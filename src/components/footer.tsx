@@ -7,7 +7,7 @@ export function Footer() {
         <a href="#inicio" title="Volver al inicio">
           <Wordmark />
         </a>
-        <span>Running · Cycling · Swimming · Triathlon</span>
+        <span>Triathlon · Swimming · Cycling · Running</span>
         <div>
           {site.contact.instagram && (
             <a
@@ -33,6 +33,17 @@ export function Footer() {
           )}
         </div>
       </div>
+      <p className="photo-credits">
+        Fotografía editorial:{" "}
+        {site.photographyCredits.map((credit, index) => (
+          <span key={credit.name}>
+            {index > 0 && " / "}
+            <a href={credit.url} target="_blank" rel="noopener noreferrer">
+              {credit.name}
+            </a>
+          </span>
+        ))}
+      </p>
       <div className="footer-bottom">
         <span>
           © {new Date().getFullYear()} {site.brandName}

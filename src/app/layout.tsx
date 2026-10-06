@@ -7,7 +7,7 @@ import "@fontsource/dm-sans/600.css";
 import "./globals.css";
 import { site } from "@/config/site";
 export const metadata: Metadata = {
-  title: `${site.brandName} — Entender. Entrenar. Adaptar.`,
+  title: `${site.brandName} — Entrenamiento de triatlón a tu medida`,
   description: site.description,
   ...(site.url
     ? { metadataBase: new URL(site.url), alternates: { canonical: site.url } }

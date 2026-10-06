@@ -5,10 +5,12 @@ import { Arrow, LoopArrow, RouteArt, SectionLabel } from "@/components/ui";
 import { Curve } from "@/components/curve";
 import { Pricing } from "@/components/pricing";
 import { ContactForm } from "@/components/contact";
+import { ProductSection, BarcelonaSection } from "./product";
+import "./triathlon.css";
 export function Landing() {
   return (
     <>
-      <section className="hero" id="inicio">
+      <section className="hero triathlon-hero" id="inicio">
         <div className="hero-copy">
           <div className="eyebrow">
             <span className="live-dot" />
@@ -16,46 +18,58 @@ export function Landing() {
           </div>
           <h1>
             {copy.hero.title.map((line, i) => (
-              <span key={line} className={i === 2 ? "accent-text" : ""}>
+              <span key={line} className={i === 1 ? "accent-text" : ""}>
                 {line}
               </span>
             ))}
           </h1>
           <p>{copy.hero.description}</p>
+          <div className="hero-delivery">
+            <span>PLAN CADA VIERNES</span>
+            <span>FEEDBACK SEMANAL</span>
+            <span>TRAININGPEAKS</span>
+          </div>
           <div className="hero-actions">
             <a className="button accent" href="#contacto">
               {copy.hero.primary}
               <Arrow diagonal />
             </a>
-            <a className="text-link" href="#metodo">
+            <a className="text-link" href="#planes">
               {copy.hero.secondary}
               <Arrow />
             </a>
           </div>
+          <p className="hero-price">
+            Triatlón desde{" "}
+            <strong>{site.prices.individual.triathlon} € / mes</strong>
+            <span>
+              Precio provisional. También puedes entrenar una sola disciplina.
+            </span>
+          </p>
         </div>
         <div className="hero-visual">
           {site.images.hero ? (
             <Image
               src={site.images.hero}
-              alt="Atleta de endurance durante un entrenamiento"
+              alt="Triatleta durante el segmento de carrera de una competición"
               fill
-              priority
+              preload
               sizes="(max-width: 760px) 100vw, 50vw"
             />
           ) : (
             <RouteArt />
           )}
           <div className="visual-coordinate">
-            <span>NO HAY DOS ATLETAS IGUALES.</span>
-            <span>TAMPOCO DOS CAMINOS.</span>
+            <span>NATACIÓN / CICLISMO / CARRERA</span>
+            <span>TRES DISCIPLINAS. UN PLAN PARA TI.</span>
           </div>
           <span className="visual-index">I / P</span>
         </div>
         <div className="hero-bottom">
           <span>
-            RUNNING <i /> CICLISMO <i /> NATACIÓN <i /> TRIATLÓN
+            SWIM <i /> BIKE <i /> RUN <i /> ICARO PROJECT
           </span>
-          <a href="#metodo" title="Explorar el método">
+          <a href="#como-funciona" title="Ver cómo funciona">
             HECHO PARA TI <span>↓</span>
           </a>
         </div>
@@ -77,9 +91,107 @@ export function Landing() {
           </span>
         ))}
       </div>
+      <ProductSection />
+      <section className="sports-section triathlon-sports">
+        <div className="section sports-heading" data-reveal>
+          <SectionLabel number="02">SWIM. BIKE. RUN.</SectionLabel>
+          <h2>
+            Tres disciplinas.
+            <br />
+            Un mismo atleta.
+          </h2>
+          <p className="sports-intro">
+            Nadar, pedalear y correr forman parte del mismo plan. Organizamos
+            las tres disciplinas para que la carga encaje contigo. También
+            puedes elegir una sola.
+          </p>
+        </div>
+        <div className="sports-grid">
+          {sports.map((s) => (
+            <article className={`sport sport-${s.key}`} key={s.key}>
+              {site.images[s.key] ? (
+                <Image
+                  src={site.images[s.key]}
+                  alt={s.alt}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 33vw"
+                />
+              ) : (
+                <div className="sport-art" aria-hidden="true">
+                  {s.key === "running" ? (
+                    <svg viewBox="0 0 300 350">
+                      <path d="M-30 350 125 0M35 350 160 0M100 350 195 0M165 350 230 0M230 350 265 0M295 350 300 0" />
+                    </svg>
+                  ) : s.key === "cycling" ? (
+                    <svg viewBox="0 0 300 350">
+                      <circle cx="150" cy="175" r="115" />
+                      <circle cx="150" cy="175" r="105" />
+                      {Array.from({ length: 16 }, (_, i) => (
+                        <line
+                          key={i}
+                          x1="150"
+                          y1="175"
+                          x2={150 + 104 * Math.cos((i * Math.PI) / 8)}
+                          y2={175 + 104 * Math.sin((i * Math.PI) / 8)}
+                        />
+                      ))}
+                      <circle cx="150" cy="175" r="12" />
+                    </svg>
+                  ) : s.key === "swimming" ? (
+                    <svg viewBox="0 0 300 350">
+                      {Array.from({ length: 10 }, (_, i) => (
+                        <path
+                          key={i}
+                          d={`M-20 ${50 + i * 28}Q55 ${10 + i * 28} 130 ${50 + i * 28}T320 ${50 + i * 28}`}
+                        />
+                      ))}
+                    </svg>
+                  ) : null}
+                </div>
+              )}
+              <span className="sport-number">{s.symbol} /</span>
+              <div className="sport-caption">
+                <h3>{s.name}</h3>
+                <p>{s.caption}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section plans-section" id="planes">
+        <div className="section-heading" data-reveal>
+          <div>
+            <SectionLabel number="03">ELIGE TU SEGUIMIENTO</SectionLabel>
+            <h2>
+              La planificación
+              <br />
+              siempre es individual.
+            </h2>
+          </div>
+          <p className="heading-copy">
+            Lo que cambia es cuánto seguimiento necesitas. Frecuencia de
+            contacto, rapidez de ajustes y profundidad del análisis.
+          </p>
+        </div>
+        <div className="shared-features" data-reveal>
+          <span className="micro">EN TODOS LOS PLANES</span>
+          <ul>
+            {sharedFeatures.map((f) => (
+              <li key={f}>
+                <span aria-hidden="true">
+                  <Arrow diagonal />
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Pricing />
+      </section>
+      <BarcelonaSection />
       <section className="section philosophy" id="metodo">
         <div data-reveal>
-          <SectionLabel number="01">EL PUNTO DE PARTIDA</SectionLabel>
+          <SectionLabel number="05">EL PUNTO DE PARTIDA</SectionLabel>
           <h2>
             {copy.philosophy.title.split("\n").map((line) => (
               <span key={line}>{line}</span>
@@ -102,7 +214,7 @@ export function Landing() {
       <section className="section profile dark-section" id="perfil">
         <div className="section-heading" data-reveal>
           <div>
-            <SectionLabel number="02">EL PERFIL FISIOLÓGICO</SectionLabel>
+            <SectionLabel number="06">EL PERFIL FISIOLÓGICO</SectionLabel>
             <h2>
               Tu mapa
               <br />
@@ -141,7 +253,7 @@ export function Landing() {
       <section className="section process-section">
         <div className="section-heading" data-reveal>
           <div>
-            <SectionLabel number="03">
+            <SectionLabel number="07">
               DEL CONTEXTO AL ENTRENAMIENTO
             </SectionLabel>
             <h2>
@@ -196,7 +308,7 @@ export function Landing() {
       </section>
       <section className="section weekly">
         <div data-reveal>
-          <SectionLabel number="04">ASÍ ES TU SEMANA</SectionLabel>
+          <SectionLabel number="08">ASÍ ES TU SEMANA</SectionLabel>
           <h2>
             Un plan vivo.
             <br />
@@ -208,17 +320,17 @@ export function Landing() {
             {
               day: "VIERNES",
               title: "La próxima semana, con sentido.",
-              text: "Recibes tu planificación. Revisamos lo realizado, tu respuesta, el ciclo, la fatiga, la disponibilidad y las competiciones.",
+              text: "Tu próxima semana aparece en TrainingPeaks. Revisamos lo realizado, tu respuesta y tu disponibilidad para decidir las sesiones.",
             },
             {
               day: "DURANTE LA SEMANA",
               title: "Entrenas. Nos cuentas.",
-              text: "Registras datos, sensaciones y comentarios. La frecuencia de seguimiento y los ajustes dependen del plan elegido.",
+              text: "Sigues las sesiones en TrainingPeaks o en tu reloj compatible. Tus datos y comentarios nos ayudan a revisar cómo vas.",
             },
             {
               day: "DOMINGO",
               title: "Observar antes de seguir.",
-              text: "Feedback semanal: qué ha funcionado, qué vigilamos y cómo estás respondiendo. Si el fin de semana cambia el contexto, adaptamos la programación.",
+              text: "Feedback semanal: qué ha funcionado, qué vigilamos y cómo estás respondiendo. Si el fin de semana cambia el contexto, revisamos los ajustes según el seguimiento contratado.",
             },
           ].map((item, i) => (
             <article key={item.day} data-reveal>
@@ -231,36 +343,6 @@ export function Landing() {
             </article>
           ))}
         </div>
-      </section>
-      <section className="section plans-section" id="planes">
-        <div className="section-heading" data-reveal>
-          <div>
-            <SectionLabel number="05">ELIGE TU SEGUIMIENTO</SectionLabel>
-            <h2>
-              La planificación
-              <br />
-              siempre es individual.
-            </h2>
-          </div>
-          <p className="heading-copy">
-            Lo que cambia es cuánto seguimiento necesitas. Frecuencia de
-            contacto, rapidez de ajustes y profundidad del análisis.
-          </p>
-        </div>
-        <div className="shared-features" data-reveal>
-          <span className="micro">EN TODOS LOS PLANES</span>
-          <ul>
-            {sharedFeatures.map((f) => (
-              <li key={f}>
-                <span aria-hidden="true">
-                  <Arrow diagonal />
-                </span>
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Pricing />
       </section>
       <section className="section lactate" id="lactato">
         <div className="lactate-visual" data-reveal>
@@ -315,7 +397,7 @@ export function Landing() {
           )}
         </div>
         <div className="lactate-copy" data-reveal>
-          <SectionLabel number="06">LACTATO, CUANDO APORTA</SectionLabel>
+          <SectionLabel number="09">LACTATO, CUANDO APORTA</SectionLabel>
           <h2>
             Una herramienta más.
             <br />
@@ -340,75 +422,6 @@ export function Landing() {
           </div>
         </div>
       </section>
-      <section className="sports-section">
-        <div className="section sports-heading" data-reveal>
-          <SectionLabel number="07">
-            CUATRO DISCIPLINAS. EL MISMO CRITERIO.
-          </SectionLabel>
-          <h2>
-            Tu deporte.
-            <br />
-            Nuestra forma de trabajar.
-          </h2>
-        </div>
-        <div className="sports-grid">
-          {sports.map((s) => (
-            <article className={`sport sport-${s.key}`} key={s.key}>
-              {site.images[s.key] ? (
-                <Image
-                  src={site.images[s.key]}
-                  alt={`Entrenamiento de ${s.name.toLowerCase()}`}
-                  fill
-                  sizes="(max-width:600px) 50vw, 25vw"
-                />
-              ) : (
-                <div className="sport-art" aria-hidden="true">
-                  {s.key === "running" ? (
-                    <svg viewBox="0 0 300 350">
-                      <path d="M-30 350 125 0M35 350 160 0M100 350 195 0M165 350 230 0M230 350 265 0M295 350 300 0" />
-                    </svg>
-                  ) : s.key === "cycling" ? (
-                    <svg viewBox="0 0 300 350">
-                      <circle cx="150" cy="175" r="115" />
-                      <circle cx="150" cy="175" r="105" />
-                      {Array.from({ length: 16 }, (_, i) => (
-                        <line
-                          key={i}
-                          x1="150"
-                          y1="175"
-                          x2={150 + 104 * Math.cos((i * Math.PI) / 8)}
-                          y2={175 + 104 * Math.sin((i * Math.PI) / 8)}
-                        />
-                      ))}
-                      <circle cx="150" cy="175" r="12" />
-                    </svg>
-                  ) : s.key === "swimming" ? (
-                    <svg viewBox="0 0 300 350">
-                      {Array.from({ length: 10 }, (_, i) => (
-                        <path
-                          key={i}
-                          d={`M-20 ${50 + i * 28}Q55 ${10 + i * 28} 130 ${50 + i * 28}T320 ${50 + i * 28}`}
-                        />
-                      ))}
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 300 350">
-                      <path d="m150 50 120 220H30Z" />
-                      <path d="m150 83 93 170H57Z" />
-                      <path d="m150 116 65 120H85Z" />
-                    </svg>
-                  )}
-                </div>
-              )}
-              <span className="sport-number">{s.symbol} /</span>
-              <div className="sport-caption">
-                <h3>{s.name}</h3>
-                <p>{s.caption}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
       <section className="section audience">
         <div data-reveal>
           <span className="micro">ENTRENAR CON INTENCIÓN</span>
@@ -423,8 +436,9 @@ export function Landing() {
         </div>
         <div data-reveal>
           <p>
-            Un objetivo deportivo. Una vida con horarios. Ganas de mejorar con
-            estructura, feedback y un plan que evolucione contigo.
+            Tu primer triatlón, una nueva distancia o una prueba que te hace
+            ilusión. Organizamos el entrenamiento alrededor de tu objetivo y del
+            tiempo que tienes.
           </p>
           <a className="text-link" href="#contacto">
             Vamos a conocerte
@@ -447,7 +461,7 @@ export function Landing() {
       )}
       <section className="section faq-section" id="faq">
         <div data-reveal>
-          <SectionLabel number="08">SIN DUDAS EN LA SALIDA</SectionLabel>
+          <SectionLabel number="10">SIN DUDAS EN LA SALIDA</SectionLabel>
           <h2>
             Lo que quizá
             <br />
@@ -468,7 +482,7 @@ export function Landing() {
       </section>
       <section className="section contact-section dark-section" id="contacto">
         <div className="contact-copy" data-reveal>
-          <SectionLabel number="09">
+          <SectionLabel number="11">
             EMPEZAMOS POR UNA CONVERSACIÓN
           </SectionLabel>
           <h2>

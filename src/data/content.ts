@@ -1,18 +1,19 @@
 import { site } from "@/config/site";
 export const navigation = [
-  { label: "Método", href: "#metodo" },
+  { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Planes", href: "#planes" },
-  { label: "Lactato", href: "#lactato" },
+  { label: "Barcelona", href: "#barcelona" },
+  { label: "Método", href: "#metodo" },
   { label: "FAQ", href: "#faq" },
 ];
 export const copy = {
   hero: {
-    eyebrow: "ENTRENAMIENTO INDIVIDUALIZADO",
-    title: ["Entender.", "Entrenar.", "Adaptar."],
+    eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
+    title: ["Triatlón.", "A tu medida."],
     description:
-      "Planificación semanal individualizada para tu objetivo, tu disponibilidad y tu manera de responder. Un entrenamiento que evoluciona contigo.",
+      "Un entrenador que organiza tu natación, ciclismo y carrera. Tu plan semanal en TrainingPeaks, feedback y ajustes para que sepas qué hacer y por qué.",
     primary: "Cuéntame tu objetivo",
-    secondary: "Descubre el método",
+    secondary: "Ver planes y precios",
   },
   philosophy: {
     title: "El plan empieza\npor entenderte.",
@@ -51,7 +52,8 @@ export const process = [
   },
 ];
 export const sharedFeatures = [
-  "Planificación semanal individualizada",
+  "Plan semanal individualizado en TrainingPeaks",
+  "Sincronización con dispositivos compatibles",
   "Revisión de la semana anterior",
   "Objetivo y disponibilidad real",
   "Trabajo por fortalezas y limitaciones",
@@ -67,7 +69,7 @@ export const plans = [
     name: "Individual",
     label: "TU PLAN. TU AUTONOMÍA.",
     description:
-      "Para quien entrena con autonomía y quiere un plan que tenga sentido.",
+      "Quieres saber qué entrenar cada semana y te organizas con autonomía.",
     features: [
       "Análisis de sesiones importantes",
       "Feedback cada semana",
@@ -84,7 +86,7 @@ export const plans = [
     name: "Coaching",
     label: "UN PUNTO DE CONTACTO DIARIO.",
     description:
-      "Para quien valora el diálogo y necesita ajustes durante la semana.",
+      "Quieres un entrenador al que consultar cada día y ajustes durante la semana.",
     features: [
       "Todo lo incluido en Individual",
       "Seguimiento y análisis más frecuentes",
@@ -102,7 +104,7 @@ export const plans = [
     name: "Performance",
     label: "MÁS CERCA DE CADA DECISIÓN.",
     description:
-      "Para quien necesita un seguimiento cercano y un análisis más profundo.",
+      "Quieres contacto directo, análisis en profundidad y una videollamada cada semana.",
     features: [
       "Todo lo incluido en Coaching",
       "Contacto directo y prioridad de respuesta",
@@ -117,6 +119,14 @@ export const plans = [
   },
 ] as const;
 export const faqs = [
+  [
+    "¿Los entrenamientos llegan a mi reloj?",
+    "Sí, puedes conectar TrainingPeaks con un dispositivo compatible para recibir los entrenamientos estructurados que admita tu modelo. La sincronización depende de la marca, la disciplina y el tipo de sesión. Te ayudamos con la configuración inicial.",
+  ],
+  [
+    "¿Puedo trabajar la técnica de forma presencial?",
+    "Sí. Tenemos la posibilidad de trabajar técnica en dos centros de Barcelona. Cuéntanos qué necesitas mejorar y te explicaremos las opciones, disponibilidad y condiciones antes de reservar.",
+  ],
   [
     "¿Puedo entrenar solamente running?",
     "Sí. El plan de una disciplina puede dedicarse a running, ciclismo o natación. La planificación es individualizada en los tres casos.",
@@ -170,27 +180,24 @@ export const faqs = [
 ];
 export const sports = [
   {
-    key: "running",
-    name: "Running",
-    caption: "Cada zancada tiene un porqué.",
+    key: "swimming",
+    name: "Natación",
+    alt: "Nadador practicando crol en una piscina",
+    caption: "Técnica, ritmo y confianza en el agua.",
     symbol: "01",
   },
   {
     key: "cycling",
     name: "Ciclismo",
-    caption: "Potencia con dirección.",
+    alt: "Ciclista pedaleando sobre una bicicleta de carretera",
+    caption: "La carga que necesitas sobre la bici.",
     symbol: "02",
   },
   {
-    key: "swimming",
-    name: "Natación",
-    caption: "Encontrar tu ritmo en el agua.",
+    key: "running",
+    name: "Carrera",
+    alt: "Triatleta corriendo durante una competición",
+    caption: "Llegar a correr con lo que necesitas.",
     symbol: "03",
-  },
-  {
-    key: "triathlon",
-    name: "Triatlón",
-    caption: "Tres disciplinas. Un mismo atleta.",
-    symbol: "04",
   },
 ] as const;

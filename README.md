@@ -38,13 +38,15 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 | Permanencia y plataforma | `site.terms.commitment`, `trainingPlatform`                                         |
 | Testimonios reales       | `site.testimonials`; vacío mantiene la sección oculta                               |
 
+El texto de TrainingPeaks, el reloj y las sesiones en los dos centros de Barcelona se edita en **`src/data/product.ts`**. La sincronización depende del dispositivo y de la sesión; la página no realiza integraciones con cuentas ni solicita credenciales. Los nombres de los centros, las disciplinas presenciales concretas y sus condiciones se incorporarán cuando estén confirmados.
+
 Hero, filosofía, pasos, planes, prestaciones y FAQ: **`src/data/content.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
 
 ## Fotografías
 
-La versión inicial utiliza gráficos vectoriales propios, temporales, no fotografías ni deportistas generados. Sustitúyelos por imágenes reales de la marca con permiso de uso. Guarda las imágenes optimizadas en `public/images/`, por ejemplo `running.webp`, y cambia `site.images.running` a `/images/running.webp`.
+La página utiliza fotografías reales de competición y entrenamiento (Quino Al, Marcus Ng y Pixabay), con fuentes documentadas en `public/images/SOURCES.md` y créditos editables en `site.photographyCredits`. Son fotografías editoriales temporales. Sustitúyelas por imágenes reales de la marca con permiso de uso. Guarda las imágenes optimizadas en `public/images/`, por ejemplo `running.webp`, y cambia `site.images.running` a `/images/running.webp`.
 
-Los espacios disponibles son hero, running, cycling, swimming, triathlon y lactate. Una imagen vacía muestra el gráfico editorial correspondiente. La foto de hero se carga con prioridad; el resto usa lazy loading con `next/image`. Para otros encuadres, ajusta `object-position` en `src/app/globals.css` y el texto alternativo en `landing.tsx`. Usa rutas locales; para un proveedor remoto, añade solo su dominio a `images.remotePatterns` en `next.config.ts` y permite su acceso en el entorno.
+Los espacios disponibles son hero, running, cycling, swimming, triathlon y lactate. Una imagen vacía muestra el gráfico editorial correspondiente. La fotografía de natación es pequeña (427×417); para una futura sesión de fotos, sustitúyela por un original más grande manteniendo la ruta editable. La foto de hero usa `preload`; el resto usa lazy loading con `next/image`. Para otros encuadres, ajusta `object-position` en `src/sections/triathlon.css`. El texto alternativo de las disciplinas se edita en `src/data/content.ts`; el del hero, en `src/sections/landing.tsx`. Usa rutas locales; para un proveedor remoto, añade solo su dominio a `images.remotePatterns` en `next.config.ts` y permite su acceso en el entorno.
 
 ## Formulario y contacto
 
@@ -56,7 +58,7 @@ Para activar cualquier envío, configura un enlace real de privacidad. Sin él, 
 
 ## Diseño, animación y accesibilidad
 
-Colores, tipografía, tamaños y responsive: `src/app/globals.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
+Colores y estilos generales: `src/app/globals.css`. La composición de triatlón se ajusta en `src/sections/triathlon.css`; TrainingPeaks y Barcelona, en `src/sections/product.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
 
 ## Comprobar
 
@@ -76,7 +78,7 @@ Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow
 4. Configura el dominio definitivo en `site.url`, contactos reales, imágenes y enlaces legales; vuelve a desplegar.
 5. Comprueba el envío real con tu proveedor, las políticas y las condiciones de contratación antes de anunciar la web.
 
-No se ha desplegado ni publicado automáticamente. No se han inventado condiciones de permanencia ni una plataforma de entrenamiento. Los enlaces legales pendientes se muestran como texto no interactivo. No hay banner de cookies porque no se instala analítica; revisa consentimiento y política si añades herramientas que lo requieran.
+La web no se ha desplegado en un dominio público. TrainingPeaks es la plataforma de trabajo confirmada. No se han inventado condiciones de permanencia. Los enlaces legales pendientes se muestran como texto no interactivo. No hay banner de cookies porque no se instala analítica; revisa consentimiento y política si añades herramientas que lo requieran.
 
 ## Estructura
 
@@ -85,7 +87,7 @@ No se ha desplegado ni publicado automáticamente. No se han inventado condicion
 - `src/sections`: composición editorial.
 - `src/data`: contenido editable.
 - `src/config`: configuración pública centralizada.
-- `public/images`: fotografías reales de la marca.
+- `public/images`: fotografías deportivas reales y documentación de sus fuentes.
 - `tests`: pruebas de navegador.
 
 Las tareas de nube ya se ejecutan en un entorno aislado. Utiliza este checkout; no crees worktrees salvo petición expresa.

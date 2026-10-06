@@ -4,7 +4,7 @@ import { site } from "@/config/site";
 import { plans } from "@/data/content";
 import { Arrow } from "./ui";
 export function Pricing() {
-  const [mode, setMode] = useState<"single" | "triathlon">("single");
+  const [mode, setMode] = useState<"single" | "triathlon">("triathlon");
   return (
     <>
       <div className="pricing-selector">
@@ -71,7 +71,7 @@ export function Pricing() {
               <Arrow diagonal />
             </a>
             <p className="plan-common">
-              Planificación individualizada incluida.
+              Plan semanal en TrainingPeaks incluido.
             </p>
             <ul>
               {plan.features.map((f) => (

@@ -1,0 +1,282 @@
+/* Triatlón primero: el servicio debe entenderse antes de profundizar en el método. */
+.triathlon-hero {
+  min-height: 730px;
+  padding-top: 78px;
+}
+.triathlon-hero .hero-copy {
+  max-width: 620px;
+  padding-bottom: 65px;
+}
+.triathlon-hero h1 {
+  font-size: clamp(85px, 8.1vw, 126px);
+  margin-top: 34px;
+  margin-bottom: 32px;
+  line-height: 0.91;
+}
+.triathlon-hero .hero-copy > p {
+  max-width: 390px;
+  font-size: 15px;
+}
+.hero-delivery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 18px;
+  margin-top: 24px;
+  color: #d0d6c5;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.hero-delivery > span {
+  border-bottom: 1px solid #59614d;
+  padding-bottom: 8px;
+}
+.triathlon-hero .hero-actions {
+  gap: 24px;
+  margin-top: 30px;
+}
+.triathlon-hero .hero-actions .text-link {
+  padding: 16px 0;
+}
+.triathlon-hero .hero-copy > .hero-price {
+  font-size: 11px;
+  color: #b4bda6;
+  margin-top: 25px;
+}
+.hero-price strong {
+  font-weight: 600;
+  color: var(--paper);
+}
+.hero-price > span {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #a2ad95;
+}
+.triathlon-hero .hero-visual {
+  width: 48%;
+  background: #30382a;
+}
+.triathlon-hero .hero-visual img {
+  filter: grayscale(0.35);
+  object-position: 58% center;
+}
+.triathlon-hero .hero-visual:has(img):after {
+  background:
+    linear-gradient(90deg, var(--ink), transparent 35%),
+    linear-gradient(0deg, #13180deb, transparent 40%);
+}
+.triathlon-hero .visual-coordinate {
+  left: 65px;
+  color: var(--paper);
+  font-size: 9px;
+}
+.triathlon-hero .visual-index {
+  font-size: 65px;
+}
+.triathlon-hero .hero-bottom {
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+@media (max-width: 1100px) {
+  .desktop-nav {
+    gap: 18px;
+    font-size: 11px;
+  }
+  .triathlon-hero {
+    padding-top: 55px;
+  }
+  .triathlon-hero h1 {
+    font-size: clamp(72px, 8.3vw, 106px);
+  }
+  .triathlon-hero .hero-copy > p {
+    max-width: 330px;
+    font-size: 14px;
+  }
+  .triathlon-hero .hero-actions {
+    gap: 17px;
+  }
+  .triathlon-hero .visual-coordinate {
+    left: 35px;
+    font-size: 8px;
+  }
+}
+@media (max-width: 760px) {
+  .triathlon-hero {
+    padding-top: 34px;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .triathlon-hero .hero-copy {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .triathlon-hero h1 {
+    font-size: clamp(67px, 15.7vw, 105px);
+    margin-top: 29px;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+  }
+  .triathlon-hero .hero-copy > p {
+    max-width: 390px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .hero-delivery {
+    font-size: 8px;
+    gap: 8px 13px;
+    margin-top: 19px;
+    letter-spacing: 0.6px;
+  }
+  .triathlon-hero .hero-actions {
+    gap: 17px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .triathlon-hero .hero-copy > .hero-price {
+    font-size: 11px;
+    margin-top: 16px;
+  }
+  .triathlon-hero .hero-visual {
+    position: relative;
+    inset: auto;
+    width: calc(100% + 48px);
+    margin: 29px -24px 0;
+    height: 265px;
+    opacity: 1;
+  }
+  .triathlon-hero .hero-visual:after {
+    background: linear-gradient(0deg, var(--ink), transparent 65%);
+  }
+  .triathlon-hero .hero-visual:has(img):after {
+    background: linear-gradient(0deg, #12180eeb, transparent 55%);
+  }
+  .triathlon-hero .hero-visual img {
+    object-position: center 45%;
+  }
+  .triathlon-hero .hero-visual .route-art {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.35);
+  }
+  .triathlon-hero .visual-coordinate {
+    bottom: 25px;
+    left: 24px;
+    letter-spacing: 1.2px;
+    font-size: 8px;
+  }
+  .triathlon-hero .visual-index {
+    right: 24px;
+    bottom: 19px;
+    font-size: 47px;
+  }
+  .triathlon-hero .hero-bottom {
+    margin-top: 0;
+    padding: 19px 0;
+    border-color: #46513b;
+  }
+  .triathlon-hero .hero-bottom > span {
+    font-size: 8px;
+    gap: 12px;
+  }
+}
+@media (max-width: 360px) {
+  .triathlon-hero h1 {
+    font-size: 58px;
+  }
+  .hero-delivery {
+    font-size: 7px;
+    gap: 10px;
+  }
+  .triathlon-hero .hero-bottom > span {
+    font-size: 7px;
+    gap: 8px;
+  }
+  .triathlon-hero .hero-actions {
+    gap: 10px;
+  }
+}
+.triathlon-sports .sports-heading {
+  padding-top: 60px;
+  padding-bottom: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 70px;
+  align-items: end;
+}
+.triathlon-sports .sports-heading .section-label {
+  grid-column: 1/-1;
+}
+.sports-intro {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 430px;
+}
+.triathlon-sports .sports-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.triathlon-sports .sport {
+  min-height: 360px;
+}
+.triathlon-sports .sport img {
+  filter: grayscale(0.7);
+  transition: transform 0.65s;
+}
+.triathlon-sports .sport:hover img {
+  transform: scale(1.035);
+}
+.triathlon-sports .sport:has(img):after {
+  background: linear-gradient(0deg, #0c120bf2, transparent 80%);
+}
+.product-platform-name svg {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+@media (max-width: 760px) {
+  .triathlon-sports .sports-heading {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 40px;
+    padding-bottom: 27px;
+  }
+  .triathlon-sports .sports-heading .section-label {
+    margin-bottom: 0;
+  }
+  .sports-intro {
+    font-size: 13px;
+  }
+  .triathlon-sports .sports-grid {
+    grid-template-columns: 1fr;
+  }
+  .triathlon-sports .sport {
+    min-height: 250px;
+    border-right: 0;
+    border-top: 1px solid #626b54;
+  }
+  .triathlon-sports .sport h3 {
+    font-size: 38px;
+  }
+  .triathlon-sports .sport p {
+    max-width: none;
+    font-size: 11px;
+  }
+  .triathlon-sports .sport img {
+    object-position: center 38%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .triathlon-sports .sport:hover img {
+    transform: none;
+  }
+}
+.photo-credits {
+  font-size: 9px;
+  color: #a7af9c;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.photo-credits a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

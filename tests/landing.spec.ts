@@ -69,6 +69,14 @@ test("prices switch and selecting plan carries interest to form", async ({
 }) => {
   await page.goto("/");
   await expect(page.locator(".price strong")).toHaveText([
+    "89 €",
+    "119 €",
+    "179 €",
+  ]);
+  await page
+    .getByRole("button", { name: "Una disciplina", exact: true })
+    .click();
+  await expect(page.locator(".price strong")).toHaveText([
     "69 €",
     "99 €",
     "159 €",
@@ -151,4 +159,43 @@ test("keyboard access and reduced motion", async ({ page }) => {
         elements.every((e) => (e as HTMLInputElement).labels?.length),
       ),
   ).toBe(true);
+});
+
+test("triathlon product, platform and Barcelona are clear and real photos load", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Triatlón.",
+  );
+  await expect(page.locator(".hero-price")).toContainText("89 € / mes");
+  await expect(page.locator("#como-funciona")).toContainText("TrainingPeaks");
+  await expect(page.locator("#como-funciona")).toContainText(
+    "reloj compatible",
+  );
+  await expect(page.locator("#barcelona")).toContainText("Dos centros");
+  await expect(page.locator("#barcelona")).toContainText("Barcelona");
+  await page
+    .getByRole("link", { name: "Ver planes y precios", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#planes$/);
+  await expect(
+    page.getByRole("button", { name: "Triatlón", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  const images = page.locator(".hero-visual img, .triathlon-sports img");
+  await expect(images).toHaveCount(4);
+  for (const photo of await images.all()) {
+    await photo.scrollIntoViewIfNeeded();
+    await expect(photo).toBeVisible();
+    await expect
+      .poll(() =>
+        photo.evaluate(
+          (image) =>
+            (image as HTMLImageElement).complete &&
+            (image as HTMLImageElement).naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+    await expect(photo).toHaveAttribute("alt", /.+/);
+  }
 });
