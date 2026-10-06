@@ -1,0 +1,1 @@
+Guarda aquí las fotografías reales y autorizadas de ICARO PROJECT, preferiblemente WebP o AVIF. Activa cada foto con una ruta local en `src/config/site.ts` (por ejemplo `/images/running.webp`). Actualmente se muestran gráficos editoriales temporales. No se incluyen fotografías de stock ni imágenes artificiales de deportistas.
