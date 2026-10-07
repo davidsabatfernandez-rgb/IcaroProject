@@ -97,6 +97,64 @@ test("plans show no prices and each enquiry carries interest to the form", async
   );
 });
 
+test("technical criteria explain decisions and can be explored with the keyboard", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  await page.goto("/");
+  const method = page.locator("#metodo");
+  const intensity = method.getByRole("button", {
+    name: "Intensidad",
+    exact: true,
+  });
+  const load = method.getByRole("button", {
+    name: "Carga y recuperación",
+    exact: true,
+  });
+  const progression = method.getByRole("button", {
+    name: "Progresión",
+    exact: true,
+  });
+  const detail = method.locator(".tm-technical-detail");
+
+  await load.click();
+  await expect(load).toHaveAttribute("aria-pressed", "true");
+  await expect(intensity).toHaveAttribute("aria-pressed", "false");
+  await expect(method.locator(".tm-decision-content")).toContainText(
+    "recuperación",
+  );
+  await expect(method.locator(".tm-signals")).toContainText(
+    "Tu disponibilidad",
+  );
+  await detail.locator("summary").click();
+  await expect(detail).toHaveAttribute("open", "");
+  await expect(detail).toContainText("La dosis importa tanto como la sesión");
+
+  await progression.focus();
+  await page.keyboard.press("Enter");
+  await expect(progression).toBeFocused();
+  await expect(progression).toHaveAttribute("aria-pressed", "true");
+  await expect(load).toHaveAttribute("aria-pressed", "false");
+  await expect(method.locator('.tm-topic[aria-pressed="true"]')).toHaveCount(1);
+  await expect(method.locator(".tm-signals")).toContainText(
+    "Sesiones comparables",
+  );
+  await expect(method.locator(".tm-decision-content")).toContainText(
+    "avanzar, repetir o ajustar",
+  );
+  await expect(detail).not.toHaveAttribute("open");
+
+  await intensity.click();
+  await detail.locator("summary").click();
+  await expect(detail).toContainText("LT1 y LT2");
+  await expect(detail).toContainText("opcional");
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
 test("weekly schedule and support channels match the three coaching plans", async ({
   page,
 }) => {

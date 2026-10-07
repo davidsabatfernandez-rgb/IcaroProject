@@ -4,6 +4,7 @@ export const site = {
   description:
     "Entrenamiento de triatlón individualizado, planificación semanal en TrainingPeaks y seguimiento de tu entrenador. También running, ciclismo y natación.",
   url: "", // URL pública definitiva, sin barra final. Activa canonical y sitemap.
+  trainingPeaksUrl: "https://www.trainingpeaks.com/",
   contact: { whatsapp: "", instagram: "", email: "", formEndpoint: "" },
   legal: { notice: "", privacy: "", cookies: "" },
   images: {

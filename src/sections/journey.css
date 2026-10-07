@@ -256,13 +256,46 @@
   border-top: 1px solid var(--line);
 }
 
-.journey-platform > strong {
-  display: block;
+.journey-platform-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 8px;
+  color: var(--ink);
   font-family: var(--body);
   font-size: 25px;
-  font-weight: 600;
   letter-spacing: -0.04em;
+  text-decoration: underline;
+  text-decoration-color: #bbc9ce;
+  text-underline-offset: 7px;
+}
+
+.journey-platform-link strong {
+  font-weight: 600;
+}
+
+.journey-platform-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.journey-platform-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.journey-platform-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.journey-platform-external {
+  display: block;
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 .journey-platform p {

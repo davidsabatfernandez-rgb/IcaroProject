@@ -6,7 +6,7 @@ import { Pricing } from "@/components/pricing";
 import { ContactForm } from "@/components/contact";
 import { LactatePricing } from "@/components/lactate-pricing";
 import { BarcelonaSection } from "./product";
-import { ValueSection } from "./value";
+import { TechnicalMethodSection } from "./technical-method";
 import { JourneySection } from "./journey";
 
 export function Landing() {
@@ -56,15 +56,27 @@ export function Landing() {
         </div>
         <div className="hero-bottom">
           <div>
-            <strong>Tu plan, de verdad.</strong>
-            <span>Individualizado para tu vida y tu objetivo.</span>
+            <strong>Tu perfil guía el plan.</strong>
+            <span>Tests de campo y zonas de entrenamiento revisables.</span>
           </div>
           <div>
-            <strong>Cerca, cada semana.</strong>
-            <span>Revisión y feedback de tu entrenador.</span>
+            <strong>Tu respuesta cuenta.</strong>
+            <span>Datos y sensaciones con una explicación semanal.</span>
           </div>
           <div>
-            <strong>TrainingPeaks + tu reloj.</strong>
+            <strong>
+              <a
+                className="hero-platform-link"
+                href={site.trainingPeaksUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TrainingPeaks (abre en una pestaña nueva)"
+              >
+                TrainingPeaks
+                <Arrow diagonal />
+              </a>{" "}
+              + tu reloj.
+            </strong>
             <span>Sesiones estructuradas en dispositivos compatibles.</span>
           </div>
         </div>
@@ -81,9 +93,10 @@ export function Landing() {
             </h2>
           </div>
           <p className="heading-copy">
-            Natación, ciclismo y carrera se planifican en conjunto. Tu nivel, tu
-            tiempo y tu objetivo marcan el punto de partida. También puedes
-            entrenar una sola disciplina.
+            Coordinamos natación, ciclismo y carrera: la carga de una sesión
+            influye en lo que puedes sostener después. Tu nivel, tu tiempo y tu
+            objetivo orientan la distribución. También puedes entrenar una sola
+            disciplina.
           </p>
         </div>
         <div className="sports-grid">
@@ -106,7 +119,7 @@ export function Landing() {
           ))}
         </div>
       </section>
-      <ValueSection />
+      <TechnicalMethodSection />
       <JourneySection />
 
       <section className="section plans-section" id="planes">

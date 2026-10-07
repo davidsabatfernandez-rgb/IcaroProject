@@ -1,5 +1,6 @@
 import { Arrow, LoopArrow, SectionLabel } from "@/components/ui";
 import { TrainingCalendar } from "@/components/training-calendar";
+import { site } from "@/config/site";
 import { journeyCopy, journeyStages } from "@/data/journey";
 import { productCopy } from "@/data/product";
 import { WeeklySchedule } from "./value";
@@ -89,7 +90,19 @@ export function JourneySection() {
           </p>
           <div className="journey-platform">
             <span className="micro">PLANIFICACIÓN EN</span>
-            <strong>TrainingPeaks</strong>
+            <a
+              className="journey-platform-link"
+              href={site.trainingPeaksUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TrainingPeaks (abre en una pestaña nueva)"
+            >
+              <strong>TrainingPeaks</strong>
+              <Arrow diagonal />
+            </a>
+            <small className="journey-platform-external">
+              Web oficial · nueva pestaña
+            </small>
             <p>{productCopy.platformDescription}</p>
           </div>
           <p className="journey-watch">

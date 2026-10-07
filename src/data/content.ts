@@ -11,7 +11,7 @@ export const copy = {
     eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
     title: ["Triatlón.", "A tu medida."],
     description:
-      "Un plan que encaja en tu vida. Un entrenador que conoce tu proceso. Desde tu primer triatlón hasta el reto que quieres preparar.",
+      "Tu objetivo y tus horarios marcan el punto de partida. Ajustamos la duración, la intensidad y la recuperación con tus datos y sensaciones, y te explicamos el porqué de cada sesión.",
     primary: "Hablar con un entrenador",
     secondary: "Ver cómo empezamos",
   },
@@ -91,6 +91,10 @@ export const plans = [
   },
 ] as const;
 export const faqs = [
+  [
+    "¿Necesito entender los datos para empezar?",
+    "No necesitas conocer las zonas ni saber fisiología. Te explicamos cuánto dura cada sesión, a qué intensidad hacerla y qué buscamos con ella. Utilizamos los datos que tengas disponibles junto con tus sensaciones; un potenciómetro no es un requisito para empezar.",
+  ],
   [
     "¿La llamada inicial está incluida?",
     "Sí. Individual, Coaching y Performance incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Coaching tiene una mensual y Performance una semanal.",

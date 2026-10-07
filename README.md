@@ -37,8 +37,11 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 | Dominio y canonical      | `site.url`: dominio público completo, sin barra final                               |
 | Enlaces legales          | `site.legal.notice`, `privacy`, `cookies`                                           |
 | Permanencia y plataforma | `site.terms.commitment`, `trainingPlatform`                                         |
+| Enlace a TrainingPeaks   | `site.trainingPeaksUrl`: web oficial de la plataforma                               |
 
 El texto de TrainingPeaks, el reloj y las sesiones en los dos centros de Barcelona se edita en **`src/data/product.ts`**. La sincronización depende del dispositivo y de la sesión; la página no realiza integraciones con cuentas ni solicita credenciales. Los nombres de los centros, las disciplinas presenciales concretas y sus condiciones se incorporarán cuando estén confirmados.
+
+El enlace público a TrainingPeaks usa **`site.trainingPeaksUrl`**, inicialmente `https://www.trainingpeaks.com/`. Abre la web oficial en una pestaña nueva y lo indica en su nombre accesible y junto al calendario. La marca se escribe como texto, sin presentar una certificación, patrocinio o integración de la web de ICARO con la plataforma.
 
 Hero, filosofía, planes, prestaciones y FAQ: **`src/data/content.ts`**. Necesidades del atleta, cercanía y calendario de entrega: **`src/data/value.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
 
@@ -47,6 +50,8 @@ La web presenta los tres seguimientos sin precios y dirige cada consulta al form
 El recorrido desde el primer contacto hasta el objetivo se edita en **`src/data/journey.ts`**: `journeyCopy` contiene la introducción y la explicación del ciclo, y `journeyStages`, las ocho etapas. Las etapas 01–04 establecen el punto de partida; 05–07 repiten prescripción, revisión y ajuste; 08 conecta el proceso con el objetivo. Conserva las fases `INICIO`, `CICLO SEMANAL` y `OBJETIVO`, que identifican cada grupo visual en **`src/sections/journey.tsx`**.
 
 La semana del calendario interactivo está en **`src/data/training-week.ts`**. Puedes editar días, disciplinas, títulos, duración, objetivo y bloques de cada sesión; conserva identificadores únicos y comprueba que los minutos de los bloques suman la duración indicada. El calendario tiene un diseño original y datos ilustrativos: enseña cómo leer una sesión y no representa la prescripción de un atleta. Su componente está en **`src/components/training-calendar.tsx`**.
+
+La explicación técnica del método se compone en **`src/sections/technical-method.tsx`** y se edita en **`src/data/technical-method.ts`**; sus estilos están en **`src/sections/technical-method.css`**. Esta sección sustituye la presentación anterior de necesidades en `#metodo`. El panel de **`src/components/technical-decisions.tsx`** permite explorar intensidad, carga y recuperación, y progresión; cada tema conecta información, decisión del entrenador y utilidad para el atleta. La explicación técnica adicional se despliega a petición y se cierra al cambiar de tema. Las cuatro fortalezas del bloque «Por qué entrenar con ICARO» se editan en `technicalStrengths`. La credibilidad se apoya en el proceso real de ICARO, sin comparaciones no documentadas con otros entrenadores, acreditaciones inventadas ni garantías de resultados.
 
 ## Seguimiento y tests
 
@@ -90,7 +95,7 @@ npm run build
 npm run test:e2e
 ```
 
-Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow y de precios visibles, consulta de los tres planes, FAQ, validación del formulario, reduced motion, calendario semanal, canales de seguimiento, condiciones de lactato y consulta del test en pista. En este entorno usan `/usr/bin/chromium`. En otro sistema usa `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/ruta/al/navegador` o instala Chromium con `npx playwright install chromium` (elimina esa variable para usar el navegador de Playwright).
+Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow y de precios visibles, consulta de los tres planes, FAQ, validación del formulario, reduced motion, calendario semanal, canales de seguimiento, condiciones de lactato y consulta del test en pista. También verifican la selección con teclado del criterio técnico y el reinicio de su detalle al cambiar de tema. En este entorno usan `/usr/bin/chromium`. En otro sistema usa `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/ruta/al/navegador` o instala Chromium con `npx playwright install chromium` (elimina esa variable para usar el navegador de Playwright).
 
 ## Desplegar en Vercel
 
