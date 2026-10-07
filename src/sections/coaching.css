@@ -65,6 +65,9 @@
   padding: 28px 32px;
   margin-top: 30px;
 }
+.plans-section .shared-features {
+  margin-top: 30px;
+}
 .shared-schedule > .micro {
   font-size: 9px;
   color: #39535d;

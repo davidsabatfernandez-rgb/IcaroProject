@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { site, whatsappUrl } from "@/config/site";
-import { copy, process, sharedFeatures, faqs, sports } from "@/data/content";
+import { copy, sharedFeatures, faqs, sports } from "@/data/content";
 import { Arrow, LoopArrow, RouteArt, SectionLabel } from "@/components/ui";
 import { Curve } from "@/components/curve";
 import { Pricing } from "@/components/pricing";
 import { ContactForm } from "@/components/contact";
 import { LactatePricing } from "@/components/lactate-pricing";
-import { ProductSection, BarcelonaSection } from "./product";
-import { ValueSection, WeeklySchedule } from "./value";
+import { BarcelonaSection } from "./product";
+import { ValueSection } from "./value";
+import { JourneySection } from "./journey";
 import "./triathlon.css";
 import "./coaching.css";
 export function Landing() {
@@ -27,6 +28,10 @@ export function Landing() {
             ))}
           </h1>
           <p>{copy.hero.description}</p>
+          <div className="hero-performance-note">
+            <strong>Rigor en el entrenamiento.</strong>
+            <span>Cercanía en cada etapa.</span>
+          </div>
           <div className="hero-delivery">
             <span>100 % INDIVIDUALIZADO</span>
             <span>FEEDBACK SEMANAL</span>
@@ -57,7 +62,7 @@ export function Landing() {
               alt="Grupo de corredores y sus sombras vistos desde arriba en una pista"
               fill
               preload
-              sizes="100vw"
+              sizes="(max-width: 760px) 100vw, 48vw"
             />
           ) : (
             <RouteArt />
@@ -94,10 +99,9 @@ export function Landing() {
           </span>
         ))}
       </div>
-      <ProductSection />
       <section className="sports-section triathlon-sports">
         <div className="section sports-heading" data-reveal>
-          <SectionLabel number="02">SWIM. BIKE. RUN.</SectionLabel>
+          <SectionLabel number="01">SWIM. BIKE. RUN.</SectionLabel>
           <h2>
             Tres disciplinas.
             <br />
@@ -162,6 +166,7 @@ export function Landing() {
         </div>
       </section>
       <ValueSection />
+      <JourneySection />
       <section className="section plans-section" id="planes">
         <div className="section-heading" data-reveal>
           <div>
@@ -177,6 +182,7 @@ export function Landing() {
             contacto, rapidez de ajustes y profundidad del análisis.
           </p>
         </div>
+        <Pricing />
         <div className="shared-features" data-reveal>
           <span className="micro">EN TODOS LOS PLANES</span>
           <ul>
@@ -190,8 +196,6 @@ export function Landing() {
             ))}
           </ul>
         </div>
-        <WeeklySchedule />
-        <Pricing />
       </section>
       <BarcelonaSection />
       <section className="section philosophy" id="metodo">
@@ -228,8 +232,8 @@ export function Landing() {
           </div>
           <div className="heading-copy">
             <p>
-              No buscamos únicamente que entrenes más. Buscamos entender qué
-              limita tu rendimiento y qué adaptación necesitas.
+              Tu perfil nos ayuda a elegir qué trabajar ahora, tanto si preparas
+              tu primer triatlón como si buscas un objetivo exigente.
             </p>
             <p className="muted">
               Tests de campo, ritmo, potencia, frecuencia cardiaca, sensaciones
@@ -253,100 +257,6 @@ export function Landing() {
               entrenar. Y cómo comprobaremos si ha funcionado.
             </p>
           </div>
-        </div>
-      </section>
-      <section className="section process-section">
-        <div className="section-heading" data-reveal>
-          <div>
-            <SectionLabel number="07">
-              DEL CONTEXTO AL ENTRENAMIENTO
-            </SectionLabel>
-            <h2>
-              Un método.
-              <br />
-              Tu recorrido.
-            </h2>
-          </div>
-          <p className="heading-copy">
-            Cada ciclo tiene una razón. Primero definimos la adaptación que
-            buscamos; después elegimos el estímulo y la dosis que puedes
-            tolerar.
-          </p>
-        </div>
-        <div className="process-grid">
-          {process.map((step, i) => (
-            <article key={step.title} data-reveal>
-              <span className="process-number">0{i + 1}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-              <span className="process-arrow" aria-hidden="true">
-                {i === 6 ? <LoopArrow /> : <Arrow diagonal />}
-              </span>
-            </article>
-          ))}
-        </div>
-        <div className="cycle-line">
-          <span>OBJETIVO</span>
-          <Arrow />
-          <span>ADAPTACIÓN</span>
-          <Arrow />
-          <span>ESTÍMULO + DOSIS</span>
-          <Arrow />
-          <span>RESPUESTA</span>
-          <Arrow />
-          <span>SIGUIENTE DECISIÓN</span>
-        </div>
-        <div className="evolution">
-          <span className="micro">EL PERFIL SE ACTUALIZA CONTIGO</span>
-          <p>
-            Inicio <span>→</span> Primer bloque <span>→</span> Retest{" "}
-            <span>→</span> Segundo bloque <span>→</span> Fase específica{" "}
-            <span>→</span> Competición
-          </p>
-          <small>
-            ¿Qué ha mejorado? ¿Qué sigue igual? ¿Qué limita ahora? ¿Qué
-            entrenamos después?
-          </small>
-        </div>
-      </section>
-      <section className="section weekly">
-        <div data-reveal>
-          <SectionLabel number="08">ASÍ ES TU SEMANA</SectionLabel>
-          <h2>
-            Un plan vivo.
-            <br />
-            Una semana real.
-          </h2>
-        </div>
-        <div className="weekly-timeline">
-          {[
-            {
-              day: "VIERNES",
-              title: "Nos envías tu disponibilidad.",
-              text: "Tu tiempo real, tus horarios y los compromisos de la siguiente semana. El entrenamiento empieza por encajar en tu vida.",
-            },
-            {
-              day: "SÁBADO Y DOMINGO",
-              title: "Recibes el plan y sabes por qué.",
-              text: "Programación en TrainingPeaks, revisión de la semana anterior y objetivos de la siguiente. Individual recibe audios de WhatsApp; Performance revisa contigo en la llamada semanal. Coaching incluye una llamada mensual.",
-            },
-            {
-              day: "DURANTE LA SEMANA",
-              title: "Entrenas y seguimos cerca.",
-              text: "Sigues las sesiones y registras datos y sensaciones. Coaching y Performance incluyen consultas diarias para resolver dudas y revisar los ajustes que necesites.",
-            },
-          ].map((item, i) => (
-            <article key={item.day} data-reveal>
-              <div className="timeline-marker">0{i + 1}</div>
-              <div>
-                <span className="micro">{item.day}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
       <section className="section lactate" id="lactato">
@@ -402,7 +312,7 @@ export function Landing() {
           )}
         </div>
         <div className="lactate-copy" data-reveal>
-          <SectionLabel number="09">LACTATO, CUANDO APORTA</SectionLabel>
+          <SectionLabel number="07">LACTATO, CUANDO APORTA</SectionLabel>
           <h2>
             Una herramienta más.
             <br />
@@ -433,19 +343,19 @@ export function Landing() {
         <div data-reveal>
           <span className="micro">ENTRENAR CON INTENCIÓN</span>
           <h2>
-            No necesitas
+            Para empezar.
             <br />
-            ser profesional.
+            Para progresar.
+            <br />
+            Para competir.
           </h2>
-          <p className="audience-subtitle">
-            Pero sí querer entender tu entrenamiento.
-          </p>
+          <p className="audience-subtitle">El rigor se adapta a tu nivel.</p>
         </div>
         <div data-reveal>
           <p>
-            Tu primer triatlón, una nueva distancia o una prueba que te hace
-            ilusión. Organizamos el entrenamiento alrededor de tu objetivo y del
-            tiempo que tienes.
+            Si empiezas, construimos una base que puedas sostener. Si ya
+            compites, afinamos lo que necesitas mejorar. Tu experiencia, tu
+            objetivo y tu disponibilidad orientan cada decisión.
           </p>
           <a className="text-link" href="#contacto">
             Vamos a conocerte
@@ -468,7 +378,7 @@ export function Landing() {
       )}
       <section className="section faq-section" id="faq">
         <div data-reveal>
-          <SectionLabel number="10">SIN DUDAS EN LA SALIDA</SectionLabel>
+          <SectionLabel number="08">SIN DUDAS EN LA SALIDA</SectionLabel>
           <h2>
             Lo que quizá
             <br />
@@ -489,7 +399,7 @@ export function Landing() {
       </section>
       <section className="section contact-section dark-section" id="contacto">
         <div className="contact-copy" data-reveal>
-          <SectionLabel number="11">
+          <SectionLabel number="09">
             EMPEZAMOS POR UNA CONVERSACIÓN
           </SectionLabel>
           <h2>

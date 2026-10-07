@@ -71,7 +71,7 @@ export function Pricing() {
               <Arrow diagonal />
             </a>
             <p className="plan-common">
-              Plan semanal en TrainingPeaks incluido.
+              Llamada inicial y plan semanal en TrainingPeaks incluidos.
             </p>
             <ul>
               {plan.features.map((f) => (

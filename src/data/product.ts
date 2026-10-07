@@ -2,7 +2,7 @@ export const productCopy = {
   label: "TU ENTRENAMIENTO, PASO A PASO",
   title: ["Tu plan. Tu reloj.", "Tu entrenador."],
   description:
-    "Un plan que encaja en tu vida y un entrenador que te acompaña. Cada sesión tiene un propósito, y te explicamos cómo conecta con tu objetivo.",
+    "Empezamos con una llamada inicial, incluida en los tres planes. Después, un plan que encaja en tu vida y un entrenador que te explica el propósito de cada sesión.",
   platformDescription:
     "Tu calendario, las sesiones de natación, ciclismo y carrera, y los datos de tus entrenamientos, en el mismo sitio.",
   compatibility:

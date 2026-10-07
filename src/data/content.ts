@@ -11,7 +11,7 @@ export const copy = {
     eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
     title: ["Triatlón.", "A tu medida."],
     description:
-      "Tu plan individual en TrainingPeaks, cada sesión con un propósito y un entrenador que te escucha. Organizamos natación, ciclismo y carrera para aprovechar tu tiempo y avanzar juntos hacia tu objetivo.",
+      "Desde tu primer triatlón hasta una preparación exigente. Plan individual en TrainingPeaks, sesiones con un propósito y un entrenador que te escucha, interpreta tus datos y te acompaña hacia tu objetivo.",
     primary: "Cuéntame tu objetivo",
     secondary: "Ver planes y precios",
   },
@@ -21,37 +21,8 @@ export const copy = {
       "No entrenas en una hoja de cálculo. Entrenas en una vida real. Por eso, antes de decidir qué haces, necesitamos saber quién eres, qué buscas y qué puedes sostener.",
   },
 };
-export const process = [
-  {
-    title: "Conocerte",
-    text: "Tu objetivo, experiencia, disponibilidad, historial y lesiones. El contexto también cuenta.",
-  },
-  {
-    title: "Medir",
-    text: "Tests de campo, entrenamientos, datos disponibles y sensaciones. Elegimos lo que aporta información útil.",
-  },
-  {
-    title: "Entender",
-    text: "Construimos tu perfil: fortalezas, limitaciones y prioridades. Y te explicamos lo que vemos.",
-  },
-  {
-    title: "Planificar",
-    text: "Organizamos la temporada en ciclos. Cada bloque persigue una adaptación concreta.",
-  },
-  {
-    title: "Entrenar",
-    text: "Prescripción semanal personalizada. Intensidades y dosis que encajan contigo.",
-  },
-  {
-    title: "Observar",
-    text: "Revisamos datos, fatiga y sensaciones. Importa cómo respondes, además de lo que completas.",
-  },
-  {
-    title: "Adaptar",
-    text: "La siguiente semana depende de lo que ha sucedido. Volvemos a medir y ajustamos el camino.",
-  },
-];
 export const sharedFeatures = [
+  "Llamada inicial incluida en los tres planes",
   "Plan semanal individualizado en TrainingPeaks",
   "Disponibilidad enviada cada viernes",
   "Programación entre sábado y domingo",
@@ -78,7 +49,7 @@ export const plans = [
     contact: "Feedback semanal por WhatsApp.",
     detail:
       "Entre sábado y domingo recibes audios con la explicación de la semana anterior y los objetivos de la siguiente, junto a tu nueva programación.",
-    call: "Sin llamada incluida",
+    call: "Sin llamadas de seguimiento",
   },
   {
     id: "coaching",
@@ -121,6 +92,10 @@ export const plans = [
 ] as const;
 export const faqs = [
   [
+    "¿La llamada inicial está incluida?",
+    "Sí. Individual, Coaching y Performance incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Coaching tiene una mensual y Performance una semanal.",
+  ],
+  [
     "¿Los entrenamientos llegan a mi reloj?",
     "Sí, puedes conectar TrainingPeaks con un dispositivo compatible para recibir los entrenamientos estructurados que admita tu modelo. La sincronización depende de la marca, la disciplina y el tipo de sesión. Te ayudamos con la configuración inicial.",
   ],
@@ -158,7 +133,7 @@ export const faqs = [
   ],
   [
     "¿Cómo contacto con el entrenador?",
-    "En Individual recibes feedback semanal por audios de WhatsApp, sin llamada incluida. Coaching permite consultas diarias y una llamada mensual. Performance ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
+    "Los tres planes incluyen una llamada inicial. Después, Individual entrega feedback semanal por audios de WhatsApp y no incluye llamadas de seguimiento. Coaching permite consultas diarias y una llamada mensual. Performance ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
   ],
   [
     "¿Los tests de lactato son obligatorios?",
@@ -170,7 +145,7 @@ export const faqs = [
   ],
   [
     "¿Qué diferencia hay entre los tres planes?",
-    "Todos incluyen planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega feedback por audios de WhatsApp y no incluye llamadas. Coaching añade consultas diarias y una llamada mensual. Performance ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de los tests de lactato.",
+    "Todos incluyen llamada inicial, planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega feedback por audios de WhatsApp y no incluye llamadas de seguimiento. Coaching añade consultas diarias y una llamada mensual. Performance ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de los tests de lactato.",
   ],
   [
     "¿Hay permanencia?",

@@ -59,8 +59,9 @@ export function WeeklySchedule() {
         ))}
       </div>
       <p className="schedule-feedback">
-        Individual: audios de WhatsApp, sin llamada. Coaching: consultas diarias
-        y llamada mensual. Performance: consultas diarias y llamada semanal.
+        Individual: audios de WhatsApp, sin llamadas de seguimiento. Coaching:
+        consultas diarias y llamada mensual. Performance: consultas diarias y
+        llamada semanal.
       </p>
     </div>
   );

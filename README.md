@@ -28,7 +28,7 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 | ------------------------ | ----------------------------------------------------------------------------------- |
 | Nombre de marca          | `site.brandName`; reemplaza favicon/imagen social si cambias la identidad           |
 | Precios                  | `site.prices`: `single` para una disciplina, `triathlon` para triatlón              |
-| Tests de lactato          | `site.lactate`: test independiente, tarifas por plan, periodicidad y desplazamiento |
+| Tests de lactato         | `site.lactate`: test independiente, tarifas por plan, periodicidad y desplazamiento |
 | WhatsApp                 | `site.contact.whatsapp`: número real con prefijo internacional, sin `+` ni espacios |
 | Instagram                | `site.contact.instagram`: URL completa                                              |
 | Email                    | `site.contact.email`                                                                |
@@ -41,17 +41,21 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 
 El texto de TrainingPeaks, el reloj y las sesiones en los dos centros de Barcelona se edita en **`src/data/product.ts`**. La sincronización depende del dispositivo y de la sesión; la página no realiza integraciones con cuentas ni solicita credenciales. Los nombres de los centros, las disciplinas presenciales concretas y sus condiciones se incorporarán cuando estén confirmados.
 
-Hero, filosofía, pasos, planes, prestaciones y FAQ: **`src/data/content.ts`**. Necesidades del atleta, cercanía y calendario compartido: **`src/data/value.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
+Hero, filosofía, planes, prestaciones y FAQ: **`src/data/content.ts`**. Necesidades del atleta, cercanía y calendario de entrega: **`src/data/value.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
+
+El recorrido desde el primer contacto hasta el objetivo se edita en **`src/data/journey.ts`**: `journeyCopy` contiene la introducción y la explicación del ciclo, y `journeyStages`, las ocho etapas. Las etapas 01–04 establecen el punto de partida; 05–07 repiten prescripción, revisión y ajuste; 08 conecta el proceso con el objetivo. Conserva las fases `INICIO`, `CICLO SEMANAL` y `OBJETIVO`, que identifican cada grupo visual en **`src/sections/journey.tsx`**.
+
+La semana del calendario interactivo está en **`src/data/training-week.ts`**. Puedes editar días, disciplinas, títulos, duración, objetivo y bloques de cada sesión; conserva identificadores únicos y comprueba que los minutos de los bloques suman la duración indicada. El calendario tiene un diseño original y datos ilustrativos: enseña cómo leer una sesión y no representa la prescripción de un atleta. Su componente está en **`src/components/training-calendar.tsx`**.
 
 ## Seguimiento y tests
 
-En los tres planes, el atleta envía su disponibilidad el viernes. Entre sábado y domingo recibe la programación en TrainingPeaks, la explicación de cómo fue la semana anterior y los objetivos de la siguiente.
+Los tres planes incluyen una llamada inicial para conocerse y acordar objetivos concretos. En todos, el atleta envía su disponibilidad el viernes. Entre sábado y domingo recibe la programación en TrainingPeaks, la explicación de cómo fue la semana anterior y los objetivos de la siguiente.
 
-| Plan | Seguimiento | Test de lactato |
-| --- | --- | --- |
-| Individual | Feedback semanal por audios de WhatsApp, sin llamada | 80 € por test |
-| Coaching | Feedback semanal, consultas diarias y llamada mensual | 65 € por test, promoción trimestral |
-| Performance | Revisión en llamada semanal y consultas diarias | Un test incluido cada 6 meses; opción trimestral a 50 € |
+| Plan        | Seguimiento después de la llamada inicial                            | Test de lactato                                         |
+| ----------- | -------------------------------------------------------------------- | ------------------------------------------------------- |
+| Individual  | Feedback semanal por audios de WhatsApp, sin llamadas de seguimiento | 80 € por test                                           |
+| Coaching    | Feedback semanal, consultas diarias y llamada mensual                | 65 € por test, promoción trimestral                     |
+| Performance | Revisión en llamada semanal y consultas diarias                      | Un test incluido cada 6 meses; opción trimestral a 50 € |
 
 El test de lactato en pista se puede consultar sin contratar un plan: 100 € más desplazamiento, presupuestado antes de reservar. No se inventa una tarifa por kilómetro ni se promete atención inmediata o 24 horas. Los precios mensuales de entrenamiento siguen marcados como provisionales. La consulta del test prepara el interés en el formulario; no representa una reserva o un pago.
 
@@ -71,7 +75,7 @@ Para activar cualquier envío, configura un enlace real de privacidad. Sin él, 
 
 ## Diseño, animación y accesibilidad
 
-Colores y estilos generales: `src/app/globals.css`. Azul marino, blanco cálido y acento lima suave conservan el diseño editorial y priorizan contraste y legibilidad. La composición de triatlón se ajusta en `src/sections/triathlon.css`; TrainingPeaks y Barcelona, en `src/sections/product.css`; necesidades, calendario y tarifas, en `src/sections/coaching.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
+Colores y estilos generales: `src/app/globals.css`. Azul marino, blanco cálido y acento lima suave conservan el diseño editorial y priorizan contraste y legibilidad. La composición de triatlón se ajusta en `src/sections/triathlon.css`; el recorrido, en `src/sections/journey.css`; el calendario interactivo, en `src/components/training-calendar.css`; Barcelona, en `src/sections/product.css`; necesidades, calendario de entrega y tarifas, en `src/sections/coaching.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
 
 El mensaje presenta necesidades concretas (tiempo, rumbo y dudas), seguidas de la respuesta real del servicio. La eficiencia se explica mediante sesiones con propósito y revisión de la respuesta, sin garantizar una adaptación o un rendimiento del 100 %. La cercanía se expresa como atención y seguimiento, sin inventar una comunidad, testimonios ni escasez. La guía de [GSA sobre escribir para el lector](https://github.com/GSA/plainlanguage.gov/blob/main/_pages/guidelines/audience/index.md) y la de [NHS sobre voz y tono](https://github.com/nhsuk/nhsuk-service-manual/blob/main/app/views/content/voice-and-tone.njk) orientan la claridad y el tono; no son pruebas de conversión en triatlón.
 

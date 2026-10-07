@@ -104,23 +104,20 @@ test("weekly schedule and support channels match the three coaching plans", asyn
   await expect(schedule).toContainText("SÁBADO Y DOMINGO");
   await expect(schedule).toContainText("semana anterior");
   await expect(schedule).toContainText("siguiente");
-  const individual = page
-    .locator(".plan")
-    .filter({
-      has: page.getByRole("heading", { name: "Individual", exact: true }),
-    });
-  const coaching = page
-    .locator(".plan")
-    .filter({
-      has: page.getByRole("heading", { name: "Coaching", exact: true }),
-    });
-  const performance = page
-    .locator(".plan")
-    .filter({
-      has: page.getByRole("heading", { name: "Performance", exact: true }),
-    });
+  const individual = page.locator(".plan").filter({
+    has: page.getByRole("heading", { name: "Individual", exact: true }),
+  });
+  const coaching = page.locator(".plan").filter({
+    has: page.getByRole("heading", { name: "Coaching", exact: true }),
+  });
+  const performance = page.locator(".plan").filter({
+    has: page.getByRole("heading", { name: "Performance", exact: true }),
+  });
   await expect(individual).toContainText("audios de WhatsApp");
-  await expect(individual).toContainText("Sin llamada incluida");
+  await expect(individual).toContainText("Sin llamadas de seguimiento");
+  for (const plan of [individual, coaching, performance]) {
+    await expect(plan).toContainText("Llamada inicial");
+  }
   await expect(coaching).toContainText("Consultas diarias");
   await expect(coaching).toContainText("Llamada mensual");
   await expect(performance).toContainText("Contacto diario");
@@ -135,6 +132,48 @@ test("weekly schedule and support channels match the three coaching plans", asyn
   await expect(page.locator("details[open]")).toContainText(
     "Entre sábado y domingo recibes la programación",
   );
+});
+
+test("journey explains the start and weekly cycle, with an interactive session example", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  await page.goto("/");
+  const journey = page.locator("#como-funciona");
+  await expect(journey.locator(".journey-stages > li")).toHaveCount(8);
+  const initialCall = journey
+    .locator(".journey-step")
+    .filter({
+      has: page.getByRole("heading", { name: "Llamada inicial.", exact: true }),
+    });
+  await expect(initialCall).toContainText("Incluida en los tres planes");
+  await expect(journey.locator(".journey-loop")).toContainText(
+    "prescribir, revisar y ajustar",
+  );
+
+  const calendar = journey.locator(".training-calendar");
+  await expect(calendar).toContainText("SEMANA ORIENTATIVA");
+  await expect(calendar).toContainText("no un plan individual");
+  const bike = calendar.getByRole("button", { name: /^Martes: Ciclismo/ });
+  await bike.click();
+  await expect(calendar.locator(".tc-detail h4")).toHaveText("Pedaleo estable");
+  await expect(calendar.locator(".tc-detail-meta")).toContainText("55 min");
+  await expect(bike).toHaveAttribute("aria-pressed", "true");
+  await expect(calendar.locator('button[aria-pressed="true"]')).toHaveCount(1);
+
+  const rest = calendar.getByRole("button", { name: /^Jueves: Recuperación/ });
+  await rest.focus();
+  await page.keyboard.press("Enter");
+  await expect(rest).toBeFocused();
+  await expect(rest).toHaveAttribute("aria-pressed", "true");
+  await expect(bike).toHaveAttribute("aria-pressed", "false");
+  await expect(calendar.locator(".tc-recovery-note")).toContainText("descanso");
+  await expect(calendar.locator(".tc-structure-bar")).toHaveCount(0);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
 });
 
 test("lactate advantages stay separate from monthly prices and a track enquiry is prefilled", async ({
