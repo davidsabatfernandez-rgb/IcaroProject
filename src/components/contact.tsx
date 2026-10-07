@@ -148,8 +148,8 @@ export function ContactForm() {
       ) : (
         <p className="form-note">
           {configured
-            ? "Antes de publicar el formulario, configura la política de privacidad."
-            : "Contacto pendiente de activación. Puedes preparar tu consulta; tus datos no se enviarán ni se guardarán."}
+            ? "El envío se activará cuando esté disponible la información de privacidad."
+            : "El canal de envío todavía no está disponible. Puedes preparar y copiar tu consulta; tus datos no se enviarán ni se guardarán."}
         </p>
       )}
       <button className="button accent" type="submit" disabled={busy}>

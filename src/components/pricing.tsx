@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { site } from "@/config/site";
 import { plans } from "@/data/content";
 import { Arrow } from "./ui";
 export function Pricing() {
@@ -51,13 +50,11 @@ export function Pricing() {
               <h3>{plan.name}</h3>
               <p>{plan.description}</p>
             </div>
-            <div className="price" aria-live="polite">
-              <strong>
-                {site.prices[plan.id][mode]}
-                <span> €</span>
-              </strong>
-              <span>/ mes</span>
-            </div>
+            <p className="plan-modality" aria-live="polite">
+              {mode === "triathlon"
+                ? "Plan de triatlón"
+                : "Plan de una disciplina"}
+            </p>
             <a
               className={`button ${plan.id === "coaching" ? "accent" : "outline"}`}
               href={`#contacto`}
@@ -67,7 +64,7 @@ export function Pricing() {
                 )
               }
             >
-              Elegir {plan.name}
+              Consultar {plan.name}
               <Arrow diagonal />
             </a>
             <p className="plan-common">
@@ -87,24 +84,16 @@ export function Pricing() {
               <span className="micro">TU TEST DE LACTATO</span>
               {plan.id === "performance" ? (
                 <>
-                  <strong>
-                    1 test incluido cada{" "}
-                    {site.lactate.performanceIncludedMonths} meses
-                  </strong>
-                  <p>
-                    Opción de test trimestral:{" "}
-                    {site.lactate.performanceQuarterly} €.
-                  </p>
+                  <strong>1 test incluido cada 6 meses</strong>
+                  <p>También puedes consultar la opción trimestral.</p>
                 </>
               ) : (
                 <>
-                  <strong>
-                    {site.lactate[plan.id]} € <span>/ test</span>
-                  </strong>
+                  <strong>Condiciones para atletas del plan</strong>
                   <p>
                     {plan.id === "coaching"
-                      ? "Promoción trimestral."
-                      : "Tarifa para atletas de Individual."}
+                      ? "Consulta la promoción trimestral."
+                      : "Pregúntanos cuándo puede ayudarte un test."}
                   </p>
                 </>
               )}
@@ -112,11 +101,10 @@ export function Pricing() {
           </article>
         ))}
       </div>
-      <p className="prices-note">
-        Precios mensuales del entrenamiento provisionales. Tests de lactato
-        opcionales: Performance incluye uno semestral; el resto se contrata a la
-        tarifa indicada. Desplazamiento presupuestado antes de reservar.
-        Condiciones de contratación pendientes de confirmación.
+      <p className="prices-note plans-note">
+        ¿No sabes qué seguimiento elegir? Cuéntanos tu objetivo y tu
+        disponibilidad: te explicaremos qué plan encaja contigo y sus
+        condiciones antes de empezar. Los tests de lactato son opcionales.
       </p>
     </>
   );

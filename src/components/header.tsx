@@ -22,7 +22,7 @@ export function Header() {
         ))}
       </nav>
       <a className="header-cta" href="#contacto">
-        Empezar <Arrow diagonal />
+        Contactar <Arrow diagonal />
       </a>
       <button
         className="menu-toggle"

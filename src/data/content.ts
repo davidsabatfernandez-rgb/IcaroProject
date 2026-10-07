@@ -11,9 +11,9 @@ export const copy = {
     eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
     title: ["Triatlón.", "A tu medida."],
     description:
-      "Desde tu primer triatlón hasta una preparación exigente. Plan individual en TrainingPeaks, sesiones con un propósito y un entrenador que te escucha, interpreta tus datos y te acompaña hacia tu objetivo.",
-    primary: "Cuéntame tu objetivo",
-    secondary: "Ver planes y precios",
+      "Un plan que encaja en tu vida. Un entrenador que conoce tu proceso. Desde tu primer triatlón hasta el reto que quieres preparar.",
+    primary: "Hablar con un entrenador",
+    secondary: "Ver cómo empezamos",
   },
   philosophy: {
     title: "El plan empieza\npor entenderte.",
@@ -137,11 +137,11 @@ export const faqs = [
   ],
   [
     "¿Los tests de lactato son obligatorios?",
-    `No. Son opcionales. Los utilizamos cuando aportan información útil para decidir tu entrenamiento. Puedes contratar un test por separado o acceder a las condiciones de tu plan. Performance incluye un test cada ${site.lactate.performanceIncludedMonths} meses.`,
+    "No. Son opcionales. Los utilizamos cuando aportan información útil para decidir tu entrenamiento. Puedes contratar un test por separado o acceder a las condiciones de tu plan. Performance incluye un test cada 6 meses.",
   ],
   [
-    "¿Cuánto cuesta un test de lactato?",
-    `Un test de lactato en pista independiente cuesta ${site.lactate.standalone} €, más desplazamiento. ${site.lactate.travelNote} Con Individual, la tarifa es ${site.lactate.individual} € por test. Coaching ofrece la promoción trimestral de ${site.lactate.coaching} € por test. Performance incluye un test sin coste adicional cada ${site.lactate.performanceIncludedMonths} meses y ofrece la opción de test trimestral a ${site.lactate.performanceQuarterly} €.`,
+    "¿Puedo consultar un test sin contratar un plan?",
+    "Sí. Puedes consultar un test de lactato en pista aunque todavía no entrenes con ICARO. Te explicaremos cómo funciona y sus condiciones; el desplazamiento se presupuesta antes de reservar. Si entrenas con nosotros, también tienes condiciones específicas según tu plan.",
   ],
   [
     "¿Qué diferencia hay entre los tres planes?",
@@ -150,7 +150,7 @@ export const faqs = [
   [
     "¿Hay permanencia?",
     site.terms.commitment ||
-      "Las condiciones de contratación están pendientes de publicación. Consúltanos antes de contratar para conocer las condiciones vigentes.",
+      "Te explicamos las condiciones de contratación en la primera conversación, antes de empezar. Pregúntanos por la duración del seguimiento y las opciones para cambiar o finalizar tu plan.",
   ],
   [
     "¿Cómo veo mis entrenamientos?",

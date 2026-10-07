@@ -31,11 +31,17 @@ export function JourneySection() {
       </div>
 
       <div className="journey-phases" aria-hidden="true">
-        <span>PRIMERO, ENTENDERTE</span>
+        <span>
+          <b>01–04</b> Nos conocemos
+        </span>
         <Arrow />
-        <span>DESPUÉS, ENTRENAR Y REVISAR</span>
+        <span>
+          <b>05–07</b> Entrenamos y ajustamos
+        </span>
         <Arrow />
-        <span>TU OBJETIVO MARCA EL RUMBO</span>
+        <span>
+          <b>08</b> Tu objetivo
+        </span>
       </div>
       <ol className="journey-stages" aria-label="Tu recorrido con ICARO">
         {journeyStages.map((stage) => (
@@ -78,8 +84,8 @@ export function JourneySection() {
           </h3>
           <p>
             Duración, objetivo y estructura: sabes qué hacer y qué buscamos en
-            cada sesión. Selecciona un entrenamiento del calendario para ver un
-            ejemplo.
+            cada sesión. Prueba el calendario: selecciona un entrenamiento y
+            descubre qué hay detrás.
           </p>
           <div className="journey-platform">
             <span className="micro">PLANIFICACIÓN EN</span>
@@ -90,6 +96,10 @@ export function JourneySection() {
             Las sesiones estructuradas admitidas llegan a tu reloj compatible.
           </p>
           <small>{productCopy.compatibility}</small>
+          <a className="text-link" href="#contacto">
+            Quiero mi propia planificación
+            <Arrow diagonal />
+          </a>
         </div>
         <TrainingCalendar />
       </div>

@@ -5,7 +5,7 @@ export function ValueSection() {
   return (
     <section
       className="section value-section"
-      id="contigo"
+      id="metodo"
       aria-labelledby="value-title"
     >
       <div className="value-heading" data-reveal>

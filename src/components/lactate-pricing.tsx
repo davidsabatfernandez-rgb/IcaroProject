@@ -1,6 +1,5 @@
 "use client";
 
-import { site } from "@/config/site";
 import { Arrow } from "./ui";
 
 export function LactatePricing() {
@@ -16,11 +15,9 @@ export function LactatePricing() {
           </p>
         </div>
         <div className="lactate-booking">
-          <p className="lactate-standalone-price">
-            <strong>{site.lactate.standalone} €</strong>
-            <span>+ desplazamiento</span>
+          <p className="lactate-travel">
+            Desplazamiento presupuestado antes de reservar.
           </p>
-          <p className="lactate-travel">{site.lactate.travelNote}</p>
           <a
             className="button accent"
             href="#contacto"
@@ -32,7 +29,7 @@ export function LactatePricing() {
               )
             }
           >
-            Consultar test en pista
+            Consultar condiciones del test
             <Arrow diagonal />
           </a>
         </div>
@@ -43,32 +40,24 @@ export function LactatePricing() {
           <div>
             <dt>Individual</dt>
             <dd>
-              <strong>
-                {site.lactate.individual} € <span>/ test</span>
-              </strong>
-              <p>Tarifa para atletas del plan.</p>
+              <strong>Condiciones para atletas del plan.</strong>
+              <p>Te orientamos sobre cuándo puede aportarte información.</p>
             </dd>
           </div>
           <div>
             <dt>Coaching</dt>
             <dd>
-              <strong>
-                {site.lactate.coaching} € <span>/ test</span>
-              </strong>
-              <p>Promoción trimestral.</p>
+              <strong>Promoción trimestral.</strong>
+              <p>Consulta las condiciones junto a tu seguimiento.</p>
             </dd>
           </div>
           <div>
             <dt>Performance</dt>
             <dd>
               <strong>
-                1 test incluido{" "}
-                <span>cada {site.lactate.performanceIncludedMonths} meses</span>
+                1 test incluido <span>cada 6 meses</span>
               </strong>
-              <p>
-                Opción de test trimestral: {site.lactate.performanceQuarterly}{" "}
-                €.
-              </p>
+              <p>También puedes consultar la opción trimestral.</p>
             </dd>
           </div>
         </dl>

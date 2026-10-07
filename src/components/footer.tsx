@@ -60,11 +60,7 @@ export function Footer() {
               <a key={label} href={url}>
                 {label}
               </a>
-            ) : (
-              <span key={label} title="Pendiente de publicación">
-                {label}
-              </span>
-            ),
+            ) : null,
           )}
         </div>
         <span>Entrenar con sentido.</span>

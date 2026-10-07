@@ -37,14 +37,7 @@ for (const [name, width, height] of [
         .click();
     }
     await expect(page).toHaveURL(/#planes$/);
-    for (const id of [
-      "metodo",
-      "perfil",
-      "planes",
-      "lactato",
-      "faq",
-      "contacto",
-    ])
+    for (const id of ["metodo", "planes", "lactato", "faq", "contacto"])
       await expect(page.locator(`#${id}`)).toBeAttached();
     const broken = await page
       .locator('a[href^="#"]')
@@ -64,34 +57,44 @@ for (const [name, width, height] of [
     });
   });
 }
-test("prices switch and selecting plan carries interest to form", async ({
+test("plans show no prices and each enquiry carries interest to the form", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".price strong")).toHaveText([
-    "89 €",
-    "119 €",
-    "179 €",
+  await expect(page.locator("main")).not.toContainText(
+    /€|\beuros?\b|\bprecios?\b/i,
+  );
+  await expect(page.locator("#faq")).not.toContainText(
+    /€|\beuros?\b|\bprecios?\b/i,
+  );
+  await expect(page.locator(".price, .hero-price")).toHaveCount(0);
+  await expect(page.locator(".plan-modality")).toHaveText([
+    "Plan de triatlón",
+    "Plan de triatlón",
+    "Plan de triatlón",
   ]);
   await page
     .getByRole("button", { name: "Una disciplina", exact: true })
     .click();
-  await expect(page.locator(".price strong")).toHaveText([
-    "69 €",
-    "99 €",
-    "159 €",
+  await expect(page.locator(".plan-modality")).toHaveText([
+    "Plan de una disciplina",
+    "Plan de una disciplina",
+    "Plan de una disciplina",
   ]);
   await page.getByRole("button", { name: "Triatlón", exact: true }).click();
-  await expect(page.locator(".price strong")).toHaveText([
-    "89 €",
-    "119 €",
-    "179 €",
-  ]);
-  await page.getByRole("link", { name: "Elegir Coaching" }).click();
-  await expect(page.locator(".chosen-plan")).toContainText("Coaching");
-  await expect(page.locator('input[name="plan"]')).toHaveValue("Coaching");
-  await page.getByRole("button", { name: "Cambiar", exact: true }).click();
-  await expect(page.locator(".chosen-plan")).toHaveCount(0);
+  for (const plan of ["Individual", "Coaching", "Performance"]) {
+    await page
+      .getByRole("link", { name: `Consultar ${plan}`, exact: true })
+      .click();
+    await expect(page).toHaveURL(/#contacto$/);
+    await expect(page.locator(".chosen-plan")).toContainText(plan);
+    await expect(page.locator('input[name="plan"]')).toHaveValue(plan);
+    await page.getByRole("button", { name: "Cambiar", exact: true }).click();
+    await expect(page.locator(".chosen-plan")).toHaveCount(0);
+  }
+  await expect(page.locator("main")).not.toContainText(
+    /€|\beuros?\b|\bprecios?\b/i,
+  );
 });
 
 test("weekly schedule and support channels match the three coaching plans", async ({
@@ -141,11 +144,9 @@ test("journey explains the start and weekly cycle, with an interactive session e
   await page.goto("/");
   const journey = page.locator("#como-funciona");
   await expect(journey.locator(".journey-stages > li")).toHaveCount(8);
-  const initialCall = journey
-    .locator(".journey-step")
-    .filter({
-      has: page.getByRole("heading", { name: "Llamada inicial.", exact: true }),
-    });
+  const initialCall = journey.locator(".journey-step").filter({
+    has: page.getByRole("heading", { name: "Llamada inicial.", exact: true }),
+  });
   await expect(initialCall).toContainText("Incluida en los tres planes");
   await expect(journey.locator(".journey-loop")).toContainText(
     "prescribir, revisar y ajustar",
@@ -176,29 +177,35 @@ test("journey explains the start and weekly cycle, with an interactive session e
   ).toBe(true);
 });
 
-test("lactate advantages stay separate from monthly prices and a track enquiry is prefilled", async ({
+test("optional lactate conditions are clear and a track enquiry is prefilled", async ({
   page,
 }) => {
   await page.goto("/");
   const benefits = page.locator(".plan-lactate");
-  await expect(benefits.nth(0)).toContainText("80 €");
-  await expect(benefits.nth(1)).toContainText("65 €");
-  await expect(benefits.nth(1)).toContainText("Promoción trimestral");
+  await expect(benefits.nth(0)).toContainText(
+    "Condiciones para atletas del plan",
+  );
+  await expect(benefits.nth(1)).toContainText("promoción trimestral");
   await expect(benefits.nth(2)).toContainText("1 test incluido cada 6 meses");
-  await expect(benefits.nth(2)).toContainText("test trimestral: 50 €");
+  await expect(benefits.nth(2)).toContainText("opción trimestral");
   await page
     .getByRole("button", { name: "Una disciplina", exact: true })
     .click();
-  await expect(benefits.nth(0)).toContainText("80 €");
+  await expect(benefits.nth(0)).toContainText(
+    "Condiciones para atletas del plan",
+  );
   await expect(benefits.nth(2)).toContainText("cada 6 meses");
-  await expect(page.locator(".lactate-standalone-price")).toContainText(
-    "100 €",
+  await expect(page.locator("#lactato")).not.toContainText(
+    /€|\beuros?\b|\bprecios?\b/i,
+  );
+  await expect(page.locator(".lactate-rate-note")).toContainText(
+    "Tests opcionales",
   );
   await expect(page.locator(".lactate-travel")).toHaveText(
     "Desplazamiento presupuestado antes de reservar.",
   );
   await page
-    .getByRole("link", { name: "Consultar test en pista", exact: true })
+    .getByRole("link", { name: "Consultar condiciones del test", exact: true })
     .click();
   await expect(page).toHaveURL(/#contacto$/);
   await expect(page.locator('input[name="plan"]')).toHaveValue(
@@ -206,22 +213,6 @@ test("lactate advantages stay separate from monthly prices and a track enquiry i
   );
   await expect(page.locator(".chosen-plan")).toContainText(
     "Test de lactato en pista",
-  );
-});
-test("curve changes stage and explains thresholds", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Después de un bloque" }).click();
-  await expect(page.locator(".evolution-curve")).toHaveClass(/active/);
-  await expect(page.locator(".chart-caption")).toContainText(
-    "Sin datos reales",
-  );
-  await page.getByRole("button", { name: /Segundo umbral/ }).click();
-  await expect(page.locator(".threshold-description")).toContainText(
-    "El segundo umbral",
-  );
-  await page.getByRole("button", { name: /Tus zonas/ }).click();
-  await expect(page.locator(".threshold-description")).toContainText(
-    "no a una tabla",
   );
 });
 test("FAQ expands and contact cannot falsely claim submission", async ({
@@ -283,17 +274,19 @@ test("triathlon product, platform and Barcelona are clear and real photos load",
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Triatlón.",
   );
-  await expect(page.locator(".hero-price")).toContainText("89 € / mes");
   await expect(page.locator("#como-funciona")).toContainText("TrainingPeaks");
   await expect(page.locator("#como-funciona")).toContainText(
     "reloj compatible",
   );
   await expect(page.locator("#barcelona")).toContainText("Dos centros");
   await expect(page.locator("#barcelona")).toContainText("Barcelona");
+  await expect(
+    page.locator(".testimonials, #sobre-mi, #sobre-nosotros"),
+  ).toHaveCount(0);
   await page
-    .getByRole("link", { name: "Ver planes y precios", exact: true })
+    .getByRole("link", { name: "Ver cómo empezamos", exact: true })
     .click();
-  await expect(page).toHaveURL(/#planes$/);
+  await expect(page).toHaveURL(/#como-funciona$/);
   await expect(
     page.getByRole("button", { name: "Triatlón", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
