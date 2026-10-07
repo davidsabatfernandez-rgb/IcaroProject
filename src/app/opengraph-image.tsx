@@ -7,7 +7,7 @@ export default function Image() {
   return new ImageResponse(
     <div
       style={{
-        background: "#191b18",
+        background: "#102c3a",
         color: "#f3f2e9",
         width: "100%",
         height: "100%",

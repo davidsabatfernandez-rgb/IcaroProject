@@ -7,15 +7,16 @@ export const site = {
   contact: { whatsapp: "", instagram: "", email: "", formEndpoint: "" },
   legal: { notice: "", privacy: "", cookies: "" },
   images: {
-    hero: "/images/triathlon-race.jpg",
-    running: "/images/running-race.jpg",
+    hero: "/images/running-track.jpg",
+    running: "/images/running-coast.jpg",
     cycling: "/images/road-cycling.jpg",
     swimming: "/images/swimming-technique.webp",
     triathlon: "",
     lactate: "",
   },
   photographyCredits: [
-    { name: "Quino Al", url: "https://unsplash.com/@quinoal" },
+    { name: "Steven Lelham", url: "https://unsplash.com/photos/atSaEOeE8Nk" },
+    { name: "Fred Neethling", url: "https://unsplash.com/photos/T_KWo8LMyK4" },
     { name: "Marcus Ng", url: "https://unsplash.com/photos/ZbbhkQ0M2AM" },
     {
       name: "Pixabay",
@@ -26,6 +27,14 @@ export const site = {
     individual: { single: 69, triathlon: 89 },
     coaching: { single: 99, triathlon: 119 },
     performance: { single: 159, triathlon: 179 },
+  },
+  lactate: {
+    standalone: 100,
+    individual: 80,
+    coaching: 65,
+    performanceQuarterly: 50,
+    performanceIncludedMonths: 6,
+    travelNote: "Desplazamiento presupuestado antes de reservar.",
   },
   terms: {
     commitment: "",

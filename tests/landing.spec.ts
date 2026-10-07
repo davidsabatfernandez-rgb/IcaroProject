@@ -93,6 +93,82 @@ test("prices switch and selecting plan carries interest to form", async ({
   await page.getByRole("button", { name: "Cambiar", exact: true }).click();
   await expect(page.locator(".chosen-plan")).toHaveCount(0);
 });
+
+test("weekly schedule and support channels match the three coaching plans", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const schedule = page.locator(".shared-schedule");
+  await expect(schedule).toContainText("VIERNES");
+  await expect(schedule).toContainText("Tú nos envías tu disponibilidad.");
+  await expect(schedule).toContainText("SÁBADO Y DOMINGO");
+  await expect(schedule).toContainText("semana anterior");
+  await expect(schedule).toContainText("siguiente");
+  const individual = page
+    .locator(".plan")
+    .filter({
+      has: page.getByRole("heading", { name: "Individual", exact: true }),
+    });
+  const coaching = page
+    .locator(".plan")
+    .filter({
+      has: page.getByRole("heading", { name: "Coaching", exact: true }),
+    });
+  const performance = page
+    .locator(".plan")
+    .filter({
+      has: page.getByRole("heading", { name: "Performance", exact: true }),
+    });
+  await expect(individual).toContainText("audios de WhatsApp");
+  await expect(individual).toContainText("Sin llamada incluida");
+  await expect(coaching).toContainText("Consultas diarias");
+  await expect(coaching).toContainText("Llamada mensual");
+  await expect(performance).toContainText("Contacto diario");
+  await expect(performance).toContainText("Llamada semanal");
+  await page
+    .locator("summary")
+    .filter({ hasText: "¿Cada cuánto recibo mi planificación?" })
+    .click();
+  await expect(page.locator("details[open]")).toContainText(
+    "Cada viernes nos envías tu disponibilidad",
+  );
+  await expect(page.locator("details[open]")).toContainText(
+    "Entre sábado y domingo recibes la programación",
+  );
+});
+
+test("lactate advantages stay separate from monthly prices and a track enquiry is prefilled", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const benefits = page.locator(".plan-lactate");
+  await expect(benefits.nth(0)).toContainText("80 €");
+  await expect(benefits.nth(1)).toContainText("65 €");
+  await expect(benefits.nth(1)).toContainText("Promoción trimestral");
+  await expect(benefits.nth(2)).toContainText("1 test incluido cada 6 meses");
+  await expect(benefits.nth(2)).toContainText("test trimestral: 50 €");
+  await page
+    .getByRole("button", { name: "Una disciplina", exact: true })
+    .click();
+  await expect(benefits.nth(0)).toContainText("80 €");
+  await expect(benefits.nth(2)).toContainText("cada 6 meses");
+  await expect(page.locator(".lactate-standalone-price")).toContainText(
+    "100 €",
+  );
+  await expect(page.locator(".lactate-travel")).toHaveText(
+    "Desplazamiento presupuestado antes de reservar.",
+  );
+  await page
+    .getByRole("link", { name: "Consultar test en pista", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#contacto$/);
+  await expect(page.locator('input[name="plan"]')).toHaveValue(
+    "Test de lactato en pista",
+  );
+  await expect(page.locator(".chosen-plan")).toContainText(
+    "Test de lactato en pista",
+  );
+});
 test("curve changes stage and explains thresholds", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Después de un bloque" }).click();

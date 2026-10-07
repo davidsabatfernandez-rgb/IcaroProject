@@ -5,8 +5,11 @@ import { Arrow, LoopArrow, RouteArt, SectionLabel } from "@/components/ui";
 import { Curve } from "@/components/curve";
 import { Pricing } from "@/components/pricing";
 import { ContactForm } from "@/components/contact";
+import { LactatePricing } from "@/components/lactate-pricing";
 import { ProductSection, BarcelonaSection } from "./product";
+import { ValueSection, WeeklySchedule } from "./value";
 import "./triathlon.css";
+import "./coaching.css";
 export function Landing() {
   return (
     <>
@@ -25,7 +28,7 @@ export function Landing() {
           </h1>
           <p>{copy.hero.description}</p>
           <div className="hero-delivery">
-            <span>PLAN CADA VIERNES</span>
+            <span>100 % INDIVIDUALIZADO</span>
             <span>FEEDBACK SEMANAL</span>
             <span>TRAININGPEAKS</span>
           </div>
@@ -51,10 +54,10 @@ export function Landing() {
           {site.images.hero ? (
             <Image
               src={site.images.hero}
-              alt="Triatleta durante el segmento de carrera de una competición"
+              alt="Grupo de corredores y sus sombras vistos desde arriba en una pista"
               fill
               preload
-              sizes="(max-width: 760px) 100vw, 50vw"
+              sizes="100vw"
             />
           ) : (
             <RouteArt />
@@ -158,6 +161,7 @@ export function Landing() {
           ))}
         </div>
       </section>
+      <ValueSection />
       <section className="section plans-section" id="planes">
         <div className="section-heading" data-reveal>
           <div>
@@ -186,6 +190,7 @@ export function Landing() {
             ))}
           </ul>
         </div>
+        <WeeklySchedule />
         <Pricing />
       </section>
       <BarcelonaSection />
@@ -319,18 +324,18 @@ export function Landing() {
           {[
             {
               day: "VIERNES",
-              title: "La próxima semana, con sentido.",
-              text: "Tu próxima semana aparece en TrainingPeaks. Revisamos lo realizado, tu respuesta y tu disponibilidad para decidir las sesiones.",
+              title: "Nos envías tu disponibilidad.",
+              text: "Tu tiempo real, tus horarios y los compromisos de la siguiente semana. El entrenamiento empieza por encajar en tu vida.",
+            },
+            {
+              day: "SÁBADO Y DOMINGO",
+              title: "Recibes el plan y sabes por qué.",
+              text: "Programación en TrainingPeaks, revisión de la semana anterior y objetivos de la siguiente. Individual recibe audios de WhatsApp; Performance revisa contigo en la llamada semanal. Coaching incluye una llamada mensual.",
             },
             {
               day: "DURANTE LA SEMANA",
-              title: "Entrenas. Nos cuentas.",
-              text: "Sigues las sesiones en TrainingPeaks o en tu reloj compatible. Tus datos y comentarios nos ayudan a revisar cómo vas.",
-            },
-            {
-              day: "DOMINGO",
-              title: "Observar antes de seguir.",
-              text: "Feedback semanal: qué ha funcionado, qué vigilamos y cómo estás respondiendo. Si el fin de semana cambia el contexto, revisamos los ajustes según el seguimiento contratado.",
+              title: "Entrenas y seguimos cerca.",
+              text: "Sigues las sesiones y registras datos y sensaciones. Coaching y Performance incluyen consultas diarias para resolver dudas y revisar los ajustes que necesites.",
             },
           ].map((item, i) => (
             <article key={item.day} data-reveal>
@@ -415,12 +420,14 @@ export function Landing() {
             <span className="micro">TESTS OPCIONALES</span>
             <h3>Volver a medir. Entender la evolución.</h3>
             <p>
-              Aproximadamente un test cada tres meses, cuando sea útil. Se
-              contrata aparte y los atletas activos tienen precio especial.
-              Consúltanos las condiciones.
+              Medimos cuando la información ayuda a decidir tu entrenamiento.
+              Puedes contratar el test en pista por separado o aprovechar las
+              condiciones de tu plan. Performance incluye un test cada seis
+              meses.
             </p>
           </div>
         </div>
+        <LactatePricing />
       </section>
       <section className="section audience">
         <div data-reveal>
@@ -495,8 +502,9 @@ export function Landing() {
             </span>
           </h2>
           <p>
-            Cuéntanos dónde estás y qué te gustaría conseguir. El primer paso es
-            entenderte.
+            Cuéntanos tu objetivo, el tiempo que tienes y lo que hoy te cuesta
+            resolver. Empezamos escuchándote para encontrar el acompañamiento
+            que encaja contigo.
           </p>
           <div className="contact-links">
             {whatsappUrl() && (

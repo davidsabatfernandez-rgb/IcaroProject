@@ -49,7 +49,7 @@
   font-size: 54px;
   line-height: 1;
   font-weight: 500;
-  color: #767c6b;
+  color: #69797e;
 }
 .product-flow-icon {
   width: 43px;
@@ -58,10 +58,10 @@
 .product-next {
   display: flex;
   margin-left: auto;
-  color: #737c62;
+  color: #62767c;
 }
 .product-step-label {
-  color: #535d43;
+  color: #43575d;
   font-size: 10px;
   letter-spacing: 1.3px;
   margin-bottom: 12px;
@@ -74,7 +74,7 @@
 .product-step p {
   font-size: 14px;
   line-height: 1.75;
-  color: #4d5347;
+  color: #465154;
 }
 .product-step-detail {
   display: block;
@@ -104,7 +104,7 @@
 .product-platform-name p > span {
   margin-left: 10px;
   font-size: 22px;
-  color: #657b3d;
+  color: #3d6c7b;
 }
 .product-platform-copy p {
   font-size: 14px;
@@ -112,7 +112,7 @@
 }
 .product-platform-copy small {
   display: block;
-  color: #626957;
+  color: #536872;
   max-width: 670px;
   font-size: 11px;
   line-height: 1.7;
@@ -137,7 +137,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  border-right: 1px solid #43483b;
+  border-right: 1px solid #3b4548;
   color: var(--accent);
   padding-right: 35px;
 }
@@ -177,7 +177,7 @@
 }
 .barcelona-copy > p:not(.barcelona-subtitle) {
   max-width: 600px;
-  color: #c7cabc;
+  color: #bcc7ca;
   font-size: 14px;
   margin-top: 17px;
 }
@@ -186,7 +186,7 @@
 }
 .barcelona-copy > small {
   display: block;
-  color: #b1b7a6;
+  color: #a6b3b7;
   max-width: 500px;
   margin-top: 14px;
   font-size: 11px;
@@ -268,7 +268,7 @@
     align-items: center;
     gap: 22px;
     border-right: 0;
-    border-bottom: 1px solid #43483b;
+    border-bottom: 1px solid #3b4548;
     padding-right: 0;
     padding-bottom: 23px;
   }

@@ -2,9 +2,9 @@ export const productCopy = {
   label: "TU ENTRENAMIENTO, PASO A PASO",
   title: ["Tu plan. Tu reloj.", "Tu entrenador."],
   description:
-    "Un plan de triatlón a tu medida y un entrenador que revisa cómo respondes. Sabes qué toca hacer y cómo seguir tu sesión.",
+    "Un plan que encaja en tu vida y un entrenador que te acompaña. Cada sesión tiene un propósito, y te explicamos cómo conecta con tu objetivo.",
   platformDescription:
-    "Tu calendario de entrenamiento, los datos de tus sesiones y la comunicación sobre cada entreno, en el mismo sitio.",
+    "Tu calendario, las sesiones de natación, ciclismo y carrera, y los datos de tus entrenamientos, en el mismo sitio.",
   compatibility:
     "La sincronización depende del reloj, la conexión y el tipo de sesión. Te ayudamos a comprobar la compatibilidad antes de empezar.",
   primaryAction: "Ver los planes",
@@ -14,10 +14,10 @@ export const trainingFlow = [
   {
     number: "01",
     icon: "plan",
-    label: "RECIBE TU SEMANA",
-    title: "Abre TrainingPeaks.",
-    text: "Tu plan individual te dice qué toca, cuánto dura y a qué intensidad. Natación, ciclismo y carrera, según tu objetivo y disponibilidad.",
-    detail: "Una semana clara, antes de empezar.",
+    label: "PREPARA TU SEMANA",
+    title: "Del viernes al fin de semana.",
+    text: "El viernes nos envías tu disponibilidad. Entre sábado y domingo recibes tu plan en TrainingPeaks, la explicación de la semana anterior y los objetivos de la siguiente.",
+    detail: "Sabes qué toca hacer y para qué.",
   },
   {
     number: "02",
@@ -31,9 +31,9 @@ export const trainingFlow = [
     number: "03",
     icon: "review",
     label: "CUÉNTANOS CÓMO HA IDO",
-    title: "Tu entrenador lo revisa.",
-    text: "Sincroniza la actividad y añade tus sensaciones. Tu entrenador revisa tu respuesta y ajusta el plan según el seguimiento contratado.",
-    detail: "Tus datos cuentan. Tus sensaciones también.",
+    title: "Tu entrenador te acompaña.",
+    text: "Te damos feedback semanal a partir de tus datos y sensaciones. Individual lo recibe en audios de WhatsApp; Coaching y Performance añaden consultas diarias.",
+    detail: "Coaching: llamada mensual. Performance: llamada semanal.",
   },
 ] as const;
 

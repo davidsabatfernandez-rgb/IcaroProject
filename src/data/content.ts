@@ -11,7 +11,7 @@ export const copy = {
     eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
     title: ["Triatlón.", "A tu medida."],
     description:
-      "Un entrenador que organiza tu natación, ciclismo y carrera. Tu plan semanal en TrainingPeaks, feedback y ajustes para que sepas qué hacer y por qué.",
+      "Tu plan individual en TrainingPeaks, cada sesión con un propósito y un entrenador que te escucha. Organizamos natación, ciclismo y carrera para aprovechar tu tiempo y avanzar juntos hacia tu objetivo.",
     primary: "Cuéntame tu objetivo",
     secondary: "Ver planes y precios",
   },
@@ -53,13 +53,13 @@ export const process = [
 ];
 export const sharedFeatures = [
   "Plan semanal individualizado en TrainingPeaks",
+  "Disponibilidad enviada cada viernes",
+  "Programación entre sábado y domingo",
+  "Explicación de la semana anterior y objetivos de la siguiente",
+  "Feedback semanal de tu entrenador",
   "Sincronización con dispositivos compatibles",
-  "Revisión de la semana anterior",
-  "Objetivo y disponibilidad real",
-  "Trabajo por fortalezas y limitaciones",
-  "Organización por ciclos",
+  "Trabajo por fortalezas, limitaciones y ciclos",
   "Tests de campo y zonas revisables",
-  "Feedback semanal",
   "Preparación de competición",
 ];
 export const plans = [
@@ -69,16 +69,16 @@ export const plans = [
     name: "Individual",
     label: "TU PLAN. TU AUTONOMÍA.",
     description:
-      "Quieres saber qué entrenar cada semana y te organizas con autonomía.",
+      "Quieres un plan bien explicado, feedback semanal y libertad para organizarte con autonomía.",
     features: [
       "Análisis de sesiones importantes",
-      "Feedback cada semana",
+      "Feedback semanal por audios de WhatsApp",
       "Preparación de competición",
     ],
-    contact: "Consultas urgentes de 19:00 a 20:00.",
+    contact: "Feedback semanal por WhatsApp.",
     detail:
-      "Para molestias, cambios de horario o dudas que condicionen el siguiente entrenamiento. Las demás consultas se responden con la programación semanal.",
-    call: "Sin videollamada periódica incluida",
+      "Entre sábado y domingo recibes audios con la explicación de la semana anterior y los objetivos de la siguiente, junto a tu nueva programación.",
+    call: "Sin llamada incluida",
   },
   {
     id: "coaching",
@@ -86,17 +86,18 @@ export const plans = [
     name: "Coaching",
     label: "UN PUNTO DE CONTACTO DIARIO.",
     description:
-      "Quieres un entrenador al que consultar cada día y ajustes durante la semana.",
+      "Quieres resolver tus dudas cada día, ajustar el plan cuando hace falta y hablar con tu entrenador una vez al mes.",
     features: [
-      "Todo lo incluido en Individual",
+      "Plan individual y feedback semanal",
+      "Consultas diarias al entrenador",
       "Seguimiento y análisis más frecuentes",
       "Ajustes durante la semana",
       "Control de fatiga y respuesta",
     ],
-    contact: "Contacto diario de 19:00 a 20:00.",
+    contact: "Consultas diarias con tu entrenador.",
     detail:
-      "Dudas, sensaciones y cambios relacionados con el entrenamiento, sin necesidad de que sean urgentes.",
-    call: "Videollamada mensual",
+      "Comparte tus dudas, sensaciones y cambios de disponibilidad durante la semana. Estamos cerca para revisar contigo lo que necesitas.",
+    call: "Llamada mensual",
   },
   {
     id: "performance",
@@ -104,18 +105,18 @@ export const plans = [
     name: "Performance",
     label: "MÁS CERCA DE CADA DECISIÓN.",
     description:
-      "Quieres contacto directo, análisis en profundidad y una videollamada cada semana.",
+      "Quieres un acompañamiento más cercano, disponibilidad para tus dudas y una llamada cada semana para revisar tu evolución.",
     features: [
-      "Todo lo incluido en Coaching",
-      "Contacto directo y prioridad de respuesta",
+      "Plan individual y feedback semanal",
+      "Consultas diarias y contacto cercano",
       "Análisis profundo y adaptación continua",
       "Perfil longitudinal y comparación de ciclos",
-      "Mayor preparación de competición",
+      "Preparación detallada de competición",
     ],
-    contact: "Contacto directo y seguimiento detallado.",
+    contact: "Contacto diario para todas tus dudas.",
     detail:
-      "Mayor profundidad para interpretar tu evolución y preparar cada fase de la temporada.",
-    call: "Videollamada semanal",
+      "En la llamada semanal revisamos cómo fue la semana anterior y qué buscamos en la siguiente. Durante la semana estamos disponibles para resolver tus dudas.",
+    call: "Llamada semanal",
   },
 ] as const;
 export const faqs = [
@@ -149,23 +150,27 @@ export const faqs = [
   ],
   [
     "¿Cada cuánto recibo mi planificación?",
-    "Los viernes recibes la planificación de la siguiente semana, basada en tu objetivo, el ciclo y tu respuesta. Si el fin de semana cambia la situación, puede modificarse.",
+    "Cada viernes nos envías tu disponibilidad para la siguiente semana. Entre sábado y domingo recibes la programación en TrainingPeaks, una explicación de la semana anterior y los objetivos de la siguiente. Así el plan encaja con el tiempo que realmente tienes.",
   ],
   [
     "¿Cómo funciona el feedback semanal?",
-    "El domingo revisamos qué hemos visto, qué ha funcionado, qué debemos vigilar y qué condiciona la siguiente semana. Una valoración sencilla y útil.",
+    "Revisamos lo que has hecho, cómo has respondido y qué buscamos en la semana siguiente. Esa explicación llega entre sábado y domingo junto al nuevo plan. En Individual, el feedback semanal se entrega mediante audios de WhatsApp.",
   ],
   [
     "¿Cómo contacto con el entrenador?",
-    "Individual reserva la franja de 19:00 a 20:00 para consultas urgentes sobre el próximo entrenamiento. Coaching ofrece contacto diario en esa franja. Performance añade contacto directo y prioridad de respuesta. No es un servicio de atención médica.",
+    "En Individual recibes feedback semanal por audios de WhatsApp, sin llamada incluida. Coaching permite consultas diarias y una llamada mensual. Performance ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
   ],
   [
     "¿Los tests de lactato son obligatorios?",
-    "No. Son opcionales y se contratan aparte. Los atletas activos tienen precio especial y pueden realizar aproximadamente un test cada tres meses cuando resulte útil.",
+    `No. Son opcionales. Los utilizamos cuando aportan información útil para decidir tu entrenamiento. Puedes contratar un test por separado o acceder a las condiciones de tu plan. Performance incluye un test cada ${site.lactate.performanceIncludedMonths} meses.`,
+  ],
+  [
+    "¿Cuánto cuesta un test de lactato?",
+    `Un test de lactato en pista independiente cuesta ${site.lactate.standalone} €, más desplazamiento. ${site.lactate.travelNote} Con Individual, la tarifa es ${site.lactate.individual} € por test. Coaching ofrece la promoción trimestral de ${site.lactate.coaching} € por test. Performance incluye un test sin coste adicional cada ${site.lactate.performanceIncludedMonths} meses y ofrece la opción de test trimestral a ${site.lactate.performanceQuarterly} €.`,
   ],
   [
     "¿Qué diferencia hay entre los tres planes?",
-    "Todos incluyen planificación individualizada. Cambian la frecuencia de contacto y revisión, la rapidez de los ajustes y la profundidad del análisis. Coaching incluye una videollamada mensual; Performance, una semanal.",
+    "Todos incluyen planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega feedback por audios de WhatsApp y no incluye llamadas. Coaching añade consultas diarias y una llamada mensual. Performance ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de los tests de lactato.",
   ],
   [
     "¿Hay permanencia?",
@@ -175,7 +180,7 @@ export const faqs = [
   [
     "¿Cómo veo mis entrenamientos?",
     site.terms.trainingPlatform ||
-      "Te explicaremos el canal y las herramientas de entrega al comenzar. La plataforma concreta está pendiente de confirmación; no necesitas elegirla ahora.",
+      "Consultas tu programación en TrainingPeaks. Puedes conectar un reloj compatible para recibir las sesiones estructuradas que admita tu modelo. Te ayudamos a configurar la conexión.",
   ],
 ];
 export const sports = [
@@ -196,7 +201,7 @@ export const sports = [
   {
     key: "running",
     name: "Carrera",
-    alt: "Triatleta corriendo durante una competición",
+    alt: "Silueta de un corredor junto al mar al atardecer",
     caption: "Llegar a correr con lo que necesitas.",
     symbol: "03",
   },

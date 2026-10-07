@@ -83,12 +83,40 @@ export function Pricing() {
               <p>{plan.detail}</p>
               <span className="call">{plan.call}</span>
             </div>
+            <div className="plan-lactate">
+              <span className="micro">TU TEST DE LACTATO</span>
+              {plan.id === "performance" ? (
+                <>
+                  <strong>
+                    1 test incluido cada{" "}
+                    {site.lactate.performanceIncludedMonths} meses
+                  </strong>
+                  <p>
+                    Opción de test trimestral:{" "}
+                    {site.lactate.performanceQuarterly} €.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <strong>
+                    {site.lactate[plan.id]} € <span>/ test</span>
+                  </strong>
+                  <p>
+                    {plan.id === "coaching"
+                      ? "Promoción trimestral."
+                      : "Tarifa para atletas de Individual."}
+                  </p>
+                </>
+              )}
+            </div>
           </article>
         ))}
       </div>
       <p className="prices-note">
-        Precios provisionales mensuales. Los tests de lactato se contratan
-        aparte. Condiciones de contratación pendientes de confirmación.
+        Precios mensuales del entrenamiento provisionales. Tests de lactato
+        opcionales: Performance incluye uno semestral; el resto se contrata a la
+        tarifa indicada. Desplazamiento presupuestado antes de reservar.
+        Condiciones de contratación pendientes de confirmación.
       </p>
     </>
   );

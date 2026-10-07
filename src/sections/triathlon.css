@@ -22,12 +22,12 @@
   flex-wrap: wrap;
   gap: 9px 18px;
   margin-top: 24px;
-  color: #d0d6c5;
+  color: #c5d2d6;
   font-size: 9px;
   letter-spacing: 1px;
 }
 .hero-delivery > span {
-  border-bottom: 1px solid #59614d;
+  border-bottom: 1px solid #4d5c61;
   padding-bottom: 8px;
 }
 .triathlon-hero .hero-actions {
@@ -39,7 +39,7 @@
 }
 .triathlon-hero .hero-copy > .hero-price {
   font-size: 11px;
-  color: #b4bda6;
+  color: #a6b7bd;
   margin-top: 25px;
 }
 .hero-price strong {
@@ -50,20 +50,20 @@
   display: block;
   margin-top: 4px;
   font-size: 10px;
-  color: #a2ad95;
+  color: #95a7ad;
 }
 .triathlon-hero .hero-visual {
   width: 48%;
-  background: #30382a;
+  background: #2a3538;
 }
 .triathlon-hero .hero-visual img {
   filter: grayscale(0.35);
-  object-position: 58% center;
+  object-position: 68% center;
 }
 .triathlon-hero .hero-visual:has(img):after {
   background:
     linear-gradient(90deg, var(--ink), transparent 35%),
-    linear-gradient(0deg, #13180deb, transparent 40%);
+    linear-gradient(0deg, #0d1518eb, transparent 40%);
 }
 .triathlon-hero .visual-coordinate {
   left: 65px;
@@ -72,6 +72,8 @@
 }
 .triathlon-hero .visual-index {
   font-size: 65px;
+  color: var(--accent);
+  z-index: 2;
 }
 .triathlon-hero .hero-bottom {
   padding-top: 21px;
@@ -149,7 +151,7 @@
     background: linear-gradient(0deg, var(--ink), transparent 65%);
   }
   .triathlon-hero .hero-visual:has(img):after {
-    background: linear-gradient(0deg, #12180eeb, transparent 55%);
+    background: linear-gradient(0deg, #0e1618eb, transparent 55%);
   }
   .triathlon-hero .hero-visual img {
     object-position: center 45%;
@@ -173,7 +175,7 @@
   .triathlon-hero .hero-bottom {
     margin-top: 0;
     padding: 19px 0;
-    border-color: #46513b;
+    border-color: #3b4c51;
   }
   .triathlon-hero .hero-bottom > span {
     font-size: 8px;
@@ -226,7 +228,7 @@
   transform: scale(1.035);
 }
 .triathlon-sports .sport:has(img):after {
-  background: linear-gradient(0deg, #0c120bf2, transparent 80%);
+  background: linear-gradient(0deg, #0b1012f2, transparent 80%);
 }
 .product-platform-name svg {
   vertical-align: middle;
@@ -252,7 +254,7 @@
   .triathlon-sports .sport {
     min-height: 250px;
     border-right: 0;
-    border-top: 1px solid #626b54;
+    border-top: 1px solid #54656b;
   }
   .triathlon-sports .sport h3 {
     font-size: 38px;
@@ -272,7 +274,7 @@
 }
 .photo-credits {
   font-size: 9px;
-  color: #a7af9c;
+  color: #9caaaf;
   margin-bottom: 20px;
   line-height: 1.8;
 }

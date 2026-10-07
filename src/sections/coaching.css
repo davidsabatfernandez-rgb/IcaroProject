@@ -1,0 +1,300 @@
+.value-section {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 40px 90px;
+  border-bottom: 1px solid var(--line);
+}
+.value-heading > .micro {
+  color: var(--muted);
+  font-size: 10px;
+}
+.value-heading h2 {
+  margin: 25px 0;
+  font-size: clamp(45px, 4.5vw, 66px);
+}
+.value-heading h2 span {
+  display: block;
+}
+.value-heading > p {
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.value-heading .text-link {
+  margin-top: 28px;
+}
+.athlete-needs article {
+  display: flex;
+  gap: 25px;
+  border-top: 1px solid var(--line);
+  padding: 23px 0;
+}
+.need-index {
+  font-family: var(--display);
+  font-size: 37px;
+  line-height: 1;
+  color: #456773;
+}
+.athlete-needs h3 {
+  font-size: 32px;
+  line-height: 1.1;
+}
+.athlete-needs p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+.athlete-needs .need-concern {
+  color: var(--ink);
+  margin-top: 10px;
+}
+.athlete-needs strong {
+  display: block;
+  font-size: 12px;
+  margin-top: 16px;
+}
+.value-closeness {
+  grid-column: 1 / -1;
+  max-width: 790px;
+  font-size: 16px;
+  border-left: 3px solid #456773;
+  padding-left: 25px;
+}
+.shared-schedule {
+  background: #e5edec;
+  padding: 28px 32px;
+  margin-top: 30px;
+}
+.shared-schedule > .micro {
+  font-size: 9px;
+  color: #39535d;
+}
+.schedule-days {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 40px;
+  margin-top: 20px;
+}
+.schedule-days > div + div {
+  border-left: 1px solid #c1ced0;
+  padding-left: 40px;
+}
+.schedule-day {
+  font-size: 10px;
+  color: #39535d;
+  letter-spacing: 1.3px;
+  font-weight: 600;
+}
+.schedule-days h3 {
+  font-size: 29px;
+  line-height: 1.1;
+  margin-top: 10px;
+}
+.schedule-days p {
+  font-size: 13px;
+  color: #455d67;
+  margin-top: 12px;
+  max-width: 490px;
+}
+.schedule-feedback {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 25px;
+  padding-top: 19px;
+  border-top: 1px solid #c1ced0;
+  color: #39535d;
+}
+.plan .call {
+  font-size: 13px;
+  font-weight: 600;
+}
+.plan-lactate {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.plan-lactate > .micro {
+  font-size: 9px;
+  color: var(--muted);
+}
+.plan-lactate > strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 31px;
+  line-height: 1.1;
+  margin-top: 12px;
+}
+.plan-lactate > strong span {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 400;
+}
+.plan-lactate > p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 12px;
+}
+.recommended .plan-lactate {
+  border-color: #4c646e;
+}
+.recommended .plan-lactate > .micro,
+.recommended .plan-lactate > p {
+  color: #b9c8cb;
+}
+.lactate-tariffs {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.lactate-standalone {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 50px;
+  padding: 40px 0;
+  border-top: 1px solid #bacbd0;
+  border-bottom: 1px solid #bacbd0;
+}
+.lactate-standalone .micro {
+  font-size: 10px;
+  color: #3f5d68;
+}
+.lactate-standalone h3 {
+  font-size: 40px;
+  margin-top: 16px;
+  line-height: 1.1;
+}
+.lactate-standalone > div > p:not(.lactate-standalone-price) {
+  max-width: 455px;
+  font-size: 13px;
+  color: #455d67;
+  margin-top: 16px;
+}
+.lactate-standalone-price strong {
+  font-family: var(--display);
+  font-size: 66px;
+  line-height: 1;
+}
+.lactate-standalone-price span {
+  display: block;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.lactate-standalone .lactate-travel {
+  font-size: 11px;
+}
+.lactate-booking .button {
+  margin-top: 24px;
+}
+.lactate-plan-rates {
+  padding-top: 32px;
+}
+.lactate-plan-rates > h3 {
+  font-size: 30px;
+}
+.lactate-plan-rates dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.35fr;
+  margin: 28px 0 0;
+}
+.lactate-plan-rates dl > div {
+  padding: 0 25px 0 0;
+}
+.lactate-plan-rates dl > div + div {
+  border-left: 1px solid #bacbd0;
+  padding-left: 25px;
+}
+.lactate-plan-rates dt {
+  font-size: 11px;
+  font-weight: 600;
+}
+.lactate-plan-rates dd {
+  margin: 14px 0 0;
+}
+.lactate-plan-rates dd strong {
+  font-family: var(--display);
+  font-size: 31px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+.lactate-plan-rates dd strong span {
+  display: block;
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 7px;
+}
+.lactate-plan-rates dd p,
+.lactate-rate-note {
+  font-size: 11px;
+  color: #455d67;
+  margin-top: 12px;
+}
+.lactate-rate-note {
+  max-width: 730px;
+  margin-top: 28px;
+}
+@media (max-width: 1000px) {
+  .value-section {
+    gap: 35px;
+  }
+  .plan-lactate > strong {
+    font-size: 27px;
+  }
+}
+@media (max-width: 760px) {
+  .value-section {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .value-heading > p {
+    font-size: 15px;
+  }
+  .value-heading h2 {
+    font-size: 47px;
+  }
+  .athlete-needs article {
+    gap: 18px;
+  }
+  .value-closeness {
+    font-size: 14px;
+    padding-left: 20px;
+  }
+  .shared-schedule {
+    padding: 24px 20px;
+    margin-top: 25px;
+  }
+  .schedule-days {
+    grid-template-columns: 1fr;
+    gap: 23px;
+  }
+  .schedule-days > div + div {
+    border-left: 0;
+    border-top: 1px solid #c1ced0;
+    padding: 23px 0 0;
+  }
+  .schedule-days h3 {
+    font-size: 28px;
+  }
+  .lactate-standalone {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 30px 0;
+  }
+  .lactate-booking .button {
+    width: 100%;
+  }
+  .lactate-plan-rates dl {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+  .lactate-plan-rates dl > div {
+    padding: 22px 0;
+    border-top: 1px solid #bacbd0;
+  }
+  .lactate-plan-rates dl > div + div {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .lactate-plan-rates dd strong {
+    font-size: 33px;
+  }
+}

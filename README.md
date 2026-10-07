@@ -28,6 +28,7 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 | ------------------------ | ----------------------------------------------------------------------------------- |
 | Nombre de marca          | `site.brandName`; reemplaza favicon/imagen social si cambias la identidad           |
 | Precios                  | `site.prices`: `single` para una disciplina, `triathlon` para triatlón              |
+| Tests de lactato          | `site.lactate`: test independiente, tarifas por plan, periodicidad y desplazamiento |
 | WhatsApp                 | `site.contact.whatsapp`: número real con prefijo internacional, sin `+` ni espacios |
 | Instagram                | `site.contact.instagram`: URL completa                                              |
 | Email                    | `site.contact.email`                                                                |
@@ -40,11 +41,23 @@ La configuración pública está en **`src/config/site.ts`**. No pongas credenci
 
 El texto de TrainingPeaks, el reloj y las sesiones en los dos centros de Barcelona se edita en **`src/data/product.ts`**. La sincronización depende del dispositivo y de la sesión; la página no realiza integraciones con cuentas ni solicita credenciales. Los nombres de los centros, las disciplinas presenciales concretas y sus condiciones se incorporarán cuando estén confirmados.
 
-Hero, filosofía, pasos, planes, prestaciones y FAQ: **`src/data/content.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
+Hero, filosofía, pasos, planes, prestaciones y FAQ: **`src/data/content.ts`**. Necesidades del atleta, cercanía y calendario compartido: **`src/data/value.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
+
+## Seguimiento y tests
+
+En los tres planes, el atleta envía su disponibilidad el viernes. Entre sábado y domingo recibe la programación en TrainingPeaks, la explicación de cómo fue la semana anterior y los objetivos de la siguiente.
+
+| Plan | Seguimiento | Test de lactato |
+| --- | --- | --- |
+| Individual | Feedback semanal por audios de WhatsApp, sin llamada | 80 € por test |
+| Coaching | Feedback semanal, consultas diarias y llamada mensual | 65 € por test, promoción trimestral |
+| Performance | Revisión en llamada semanal y consultas diarias | Un test incluido cada 6 meses; opción trimestral a 50 € |
+
+El test de lactato en pista se puede consultar sin contratar un plan: 100 € más desplazamiento, presupuestado antes de reservar. No se inventa una tarifa por kilómetro ni se promete atención inmediata o 24 horas. Los precios mensuales de entrenamiento siguen marcados como provisionales. La consulta del test prepara el interés en el formulario; no representa una reserva o un pago.
 
 ## Fotografías
 
-La página utiliza fotografías reales de competición y entrenamiento (Quino Al, Marcus Ng y Pixabay), con fuentes documentadas en `public/images/SOURCES.md` y créditos editables en `site.photographyCredits`. Son fotografías editoriales temporales. Sustitúyelas por imágenes reales de la marca con permiso de uso. Guarda las imágenes optimizadas en `public/images/`, por ejemplo `running.webp`, y cambia `site.images.running` a `/images/running.webp`.
+La página utiliza fotografías reales de deporte (Steven Lelham, Fred Neethling, Marcus Ng y Pixabay), con fuentes documentadas en `public/images/SOURCES.md` y créditos editables en `site.photographyCredits`. Las fuentes declaran licencias gratuitas de uso comercial Unsplash/Pexels; las imágenes conservan copyright y no se presentan como CC0 ni como atletas de ICARO. Las fotos de carrera se sustituyeron por una vista cenital y una silueta para evitar primeros planos y clubes ajenos. El alcance de la comprobación, las restricciones de acceso directo y la ausencia de cesiones de modelo/marca en los mirrors quedan documentados. Para fotografías propias, guarda originales autorizados en `public/images/`, por ejemplo `running.webp`, y cambia `site.images.running` a `/images/running.webp`.
 
 Los espacios disponibles son hero, running, cycling, swimming, triathlon y lactate. Una imagen vacía muestra el gráfico editorial correspondiente. La fotografía de natación es pequeña (427×417); para una futura sesión de fotos, sustitúyela por un original más grande manteniendo la ruta editable. La foto de hero usa `preload`; el resto usa lazy loading con `next/image`. Para otros encuadres, ajusta `object-position` en `src/sections/triathlon.css`. El texto alternativo de las disciplinas se edita en `src/data/content.ts`; el del hero, en `src/sections/landing.tsx`. Usa rutas locales; para un proveedor remoto, añade solo su dominio a `images.remotePatterns` en `next.config.ts` y permite su acceso en el entorno.
 
@@ -58,7 +71,9 @@ Para activar cualquier envío, configura un enlace real de privacidad. Sin él, 
 
 ## Diseño, animación y accesibilidad
 
-Colores y estilos generales: `src/app/globals.css`. La composición de triatlón se ajusta en `src/sections/triathlon.css`; TrainingPeaks y Barcelona, en `src/sections/product.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
+Colores y estilos generales: `src/app/globals.css`. Azul marino, blanco cálido y acento lima suave conservan el diseño editorial y priorizan contraste y legibilidad. La composición de triatlón se ajusta en `src/sections/triathlon.css`; TrainingPeaks y Barcelona, en `src/sections/product.css`; necesidades, calendario y tarifas, en `src/sections/coaching.css`. Acento único `--accent`. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. La curva es una **representación conceptual sin datos reales**; no predice resultados ni sirve para calcular umbrales.
+
+El mensaje presenta necesidades concretas (tiempo, rumbo y dudas), seguidas de la respuesta real del servicio. La eficiencia se explica mediante sesiones con propósito y revisión de la respuesta, sin garantizar una adaptación o un rendimiento del 100 %. La cercanía se expresa como atención y seguimiento, sin inventar una comunidad, testimonios ni escasez. La guía de [GSA sobre escribir para el lector](https://github.com/GSA/plainlanguage.gov/blob/main/_pages/guidelines/audience/index.md) y la de [NHS sobre voz y tono](https://github.com/nhsuk/nhsuk-service-manual/blob/main/app/views/content/voice-and-tone.njk) orientan la claridad y el tono; no son pruebas de conversión en triatlón.
 
 ## Comprobar
 
@@ -68,7 +83,7 @@ npm run build
 npm run test:e2e
 ```
 
-Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow, precios, selección de plan, umbrales, FAQ, validación del formulario y reduced motion. En este entorno usan `/usr/bin/chromium`. En otro sistema usa `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/ruta/al/navegador` o instala Chromium con `npx playwright install chromium` (elimina esa variable para usar el navegador de Playwright).
+Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow, precios, selección de plan, umbrales, FAQ, validación del formulario, reduced motion, calendario semanal, canales de seguimiento, tarifas de lactato y consulta del test en pista. En este entorno usan `/usr/bin/chromium`. En otro sistema usa `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/ruta/al/navegador` o instala Chromium con `npx playwright install chromium` (elimina esa variable para usar el navegador de Playwright).
 
 ## Desplegar en Vercel
 
