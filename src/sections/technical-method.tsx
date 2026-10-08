@@ -16,7 +16,7 @@ export function TechnicalMethodSection() {
     >
       <div className="tm-heading" data-reveal>
         <div>
-          <SectionLabel number="02">{technicalMethodCopy.label}</SectionLabel>
+          <SectionLabel number="04">{technicalMethodCopy.label}</SectionLabel>
           <h2 id="technical-method-title">
             {technicalMethodCopy.title.map((line) => (
               <span key={line}>{line}</span>

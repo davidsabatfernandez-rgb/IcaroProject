@@ -15,7 +15,7 @@ export function JourneySection() {
     >
       <div className="journey-heading" data-reveal>
         <div>
-          <SectionLabel number="02">{journeyCopy.label}</SectionLabel>
+          <SectionLabel number="05">{journeyCopy.label}</SectionLabel>
           <h2 id="journey-title">
             {journeyCopy.title.map((line) => (
               <span key={line}>{line}</span>

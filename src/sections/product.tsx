@@ -11,7 +11,7 @@ export function BarcelonaSection() {
     >
       <div className="barcelona-inner">
         <div className="barcelona-copy" data-reveal>
-          <SectionLabel number="04">{barcelonaCopy.label}</SectionLabel>
+          <SectionLabel number="06">{barcelonaCopy.label}</SectionLabel>
           <h2 id="barcelona-title">
             También,
             <br />a pie de atleta.

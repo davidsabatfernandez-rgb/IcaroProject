@@ -8,6 +8,7 @@ import { LactatePricing } from "@/components/lactate-pricing";
 import { BarcelonaSection } from "./product";
 import { TechnicalMethodSection } from "./technical-method";
 import { JourneySection } from "./journey";
+import { CommunitySection } from "./community";
 
 export function Landing() {
   return (
@@ -37,6 +38,10 @@ export function Landing() {
               ))}
             </h1>
             <p className="hero-description">{copy.hero.description}</p>
+            <a className="hero-community-link" href="#comunidad">
+              Entrenamiento individual. Una comunidad contigo.{" "}
+              <Arrow diagonal />
+            </a>
             <div className="hero-actions">
               <a className="button accent" href="#contacto">
                 {copy.hero.primary}
@@ -82,10 +87,44 @@ export function Landing() {
         </div>
       </section>
 
+      <section className="section plans-section" id="planes">
+        <div className="section-heading" data-reveal>
+          <div>
+            <SectionLabel number="01">ENCUENTRA TU ACOMPAÑAMIENTO</SectionLabel>
+            <h2>
+              Tu plan es individual.
+              <br />
+              El seguimiento lo eliges tú.
+            </h2>
+          </div>
+          <p className="heading-copy">
+            Tres formas de estar cerca de tu entrenador. Cuéntanos lo que
+            necesitas y te ayudamos a elegir antes de empezar.
+          </p>
+        </div>
+        <Pricing />
+        <div className="shared-features" data-reveal>
+          <div>
+            <span className="micro">LA BASE ES LA MISMA</span>
+            <h3>Incluido en todos.</h3>
+          </div>
+          <ul>
+            {sharedFeatures.map((feature) => (
+              <li key={feature}>
+                <Arrow diagonal />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <CommunitySection />
+
       <section className="section sports-section triathlon-sports">
         <div className="section-heading" data-reveal>
           <div>
-            <SectionLabel number="01">ENTRENAMIENTO PARA TU VIDA</SectionLabel>
+            <SectionLabel number="03">ENTRENAMIENTO PARA TU VIDA</SectionLabel>
             <h2>
               Tres disciplinas.
               <br />
@@ -122,38 +161,6 @@ export function Landing() {
       <TechnicalMethodSection />
       <JourneySection />
 
-      <section className="section plans-section" id="planes">
-        <div className="section-heading" data-reveal>
-          <div>
-            <SectionLabel number="03">ENCUENTRA TU ACOMPAÑAMIENTO</SectionLabel>
-            <h2>
-              Tu plan es individual.
-              <br />
-              El seguimiento lo eliges tú.
-            </h2>
-          </div>
-          <p className="heading-copy">
-            Tres formas de estar cerca de tu entrenador. Cuéntanos lo que
-            necesitas y te ayudamos a elegir antes de empezar.
-          </p>
-        </div>
-        <Pricing />
-        <div className="shared-features" data-reveal>
-          <div>
-            <span className="micro">LA BASE ES LA MISMA</span>
-            <h3>Incluido en todos.</h3>
-          </div>
-          <ul>
-            {sharedFeatures.map((feature) => (
-              <li key={feature}>
-                <Arrow diagonal />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <div className="support-services">
         <BarcelonaSection />
         <section
@@ -163,7 +170,7 @@ export function Landing() {
         >
           <div className="section-heading" data-reveal>
             <div>
-              <SectionLabel number="05">TESTS OPCIONALES</SectionLabel>
+              <SectionLabel number="07">TESTS OPCIONALES</SectionLabel>
               <h2 id="lactate-title">
                 Medir para decidir.
                 <br />
@@ -182,7 +189,7 @@ export function Landing() {
 
       <section className="section faq-section" id="faq">
         <div data-reveal>
-          <SectionLabel number="06">ANTES DE DAR EL PRIMER PASO</SectionLabel>
+          <SectionLabel number="08">ANTES DE DAR EL PRIMER PASO</SectionLabel>
           <h2>
             Resolvemos
             <br />

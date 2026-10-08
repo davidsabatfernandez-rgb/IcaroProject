@@ -2,9 +2,10 @@
 export const site = {
   brandName: "ICARO PROJECT",
   description:
-    "Entrenamiento de triatlón individualizado, planificación semanal en TrainingPeaks y seguimiento de tu entrenador. También running, ciclismo y natación.",
+    "Entrenamiento de triatlón individualizado, planificación semanal en TrainingPeaks y seguimiento de tu entrenador. Una comunidad con entrenamientos presenciales. También running, ciclismo y natación.",
   url: "", // URL pública definitiva, sin barra final. Activa canonical y sitemap.
   trainingPeaksUrl: "https://www.trainingpeaks.com/",
+  community: { name: "Social ICARO", instagramGroupUrl: "" },
   contact: { whatsapp: "", instagram: "", email: "", formEndpoint: "" },
   legal: { notice: "", privacy: "", cookies: "" },
   images: {

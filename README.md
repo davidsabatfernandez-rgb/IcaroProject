@@ -118,3 +118,7 @@ La web no se ha desplegado en un dominio público. TrainingPeaks es la plataform
 - `tests`: pruebas de navegador.
 
 Las tareas de nube ya se ejecutan en un entorno aislado. Utiliza este checkout; no crees worktrees salvo petición expresa.
+
+### Comunidad Social ICARO
+
+La landing distingue la comunidad gratuita de los planes de entrenamiento y de las sesiones presenciales. Configura el enlace directo real del grupo de Instagram en `site.community.instagramGroupUrl` (`src/config/site.ts`). Sin ese enlace, se informa de su próxima disponibilidad y no se muestra un botón de acceso ficticio. `site.contact.instagram` sigue reservado al perfil de contacto.

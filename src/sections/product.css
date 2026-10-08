@@ -38,7 +38,7 @@
   color: var(--paper);
 }
 .barcelona-marker > .micro {
-  color: #cfdfcf;
+  color: #e0d3c4;
   font-size: 9px;
 }
 .barcelona-marker > strong {
@@ -59,7 +59,7 @@
   gap: 16px;
   align-items: baseline;
   font-size: 13px;
-  color: #d5e0e4;
+  color: #e0d3c4;
 }
 .barcelona-steps i {
   color: var(--accent);
@@ -74,7 +74,7 @@
   align-items: center;
   padding-top: 24px;
   margin-top: 30px;
-  border-top: 1px solid #496370;
+  border-top: 1px solid #6f5949;
   font-size: 12px;
   color: var(--accent);
 }

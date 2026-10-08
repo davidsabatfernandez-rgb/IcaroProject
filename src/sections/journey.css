@@ -1,6 +1,6 @@
 .journey-section {
   color: var(--ink);
-  background: #f5f7f8;
+  background: #f7f3ed;
 }
 
 .journey-heading {
@@ -58,7 +58,7 @@
   min-height: 26px;
   padding: 3px 8px;
   border-radius: 6px;
-  background: #eaf0f2;
+  background: #f7f3ed;
   color: var(--ink);
   font-size: 10px;
   font-weight: 600;
@@ -166,7 +166,7 @@
 }
 
 .journey-recurring {
-  border-color: #c7d5d9;
+  border-color: #e0d3c4;
 }
 
 .journey-goal {
@@ -177,7 +177,7 @@
 
 .journey-goal .journey-phase,
 .journey-goal p {
-  color: #c4d1d6;
+  color: #e0d3c4;
 }
 
 .journey-goal .journey-step-top > svg {
@@ -195,7 +195,7 @@
   margin-top: 24px;
   padding: 24px 28px;
   border-radius: 16px;
-  background: #eaf0df;
+  background: #f7f3ed;
 }
 
 .journey-loop > div {
@@ -217,7 +217,7 @@
 
 .journey-loop p {
   max-width: 730px;
-  color: #43535a;
+  color: #6f5949;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -266,7 +266,7 @@
   font-size: 25px;
   letter-spacing: -0.04em;
   text-decoration: underline;
-  text-decoration-color: #bbc9ce;
+  text-decoration-color: #cdbdab;
   text-underline-offset: 7px;
 }
 

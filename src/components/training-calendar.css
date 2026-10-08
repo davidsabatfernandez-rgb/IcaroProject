@@ -2,11 +2,11 @@
   width: 100%;
   min-width: 0;
   padding: 26px;
-  border: 1px solid var(--line, #dbe3e6);
+  border: 1px solid var(--line, #e0d3c4);
   border-radius: 20px;
   background: #fff;
-  color: var(--ink, #102c3a);
-  box-shadow: 0 18px 54px rgb(16 44 58 / 7%);
+  color: var(--ink, #392b24);
+  box-shadow: 0 18px 54px rgb(57 43 36 / 7%);
   font-family: var(--body, "DM Sans", sans-serif);
 }
 
@@ -20,7 +20,7 @@
 
 .training-calendar .tc-eyebrow {
   margin: 0 0 7px;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -40,8 +40,8 @@
   flex-shrink: 0;
   padding: 6px 10px;
   border-radius: 20px;
-  background: #eaf0df;
-  color: #33452a;
+  background: #f7f3ed;
+  color: #604923;
   font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.025em;
@@ -75,30 +75,30 @@
 }
 
 .training-calendar .tc-swim {
-  --tc-sport-line: #476d7b;
-  --tc-sport-paper: #e4eef2;
+  --tc-sport-line: #796052;
+  --tc-sport-paper: #f1e8df;
 }
 
 .training-calendar .tc-bike {
-  --tc-sport-line: #59683d;
-  --tc-sport-paper: #edf3df;
+  --tc-sport-line: #87652d;
+  --tc-sport-paper: #f6ecd7;
 }
 
 .training-calendar .tc-run {
-  --tc-sport-line: #4e6071;
-  --tc-sport-paper: #e9edf1;
+  --tc-sport-line: #6c5141;
+  --tc-sport-paper: #ece3dc;
 }
 
 .training-calendar .tc-recovery {
-  --tc-sport-line: #66736f;
-  --tc-sport-paper: #f2f4f6;
+  --tc-sport-line: #73685f;
+  --tc-sport-paper: #f4f0eb;
 }
 
 .training-calendar .tc-week {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   overflow: hidden;
-  border: 1px solid var(--line, #dbe3e6);
+  border: 1px solid var(--line, #e0d3c4);
   border-radius: 10px;
   background: #fff;
 }
@@ -108,14 +108,14 @@
 }
 
 .training-calendar .tc-day + .tc-day {
-  border-left: 1px solid #e1e7ea;
+  border-left: 1px solid #e0d3c4;
 }
 
 .training-calendar .tc-day-heading {
   padding: 10px 2px;
-  border-bottom: 1px solid #e1e7ea;
-  background: #f5f7f8;
-  color: #435c66;
+  border-bottom: 1px solid #e0d3c4;
+  background: #f7f3ed;
+  color: #6f5949;
   font-size: 9px;
   font-weight: 600;
   line-height: 1.5;
@@ -144,7 +144,7 @@
   border-top: 3px solid var(--tc-sport-line);
   border-radius: 6px;
   background: var(--tc-sport-paper);
-  color: #102c3a;
+  color: #392b24;
   font: inherit;
   text-align: left;
   cursor: pointer;
@@ -162,15 +162,15 @@
 }
 
 .training-calendar .tc-session[aria-pressed="true"] {
-  border-color: #102c3a;
-  background: var(--accent, #d5ea79);
-  box-shadow: inset 0 0 0 1px #102c3a;
+  border-color: #392b24;
+  background: var(--accent, #d9b66f);
+  box-shadow: inset 0 0 0 1px #392b24;
 }
 
 .training-calendar .tc-session:focus-visible {
   position: relative;
   z-index: 1;
-  outline: 2px solid #102c3a;
+  outline: 2px solid #392b24;
   outline-offset: -4px;
 }
 
@@ -207,7 +207,7 @@
   align-items: baseline;
   gap: 7px;
   margin: 13px 0 19px;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 11px;
   line-height: 1.5;
 }
@@ -216,7 +216,7 @@
   flex-shrink: 0;
   width: 18px;
   height: 18px;
-  color: #102c3a;
+  color: #392b24;
 }
 
 .training-calendar .tc-detail {
@@ -225,7 +225,7 @@
   gap: 23px;
   padding: 20px;
   border-radius: 12px;
-  background: #f5f7f8;
+  background: #f7f3ed;
 }
 
 .training-calendar .tc-detail-description,
@@ -239,7 +239,7 @@
   align-items: center;
   gap: 8px 14px;
   margin-bottom: 10px;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 10px;
   line-height: 1.5;
 }
@@ -268,7 +268,7 @@
 
 .training-calendar .tc-detail-description > p {
   margin: 0;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 12px;
   line-height: 1.65;
 }
@@ -311,28 +311,28 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 11px;
   line-height: 1.5;
 }
 
 .training-calendar .tc-structure li strong {
   flex-shrink: 0;
-  color: #102c3a;
+  color: #392b24;
   font-size: 11px;
   font-weight: 500;
 }
 
 .training-calendar .tc-recovery-note {
   margin: 0;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 12px;
   line-height: 1.6;
 }
 
 .training-calendar .tc-example-note {
   margin: 19px 0 0;
-  color: var(--muted, #536872);
+  color: var(--muted, #75665a);
   font-size: 10px;
   line-height: 1.6;
 }

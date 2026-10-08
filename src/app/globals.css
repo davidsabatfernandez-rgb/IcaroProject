@@ -1,9 +1,9 @@
 :root {
-  --ink: #102c3a;
+  --ink: #392b24;
   --paper: #fff;
-  --accent: #d5ea79;
-  --muted: #536872;
-  --line: #dbe3e6;
+  --accent: #d9b66f;
+  --muted: #75665a;
+  --line: #e0d3c4;
   --display: "Barlow Condensed", sans-serif;
   --body: "DM Sans", sans-serif;
 }
@@ -55,7 +55,7 @@ summary:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #477789;
+  outline: 3px solid #89612e;
   outline-offset: 5px;
 }
 h1,
@@ -152,19 +152,19 @@ p + p {
   color: var(--ink);
 }
 .button.accent:hover {
-  background: #c8df67;
+  background: #cba35b;
 }
 .button.ink {
   background: var(--ink);
   color: var(--paper);
 }
 .button.outline {
-  border-color: #b6c6cd;
+  border-color: #cdbdab;
   background: transparent;
   color: inherit;
 }
 .button.outline:hover {
-  background: #eef3f4;
+  background: #f7f3ed;
 }
 .text-link {
   display: inline-flex;
@@ -189,7 +189,7 @@ p + p {
   align-items: center;
   justify-content: space-between;
   gap: 25px;
-  border-bottom: 1px solid #e5ebed;
+  border-bottom: 1px solid #f7f3ed;
 }
 .wordmark {
   display: flex;
@@ -204,7 +204,7 @@ p + p {
   font-weight: 600;
 }
 .brand-dot {
-  color: #496c3b;
+  color: #89612e;
 }
 .wordmark small {
   font-size: 8px;
@@ -223,7 +223,7 @@ p + p {
   padding: 9px 0;
 }
 .desktop-nav a:hover {
-  color: #44693d;
+  color: #6f5949;
 }
 .header-cta {
   display: inline-flex;
@@ -261,12 +261,12 @@ p + p {
   background:
     linear-gradient(
       90deg,
-      #071c2be8 0%,
-      #071c2bcc 38%,
-      #071c2b5c 75%,
-      #071c2b59
+      #251a14e8 0%,
+      #251a14cc 38%,
+      #251a145c 75%,
+      #251a1459
     ),
-    linear-gradient(0deg, #071c2bbf, transparent 55%);
+    linear-gradient(0deg, #251a14bf, transparent 55%);
 }
 .hero-visual .route-art {
   width: 100%;
@@ -289,7 +289,7 @@ p + p {
   max-width: 760px;
 }
 .hero .eyebrow {
-  color: #e3ebed;
+  color: #f7f3ed;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -310,7 +310,7 @@ h1 {
   max-width: 490px;
   font-size: 16px;
   line-height: 1.75;
-  color: #e3ebed;
+  color: #f7f3ed;
 }
 .hero-actions {
   display: flex;
@@ -329,7 +329,7 @@ h1 {
   gap: 7px;
   font-size: 12px;
   letter-spacing: 0.25em;
-  color: #e7eeee;
+  color: #f7f3ed;
 }
 .hero-bottom {
   position: relative;
@@ -341,7 +341,7 @@ h1 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px;
   border-top: 1px solid #ffffff40;
-  background: #071c2b55;
+  background: #251a1455;
 }
 .hero-bottom > div {
   display: flex;
@@ -357,7 +357,7 @@ h1 {
   align-items: center;
   gap: 6px;
   text-decoration: underline;
-  text-decoration-color: #d5ea7999;
+  text-decoration-color: #d9b66f99;
   text-underline-offset: 4px;
 }
 .hero-platform-link:hover {
@@ -369,7 +369,7 @@ h1 {
 }
 .hero-bottom span {
   font-size: 12px;
-  color: #d4dfe4;
+  color: #e0d3c4;
   margin-top: 5px;
 }
 .sports-grid {
@@ -393,7 +393,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #071c2be8, #071c2b11 80%);
+  background: linear-gradient(0deg, #251a14e8, #251a1411 80%);
 }
 .sport:hover img {
   transform: scale(1.035);
@@ -412,7 +412,7 @@ h1 {
   right: 28px;
 }
 .sport-caption .micro {
-  color: #d6e7ae;
+  color: #cdbdab;
 }
 .sport-caption h3 {
   color: #fff;
@@ -420,7 +420,7 @@ h1 {
   margin: 8px 0;
 }
 .sport-caption p {
-  color: #e0e9ed;
+  color: #f7f3ed;
   max-width: 300px;
   font-size: 13px;
 }
@@ -459,7 +459,7 @@ h1 {
   padding-top: 0;
 }
 .need-index {
-  color: #486653;
+  color: #6f5949;
   font-size: 11px;
   margin-top: 5px;
   font-weight: 600;
@@ -491,13 +491,13 @@ h1 {
 }
 .shared-schedule {
   padding: 30px;
-  background: #eef3f4;
+  background: #f7f3ed;
   border-radius: 10px;
   margin-top: 28px;
   color: var(--ink);
 }
 .shared-schedule > .micro {
-  color: #526775;
+  color: #6f5949;
   font-size: 10px;
 }
 .schedule-days {
@@ -507,14 +507,14 @@ h1 {
   margin-top: 20px;
 }
 .schedule-days > div + div {
-  border-left: 1px solid #c9d7de;
+  border-left: 1px solid #e0d3c4;
   padding-left: 34px;
 }
 .schedule-day {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: #426253;
+  color: #6f5949;
 }
 .schedule-days h3 {
   font-size: 23px;
@@ -527,7 +527,7 @@ h1 {
 }
 .schedule-feedback {
   margin-top: 25px;
-  border-top: 1px solid #c9d7de;
+  border-top: 1px solid #e0d3c4;
   padding-top: 17px;
   color: var(--muted);
   font-size: 12px;
@@ -547,7 +547,7 @@ h1 {
   flex-shrink: 0;
   padding: 5px;
   border: 1px solid var(--line);
-  background: #f2f5f6;
+  background: #f7f3ed;
   border-radius: 7px;
 }
 .segmented button {
@@ -597,10 +597,10 @@ h1 {
 }
 .plan-top .micro {
   font-size: 9px;
-  color: #4f6973;
+  color: #6f5949;
 }
 .recommended .plan-top .micro {
-  color: #c8d8de;
+  color: #e0d3c4;
 }
 .plan-top h3 {
   margin: 14px 0 16px;
@@ -612,7 +612,7 @@ h1 {
   min-height: 95px;
 }
 .recommended .plan-top > p {
-  color: #d5e0e5;
+  color: #e0d3c4;
 }
 .plan-modality {
   margin: 20px 0;
@@ -628,7 +628,7 @@ h1 {
   font-size: 11px;
 }
 .recommended .plan-common {
-  color: #c8d8de;
+  color: #e0d3c4;
 }
 .plan > ul {
   margin: 22px 0;
@@ -649,7 +649,7 @@ h1 {
   top: 7px;
   width: 5px;
   height: 5px;
-  background: #608343;
+  background: #89612e;
   border-radius: 50%;
 }
 .recommended > ul > li::before {
@@ -662,7 +662,7 @@ h1 {
 }
 .recommended .plan-contact,
 .recommended .plan-lactate {
-  border-color: #48616c;
+  border-color: #6f5949;
 }
 .plan-contact > strong {
   font-size: 13px;
@@ -674,20 +674,20 @@ h1 {
   font-size: 12px;
 }
 .recommended .plan-contact p {
-  color: #c8d8de;
+  color: #e0d3c4;
 }
 .plan .call {
   display: inline-flex;
-  background: #edf3e7;
+  background: #f7f3ed;
   border-radius: 4px;
-  color: #3f5c37;
+  color: #765629;
   padding: 6px 10px;
   margin-top: 18px;
   font-size: 11px;
   font-weight: 600;
 }
 .recommended .call {
-  background: #d5ea79;
+  background: #d9b66f;
   color: var(--ink);
 }
 .plan-lactate {
@@ -711,7 +711,7 @@ h1 {
 }
 .recommended .plan-lactate > .micro,
 .recommended .plan-lactate > p {
-  color: #c8d8de;
+  color: #e0d3c4;
 }
 .plans-note {
   max-width: 780px;
@@ -724,7 +724,7 @@ h1 {
   display: grid;
   grid-template-columns: 0.65fr 1.6fr;
   gap: 45px;
-  background: #f3f6f7;
+  background: #f7f3ed;
   border-radius: 10px;
   padding: 30px;
   margin-top: 40px;
@@ -756,10 +756,10 @@ h1 {
   width: 15px;
   height: 15px;
   margin-top: 2px;
-  color: #4b6a38;
+  color: #6f5949;
 }
 .support-services {
-  background: #f3f6f7;
+  background: #f7f3ed;
 }
 .lactate {
   padding-top: 36px;
@@ -810,7 +810,7 @@ h1 {
   margin: 24px 0 0;
 }
 .lactate-plan-rates dl > div {
-  border-left: 2px solid #b7cbd2;
+  border-left: 2px solid #cdbdab;
   padding-left: 20px;
 }
 .lactate-plan-rates dt {
@@ -867,7 +867,7 @@ h1 {
   display: none;
 }
 .faq-list summary > span {
-  color: #3d6676;
+  color: #6f5949;
   font-size: 23px;
   font-weight: 400;
 }
@@ -890,14 +890,14 @@ h1 {
   align-items: start;
 }
 .contact-copy .section-label {
-  color: #cad7dd;
+  color: #e0d3c4;
 }
 .contact-copy h2 {
   color: #fff;
   font-size: clamp(38px, 4.2vw, 62px);
 }
 .contact-copy > p {
-  color: #cfdee3;
+  color: #e0d3c4;
   max-width: 460px;
   font-size: 15px;
   margin-top: 25px;
@@ -915,7 +915,7 @@ h1 {
   gap: 14px;
   align-items: start;
   font-size: 13px;
-  color: #d8e4e7;
+  color: #e0d3c4;
 }
 .contact-expectations svg {
   flex-shrink: 0;
@@ -931,7 +931,7 @@ h1 {
 .contact-signature {
   display: block;
   margin-top: 40px;
-  color: #becfd4;
+  color: #cdbdab;
   font-size: 10px;
   letter-spacing: 0.14em;
 }
@@ -965,9 +965,9 @@ h1 {
   display: block;
   width: 100%;
   margin-top: 8px;
-  background: #f5f7f8;
+  background: #f7f3ed;
   color: var(--ink);
-  border: 1px solid #cbd8de;
+  border: 1px solid #e0d3c4;
   border-radius: 5px;
   padding: 12px 14px;
   min-height: 46px;
@@ -976,7 +976,7 @@ h1 {
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #607681;
+  color: #6f5949;
   opacity: 1;
 }
 .contact-form textarea {
@@ -990,7 +990,7 @@ h1 {
   font-size: 11px;
 }
 .form-status {
-  color: #3e623c;
+  color: #6f5949;
   font-size: 12px;
   margin: 0;
 }
@@ -1005,7 +1005,7 @@ h1 {
   font-size: 12px;
   margin: 0;
   padding: 12px;
-  background: #edf4df;
+  background: #f7f3ed;
   border-radius: 5px;
 }
 .chosen-plan button {
@@ -1038,8 +1038,8 @@ h1 {
   color: var(--ink);
 }
 .footer {
-  background: #0b202c;
-  color: #ccd8dd;
+  background: #291e18;
+  color: #e0d3c4;
   padding: 45px max(6vw, 24px) 25px;
 }
 .footer-top {
@@ -1069,7 +1069,7 @@ h1 {
   font-size: 12px;
 }
 .photo-credits {
-  color: #b7c8d0;
+  color: #cdbdab;
   font-size: 10px;
   padding-bottom: 20px;
 }
@@ -1080,7 +1080,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  border-top: 1px solid #35505d;
+  border-top: 1px solid #6f5949;
   padding-top: 20px;
   font-size: 10px;
 }
@@ -1202,7 +1202,7 @@ h1 {
     left: 0;
     right: 0;
     background: var(--paper);
-    box-shadow: 0 16px 25px #102c3a14;
+    box-shadow: 0 16px 25px #392b2414;
     padding: 10px 24px 22px;
   }
   .mobile-nav a {
@@ -1236,8 +1236,8 @@ h1 {
   }
   .hero-visual::after {
     background:
-      linear-gradient(90deg, #071c2be6, #071c2b80),
-      linear-gradient(0deg, #071c2bbf, transparent 75%);
+      linear-gradient(90deg, #251a14e6, #251a1480),
+      linear-gradient(0deg, #251a14bf, transparent 75%);
   }
   .hero-actions {
     gap: 22px;
@@ -1321,7 +1321,7 @@ h1 {
   .schedule-days > div + div {
     border-left: 0;
     padding-left: 0;
-    border-top: 1px solid #c9d7de;
+    border-top: 1px solid #e0d3c4;
     padding-top: 23px;
   }
   .schedule-days h3 {

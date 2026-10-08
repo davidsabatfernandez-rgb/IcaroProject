@@ -2,13 +2,13 @@ import { site } from "@/config/site";
 export const navigation = [
   { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Planes", href: "#planes" },
-  { label: "Barcelona", href: "#barcelona" },
+  { label: "Comunidad", href: "#comunidad" },
   { label: "Método", href: "#metodo" },
   { label: "FAQ", href: "#faq" },
 ];
 export const copy = {
   hero: {
-    eyebrow: "ENTRENAMIENTO DE TRIATLÓN",
+    eyebrow: "TRIATLÓN · ENTRENAMIENTO Y COMUNIDAD",
     title: ["Triatlón.", "A tu medida."],
     description:
       "Tu objetivo y tus horarios marcan el punto de partida. Ajustamos la duración, la intensidad y la recuperación con tus datos y sensaciones, y te explicamos el porqué de cada sesión.",

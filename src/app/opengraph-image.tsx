@@ -7,8 +7,8 @@ export default function Image() {
   return new ImageResponse(
     <div
       style={{
-        background: "#102c3a",
-        color: "#f3f2e9",
+        background: "#392b24",
+        color: "#f7f3ed",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -22,7 +22,7 @@ export default function Image() {
           display: "flex",
           fontSize: 24,
           letterSpacing: 5,
-          color: "#c1d890",
+          color: "#d9b66f",
         }}
       >
         {site.brandName}
@@ -38,7 +38,7 @@ export default function Image() {
       >
         <span>TRIATLÓN.</span>
         <span>A TU MEDIDA.</span>
-        <span style={{ color: "#c1d890" }}>CONTIGO.</span>
+        <span style={{ color: "#d9b66f" }}>CONTIGO.</span>
       </div>
       <div style={{ display: "flex", fontSize: 18, letterSpacing: 3 }}>
         SWIM · BIKE · RUN
