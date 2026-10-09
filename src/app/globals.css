@@ -198,10 +198,25 @@ p + p {
   line-height: 1;
 }
 .wordmark > span {
-  font-family: var(--body);
-  font-size: 29px;
-  letter-spacing: -0.06em;
-  font-weight: 600;
+  font-family: var(--display);
+  font-size: 43px;
+  letter-spacing: -0.045em;
+  font-weight: 900;
+  line-height: 0.95;
+  transform: rotate(-3deg) scaleY(1.08);
+  transform-origin: left bottom;
+  -webkit-mask-image: repeating-linear-gradient(
+    173deg,
+    #000 0 14px,
+    #0009 14px 14.6px,
+    #000 14.6px 23px
+  );
+  mask-image: repeating-linear-gradient(
+    173deg,
+    #000 0 14px,
+    #0009 14px 14.6px,
+    #000 14.6px 23px
+  );
 }
 .brand-dot {
   color: #89612e;
@@ -1155,7 +1170,7 @@ h1 {
     gap: 18px;
   }
   .wordmark > span {
-    font-size: 26px;
+    font-size: 38px;
   }
   .wordmark small {
     font-size: 7px;
@@ -1440,7 +1455,7 @@ h1 {
     gap: 8px;
   }
   .wordmark > span {
-    font-size: 23px;
+    font-size: 34px;
   }
   h1 {
     font-size: 46px;

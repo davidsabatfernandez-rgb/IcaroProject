@@ -19,12 +19,14 @@ export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 }
 export function Wordmark() {
   return (
-    <span className="wordmark">
-      <span>
+    <span className="wordmark" aria-label={site.brandName}>
+      <span className="wordmark-name" aria-hidden="true">
         {site.brandName.split(" ")[0]}
         <span className="brand-dot">.</span>
       </span>
-      <small>{site.brandName.split(" ").slice(1).join(" ")}</small>
+      <small aria-hidden="true">
+        {site.brandName.split(" ").slice(1).join(" ")}
+      </small>
     </span>
   );
 }
