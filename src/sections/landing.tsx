@@ -39,8 +39,7 @@ export function Landing() {
             </h1>
             <p className="hero-description">{copy.hero.description}</p>
             <a className="hero-community-link" href="#comunidad">
-              Entrenamiento individual. Una comunidad contigo.{" "}
-              <Arrow diagonal />
+              Un mismo propósito. Una comunidad contigo. <Arrow diagonal />
             </a>
             <div className="hero-actions">
               <a className="button accent" href="#contacto">
@@ -126,16 +125,16 @@ export function Landing() {
           <div>
             <SectionLabel number="03">ENTRENAMIENTO PARA TU VIDA</SectionLabel>
             <h2>
-              Tres disciplinas.
+              Resistencia y fuerza.
               <br />
-              Un plan para ti.
+              Un mismo propósito.
             </h2>
           </div>
           <p className="heading-copy">
-            Coordinamos natación, ciclismo y carrera: la carga de una sesión
-            influye en lo que puedes sostener después. Tu nivel, tu tiempo y tu
-            objetivo orientan la distribución. También puedes entrenar una sola
-            disciplina.
+            Triatlón y running son nuestro punto de partida. También acompañamos
+            al atleta híbrido que quiere desarrollar resistencia y fuerza.
+            Coordinamos las sesiones, su intensidad y la recuperación según tu
+            nivel, tu tiempo y lo que quieres conseguir.
           </p>
         </div>
         <div className="sports-grid">
@@ -157,6 +156,51 @@ export function Landing() {
             </article>
           ))}
         </div>
+      </section>
+      <section
+        className="section hybrid-section"
+        id="atleta-hibrido"
+        aria-labelledby="hybrid-title"
+      >
+        <div>
+          <span className="micro">ATLETA HÍBRIDO · RESISTENCIA + FUERZA</span>
+          <h2 id="hybrid-title">
+            Más de una capacidad.
+            <br />
+            Un plan que las conecta.
+          </h2>
+          <p>
+            Quieres correr, pedalear o nadar y seguir trabajando tu fuerza. Te
+            ayudamos a dar un propósito a cada sesión y a encajar ambas partes
+            en tu vida.
+          </p>
+          <a className="text-link" href="#contacto">
+            Hablemos de tu enfoque híbrido <Arrow diagonal />
+          </a>
+        </div>
+        <ol>
+          <li>
+            <strong>Partimos de tu realidad.</strong>
+            <p>
+              Experiencia, objetivo, tiempo y material disponible. El equilibrio
+              empieza por conocerte.
+            </p>
+          </li>
+          <li>
+            <strong>Coordinamos los estímulos.</strong>
+            <p>
+              Distribuimos resistencia y fuerza considerando la fatiga y la
+              recuperación, en una misma planificación en TrainingPeaks.
+            </p>
+          </li>
+          <li>
+            <strong>Escuchamos tu respuesta.</strong>
+            <p>
+              Datos, sensaciones y feedback semanal para decidir qué mantener y
+              qué ajustar. Tu plan evoluciona contigo.
+            </p>
+          </li>
+        </ol>
       </section>
       <TechnicalMethodSection />
       <JourneySection />

@@ -52,14 +52,14 @@ export const technicalDecisions = [
       "Tu disponibilidad",
     ],
     observation:
-      "Revisamos la carga conjunta de natación, ciclismo y carrera, junto con tu descanso y tus sensaciones.",
+      "Revisamos la carga conjunta de las sesiones de resistencia y fuerza, junto con tu descanso y tus sensaciones.",
     decision:
       "Distribuimos los estímulos y la recuperación para que una sesión tenga sentido dentro de toda tu semana.",
     athlete:
       "Un plan que encaja en tu agenda y se ajusta a cómo respondes. Recuperar también forma parte de entrenar.",
     technicalTitle: "La dosis importa tanto como la sesión",
     technicalExplanation:
-      "La carga combina cuánto entrenas y a qué intensidad, pero una cifra no cuenta toda la historia. Miramos la distribución entre disciplinas y la respuesta del atleta. El descanso, los compromisos y las sensaciones nos ayudan a decidir cuándo mantener el estímulo, reducirlo o reorganizar la semana.",
+      "La carga combina cuánto entrenas y a qué intensidad, pero una cifra no cuenta toda la historia. Miramos la distribución entre resistencia y fuerza, la fatiga muscular y la respuesta del atleta. El descanso, los compromisos y las sensaciones nos ayudan a decidir cuándo mantener el estímulo, reducirlo o reorganizar la semana.",
   },
   {
     id: "progresion",

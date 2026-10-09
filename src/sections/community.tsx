@@ -15,14 +15,16 @@ export function CommunitySection() {
           MÁS QUE UN PLAN DE ENTRENAMIENTO
         </SectionLabel>
         <h2 id="community-title">
-          Tu entrenamiento.
+          Tu reto es personal.
           <br />
-          Nuestra comunidad.
+          El camino, compartido.
         </h2>
         <p>
-          Somos un servicio de entrenamiento individualizado y una comunidad de
-          atletas. Queremos conocerte, acompañarte y compartir el camino
-          contigo, también con entrenamientos presenciales.
+          Hay días en los que entrenar sale solo y otros en los que cuesta
+          empezar. En ICARO queremos conocerte más allá de tus ritmos: qué te
+          ilusiona, qué te frena y qué lugar ocupa el deporte en tu vida. Somos
+          entrenamiento personalizado y una comunidad con la que compartirlo,
+          también en los entrenamientos presenciales.
         </p>
         <a className="text-link" href="#barcelona">
           Conoce el trabajo presencial <Arrow diagonal />
@@ -32,9 +34,10 @@ export function CommunitySection() {
         <span className="community-badge">SOCIAL ICARO · GRATIS</span>
         <h3>Únete a nuestro grupo.</h3>
         <p>
-          Un espacio en Instagram para conectar con la comunidad ICARO y
-          compartir tu interés por entrenar. Puedes empezar por aquí, estés
-          donde estés en tu camino deportivo.
+          Tu primera carrera, un triatlón o combinar resistencia y fuerza: cada
+          persona llega con una historia. En nuestro grupo de Instagram puedes
+          compartir la tuya, conectar con otras personas y sentirte parte de
+          ICARO. No necesitas un dorsal ni un ritmo concreto para empezar.
         </p>
         {groupUrl ? (
           <a

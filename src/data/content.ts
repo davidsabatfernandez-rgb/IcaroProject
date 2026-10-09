@@ -8,10 +8,10 @@ export const navigation = [
 ];
 export const copy = {
   hero: {
-    eyebrow: "TRIATLÓN · ENTRENAMIENTO Y COMUNIDAD",
-    title: ["Triatlón.", "A tu medida."],
+    eyebrow: "TRIATLÓN · RUNNING · ATLETA HÍBRIDO",
+    title: ["Tu reto.", "Nuestro camino."],
     description:
-      "Tu objetivo y tus horarios marcan el punto de partida. Ajustamos la duración, la intensidad y la recuperación con tus datos y sensaciones, y te explicamos el porqué de cada sesión.",
+      "Entrenar es hacer espacio para algo que te importa. Te acompañamos con un sistema personalizado que trabaja la resistencia sin olvidarse de la fuerza, una planificación en TrainingPeaks y una comunidad con la que compartir el camino.",
     primary: "Hablar con un entrenador",
     secondary: "Ver cómo empezamos",
   },
@@ -24,6 +24,7 @@ export const copy = {
 export const sharedFeatures = [
   "Llamada inicial incluida en los tres planes",
   "Plan semanal individualizado en TrainingPeaks",
+  "Resistencia y fuerza coordinadas según tu perfil y objetivo",
   "Disponibilidad enviada cada viernes",
   "Programación entre sábado y domingo",
   "Explicación de la semana anterior y objetivos de la siguiente",
@@ -91,6 +92,14 @@ export const plans = [
   },
 ] as const;
 export const faqs = [
+  [
+    "¿Puedo combinar resistencia y fuerza?",
+    "Sí. Puedes preparar triatlón o running incorporando fuerza, o trabajar con un enfoque de atleta híbrido. En la llamada inicial hablamos de tu experiencia, objetivo y material disponible. Coordinamos ambas capacidades en TrainingPeaks y ajustamos su distribución a tu disponibilidad y recuperación.",
+  ],
+  [
+    "¿Puedo formar parte de Social ICARO sin contratar un plan?",
+    "Sí. Social ICARO es nuestro grupo gratuito en Instagram para compartir el camino con la comunidad. Los planes personalizados y las sesiones presenciales tienen sus propias condiciones, que te explicamos antes de contratar.",
+  ],
   [
     "¿Necesito entender los datos para empezar?",
     "No necesitas conocer las zonas ni saber fisiología. Te explicamos cuánto dura cada sesión, a qué intensidad hacerla y qué buscamos con ella. Utilizamos los datos que tengas disponibles junto con tus sensaciones; un potenciómetro no es un requisito para empezar.",

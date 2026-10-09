@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/config/site";
-export const alt = "ICARO PROJECT — Triatlón a tu medida.";
+export const alt = "ICARO PROJECT — Tu reto. Nuestro camino.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function Image() {
@@ -36,12 +36,12 @@ export default function Image() {
           lineHeight: 1.02,
         }}
       >
-        <span>TRIATLÓN.</span>
-        <span>A TU MEDIDA.</span>
+        <span>TU RETO.</span>
+        <span>NUESTRO CAMINO.</span>
         <span style={{ color: "#d9b66f" }}>CONTIGO.</span>
       </div>
       <div style={{ display: "flex", fontSize: 18, letterSpacing: 3 }}>
-        SWIM · BIKE · RUN
+        TRIATLÓN · RUNNING · RESISTENCIA + FUERZA
       </div>
     </div>,
     size,

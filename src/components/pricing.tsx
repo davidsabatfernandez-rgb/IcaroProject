@@ -27,8 +27,8 @@ export function Pricing() {
         </div>
         <p>
           {mode === "single"
-            ? "Running, ciclismo o natación. Elige tu disciplina."
-            : "Natación, ciclismo y carrera. Planificadas en conjunto."}
+            ? "Running, ciclismo o natación, con fuerza adaptada a tu objetivo."
+            : "Natación, ciclismo, carrera y fuerza. Planificadas en conjunto."}
         </p>
       </div>
       <div className="plans-grid">

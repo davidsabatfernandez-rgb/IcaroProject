@@ -2,7 +2,7 @@ export const journeyCopy = {
   label: "DEL PRIMER CONTACTO A TU OBJETIVO",
   title: ["Así empezamos.", "Así seguimos contigo."],
   description:
-    "Tu primer triatlón o un objetivo exigente: empezamos por conocerte y convertir tu punto de partida en una semana de entrenamiento con sentido.",
+    "Tu primera carrera, un triatlón o un objetivo híbrido: empezamos por escuchar qué te mueve y convertir tu punto de partida en una semana de entrenamiento con sentido.",
   cycleDescription:
     "Repetimos el ciclo: prescribir, revisar y ajustar. Cada semana nos ayuda a decidir la siguiente, con tu disponibilidad y tu respuesta al entrenamiento como referencia.",
   action: "Empezar por una conversación",

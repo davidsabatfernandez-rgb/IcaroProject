@@ -108,7 +108,13 @@ export function ContactForm() {
           <option value="" disabled>
             Elige tu disciplina
           </option>
-          {["Running", "Ciclismo", "Natación", "Triatlón"].map((s) => (
+          {[
+            "Running",
+            "Ciclismo",
+            "Natación",
+            "Triatlón",
+            "Atleta híbrido",
+          ].map((s) => (
             <option key={s}>{s}</option>
           ))}
         </select>

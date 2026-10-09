@@ -330,9 +330,12 @@ test("triathlon product, platform and Barcelona are clear and real photos load",
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Triatlón.",
+    "Tu reto.",
   );
   await expect(page.locator("#como-funciona")).toContainText("TrainingPeaks");
+  await expect(page.locator("#atleta-hibrido")).toContainText("resistencia y fuerza");
+  await page.getByLabel("Deporte", { exact: true }).selectOption("Atleta híbrido");
+  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue("Atleta híbrido");
   await expect(page.locator("#como-funciona")).toContainText(
     "reloj compatible",
   );
