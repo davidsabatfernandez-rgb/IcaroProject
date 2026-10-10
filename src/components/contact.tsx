@@ -41,6 +41,11 @@ export function ContactForm() {
       setBusy(false);
       return;
     }
+    if (data.get("website")) {
+      setStatus("No se ha podido enviar la consulta.");
+      setBusy(false);
+      return;
+    }
     const message = `Hola, soy ${data.get("name")}.\nContacto: ${data.get("contact")}\nDeporte: ${data.get("sport")}\nObjetivo: ${data.get("goal")}\n${plan ? `Plan: ${plan}\n` : ""}${data.get("message") || ""}`;
     setSummary(message);
     try {
@@ -48,9 +53,23 @@ export function ContactForm() {
         const result = await fetch(site.contact.formEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(Object.fromEntries(data)),
+          body: JSON.stringify({
+            ...Object.fromEntries(data),
+            _subject: "Nueva consulta · ICARO PROJECT",
+            _template: "table",
+            _honey: String(data.get("website") || ""),
+            ...(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
+              ? { _replyto: contact }
+              : {}),
+          }),
+          signal: AbortSignal.timeout(20000),
         });
-        if (!result.ok) throw new Error("send");
+        const acknowledgment = await result.json();
+        if (
+          !result.ok ||
+          (acknowledgment.success !== true && acknowledgment.success !== "true")
+        )
+          throw new Error("send");
         setStatus(
           "Tu consulta se ha enviado. Gracias por contarnos tu objetivo.",
         );
@@ -72,7 +91,7 @@ export function ContactForm() {
       }
     } catch {
       setStatus(
-        "No se ha podido enviar. Inténtalo de nuevo o utiliza otro canal de contacto.",
+        "No se ha podido confirmar el envío. Inténtalo de nuevo o escríbenos a contacticaroproject@gmail.com.",
       );
     } finally {
       setBusy(false);
@@ -80,6 +99,12 @@ export function ContactForm() {
   }
   return (
     <form className="contact-form" onSubmit={submit}>
+      <div hidden aria-hidden="true">
+        <label>
+          Website
+          <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <div className="form-row">
         <label>
           Nombre
@@ -160,7 +185,7 @@ export function ContactForm() {
       )}
       <button className="button accent" type="submit" disabled={busy}>
         {busy
-          ? "Preparando…"
+          ? "Enviando…"
           : configured
             ? "Cuéntame tu objetivo"
             : "Preparar mi consulta"}

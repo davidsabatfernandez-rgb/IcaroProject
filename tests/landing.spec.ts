@@ -273,9 +273,22 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
     "Test de lactato en pista",
   );
 });
-test("FAQ expands and contact cannot falsely claim submission", async ({
+test("FAQ and contact require consent and a positive delivery acknowledgment", async ({
   page,
 }) => {
+  const payloads: Record<string, unknown>[] = [];
+  let accepted = false;
+  await page.route(
+    "https://formsubmit.co/ajax/contacticaroproject@gmail.com",
+    async (route) => {
+      payloads.push(route.request().postDataJSON());
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ success: accepted ? "true" : "false" }),
+      });
+    },
+  );
   await page.goto("/");
   await page
     .locator("summary")
@@ -284,22 +297,51 @@ test("FAQ expands and contact cannot falsely claim submission", async ({
   await expect(page.locator("details[open]")).toContainText(
     "No. Son opcionales",
   );
-  await page.getByRole("button", { name: "Preparar mi consulta" }).click();
-  await expect(page.locator(".form-status")).toBeEmpty();
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
   await page
     .getByLabel("Email o teléfono", { exact: true })
     .fill("atleta@example.com");
-  await page.getByLabel("Deporte", { exact: true }).selectOption("Running");
+  await page
+    .getByLabel("Deporte", { exact: true })
+    .selectOption("Atleta híbrido");
   await page
     .getByLabel("Tu objetivo", { exact: true })
     .fill("Preparar una media maratón");
-  await page.getByRole("button", { name: "Preparar mi consulta" }).click();
-  await expect(page.getByRole("status")).toContainText(
-    "No se ha enviado ni guardado",
+  await page
+    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .click();
+  expect(payloads).toHaveLength(0);
+  await page.getByRole("checkbox").check();
+  await page
+    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .click();
+  await expect(page.locator(".form-status")).toContainText(
+    "No se ha podido confirmar el envío",
   );
-  await expect(page.locator(".message-preview textarea")).toHaveValue(
-    /Preparar una media maratón/,
+  await expect(page.getByLabel("Nombre", { exact: true })).toHaveValue(
+    "Atleta de prueba",
+  );
+  expect(payloads[0]).toMatchObject({
+    contact: "atleta@example.com",
+    sport: "Atleta híbrido",
+    consent: "on",
+    _replyto: "atleta@example.com",
+  });
+  accepted = true;
+  await page
+    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .click();
+  await expect(page.locator(".form-status")).toContainText(
+    "Tu consulta se ha enviado",
+  );
+  await expect(page.getByLabel("Nombre", { exact: true })).toBeEmpty();
+  await page.goto("/privacidad");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Privacidad",
+  );
+  await expect(page.locator("main")).toContainText("FormSubmit");
+  await expect(page.locator("main")).toContainText(
+    "contacticaroproject@gmail.com",
   );
 });
 test("keyboard access and reduced motion", async ({ page }) => {
@@ -333,9 +375,15 @@ test("triathlon product, platform and Barcelona are clear and real photos load",
     "Tu reto.",
   );
   await expect(page.locator("#como-funciona")).toContainText("TrainingPeaks");
-  await expect(page.locator("#atleta-hibrido")).toContainText("resistencia y fuerza");
-  await page.getByLabel("Deporte", { exact: true }).selectOption("Atleta híbrido");
-  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue("Atleta híbrido");
+  await expect(page.locator("#atleta-hibrido")).toContainText(
+    "resistencia y fuerza",
+  );
+  await page
+    .getByLabel("Deporte", { exact: true })
+    .selectOption("Atleta híbrido");
+  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
+    "Atleta híbrido",
+  );
   await expect(page.locator("#como-funciona")).toContainText(
     "reloj compatible",
   );
