@@ -7,6 +7,7 @@ export function ContactForm() {
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [summary, setSummary] = useState("");
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
     const listener = (e: Event) => setPlan((e as CustomEvent<string>).detail);
     window.addEventListener("icaro-plan", listener);
@@ -19,7 +20,9 @@ export function ContactForm() {
   );
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (busy) return;
     setStatus("");
+    setFailed(false);
     setBusy(true);
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -50,12 +53,34 @@ export function ContactForm() {
     setSummary(message);
     try {
       if (site.contact.formEndpoint) {
-        const replyTo = form.elements.namedItem("_replyto") as HTMLInputElement;
-        replyTo.value = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
-          ? contact
-          : "";
-        setStatus("Abriendo el servicio de envío para completar tu consulta…");
-        HTMLFormElement.prototype.submit.call(form);
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 15000);
+        try {
+          const response = await fetch(site.contact.formEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(data)),
+            signal: controller.signal,
+          });
+          const result = await response.json();
+          if (!response.ok || result.success !== true) {
+            setFailed(true);
+            setStatus(
+              typeof result.message === "string"
+                ? result.message
+                : "No hemos podido confirmar el envío. Puedes contactar por WhatsApp.",
+            );
+          } else {
+            setStatus(
+              "Tu consulta se ha enviado. Gracias por contarnos tu objetivo.",
+            );
+            form.reset();
+            setPlan("");
+            setSummary("");
+          }
+        } finally {
+          window.clearTimeout(timeout);
+        }
       } else if (site.contact.whatsapp) {
         window.location.assign(whatsappUrl(message));
         setStatus(
@@ -72,6 +97,7 @@ export function ContactForm() {
         );
       }
     } catch {
+      setFailed(true);
       setStatus(
         "No se ha podido confirmar el envío. Inténtalo de nuevo o escríbenos a contacticaroproject@gmail.com.",
       );
@@ -86,13 +112,6 @@ export function ContactForm() {
       method="POST"
       onSubmit={submit}
     >
-      <input
-        type="hidden"
-        name="_subject"
-        value="Nueva consulta · ICARO PROJECT"
-      />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_replyto" defaultValue="" />
       <div hidden aria-hidden="true">
         <label>
           Website
@@ -165,12 +184,6 @@ export function ContactForm() {
         </p>
       )}
       <input type="hidden" name="plan" value={plan} />
-      {site.contact.formEndpoint && (
-        <p className="form-note">
-          Al enviar continuarás en FormSubmit para completar el envío y las
-          comprobaciones que solicite.
-        </p>
-      )}
       {site.legal.privacy ? (
         <label className="privacy-check">
           <input type="checkbox" required name="consent" />
@@ -194,6 +207,22 @@ export function ContactForm() {
       <p role="status" className="form-status">
         {status}
       </p>
+      {failed && summary && whatsappUrl(summary) && (
+        <div className="message-preview">
+          <p>
+            Conservamos los datos en este formulario. Puedes enviar la misma
+            consulta por WhatsApp.
+          </p>
+          <a
+            className="button accent"
+            href={whatsappUrl(summary)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Enviar mi consulta por WhatsApp <Arrow diagonal />
+          </a>
+        </div>
+      )}
       {summary && !configured && (
         <div className="message-preview">
           <label>

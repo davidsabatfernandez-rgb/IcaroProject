@@ -7,10 +7,10 @@ export const site = {
   trainingPeaksUrl: "https://www.trainingpeaks.com/",
   community: { name: "Social ICARO", instagramGroupUrl: "" },
   contact: {
-    whatsapp: "",
+    whatsapp: "+34 619 28 25 82",
     instagram: "",
     email: "contacticaroproject@gmail.com",
-    formEndpoint: "https://formsubmit.co/contacticaroproject@gmail.com",
+    formEndpoint: "/api/contact",
   },
   legal: { notice: "", privacy: "/privacidad", cookies: "" },
   images: {

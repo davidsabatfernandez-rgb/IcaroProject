@@ -1,0 +1,29 @@
+.hero-actions .whatsapp-cta {
+  border-color: var(--accent);
+  color: #fff;
+  background: #392b2480;
+}
+
+.hero-actions .whatsapp-cta:hover {
+  background: var(--ink);
+}
+
+.whatsapp-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.whatsapp-contact .button {
+  gap: 14px;
+  padding: 14px 18px;
+  font-size: 12px;
+}
+
+.whatsapp-number {
+  color: #e0d3c4;
+  font-size: 13px;
+  letter-spacing: 0.025em;
+}

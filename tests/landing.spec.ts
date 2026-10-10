@@ -39,6 +39,14 @@ for (const [name, width, height] of [
     await expect(page).toHaveURL(/#planes$/);
     for (const id of ["metodo", "planes", "lactato", "faq", "contacto"])
       await expect(page.locator(`#${id}`)).toBeAttached();
+    for (const link of await page
+      .getByRole("link", { name: /Contáctanos por WhatsApp/ })
+      .all()) {
+      const url = new URL((await link.getAttribute("href"))!);
+      expect(url.hostname).toBe("wa.me");
+      expect(url.pathname).toBe("/34619282582");
+      await expect(link).toHaveAttribute("target", "_blank");
+    }
     const broken = await page
       .locator('a[href^="#"]')
       .evaluateAll((links) =>
@@ -273,23 +281,32 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
     "Test de lactato en pista",
   );
 });
-test("contact requires consent and posts the enquiry to the native mail service", async ({
+test("contact handles mail failures and offers the same enquiry in WhatsApp", async ({
   page,
 }) => {
-  const requests: string[] = [];
-  await page.route(
-    "https://formsubmit.co/contacticaroproject@gmail.com",
-    async (route) => {
-      expect(route.request().method()).toBe("POST");
-      expect(route.request().isNavigationRequest()).toBe(true);
-      requests.push(route.request().postData() || "");
-      await route.fulfill({
-        contentType: "text/html; charset=utf-8",
-        body: "<h1>Servicio de envío de prueba</h1>",
-      });
-    },
-  );
+  const payloads: Record<string, unknown>[] = [];
+  let accepted = false;
+  await page.route("**/api/contact", async (route) => {
+    expect(route.request().isNavigationRequest()).toBe(false);
+    payloads.push(route.request().postDataJSON());
+    await route.fulfill({
+      status: accepted ? 200 : 503,
+      contentType: "application/json",
+      body: JSON.stringify(
+        accepted
+          ? { success: true }
+          : {
+              success: false,
+              message:
+                "El envío por email aún no está disponible. Puedes enviarnos esta consulta por WhatsApp.",
+            },
+      ),
+    });
+  });
   await page.goto("/");
+  await page
+    .getByRole("link", { name: "Consultar Coaching", exact: true })
+    .click();
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
   await page
     .getByLabel("Email o teléfono", { exact: true })
@@ -303,33 +320,79 @@ test("contact requires consent and posts the enquiry to the native mail service"
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
-  expect(requests).toHaveLength(0);
+  expect(payloads).toHaveLength(0);
   await page.getByRole("checkbox").check();
-  await page.getByLabel("Email o teléfono", { exact: true }).fill("incorrecto");
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
-    "Introduce un email válido",
+    "email aún no está disponible",
   );
-  expect(requests).toHaveLength(0);
-  await page
-    .getByLabel("Email o teléfono", { exact: true })
-    .fill("atleta@example.com");
+  await expect(page.getByLabel("Nombre", { exact: true })).toHaveValue(
+    "Atleta de prueba",
+  );
+  const fallback = page.getByRole("link", {
+    name: "Enviar mi consulta por WhatsApp",
+  });
+  await expect(fallback).toBeVisible();
+  const url = new URL((await fallback.getAttribute("href"))!);
+  expect(url.hostname).toBe("wa.me");
+  expect(url.pathname).toBe("/34619282582");
+  expect(url.searchParams.get("text")).toContain("Preparar una media maratón");
+  expect(url.searchParams.get("text")).toContain("Plan: Coaching");
+  expect(payloads[0]).toMatchObject({
+    contact: "atleta@example.com",
+    sport: "Atleta híbrido",
+    consent: "on",
+    plan: "Coaching",
+  });
+  accepted = true;
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Servicio de envío de prueba",
+  await expect(page.locator(".form-status")).toContainText(
+    "Tu consulta se ha enviado",
   );
-  const data = new URLSearchParams(requests[0]);
-  expect(data.get("contact")).toBe("atleta@example.com");
-  expect(data.get("_replyto")).toBe("atleta@example.com");
-  expect(data.get("consent")).toBe("on");
-  expect(data.get("sport")).toBe("Atleta híbrido");
+  await expect(page.getByLabel("Nombre", { exact: true })).toBeEmpty();
+  await expect(fallback).toHaveCount(0);
   await page.goto("/privacidad");
-  await expect(page.locator("main")).toContainText("FormSubmit");
+  await expect(page.locator("main")).toContainText("Resend");
 });
+
+test("contact times out and releases the send button without losing the enquiry", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.route("**/api/contact", (route) => new Promise<void>(() => {}));
+  await page.goto("/");
+  await page.getByLabel("Nombre", { exact: true }).fill("Atleta");
+  await page
+    .getByLabel("Email o teléfono", { exact: true })
+    .fill("atleta@example.com");
+  await page.getByLabel("Deporte", { exact: true }).selectOption("Running");
+  await page.getByLabel("Tu objetivo", { exact: true }).fill("Mi carrera");
+  await page.getByRole("checkbox").check();
+  await page
+    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Enviando…", exact: true }),
+  ).toBeDisabled();
+  await page.clock.fastForward(16000);
+  await expect(
+    page.getByRole("button", { name: "Cuéntame tu objetivo", exact: true }),
+  ).toBeEnabled();
+  await expect(page.locator(".form-status")).toContainText(
+    "No se ha podido confirmar",
+  );
+  await expect(page.getByLabel("Tu objetivo", { exact: true })).toHaveValue(
+    "Mi carrera",
+  );
+  await expect(
+    page.getByRole("link", { name: "Enviar mi consulta por WhatsApp" }),
+  ).toBeVisible();
+});
+
 test("keyboard access and reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");

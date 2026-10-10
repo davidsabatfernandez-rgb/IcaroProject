@@ -32,20 +32,21 @@ export default function PrivacyPage() {
       </p>
       <h2 style={{ fontSize: 24 }}>Cómo se envía</h2>
       <p>
-        Al enviar, los datos pasan por FormSubmit, un servicio externo que los
-        remite al correo de ICARO PROJECT. El correo se recibe en Gmail, de
-        Google. Estos proveedores pueden tratar información técnica asociada al
-        envío conforme a sus políticas y operar fuera del Espacio Económico
-        Europeo.
+        Al enviar, el servidor de la web recibe tu consulta y utiliza Resend
+        para remitirla al correo de ICARO PROJECT. El correo se recibe en Gmail,
+        de Google. Si el email falla, puedes elegir enviar la consulta por
+        WhatsApp, de Meta. Estos proveedores pueden tratar información técnica
+        asociada al envío conforme a sus políticas y operar fuera del Espacio
+        Económico Europeo.
       </p>
       <p>
         <a
           className="text-link"
-          href="https://formsubmit.co/privacy.pdf"
+          href="https://resend.com/legal/privacy-policy"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Privacidad de FormSubmit
+          Privacidad de Resend
         </a>
         {" · "}
         <a

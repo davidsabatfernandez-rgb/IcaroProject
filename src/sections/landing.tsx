@@ -9,8 +9,11 @@ import { BarcelonaSection } from "./product";
 import { TechnicalMethodSection } from "./technical-method";
 import { JourneySection } from "./journey";
 import { CommunitySection } from "./community";
+import "./whatsapp.css";
 
 export function Landing() {
+  const whatsapp = whatsappUrl();
+
   return (
     <>
       <section className="hero triathlon-hero" id="inicio">
@@ -46,6 +49,18 @@ export function Landing() {
                 {copy.hero.primary}
                 <Arrow diagonal />
               </a>
+              {whatsapp && (
+                <a
+                  className="button whatsapp-cta"
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Contáctanos por WhatsApp al ${site.contact.whatsapp} (abre en una pestaña nueva)`}
+                >
+                  Contáctanos por WhatsApp
+                  <Arrow diagonal />
+                </a>
+              )}
               <a className="text-link" href="#como-funciona">
                 {copy.hero.secondary}
                 <Arrow />
@@ -289,16 +304,22 @@ export function Landing() {
               </li>
             </ul>
             <div className="contact-links">
-              {whatsappUrl() && (
-                <a
-                  className="text-link"
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Hablar por WhatsApp
-                  <Arrow diagonal />
-                </a>
+              {whatsapp && (
+                <div className="whatsapp-contact">
+                  <a
+                    className="button accent"
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Contáctanos por WhatsApp al ${site.contact.whatsapp} (abre en una pestaña nueva)`}
+                  >
+                    Contáctanos por WhatsApp
+                    <Arrow diagonal />
+                  </a>
+                  <span className="whatsapp-number">
+                    {site.contact.whatsapp}
+                  </span>
+                </div>
               )}
               {site.contact.email && (
                 <a className="text-link" href={`mailto:${site.contact.email}`}>

@@ -73,9 +73,13 @@ Los espacios fotográficos activos son hero, running, cycling y swimming. Una im
 
 ## Formulario y contacto
 
-El formulario usa POST de navegador a FormSubmit para recibir consultas en `contacticaroproject@gmail.com`. El servicio muestra directamente sus comprobaciones de activación y CAPTCHA. El propietario debe confirmar la activación en Gmail. No se afirma entrega al abandonar la web. Nombre, contacto, deporte, objetivo, mensaje, plan y consentimiento se envían junto con asunto, formato tabla y email de respuesta cuando corresponde. El navegador valida los campos obligatorios y la casilla de privacidad; el código comprueba email/teléfono y honeypot.
+El formulario envía JSON a `/api/contact`, dentro de la web. La ruta del servidor valida nombre, contacto, deporte, objetivo, longitudes, consentimiento y honeypot. Rechaza peticiones desde otro origen y limita el cuerpo a 8 KB. El destino es fijo: `contacticaroproject@gmail.com`; el cliente no puede cambiar destinatario, remitente ni asunto. Se envía texto plano y `reply_to` solo si el contacto es un email válido. No se registran datos de atletas ni claves en logs.
 
-La política de privacidad está en `/privacidad`. Si se elimina su configuración se bloquea el envío. Si se vacían todos los canales de contacto, se ofrece la consulta preparada localmente. No se usa contraseña de Gmail ni se incluyen secretos públicos. Completar la identidad real del responsable de los datos con el propietario.
+Resend se invoca exclusivamente desde el servidor, con límite de 10 segundos. La interfaz deja de esperar a los 15 segundos, conserva los campos si falla y ofrece la misma consulta por WhatsApp. Solo muestra éxito tras respuesta correcta del proveedor con un identificador de envío. La aceptación por Resend no equivale a recepción confirmada en Gmail.
+
+Para activar el email en Vercel, crear cuenta de Resend con `contacticaroproject@gmail.com`, generar una API key con permiso de envío y guardar `RESEND_API_KEY` en Settings → Environment Variables → Production. No pegar claves en chats ni en `site.ts`. Después redeploy. Sin clave el servidor devuelve 503 con una opción clara de WhatsApp. El remitente provisional `onboarding@resend.dev` solo envía al email de la cuenta de Resend; por eso la cuenta debe usar ese Gmail. Para otros destinatarios o un remitente propio, verificar primero el dominio en Resend y configurar `RESEND_FROM_EMAIL` con la dirección verificada. Usar los registros exactos que dé Resend y conservar los registros de correo existentes de IONOS.
+
+WhatsApp está configurado como `+34 619 28 25 82`; los enlaces usan `https://wa.me/34619282582` con mensaje codificado. Abrir WhatsApp no envía por sí solo el mensaje: el atleta confirma el envío en la app. La política de privacidad está en `/privacidad`; completar la identidad real del responsable con el propietario.
 
 ## Diseño, animación y accesibilidad
 
@@ -125,10 +129,4 @@ La landing distingue la comunidad gratuita de los planes de entrenamiento y de l
 
 El dominio configurado para canonical, sitemap y metadatos es `https://www.icaroproject.es`, coincidiendo con la redirección configurada por el propietario en Vercel. Esto no modifica DNS ni conecta el dominio a Vercel. En Vercel: proyecto → Settings → Domains → añadir `icaroproject.es` y `www.icaroproject.es`, con redirección del dominio sin www a www. Copiar al proveedor de DNS los registros exactos que muestre Vercel; no cambiar MX, TXT de correo ni nameservers sin revisar los servicios existentes. La rama de producción debe ser `icaro-web`.
 
-El formulario usa el endpoint POST nativo de FormSubmit para enviar a `contacticaroproject@gmail.com`. No necesita contraseña Gmail ni secretos públicos. El propietario debe activar el correo siguiendo el enlace de confirmación enviado por FormSubmit en el primer envío (revisar spam). Antes de activar, el proveedor puede pedir confirmación. La web navega al servicio sin anunciar entrega y este muestra el resultado de su flujo. El navegador envía la información a un proveedor externo; se explica en `/privacidad`. Confirmar con el propietario la identidad legal del responsable, condiciones de conservación y garantías de los proveedores antes del lanzamiento definitivo. La recepción real y la activación no se han verificado desde el entorno de nube.
-
-La política de privacidad usa la marca confirmada ICARO PROJECT y el correo real; no inventa nombre legal, domicilio, NIF ni acuerdos con proveedores. Completar la identidad legal cuando el propietario la facilite. Las pruebas del formulario simulan respuestas del proveedor; no equivalen a un email recibido en Gmail.
-
-### Envío nativo del formulario
-
-El envío actual usa POST de navegador a `https://formsubmit.co/contacticaroproject@gmail.com`, sustituyendo AJAX para permitir que FormSubmit muestre directamente la activación, CAPTCHA o errores. No se desactiva CAPTCHA. El formulario valida contacto y consentimiento, incluye asunto, respuesta por email cuando corresponde y un campo honeypot. No anuncia una entrega al navegar: el proveedor completa el flujo. Las pruebas interceptan el POST para verificar los datos; la recepción en Gmail sigue pendiente de una prueba real y activación.
+El envío ya no depende de FormSubmit. Ver la configuración Resend y sus requisitos en «Formulario y contacto». No hay acceso autenticado a Vercel ni IONOS desde este entorno; el propietario debe aplicar las variables y los DNS en sus cuentas. La recepción real de una consulta debe comprobarse en Gmail tras configurar el proveedor.
