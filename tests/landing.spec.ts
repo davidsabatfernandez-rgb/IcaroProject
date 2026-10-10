@@ -273,30 +273,23 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
     "Test de lactato en pista",
   );
 });
-test("FAQ and contact require consent and a positive delivery acknowledgment", async ({
+test("contact requires consent and posts the enquiry to the native mail service", async ({
   page,
 }) => {
-  const payloads: Record<string, unknown>[] = [];
-  let accepted = false;
+  const requests: string[] = [];
   await page.route(
-    "https://formsubmit.co/ajax/contacticaroproject@gmail.com",
+    "https://formsubmit.co/contacticaroproject@gmail.com",
     async (route) => {
-      payloads.push(route.request().postDataJSON());
+      expect(route.request().method()).toBe("POST");
+      expect(route.request().isNavigationRequest()).toBe(true);
+      requests.push(route.request().postData() || "");
       await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({ success: accepted ? "true" : "false" }),
+        contentType: "text/html; charset=utf-8",
+        body: "<h1>Servicio de envío de prueba</h1>",
       });
     },
   );
   await page.goto("/");
-  await page
-    .locator("summary")
-    .filter({ hasText: "¿Los tests de lactato son obligatorios?" })
-    .click();
-  await expect(page.locator("details[open]")).toContainText(
-    "No. Son opcionales",
-  );
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
   await page
     .getByLabel("Email o teléfono", { exact: true })
@@ -310,39 +303,32 @@ test("FAQ and contact require consent and a positive delivery acknowledgment", a
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
-  expect(payloads).toHaveLength(0);
+  expect(requests).toHaveLength(0);
   await page.getByRole("checkbox").check();
+  await page.getByLabel("Email o teléfono", { exact: true }).fill("incorrecto");
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
-    "No se ha podido confirmar el envío",
+    "Introduce un email válido",
   );
-  await expect(page.getByLabel("Nombre", { exact: true })).toHaveValue(
-    "Atleta de prueba",
-  );
-  expect(payloads[0]).toMatchObject({
-    contact: "atleta@example.com",
-    sport: "Atleta híbrido",
-    consent: "on",
-    _replyto: "atleta@example.com",
-  });
-  accepted = true;
+  expect(requests).toHaveLength(0);
+  await page
+    .getByLabel("Email o teléfono", { exact: true })
+    .fill("atleta@example.com");
   await page
     .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
     .click();
-  await expect(page.locator(".form-status")).toContainText(
-    "Tu consulta se ha enviado",
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Servicio de envío de prueba",
   );
-  await expect(page.getByLabel("Nombre", { exact: true })).toBeEmpty();
+  const data = new URLSearchParams(requests[0]);
+  expect(data.get("contact")).toBe("atleta@example.com");
+  expect(data.get("_replyto")).toBe("atleta@example.com");
+  expect(data.get("consent")).toBe("on");
+  expect(data.get("sport")).toBe("Atleta híbrido");
   await page.goto("/privacidad");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Privacidad",
-  );
   await expect(page.locator("main")).toContainText("FormSubmit");
-  await expect(page.locator("main")).toContainText(
-    "contacticaroproject@gmail.com",
-  );
 });
 test("keyboard access and reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });

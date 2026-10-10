@@ -41,7 +41,7 @@ export function ContactForm() {
       setBusy(false);
       return;
     }
-    if (data.get("website")) {
+    if (data.get("_honey")) {
       setStatus("No se ha podido enviar la consulta.");
       setBusy(false);
       return;
@@ -50,30 +50,12 @@ export function ContactForm() {
     setSummary(message);
     try {
       if (site.contact.formEndpoint) {
-        const result = await fetch(site.contact.formEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...Object.fromEntries(data),
-            _subject: "Nueva consulta · ICARO PROJECT",
-            _template: "table",
-            _honey: String(data.get("website") || ""),
-            ...(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
-              ? { _replyto: contact }
-              : {}),
-          }),
-          signal: AbortSignal.timeout(20000),
-        });
-        const acknowledgment = await result.json();
-        if (
-          !result.ok ||
-          (acknowledgment.success !== true && acknowledgment.success !== "true")
-        )
-          throw new Error("send");
-        setStatus(
-          "Tu consulta se ha enviado. Gracias por contarnos tu objetivo.",
-        );
-        form.reset();
+        const replyTo = form.elements.namedItem("_replyto") as HTMLInputElement;
+        replyTo.value = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
+          ? contact
+          : "";
+        setStatus("Abriendo el servicio de envío para completar tu consulta…");
+        HTMLFormElement.prototype.submit.call(form);
       } else if (site.contact.whatsapp) {
         window.location.assign(whatsappUrl(message));
         setStatus(
@@ -98,11 +80,23 @@ export function ContactForm() {
     }
   }
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form
+      className="contact-form"
+      action={site.contact.formEndpoint || undefined}
+      method="POST"
+      onSubmit={submit}
+    >
+      <input
+        type="hidden"
+        name="_subject"
+        value="Nueva consulta · ICARO PROJECT"
+      />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_replyto" defaultValue="" />
       <div hidden aria-hidden="true">
         <label>
           Website
-          <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+          <input name="_honey" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
       <div className="form-row">
@@ -171,6 +165,12 @@ export function ContactForm() {
         </p>
       )}
       <input type="hidden" name="plan" value={plan} />
+      {site.contact.formEndpoint && (
+        <p className="form-note">
+          Al enviar continuarás en FormSubmit para completar el envío y las
+          comprobaciones que solicite.
+        </p>
+      )}
       {site.legal.privacy ? (
         <label className="privacy-check">
           <input type="checkbox" required name="consent" />

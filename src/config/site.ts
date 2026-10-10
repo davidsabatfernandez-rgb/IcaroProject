@@ -10,7 +10,7 @@ export const site = {
     whatsapp: "",
     instagram: "",
     email: "contacticaroproject@gmail.com",
-    formEndpoint: "https://formsubmit.co/ajax/contacticaroproject@gmail.com",
+    formEndpoint: "https://formsubmit.co/contacticaroproject@gmail.com",
   },
   legal: { notice: "", privacy: "/privacidad", cookies: "" },
   images: {
