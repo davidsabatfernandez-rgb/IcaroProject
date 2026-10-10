@@ -18,7 +18,14 @@ export async function handleContact(
     send?: typeof fetch;
   },
 ): Promise<Response> {
-  if (request.headers.get("origin") !== new URL(request.url).origin) {
+  const url = new URL(request.url);
+  const host = request.headers.get("host") || url.host;
+  const forwardedProtocol = request.headers.get("x-forwarded-proto");
+  const protocol =
+    forwardedProtocol === "https" || forwardedProtocol === "http"
+      ? `${forwardedProtocol}:`
+      : url.protocol;
+  if (request.headers.get("origin") !== `${protocol}//${host}`) {
     return failure(
       403,
       "Envía la consulta desde el formulario de nuestra web.",

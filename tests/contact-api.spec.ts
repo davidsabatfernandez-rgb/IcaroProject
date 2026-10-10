@@ -194,3 +194,23 @@ test("contact API returns a retryable failure when the mail connection fails", a
     expect(await response.json()).toMatchObject({ success: false });
   }
 });
+
+test("contact API uses the public request host behind the Next.js proxy", async () => {
+  const mail = provider({ id: "proxy-message-id" });
+  const request = new Request("http://0.0.0.0:3000/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: origin,
+      Host: "www.icaroproject.es",
+      "X-Forwarded-Proto": "https",
+    },
+    body: JSON.stringify(validEnquiry),
+  });
+  const response = await handleContact(request, {
+    apiKey: "test-api-key",
+    send: mail.send,
+  });
+  expect(response.status).toBe(200);
+  expect(mail.requests).toHaveLength(1);
+});
