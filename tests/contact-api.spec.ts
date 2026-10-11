@@ -10,6 +10,8 @@ const validEnquiry = {
   goal: "Preparar una media maratón",
   message: "Tengo tres tardes disponibles.",
   plan: "Coaching",
+  interest: "coaching",
+  source: "planes | /#inicio | utm_source=instagram",
   consent: "on",
   _honey: "",
 };
@@ -67,8 +69,16 @@ test("contact API sends a fixed recipient and preserves the athlete's enquiry", 
   expect(payload.from).toBe("ICARO <contacto@icaroproject.es>");
   expect(payload.subject).not.toBe("Untrusted subject");
   expect(payload.reply_to).toBe("atleta@example.com");
-  for (const field of ["name", "sport", "goal", "message", "plan"] as const)
+  for (const field of [
+    "name",
+    "sport",
+    "goal",
+    "message",
+    "plan",
+    "source",
+  ] as const)
     expect(payload.text).toContain(validEnquiry[field]);
+  expect(payload.text).toContain("Interés: Coaching individual");
   expect(payload).not.toHaveProperty("html");
 });
 
@@ -98,6 +108,12 @@ test("contact API rejects invalid fields and honeypot submissions before contact
     { goal: "g".repeat(301) },
     { message: "m".repeat(2001) },
     { plan: "p".repeat(101) },
+    { interest: "unknown" },
+    { interest: null },
+    { interest: "toString" },
+    { source: "s".repeat(501) },
+    { source: null },
+    { source: "planes\nHeader: unexpected" },
     { consent: false },
     { consent: "off" },
     { _honey: "https://spam.example.com" },
@@ -112,6 +128,37 @@ test("contact API rejects invalid fields and honeypot submissions before contact
     expect(await response.json()).toMatchObject({ success: false });
   }
   expect(mail.requests).toHaveLength(0);
+});
+
+test("contact API preserves collective and testing interests and accepts trail enquiries", async () => {
+  for (const [interest, label] of [
+    ["collective", "ICARO Collective"],
+    ["tests", "Tests y evaluaciones"],
+  ]) {
+    const mail = provider({ id: `${interest}-message-id` });
+    const response = await handleContact(
+      enquiry({ interest, sport: "Trail", plan: "", source: "disciplinas" }),
+      { apiKey: "test-api-key", send: mail.send },
+    );
+    expect(response.status).toBe(200);
+    const payload = JSON.parse(String(mail.requests[0].init?.body));
+    expect(payload.text).toContain(`Interés: ${label}`);
+    expect(payload.text).toContain("Deporte: Trail");
+    expect(payload.text).toContain("Origen: disciplinas");
+    expect(payload.text).not.toContain("Plan:");
+  }
+});
+
+test("contact API remains compatible with enquiries without interest or origin", async () => {
+  const mail = provider({ id: "legacy-message-id" });
+  const response = await handleContact(
+    enquiry({ interest: undefined, source: undefined }),
+    { apiKey: "test-api-key", send: mail.send },
+  );
+  expect(response.status).toBe(200);
+  const payload = JSON.parse(String(mail.requests[0].init?.body));
+  expect(payload.text).toContain("Interés: Coaching individual");
+  expect(payload.text).not.toContain("Origen:");
 });
 
 test("contact API rejects missing or cross-site origins without sending", async () => {

@@ -1,10 +1,10 @@
 import { site } from "@/config/site";
 export const navigation = [
-  { label: "Cómo funciona", href: "#como-funciona" },
-  { label: "Planes", href: "#planes" },
-  { label: "Comunidad", href: "#comunidad" },
   { label: "Método", href: "#metodo" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Tu preparación", href: "#como-funciona" },
+  { label: "Disciplinas", href: "#disciplinas" },
+  { label: "Colectivo", href: "#comunidad" },
+  { label: "Planes", href: "#planes" },
 ];
 export const copy = {
   hero: {

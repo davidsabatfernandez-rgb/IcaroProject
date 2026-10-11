@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { site } from "@/config/site";
 export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
@@ -18,6 +19,19 @@ export function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 export function Wordmark() {
+  if (site.logo.src && site.logo.width > 0 && site.logo.height > 0) {
+    return (
+      <span className="wordmark-original">
+        <Image
+          src={site.logo.src}
+          alt={site.logo.alt}
+          width={site.logo.width}
+          height={site.logo.height}
+          sizes="140px"
+        />
+      </span>
+    );
+  }
   return (
     <span className="wordmark" aria-label={site.brandName}>
       <span className="wordmark-name" aria-hidden="true">

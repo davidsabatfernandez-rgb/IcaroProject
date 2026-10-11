@@ -1,93 +1,97 @@
 # ICARO PROJECT
 
-Web de entrenamiento individualizado. Next.js 16, React 19 y TypeScript. Diseño editorial, mobile first; fuentes locales, sin analítica ni cookies añadidas.
+Preparación individualizada de resistencia. Next.js 16, React 19 y TypeScript, con fuentes locales y fotografías editoriales documentadas. Sin dependencias de gráficos, analítica ni cookies añadidas.
 
-## Instalar y ejecutar
+## Ejecutar
 
-Requiere Node.js 24 y npm 11 (también compatible con Node >=20.9).
+Requiere Node.js 24 y npm 11; compatible con Node >=20.9.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Abre el puerto 3000 en tu entorno de desarrollo. Para producción:
+Abre `http://localhost:3000`. Para probar la versión optimizada:
 
 ```bash
 npm run build
 npm run start
 ```
 
-Si la caché habitual de npm no es escribible, usa `npm ci --cache /tmp/icaro-npm-cache`.
+Si la caché de npm no es escribible: `npm ci --cache /tmp/icaro-npm-cache`.
 
-## Lo que puedes editar
+## Rediseño Endurance Performance Atelier
 
-La configuración pública está en **`src/config/site.ts`**. No pongas credenciales en este archivo.
+El trabajo está en la rama independiente `redesign/endurance-atelier`. **No se debe fusionar con la rama de producción ni promover un despliegue sin autorización del propietario.** La rama de producción existente es `icaro-web`.
 
-| Qué cambiar              | Dónde                                                                               |
-| ------------------------ | ----------------------------------------------------------------------------------- |
-| Nombre de marca          | `site.brandName`; reemplaza favicon/imagen social si cambias la identidad           |
-| Planes y consultas       | `src/data/content.ts` y `src/components/pricing.tsx`; no muestran importes          |
-| Tests de lactato         | `src/components/lactate-pricing.tsx`; condiciones y consulta sin importes           |
-| WhatsApp                 | `site.contact.whatsapp`: número real con prefijo internacional, sin `+` ni espacios |
-| Instagram                | `site.contact.instagram`: URL completa                                              |
-| Email                    | `site.contact.email`                                                                |
-| Formulario               | `site.contact.formEndpoint`: endpoint HTTPS propio o de un proveedor                |
-| Fotografías              | `site.images`                                                                       |
-| Dominio y canonical      | `site.url`: dominio público completo, sin barra final                               |
-| Enlaces legales          | `site.legal.notice`, `privacy`, `cookies`                                           |
-| Permanencia y plataforma | `site.terms.commitment`, `trainingPlatform`                                         |
-| Enlace a TrainingPeaks   | `site.trainingPeaksUrl`: web oficial de la plataforma                               |
+La landing combina doce secciones: portada, filosofía, laboratorio ilustrativo, interpretación, planificación, disciplinas, equipo, colectivo, servicios, evaluaciones, FAQ y contacto. La composición se concentra en `src/sections/landing.tsx`; las decisiones y los pendientes están en `docs/ENDURANCE_ATELIER.md`.
 
-El texto de TrainingPeaks, el reloj y las sesiones en los dos centros de Barcelona se edita en **`src/data/product.ts`**. La sincronización depende del dispositivo y de la sesión; la página no realiza integraciones con cuentas ni solicita credenciales. Los nombres de los centros, las disciplinas presenciales concretas y sus condiciones se incorporarán cuando estén confirmados.
+| Contenido                                                         | Archivo                                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Paleta, tipografía y estilos comunes                              | `src/app/globals.css`                                                   |
+| Configuración pública, contactos, fotografías, logo y perfil real | `src/config/site.ts`                                                    |
+| Portada y evaluaciones                                            | `src/data/atelier.ts`                                                   |
+| Filosofía, interpretación, equipo y colectivo                     | `src/data/editorial.ts`, `src/sections/editorial.tsx/css`               |
+| Disciplinas                                                       | `src/data/disciplines.ts`, `src/sections/disciplines.tsx/css`           |
+| Gráfica y evaluaciones sintéticas                                 | `src/data/lactate-lab.ts`, `src/components/lactate-lab.tsx/css`         |
+| Ejemplos de semanas y calendario                                  | `src/data/training-week.ts`, `src/components/training-calendar.tsx/css` |
+| Planes, prestaciones y FAQ                                        | `src/data/content.ts`, `src/components/pricing.tsx`                     |
+| Ciclo de entrega y recorrido inicial                              | `src/data/value.ts`, `src/data/journey.ts`                              |
+| Condiciones del test en pista                                     | `src/components/lactate-pricing.tsx`                                    |
+| Formulario y contexto de la consulta                              | `src/components/contact.tsx`, `src/components/enquiry-link.tsx`         |
+| Validación y envío real                                           | `src/lib/contact-delivery.ts`, `src/app/api/contact/route.ts`           |
 
-El enlace público a TrainingPeaks usa **`site.trainingPeaksUrl`**, inicialmente `https://www.trainingpeaks.com/`. Abre la web oficial en una pestaña nueva y lo indica en su nombre accesible y junto al calendario. La marca se escribe como texto, sin presentar una certificación, patrocinio o integración de la web de ICARO con la plataforma.
+Los módulos anteriores de `product`, `journey`, `technical-method`, `community` y sus CSS permanecen como código de referencia; la nueva landing no importa esas secciones antiguas. `journeyStages` conserva los pasos reales en un desplegable, y `WeeklySchedule` conserva la entrega semanal.
 
-Hero, filosofía, planes, prestaciones y FAQ: **`src/data/content.ts`**. Necesidades del atleta, cercanía y calendario de entrega: **`src/data/value.ts`**. El resto del texto editorial y la composición están reunidos en **`src/sections/landing.tsx`**. No hay datos de atletas, reseñas o resultados inventados.
+## Identidad y datos reales
 
-La web presenta los tres seguimientos sin precios y dirige cada consulta al formulario con el plan elegido. Los importes anteriores siguen en `site.prices` y `site.lactate` como referencia del proyecto, pero los componentes públicos no los leen ni los muestran. Este archivo es configuración pública; esos importes no deben tratarse como información secreta. Para publicar condiciones económicas de nuevo, revisa primero que estén confirmadas.
+El logo oficial del ave mencionado en el documento no estaba adjunto ni entre los archivos del repositorio. La interfaz conserva temporalmente el wordmark existente. Para incorporar el original sin reconstruirlo, guarda el recurso autorizado en `public/` y configura `site.logo.src`, `width`, `height` y `alt`; `Wordmark` mantiene su relación de aspecto. El favicon actual permanece hasta disponer del isotipo original. No se ha generado otro símbolo.
 
-El recorrido desde el primer contacto hasta el objetivo se edita en **`src/data/journey.ts`**: `journeyCopy` contiene la introducción y la explicación del ciclo, y `journeyStages`, las ocho etapas. Las etapas 01–04 establecen el punto de partida; 05–07 repiten prescripción, revisión y ajuste; 08 conecta el proceso con el objetivo. Conserva las fases `INICIO`, `CICLO SEMANAL` y `OBJETIVO`, que identifican cada grupo visual en **`src/sections/journey.tsx`**.
+El propietario confirmó que el equipo reúne entrenadores con experiencia, finishers de Ironman y triatletas de alto nivel en activo. El texto refleja esa descripción. `site.coach` permite añadir nombre, fotografía autorizada, formación acreditada, experiencia y filosofía de una persona real; no contiene nombres ni titulaciones inventados. La ficha personal se muestra cuando se incorporan nombre y fotografía.
 
-La semana del calendario interactivo está en **`src/data/training-week.ts`**. Puedes editar días, disciplinas, títulos, duración, objetivo y bloques de cada sesión; conserva identificadores únicos y comprueba que los minutos de los bloques suman la duración indicada. El calendario tiene un diseño original y datos ilustrativos: enseña cómo leer una sesión y no representa la prescripción de un atleta. Su componente está en **`src/components/training-calendar.tsx`**.
+`site.community.instagramGroupUrl` está vacío porque falta el enlace real del grupo gratuito Social ICARO. Sin él no se presenta un acceso ficticio. ICARO Collective anuncia los entrenamientos presenciales semanales confirmados por el propietario; los ritmos, distancias y condiciones dependen de cada sesión. No se inventan horarios, puntos de encuentro ni cupos.
 
-La explicación técnica del método se compone en **`src/sections/technical-method.tsx`** y se edita en **`src/data/technical-method.ts`**; sus estilos están en **`src/sections/technical-method.css`**. Esta sección sustituye la presentación anterior de necesidades en `#metodo`. El panel de **`src/components/technical-decisions.tsx`** permite explorar intensidad, carga y recuperación, y progresión; cada tema conecta información, decisión del entrenador y utilidad para el atleta. La explicación técnica adicional se despliega a petición y se cierra al cambiar de tema. Las cuatro fortalezas del bloque «Por qué entrenar con ICARO» se editan en `technicalStrengths`. La credibilidad se apoya en el proceso real de ICARO, sin comparaciones no documentadas con otros entrenadores, acreditaciones inventadas ni garantías de resultados.
+## Rigor de los ejemplos
 
-## Seguimiento y tests
+El laboratorio utiliza datos **sintéticos** en running, ciclismo y natación, con dos evaluaciones y siete escalones por disciplina. Los botones de puntos, los controles de escalón y la tabla permiten acceder a la información por teclado. Las curvas unen muestras, sin predecir valores intermedios. LT1/LT2 y sus bandas se asignan al ejemplo; no se calculan mediante umbrales universales de 2 o 4 mmol/L. La comparación A/B mantiene intensidades equivalentes y explica por qué una curva aislada no demuestra adaptación. La frecuencia cardiaca no se inventa para natación. La demo de natación no anuncia un servicio de lactato en piscina.
 
-Los tres planes incluyen una llamada inicial para conocerse y acordar objetivos concretos. En todos, el atleta envía su disponibilidad el viernes. Entre sábado y domingo recibe la programación en TrainingPeaks, la explicación de cómo fue la semana anterior y los objetivos de la siguiente.
+El calendario muestra dos semanas ilustrativas de triatlón: 420 min / 7 h y 260 min / 4 h 20. Ambas incluyen fuerza y descanso. Reducir la disponibilidad cambia prioridades y volumen; no aumenta la intensidad ni genera una prescripción individual. Los minutos de cada estructura suman su duración. «Distribución del tiempo» no se presenta como medición de carga fisiológica.
 
-| Plan        | Seguimiento después de la llamada inicial                            | Test de lactato                                  |
+TrainingPeaks es la plataforma de trabajo confirmada. El enlace usa `site.trainingPeaksUrl`, abre la web oficial en otra pestaña y lo comunica de forma accesible. La sincronización de sesiones depende del reloj, disciplina y formato; esta web no conecta cuentas ni pide claves de TrainingPeaks.
+
+## Planes y evaluaciones
+
+Todos incluyen llamada inicial. El viernes el atleta envía disponibilidad. Entre sábado y domingo recibe programación, revisión de la semana anterior y objetivos de la siguiente.
+
+| Plan        | Seguimiento                                                          | Lactato                                          |
 | ----------- | -------------------------------------------------------------------- | ------------------------------------------------ |
-| Individual  | Feedback semanal por audios de WhatsApp, sin llamadas de seguimiento | Condiciones para atletas del plan                |
-| Coaching    | Feedback semanal, consultas diarias y llamada mensual                | Promoción trimestral, condiciones bajo consulta  |
-| Performance | Revisión en llamada semanal y consultas diarias                      | Un test incluido cada 6 meses; opción trimestral |
+| Individual  | Feedback semanal por audios de WhatsApp; sin llamadas de seguimiento | Condiciones para atletas del plan                |
+| Coaching    | Feedback semanal, consultas diarias y llamada mensual                | Promoción trimestral bajo consulta               |
+| Performance | Llamada semanal y consultas diarias                                  | Un test incluido cada 6 meses; opción trimestral |
 
-El test de lactato en pista se puede consultar sin contratar un plan. Sus condiciones se explican por contacto y el desplazamiento se presupuesta antes de reservar. No se inventa una tarifa por kilómetro ni se promete atención inmediata o 24 horas. La consulta del test prepara el interés en el formulario; no representa una reserva o un pago.
+No se muestran importes. Los valores anteriores en la configuración pública no deben tratarse como secretos. El test en pista se puede consultar por separado, con desplazamiento presupuestado antes de reservar. Las evaluaciones de técnica en dos centros de Barcelona se presentan con condiciones bajo consulta. La durabilidad describe un criterio de análisis de sesiones, sin anunciar otra medición de laboratorio incluida.
+
+## Formulario y WhatsApp
+
+El formulario conserva interés (`coaching`, `collective`, `tests`), disciplina, plan y origen del CTA. El origen puede incluir la ruta de entrada y parámetros de campaña permitidos, con longitud acotada; no incluye el referrer externo ni cualquier parámetro arbitrario. El contexto viaja en la consulta, sin almacenamiento persistente añadido.
+
+La interfaz envía JSON a `/api/contact`. El servidor valida campos, longitud, consentimiento, interés y honeypot; limita el cuerpo a 8 KB y rechaza peticiones desde otro origen. El destinatario fijo es `contacticaroproject@gmail.com`. Resend se llama exclusivamente en el servidor, con tiempo máximo de 10 segundos. La interfaz deja de esperar a los 15 segundos, mantiene los campos ante errores y ofrece el mismo contenido por WhatsApp. Solo indica éxito tras aceptación correcta del proveedor; esto no confirma recepción en Gmail.
+
+Para activar Resend en Vercel:
+
+1. Cuenta Resend registrada con `contacticaroproject@gmail.com` si se usa el remitente provisional.
+2. `RESEND_API_KEY` privada en Settings → Environment Variables, para el entorno que vayas a probar.
+3. Redeploy del entorno correspondiente.
+
+`onboarding@resend.dev` solo permite el destinatario de la cuenta Resend. Para un remitente propio, verifica el dominio en Resend y configura `RESEND_FROM_EMAIL`. Copia sus registros exactos y conserva los registros de correo existentes. El propietario indicó que ya guardó `RESEND_API_KEY` en Production; eso no la hace disponible en Preview ni en este checkout. No guardar claves en el código o el chat.
+
+WhatsApp usa `https://wa.me/34619282582`. Abrir la aplicación prepara un mensaje; el atleta confirma el envío allí. La política está en `/privacidad`; falta completar la identidad real del responsable en `site.privacy.responsibleName`.
 
 ## Fotografías
 
-La página utiliza fotografías reales de deporte (Steven Lelham, Fred Neethling, Marcus Ng y Pixabay), con fuentes documentadas en `public/images/SOURCES.md` y créditos editables en `site.photographyCredits`. Las fuentes declaran licencias gratuitas de uso comercial Unsplash/Pexels; las imágenes conservan copyright y no se presentan como CC0 ni como atletas de ICARO. Las fotos de carrera se sustituyeron por una vista cenital y una silueta para evitar primeros planos y clubes ajenos. El alcance de la comprobación, las restricciones de acceso directo y la ausencia de cesiones de modelo/marca en los mirrors quedan documentados. Para fotografías propias, guarda originales autorizados en `public/images/`, por ejemplo `running.webp`, y cambia `site.images.running` a `/images/running.webp`.
+Fotos reales de Steven Lelham, Fred Neethling, Marcus Ng y Pixabay. Fuentes, licencias de uso comercial declaradas y alcance de la revisión en `public/images/SOURCES.md`; créditos en `site.photographyCredits`. No se presentan como imágenes de atletas, entrenadores o eventos de ICARO. Las licencias gratuitas conservan copyright; no se afirma CC0.
 
-Los espacios fotográficos activos son hero, running, cycling y swimming. Una imagen vacía en hero muestra el gráfico editorial; en una disciplina mantiene la tarjeta con su texto. La fotografía de natación es pequeña (427×417); para una futura sesión de fotos, sustitúyela por un original más grande manteniendo la ruta editable. La foto de hero usa `preload` y una resolución mayor en móvil para conservar la nitidez del recorte vertical; el resto usa lazy loading con `next/image`. Para otros encuadres, ajusta `object-position` en `src/app/globals.css`. El texto alternativo de las disciplinas se edita en `src/data/content.ts`; el del hero, en `src/sections/landing.tsx`. Usa rutas locales; para un proveedor remoto, añade solo su dominio a `images.remotePatterns` en `next.config.ts` y permite su acceso en el entorno.
-
-## Formulario y contacto
-
-El formulario envía JSON a `/api/contact`, dentro de la web. La ruta del servidor valida nombre, contacto, deporte, objetivo, longitudes, consentimiento y honeypot. Rechaza peticiones desde otro origen y limita el cuerpo a 8 KB. El destino es fijo: `contacticaroproject@gmail.com`; el cliente no puede cambiar destinatario, remitente ni asunto. Se envía texto plano y `reply_to` solo si el contacto es un email válido. No se registran datos de atletas ni claves en logs.
-
-Resend se invoca exclusivamente desde el servidor, con límite de 10 segundos. La interfaz deja de esperar a los 15 segundos, conserva los campos si falla y ofrece la misma consulta por WhatsApp. Solo muestra éxito tras respuesta correcta del proveedor con un identificador de envío. La aceptación por Resend no equivale a recepción confirmada en Gmail.
-
-Para activar el email en Vercel, crear cuenta de Resend con `contacticaroproject@gmail.com`, generar una API key con permiso de envío y guardar `RESEND_API_KEY` en Settings → Environment Variables → Production. No pegar claves en chats ni en `site.ts`. Después redeploy. Sin clave el servidor devuelve 503 con una opción clara de WhatsApp. El remitente provisional `onboarding@resend.dev` solo envía al email de la cuenta de Resend; por eso la cuenta debe usar ese Gmail. Para otros destinatarios o un remitente propio, verificar primero el dominio en Resend y configurar `RESEND_FROM_EMAIL` con la dirección verificada. Usar los registros exactos que dé Resend y conservar los registros de correo existentes de IONOS.
-
-WhatsApp está configurado como `+34 619 28 25 82`; los enlaces usan `https://wa.me/34619282582` con mensaje codificado. Abrir WhatsApp no envía por sí solo el mensaje: el atleta confirma el envío en la app. La política de privacidad está en `/privacidad`; completar la identidad real del responsable con el propietario.
-
-## Diseño, animación y accesibilidad
-
-Colores y estilos generales: `src/app/globals.css`. Portada fotográfica amplia, navegación clara, titulares DM Sans y bloques separados por espacio; marrón, blanco y acento dorado. El recorrido se ajusta en `src/sections/journey.css`; el calendario interactivo, en `src/components/training-calendar.css`; Barcelona, en `src/sections/product.css`. Los antiguos estilos de `triathlon.css` y `coaching.css` no se importan en esta composición. Las animaciones se desactivan con `prefers-reduced-motion`. Navegación por teclado, enlace para saltar contenido, etiquetas de campos y acordeones nativos. El calendario muestra una **semana ilustrativa sin datos reales de atletas**; no predice resultados ni sustituye una prescripción individual. La página no presenta testimonios, biografía, acreditaciones o resultados no documentados.
-
-La referencia solicitada fue `https://oriolgili.com/`, pero este entorno devolvió 403 al acceder a su página y recursos públicos. Esta edición aplica una dirección fotográfica y sencilla propia de ICARO; no afirma reproducir colores o estructura de una referencia que no se pudo inspeccionar, ni utiliza sus contenidos o imágenes.
-
-El mensaje presenta necesidades concretas (tiempo, rumbo y dudas), seguidas de la respuesta real del servicio. La eficiencia se explica mediante sesiones con propósito y revisión de la respuesta, sin garantizar una adaptación o un rendimiento del 100 %. La cercanía se expresa como atención y seguimiento, sin inventar una comunidad, testimonios ni escasez. La guía de [GSA sobre escribir para el lector](https://github.com/GSA/plainlanguage.gov/blob/main/_pages/guidelines/audience/index.md) y la de [NHS sobre voz y tono](https://github.com/nhsuk/nhsuk-service-manual/blob/main/app/views/content/voice-and-tone.njk) orientan la claridad y el tono; no son pruebas de conversión en triatlón.
+`next/image` optimiza los recursos locales. El hero tiene preload; el resto carga según necesidad. Natación usa una imagen pequeña en una composición que evita ampliarla como fotografía protagonista. Para una imagen propia, conserva el original autorizado y cambia la ruta y el texto alternativo correspondiente.
 
 ## Comprobar
 
@@ -97,36 +101,14 @@ npm run build
 npm run test:e2e
 ```
 
-Las pruebas cubren navegación, cinco tamaños de pantalla, ausencia de overflow y de precios visibles, consulta de los tres planes, FAQ, validación del formulario, reduced motion, calendario semanal, canales de seguimiento, condiciones de lactato y consulta del test en pista. También verifican la selección con teclado del criterio técnico y el reinicio de su detalle al cambiar de tema. En este entorno usan `/usr/bin/chromium`. En otro sistema usa `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/ruta/al/navegador` o instala Chromium con `npx playwright install chromium` (elimina esa variable para usar el navegador de Playwright).
+Las pruebas verifican cinco tamaños de pantalla, navegación, overflow, selección de disciplinas, laboratorio, adaptación del calendario, condiciones de planes/tests, contexto de consultas, validación, errores, timeout y éxito del formulario. Las respuestas del proveedor se simulan para evitar envíos reales en pruebas. La recepción en Gmail requiere una comprobación con la configuración del entorno desplegado.
 
-## Desplegar en Vercel
+En este entorno Playwright usa `/usr/bin/chromium`. En otro sistema instala el navegador con `npx playwright install chromium` o configura `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
 
-1. Sube este proyecto a tu repositorio GitHub.
-2. Importa el repositorio en Vercel. Si forma parte de otro repositorio, elige esta carpeta como Root Directory.
-3. Vercel detecta Next.js: instalación `npm ci`, build `npm run build`. Usa Node.js 24.
-4. Configura el dominio definitivo en `site.url`, contactos reales, imágenes y enlaces legales; vuelve a desplegar.
-5. Comprueba el envío real con tu proveedor, las políticas y las condiciones de contratación antes de anunciar la web.
+## Dominio y publicación
 
-La web no se ha desplegado en un dominio público. TrainingPeaks es la plataforma de trabajo confirmada. No se han inventado condiciones de permanencia. Los enlaces legales sin URL real quedan ocultos. No hay banner de cookies porque no se instala analítica; revisa consentimiento y política si añades herramientas que lo requieran.
+Canonical y sitemap usan `https://www.icaroproject.es`. Esto no modifica DNS. En Vercel deben estar ambos dominios, con `icaroproject.es` redirigiendo a `www.icaroproject.es`. Los registros se toman del panel del proyecto, no de una URL con `https://` o una ruta. Mantener una única estrategia de DNS y no cambiar MX/TXT de correo sin revisar sus servicios.
 
-## Estructura
+No hay acceso autenticado a Vercel, IONOS ni Gmail desde este entorno. El dominio público y la recepción real no se certifican con pruebas locales. Esta rama es de revisión; configurar un Preview separado si se quiere compartir sin publicar en producción.
 
-- `src/app`: página, estilos, metadatos, favicon e imagen social.
-- `src/components`: menú, planes, calendario, formulario y elementos visuales.
-- `src/sections`: composición editorial.
-- `src/data`: contenido editable.
-- `src/config`: configuración pública centralizada.
-- `public/images`: fotografías deportivas reales y documentación de sus fuentes.
-- `tests`: pruebas de navegador.
-
-Las tareas de nube ya se ejecutan en un entorno aislado. Utiliza este checkout; no crees worktrees salvo petición expresa.
-
-### Comunidad Social ICARO
-
-La landing distingue la comunidad gratuita de los planes de entrenamiento y de las sesiones presenciales. Configura el enlace directo real del grupo de Instagram en `site.community.instagramGroupUrl` (`src/config/site.ts`). Sin ese enlace, se informa de su próxima disponibilidad y no se muestra un botón de acceso ficticio. `site.contact.instagram` sigue reservado al perfil de contacto.
-
-## Dominio y recepción de consultas (octubre de 2026)
-
-El dominio configurado para canonical, sitemap y metadatos es `https://www.icaroproject.es`, coincidiendo con la redirección configurada por el propietario en Vercel. Esto no modifica DNS ni conecta el dominio a Vercel. En Vercel: proyecto → Settings → Domains → añadir `icaroproject.es` y `www.icaroproject.es`, con redirección del dominio sin www a www. Copiar al proveedor de DNS los registros exactos que muestre Vercel; no cambiar MX, TXT de correo ni nameservers sin revisar los servicios existentes. La rama de producción debe ser `icaro-web`.
-
-El envío ya no depende de FormSubmit. Ver la configuración Resend y sus requisitos en «Formulario y contacto». No hay acceso autenticado a Vercel ni IONOS desde este entorno; el propietario debe aplicar las variables y los DNS en sus cuentas. La recepción real de una consulta debe comprobarse en Gmail tras configurar el proveedor.
+Las tareas de nube utilizan este checkout aislado; no crear worktrees salvo petición expresa.

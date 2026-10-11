@@ -1,6 +1,7 @@
 "use client";
 
 import { Arrow } from "./ui";
+import { EnquiryLink } from "./enquiry-link";
 
 export function LactatePricing() {
   return (
@@ -18,20 +19,15 @@ export function LactatePricing() {
           <p className="lactate-travel">
             Desplazamiento presupuestado antes de reservar.
           </p>
-          <a
+          <EnquiryLink
             className="button accent"
-            href="#contacto"
-            onClick={() =>
-              window.dispatchEvent(
-                new CustomEvent("icaro-plan", {
-                  detail: "Test de lactato en pista",
-                }),
-              )
-            }
+            interest="tests"
+            source="lactato"
+            plan="Test de lactato en pista"
           >
             Consultar condiciones del test
             <Arrow diagonal />
-          </a>
+          </EnquiryLink>
         </div>
       </div>
       <div className="lactate-plan-rates">

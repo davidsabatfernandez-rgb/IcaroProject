@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { plans } from "@/data/content";
 import { Arrow } from "./ui";
+import { EnquiryLink } from "./enquiry-link";
 export function Pricing() {
   const [mode, setMode] = useState<"single" | "triathlon">("triathlon");
   return (
@@ -27,7 +28,7 @@ export function Pricing() {
         </div>
         <p>
           {mode === "single"
-            ? "Running, ciclismo o natación, con fuerza adaptada a tu objetivo."
+            ? "Running, trail, ciclismo o natación, con fuerza adaptada a tu objetivo."
             : "Natación, ciclismo, carrera y fuerza. Planificadas en conjunto."}
         </p>
       </div>
@@ -39,7 +40,7 @@ export function Pricing() {
           >
             {plan.id === "coaching" && (
               <div className="recommendation">
-                RECOMENDADO{" "}
+                CONSULTAS DIARIAS{" "}
                 <span>
                   <Arrow diagonal />
                 </span>
@@ -55,18 +56,17 @@ export function Pricing() {
                 ? "Plan de triatlón"
                 : "Plan de una disciplina"}
             </p>
-            <a
+            <EnquiryLink
               className={`button ${plan.id === "coaching" ? "accent" : "outline"}`}
-              href={`#contacto`}
-              onClick={() =>
-                window.dispatchEvent(
-                  new CustomEvent("icaro-plan", { detail: plan.name }),
-                )
-              }
+              interest="coaching"
+              source="planes"
+              plan={plan.name}
+              sport={mode === "triathlon" ? "Triatlón" : undefined}
+              aria-label={`Consultar este plan: ${plan.name}`}
             >
-              Consultar {plan.name}
+              Consultar este plan
               <Arrow diagonal />
-            </a>
+            </EnquiryLink>
             <p className="plan-common">
               Llamada inicial y plan semanal en TrainingPeaks incluidos.
             </p>

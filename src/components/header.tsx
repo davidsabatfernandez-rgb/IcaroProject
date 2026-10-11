@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { navigation } from "@/data/content";
 import { Wordmark, Arrow } from "./ui";
+import { EnquiryLink } from "./enquiry-link";
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -21,9 +22,9 @@ export function Header() {
           </a>
         ))}
       </nav>
-      <a className="header-cta" href="#contacto">
-        Contactar <Arrow diagonal />
-      </a>
+      <EnquiryLink className="header-cta" interest="coaching" source="header">
+        Empieza tu preparación <Arrow diagonal />
+      </EnquiryLink>
       <button
         className="menu-toggle"
         aria-expanded={open}
@@ -39,6 +40,7 @@ export function Header() {
           id="mobile-nav"
           className="mobile-nav"
           aria-label="Navegación móvil"
+          onClick={() => setOpen(false)}
           onKeyDown={(e) => {
             if (e.key === "Escape") setOpen(false);
           }}
@@ -49,9 +51,9 @@ export function Header() {
               <Arrow diagonal />
             </a>
           ))}
-          <a href="#contacto" onClick={() => setOpen(false)}>
-            Cuéntame tu objetivo <Arrow diagonal />
-          </a>
+          <EnquiryLink interest="coaching" source="header-mobile">
+            Empieza tu preparación <Arrow diagonal />
+          </EnquiryLink>
         </nav>
       )}
     </header>

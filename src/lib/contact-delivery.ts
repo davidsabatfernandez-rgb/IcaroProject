@@ -1,7 +1,13 @@
 const recipient = "contacticaroproject@gmail.com";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const interests: Record<string, string> = {
+  coaching: "Coaching individual",
+  collective: "ICARO Collective",
+  tests: "Tests y evaluaciones",
+};
 const sports = new Set([
   "Running",
+  "Trail",
   "Ciclismo",
   "Natación",
   "Triatlón",
@@ -62,6 +68,8 @@ export async function handleContact(
   const goal = field("goal", 300);
   const message = field("message", 2000, false);
   const plan = field("plan", 100, false);
+  const interest = field("interest", 30, false);
+  const source = field("source", 500, false);
   if (
     !name ||
     !contact ||
@@ -70,6 +78,10 @@ export async function handleContact(
     !goal ||
     message === null ||
     plan === null ||
+    interest === null ||
+    (interest !== "" && !Object.hasOwn(interests, interest)) ||
+    source === null ||
+    /[\r\n\u0000-\u001f\u007f]/.test(source) ||
     (!emailPattern.test(contact) && !/^\+?[\d\s().-]{6,25}$/.test(contact)) ||
     (data.consent !== "on" && data.consent !== true) ||
     (data._honey !== undefined && data._honey !== "")
@@ -99,7 +111,7 @@ export async function handleContact(
           to: [recipient],
           subject: "Nueva consulta · ICARO PROJECT",
           ...(emailPattern.test(contact) ? { reply_to: contact } : {}),
-          text: `Nombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${plan ? `Plan: ${plan}\n` : ""}\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad.`,
+          text: `Interés: ${interests[interest || "coaching"]}\nNombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${plan ? `Plan: ${plan}\n` : ""}${source ? `Origen: ${source}\n` : ""}\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad.`,
         }),
         signal: AbortSignal.timeout(10000),
         cache: "no-store",

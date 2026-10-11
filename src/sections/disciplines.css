@@ -1,0 +1,373 @@
+.disciplines-section {
+  background: var(--paper);
+}
+.disciplines-heading {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: end;
+  gap: 60px;
+  margin-bottom: 52px;
+}
+.disciplines-heading > p {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.disciplines-selector {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 42px;
+  gap: 0;
+}
+.disciplines-selector button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  flex: 1 1 auto;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  padding: 18px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+.disciplines-selector button span {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.disciplines-selector button:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+.disciplines-selector button[aria-pressed="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+.disciplines-selector button:focus-visible,
+.discipline-contact:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+.discipline-panel {
+  display: grid;
+  grid-template-columns: 0.95fr 1fr;
+  gap: 6vw;
+  align-items: stretch;
+}
+.discipline-photography {
+  position: relative;
+  min-height: 540px;
+  background: #e7e1d8;
+  overflow: hidden;
+}
+.discipline-main-photo {
+  position: absolute;
+  inset: 0;
+}
+.discipline-main-photo img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.discipline-photography-triathlon .discipline-main-photo {
+  inset: 0 0 75px;
+}
+.discipline-photography-photo .discipline-main-photo {
+  inset: 0 0 48px;
+}
+.discipline-triathlon-inset {
+  position: absolute;
+  bottom: 34px;
+  right: 22px;
+  display: flex;
+  gap: 10px;
+}
+.discipline-triathlon-inset > div {
+  width: 140px;
+  height: 158px;
+  position: relative;
+  border: 5px solid var(--paper);
+  background: var(--paper);
+}
+.discipline-triathlon-inset img {
+  object-fit: cover;
+}
+.discipline-triathlon-inset span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 6px 8px;
+  background: #262320;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+.discipline-photo-credit {
+  position: absolute;
+  bottom: 9px;
+  left: 12px;
+  right: 12px;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.discipline-profile {
+  padding: 16px 0;
+}
+.discipline-selected {
+  color: var(--ink);
+  display: block;
+  margin-bottom: 22px;
+}
+.discipline-profile h3 {
+  font-size: clamp(32px, 3vw, 46px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+.discipline-profile h3 > span {
+  display: block;
+}
+.discipline-introduction {
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.discipline-criteria {
+  margin: 34px 0 32px;
+}
+.discipline-criteria > div {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 18px;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+}
+.discipline-criteria dt {
+  padding-top: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink);
+  font-weight: 600;
+}
+.discipline-criteria dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.discipline-contact {
+  color: var(--ink);
+  font-size: 14px;
+}
+.discipline-diagram {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #262320;
+  color: #f5f2ec;
+  padding: 36px 30px;
+  min-height: 540px;
+}
+.discipline-diagram > .micro {
+  color: #e6c5a6;
+}
+.discipline-diagram svg {
+  width: 100%;
+  height: auto;
+  margin: 28px 0;
+}
+.discipline-gridline {
+  stroke: #f5f2ec;
+  stroke-width: 1;
+  opacity: 0.13;
+}
+.discipline-terrain-path {
+  stroke: #d1a27d;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.discipline-terrain-guides {
+  stroke: #d1a27d;
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.4;
+}
+.discipline-point {
+  fill: #e6c5a6;
+}
+.discipline-diagram-terms {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 30px;
+  color: #e6c5a6;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+}
+.discipline-diagram > p {
+  max-width: 350px;
+  font-size: 23px;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+.discipline-diagram > small {
+  color: #d4c8bc;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 22px;
+}
+.discipline-endurance-ring {
+  stroke: #f5f2ec;
+  stroke-width: 1.5;
+}
+.discipline-strength-ring {
+  stroke: #d1a27d;
+  stroke-width: 1.5;
+}
+.discipline-photography-swim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px 52px;
+}
+.discipline-photography-swim .discipline-main-photo {
+  position: relative;
+  inset: auto;
+  width: min(300px, 100%);
+  aspect-ratio: 1 / 1;
+}
+.discipline-swim-note {
+  max-width: 300px;
+  margin-top: 30px;
+}
+.discipline-swim-note > p {
+  color: var(--ink);
+  margin-top: 16px;
+  font-size: 20px;
+  line-height: 1.45;
+}
+@media (max-width: 1100px) {
+  .disciplines-selector button {
+    padding: 16px 10px;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .discipline-panel {
+    gap: 40px;
+  }
+  .discipline-criteria > div {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+  }
+}
+@media (max-width: 840px) {
+  .disciplines-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 34px;
+  }
+  .disciplines-heading > p {
+    max-width: 580px;
+  }
+  .disciplines-selector button {
+    flex-basis: 30%;
+  }
+  .discipline-panel {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .discipline-photography {
+    min-height: 400px;
+  }
+  .discipline-profile {
+    padding: 12px 0 0;
+  }
+  .discipline-profile h3 {
+    font-size: 36px;
+  }
+  .discipline-diagram {
+    min-height: 400px;
+    padding: 32px;
+  }
+  .discipline-diagram svg {
+    max-width: 540px;
+    align-self: center;
+    margin: 12px 0;
+  }
+  .discipline-diagram > p {
+    max-width: 440px;
+  }
+  .discipline-photography-swim {
+    flex-direction: row;
+    gap: 30px;
+  }
+}
+@media (max-width: 540px) {
+  .disciplines-selector {
+    margin-bottom: 28px;
+  }
+  .disciplines-selector button {
+    flex-basis: 45%;
+    min-height: 56px;
+    padding: 14px 8px;
+  }
+  .discipline-photography {
+    min-height: 350px;
+  }
+  .discipline-triathlon-inset {
+    right: 12px;
+    gap: 8px;
+  }
+  .discipline-triathlon-inset > div {
+    width: 112px;
+    height: 126px;
+  }
+  .discipline-photo-credit {
+    font-size: 10px;
+  }
+  .discipline-criteria > div {
+    grid-template-columns: 76px 1fr;
+    gap: 12px;
+  }
+  .discipline-profile h3 {
+    font-size: 32px;
+  }
+  .discipline-diagram {
+    min-height: 380px;
+    padding: 26px 22px;
+  }
+  .discipline-diagram-terms {
+    font-size: 9px;
+    margin-bottom: 24px;
+  }
+  .discipline-diagram > p {
+    font-size: 22px;
+  }
+  .discipline-photography-swim {
+    flex-direction: column;
+    padding: 26px 26px 48px;
+    gap: 0;
+  }
+  .discipline-photography-swim .discipline-main-photo {
+    width: min(240px, 100%);
+  }
+  .discipline-swim-note {
+    margin-top: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .disciplines-selector button {
+    transition: none;
+  }
+}

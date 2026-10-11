@@ -22,9 +22,18 @@ for (const [name, width, height] of [
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    if (width <= 760) {
+    if (width <= 900) {
       await page.getByRole("button", { name: "Abrir menú" }).click();
       await expect(page.locator("#mobile-nav")).toBeVisible();
+      await page
+        .locator("#mobile-nav")
+        .getByRole("link", { name: "Empieza tu preparación" })
+        .click();
+      await expect(page.locator("#mobile-nav")).toHaveCount(0);
+      await expect(page.locator('input[name="source"]')).toHaveValue(
+        /^header-mobile \| /,
+      );
+      await page.getByRole("button", { name: "Abrir menú" }).click();
       await page
         .locator("#mobile-nav")
         .getByRole("link", { name: "Planes", exact: true })
@@ -89,14 +98,26 @@ test("plans show no prices and each enquiry carries interest to the form", async
     "Plan de una disciplina",
     "Plan de una disciplina",
   ]);
-  await page.getByRole("button", { name: "Triatlón", exact: true }).click();
+  await page
+    .locator("#planes")
+    .getByRole("button", { name: "Triatlón", exact: true })
+    .click();
   for (const plan of ["Individual", "Coaching", "Performance"]) {
     await page
-      .getByRole("link", { name: `Consultar ${plan}`, exact: true })
+      .getByRole("link", { name: `Consultar este plan: ${plan}`, exact: true })
       .click();
     await expect(page).toHaveURL(/#contacto$/);
     await expect(page.locator(".chosen-plan")).toContainText(plan);
     await expect(page.locator('input[name="plan"]')).toHaveValue(plan);
+    await expect(
+      page.getByLabel("Qué te interesa", { exact: true }),
+    ).toHaveValue("coaching");
+    await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
+      "Triatlón",
+    );
+    await expect(page.locator('input[name="source"]')).toHaveValue(
+      /^planes \| /,
+    );
     await page.getByRole("button", { name: "Cambiar", exact: true }).click();
     await expect(page.locator(".chosen-plan")).toHaveCount(0);
   }
@@ -105,57 +126,95 @@ test("plans show no prices and each enquiry carries interest to the form", async
   );
 });
 
-test("technical criteria explain decisions and can be explored with the keyboard", async ({
+test("lactate lab distinguishes synthetic observations, estimates and interpretations", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.goto("/");
-  const method = page.locator("#metodo");
-  const intensity = method.getByRole("button", {
-    name: "Intensidad",
-    exact: true,
-  });
-  const load = method.getByRole("button", {
-    name: "Carga y recuperación",
-    exact: true,
-  });
-  const progression = method.getByRole("button", {
-    name: "Progresión",
-    exact: true,
-  });
-  const detail = method.locator(".tm-technical-detail");
-
-  await load.click();
-  await expect(load).toHaveAttribute("aria-pressed", "true");
-  await expect(intensity).toHaveAttribute("aria-pressed", "false");
-  await expect(method.locator(".tm-decision-content")).toContainText(
-    "recuperación",
+  const lab = page.locator(".lactate-lab");
+  await expect(lab.locator(".ll-demo")).toContainText("datos sintéticos");
+  await expect(lab.locator(".ll-demo")).toContainText(
+    "No son resultados de un atleta",
   );
-  await expect(method.locator(".tm-signals")).toContainText(
-    "Tu disponibilidad",
-  );
-  await detail.locator("summary").click();
-  await expect(detail).toHaveAttribute("open", "");
-  await expect(detail).toContainText("La dosis importa tanto como la sesión");
+  await expect(lab.locator(".ll-chart-caption")).toContainText("min/km");
+  await expect(lab.locator(".ll-thresholds")).toContainText(/referencias/i);
+  await expect(lab.locator(".ll-plot-point")).toHaveCount(7);
 
-  await progression.focus();
+  // A graph point is reachable and actionable without using a pointer.
+  const lastPoint = lab.getByRole("button", {
+    name: /^Punto 0?7 de la curva:/,
+  });
+  await lastPoint.focus();
   await page.keyboard.press("Enter");
-  await expect(progression).toBeFocused();
-  await expect(progression).toHaveAttribute("aria-pressed", "true");
-  await expect(load).toHaveAttribute("aria-pressed", "false");
-  await expect(method.locator('.tm-topic[aria-pressed="true"]')).toHaveCount(1);
-  await expect(method.locator(".tm-signals")).toContainText(
-    "Sesiones comparables",
+  await expect(lastPoint).toBeFocused();
+  await expect(lastPoint).toHaveAttribute("aria-pressed", "true");
+  await expect(lab.locator('.ll-plot-point[aria-pressed="true"]')).toHaveCount(
+    1,
   );
-  await expect(method.locator(".tm-decision-content")).toContainText(
-    "avanzar, repetir o ajustar",
+  await expect(lab.locator(".ll-reading h4")).toHaveText(
+    "Por encima de la referencia LT2",
   );
-  await expect(detail).not.toHaveAttribute("open");
+  await expect(lab.getByRole("status")).toContainText("escalón 7");
+  await expect(lab.locator(".ll-lactate-number")).toContainText("6,7");
+  await expect(lab.locator(".ll-main-reading")).toContainText(
+    "Observación simulada",
+  );
 
-  await intensity.click();
-  await detail.locator("summary").click();
-  await expect(detail).toContainText("LT1 y LT2");
-  await expect(detail).toContainText("opcional");
+  await lab.getByRole("button", { name: "Evaluación A", exact: true }).click();
+  await expect(lab.locator(".ll-lactate-number")).toContainText("8,6");
+  await expect(lab.locator(".ll-longitudinal")).toContainText(
+    "no demuestra por sí sola una mejora",
+  );
+  await lab.getByRole("button", { name: "Evaluación B", exact: true }).click();
+  await expect(lab.locator(".ll-lactate-number")).toContainText("6,7");
+  const compare = lab.getByRole("button", {
+    name: "Comparar A / B",
+    exact: true,
+  });
+  await compare.click();
+  await expect(compare).toHaveAttribute("aria-pressed", "false");
+  await expect(lab.locator(".ll-longitudinal")).toHaveCount(0);
+  await compare.click();
+  await expect(lab.locator(".ll-longitudinal")).toBeVisible();
+
+  const sports = lab.getByRole("group", {
+    name: "Disciplina del ejemplo de lactato",
+  });
+  await sports.getByRole("button", { name: "Ciclismo", exact: true }).click();
+  await expect(lab.locator(".ll-chart-caption")).toContainText("Potencia · W");
+  const firstSample = lab.getByRole("button", { name: /^Escalón 0?1/ });
+  await firstSample.click();
+  await expect(lab.locator(".ll-reading-metrics")).toContainText("100 W");
+  await expect(lab.locator(".ll-reading h4")).toHaveText(
+    "Por debajo de la referencia LT1",
+  );
+  await expect(lab.getByRole("status")).toContainText("114 latidos por minuto");
+  const data = lab.locator(".ll-data-table");
+  await data.locator("summary").click();
+  await expect(data.locator("tbody tr")).toHaveCount(7);
+  await expect(data.locator("thead th")).toHaveCount(5);
+  await expect(data.locator("caption")).toContainText("Valores inventados");
+
+  await sports.getByRole("button", { name: "Natación", exact: true }).click();
+  await expect(lab.locator(".ll-chart-caption")).toContainText("min/100 m");
+  await expect(lab.locator(".ll-reading-metrics")).toContainText(
+    "No registrada",
+  );
+  await expect(lab.getByRole("status")).toContainText(
+    "Frecuencia cardiaca no registrada",
+  );
+  await data.locator("summary").click();
+  await expect(data.locator("thead th")).toHaveCount(3);
+  await expect(data.locator("tbody tr")).toHaveCount(7);
+  await lab.locator(".ll-method-notes summary").click();
+  await expect(lab.locator(".ll-method-notes")).toContainText(
+    "No calculamos los umbrales aplicando una concentración universal",
+  );
+  await expect(lab.locator(".ll-method-notes")).toContainText(
+    "no implica que ICARO ofrezca tests de lactato en piscina",
+  );
+  await sports.getByRole("button", { name: "Running", exact: true }).click();
+  await expect(lab.locator(".ll-chart-caption")).toContainText("min/km");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -203,31 +262,65 @@ test("weekly schedule and support channels match the three coaching plans", asyn
   );
 });
 
-test("journey explains the start and weekly cycle, with an interactive session example", async ({
+test("onboarding and calendar explain sessions and adapt a coherent weekly example", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.goto("/");
   const journey = page.locator("#como-funciona");
-  await expect(journey.locator(".journey-stages > li")).toHaveCount(8);
-  const initialCall = journey.locator(".journey-step").filter({
+  const onboarding = journey.locator(".atelier-onboarding");
+  await onboarding.locator("summary").click();
+  await expect(onboarding.locator("ol > li")).toHaveCount(8);
+  const initialCall = onboarding.locator("li").filter({
     has: page.getByRole("heading", { name: "Llamada inicial.", exact: true }),
   });
   await expect(initialCall).toContainText("Incluida en los tres planes");
-  await expect(journey.locator(".journey-loop")).toContainText(
-    "prescribir, revisar y ajustar",
+  await expect(onboarding).toContainText(
+    "Prescribir, revisar, ajustar y repetir",
   );
 
   const calendar = journey.locator(".training-calendar");
   await expect(calendar).toContainText("SEMANA ORIENTATIVA");
-  await expect(calendar).toContainText("no un plan individual");
+  await expect(calendar).toContainText(
+    "no un plan individual ni un generador automático",
+  );
+  await expect(calendar.locator(".tc-total strong")).toHaveText("7 h");
+  await expect(calendar.locator(".tc-total small")).toContainText(
+    "420 minutos",
+  );
   const bike = calendar.getByRole("button", { name: /^Martes: Ciclismo/ });
   await bike.click();
   await expect(calendar.locator(".tc-detail h4")).toHaveText("Pedaleo estable");
   await expect(calendar.locator(".tc-detail-meta")).toContainText("55 min");
+  await expect(calendar.locator(".tc-session-reasoning")).toContainText(
+    "Por qué este día",
+  );
+  await expect(calendar.locator(".tc-session-reasoning")).toContainText(
+    "Adaptación que buscamos",
+  );
   await expect(bike).toHaveAttribute("aria-pressed", "true");
-  await expect(calendar.locator('button[aria-pressed="true"]')).toHaveCount(1);
+  await expect(
+    calendar.locator('.tc-session[aria-pressed="true"]'),
+  ).toHaveCount(1);
 
+  await calendar
+    .getByRole("button", { name: "Esta semana, menos tiempo", exact: true })
+    .click();
+  await expect(calendar.locator(".tc-total strong")).toHaveText("4 h 20 min");
+  await expect(calendar.locator(".tc-total small")).toContainText(
+    "260 minutos",
+  );
+  await expect(calendar.locator(".tc-detail-meta")).toContainText("40 min");
+  await expect(calendar.locator(".tc-summary")).toContainText(
+    "No compensamos con más intensidad",
+  );
+  await expect(
+    calendar.getByRole("button", { name: /^Viernes: Ciclismo/ }),
+  ).toHaveCount(0);
+  await expect(
+    calendar.getByRole("button", { name: /^Viernes: Natación/ }),
+  ).toHaveCount(1);
+  await expect(calendar.locator(".tc-key")).toContainText("Fuerza");
   const rest = calendar.getByRole("button", { name: /^Jueves: Recuperación/ });
   await rest.focus();
   await page.keyboard.press("Enter");
@@ -236,6 +329,10 @@ test("journey explains the start and weekly cycle, with an interactive session e
   await expect(bike).toHaveAttribute("aria-pressed", "false");
   await expect(calendar.locator(".tc-recovery-note")).toContainText("descanso");
   await expect(calendar.locator(".tc-structure-bar")).toHaveCount(0);
+  await calendar
+    .getByRole("button", { name: "Disponibilidad habitual", exact: true })
+    .click();
+  await expect(calendar.locator(".tc-total strong")).toHaveText("7 h");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -280,6 +377,12 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
   await expect(page.locator(".chosen-plan")).toContainText(
     "Test de lactato en pista",
   );
+  await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
+    "tests",
+  );
+  await expect(page.locator('input[name="source"]')).toHaveValue(
+    /^lactato \| /,
+  );
 });
 test("contact handles mail failures and offers the same enquiry in WhatsApp", async ({
   page,
@@ -305,7 +408,7 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
   });
   await page.goto("/");
   await page
-    .getByRole("link", { name: "Consultar Coaching", exact: true })
+    .getByRole("link", { name: "Consultar este plan: Coaching", exact: true })
     .click();
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
   await page
@@ -318,12 +421,12 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
     .getByLabel("Tu objetivo", { exact: true })
     .fill("Preparar una media maratón");
   await page
-    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .getByRole("button", { name: "Enviar mi consulta", exact: true })
     .click();
   expect(payloads).toHaveLength(0);
   await page.getByRole("checkbox").check();
   await page
-    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .getByRole("button", { name: "Enviar mi consulta", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
     "email aún no está disponible",
@@ -345,10 +448,12 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
     sport: "Atleta híbrido",
     consent: "on",
     plan: "Coaching",
+    interest: "coaching",
   });
+  expect(payloads[0].source).toMatch(/^planes \| /);
   accepted = true;
   await page
-    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .getByRole("button", { name: "Enviar mi consulta", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
     "Tu consulta se ha enviado",
@@ -373,14 +478,14 @@ test("contact times out and releases the send button without losing the enquiry"
   await page.getByLabel("Tu objetivo", { exact: true }).fill("Mi carrera");
   await page.getByRole("checkbox").check();
   await page
-    .getByRole("button", { name: "Cuéntame tu objetivo", exact: true })
+    .getByRole("button", { name: "Enviar mi consulta", exact: true })
     .click();
   await expect(
     page.getByRole("button", { name: "Enviando…", exact: true }),
   ).toBeDisabled();
   await page.clock.fastForward(16000);
   await expect(
-    page.getByRole("button", { name: "Cuéntame tu objetivo", exact: true }),
+    page.getByRole("button", { name: "Enviar mi consulta", exact: true }),
   ).toBeEnabled();
   await expect(page.locator(".form-status")).toContainText(
     "No se ha podido confirmar",
@@ -416,39 +521,39 @@ test("keyboard access and reduced motion", async ({ page }) => {
   ).toBe(true);
 });
 
-test("triathlon product, platform and Barcelona are clear and real photos load", async ({
+test("editorial identity, platform, Barcelona and authentic photography remain clear", async ({
   page,
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Tu reto.",
+    "TRAIN WITH",
   );
-  await expect(page.locator("#como-funciona")).toContainText("TrainingPeaks");
-  await expect(page.locator("#atleta-hibrido")).toContainText(
-    "resistencia y fuerza",
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "PURPOSE.",
   );
   await page
-    .getByLabel("Deporte", { exact: true })
-    .selectOption("Atleta híbrido");
-  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
-    "Atleta híbrido",
+    .getByRole("link", { name: "Descubre el método", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#metodo$/);
+  const platform = page
+    .locator("#como-funciona")
+    .getByRole("link", { name: "Planificación en TrainingPeaks" });
+  await expect(platform).toHaveAttribute(
+    "href",
+    "https://www.trainingpeaks.com/",
   );
+  await expect(platform).toHaveAttribute("target", "_blank");
+  await expect(platform).toHaveAttribute("rel", "noopener noreferrer");
   await expect(page.locator("#como-funciona")).toContainText(
     "reloj compatible",
   );
-  await expect(page.locator("#barcelona")).toContainText("Dos centros");
-  await expect(page.locator("#barcelona")).toContainText("Barcelona");
+  await expect(page.locator("#barcelona")).toContainText(
+    "dos centros de Barcelona",
+  );
   await expect(
     page.locator(".testimonials, #sobre-mi, #sobre-nosotros"),
   ).toHaveCount(0);
-  await page
-    .getByRole("link", { name: "Ver cómo empezamos", exact: true })
-    .click();
-  await expect(page).toHaveURL(/#como-funciona$/);
-  await expect(
-    page.getByRole("button", { name: "Triatlón", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
-  const images = page.locator(".hero-visual img, .triathlon-sports img");
+  const images = page.locator(".atelier-hero-image img, #disciplinas img");
   await expect(images).toHaveCount(4);
   for (const photo of await images.all()) {
     await photo.scrollIntoViewIfNeeded();
@@ -464,4 +569,88 @@ test("triathlon product, platform and Barcelona are clear and real photos load",
       .toBe(true);
     await expect(photo).toHaveAttribute("alt", /.+/);
   }
+});
+
+test("discipline enquiries preserve sport and campaign context without unrelated query data", async ({
+  page,
+}) => {
+  await page.goto(
+    "/?utm_source=instagram&utm_medium=social&email=private%40example.com#inicio",
+  );
+  const disciplines = page.locator("#disciplinas");
+  const selector = disciplines.getByRole("group", {
+    name: "Elige una disciplina",
+  });
+  const trail = selector.getByRole("button", { name: "Trail", exact: true });
+  await trail.focus();
+  await page.keyboard.press("Enter");
+  await expect(trail).toBeFocused();
+  await expect(trail).toHaveAttribute("aria-pressed", "true");
+  await expect(disciplines.locator(".discipline-introduction")).toContainText(
+    "desnivel, terreno",
+  );
+  await disciplines
+    .getByRole("link", { name: "Consulta tu objetivo en trail", exact: true })
+    .click();
+  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
+    "Trail",
+  );
+  await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
+    "coaching",
+  );
+  await expect(page.locator('input[name="source"]')).toHaveValue(
+    /disciplinas.*utm_source=instagram.*utm_medium=social/,
+  );
+  await expect(page.locator('input[name="source"]')).not.toHaveValue(
+    /private|email=/,
+  );
+
+  await selector
+    .getByRole("button", { name: "Fuerza aplicada", exact: true })
+    .click();
+  await expect(disciplines.locator(".discipline-introduction")).toContainText(
+    "atleta híbrido",
+  );
+  await expect(disciplines.locator(".discipline-criteria")).toContainText(
+    "TrainingPeaks",
+  );
+  await disciplines
+    .getByRole("link", { name: "Habla de tu preparación híbrida", exact: true })
+    .click();
+  await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
+    "Atleta híbrido",
+  );
+});
+
+test("collective has its own enquiry context and does not replace individual coaching", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("link", {
+      name: "Consultar este plan: Performance",
+      exact: true,
+    })
+    .click();
+  const collective = page.locator("#comunidad");
+  await expect(collective).toContainText("presencialmente cada semana");
+  await expect(collective).toContainText("ritmos y distancias según");
+  await expect(collective).toContainText(
+    "coaching individual tiene su propio seguimiento",
+  );
+  await expect(collective.locator(".en-social-group")).toContainText(
+    "GRUPO GRATUITO",
+  );
+  await collective
+    .getByRole("link", { name: "Conoce el colectivo", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#contacto$/);
+  await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
+    "collective",
+  );
+  await expect(page.locator('input[name="source"]')).toHaveValue(
+    /^comunidad \| /,
+  );
+  await expect(page.locator('input[name="plan"]')).toHaveValue("");
+  await expect(page.locator(".chosen-plan")).toHaveCount(0);
 });

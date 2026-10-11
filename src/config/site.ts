@@ -1,8 +1,16 @@
 /** Configuración pública. Nunca incluyas aquí credenciales. */
 export const site = {
   brandName: "ICARO PROJECT",
+  logo: { src: "", darkSrc: "", width: 0, height: 0, alt: "PROYECTO ICARO" },
+  coach: {
+    name: "",
+    photo: "",
+    qualifications: [] as string[],
+    experience: "",
+    philosophy: "",
+  },
   description:
-    "Entrenamiento personalizado de triatlón, running y atleta híbrido: resistencia y fuerza en TrainingPeaks, feedback semanal y una comunidad con la que compartir el camino.",
+    "Preparación individualizada de triatlón y resistencia: fisiología aplicada, fuerza, planificación en TrainingPeaks, feedback semanal e ICARO Collective.",
   url: "https://www.icaroproject.es",
   trainingPeaksUrl: "https://www.trainingpeaks.com/",
   community: { name: "Social ICARO", instagramGroupUrl: "" },
@@ -13,6 +21,7 @@ export const site = {
     formEndpoint: "/api/contact",
   },
   legal: { notice: "", privacy: "/privacidad", cookies: "" },
+  privacy: { responsibleName: "" },
   images: {
     hero: "/images/running-track.jpg",
     running: "/images/running-coast.jpg",

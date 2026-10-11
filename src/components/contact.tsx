@@ -2,16 +2,82 @@
 import { useEffect, useState } from "react";
 import { site, whatsappUrl } from "@/config/site";
 import { Arrow } from "./ui";
+import type { EnquiryInterest, EnquirySelection } from "./enquiry-link";
+
+const interestLabels: Record<EnquiryInterest, string> = {
+  coaching: "Coaching individual",
+  collective: "ICARO Collective",
+  tests: "Tests y evaluaciones",
+};
+const disciplines = [
+  "Triatlón",
+  "Running",
+  "Trail",
+  "Ciclismo",
+  "Natación",
+  "Atleta híbrido",
+];
+
+function enquiryEntry() {
+  const url = new URL(window.location.href);
+  const path = `${url.pathname}${url.hash}`
+    .replace(/[^a-zA-Z0-9_/#.-]/g, "")
+    .slice(0, 160);
+  const campaign: string[] = [];
+  for (const key of ["ref", "utm_source", "utm_medium", "utm_campaign"]) {
+    const value = url.searchParams.get(key);
+    // Retain campaign identifiers, never complete URLs or arbitrary query data.
+    if (value && /^[a-zA-Z0-9_-]{1,40}$/.test(value))
+      campaign.push(`${key}=${value}`);
+  }
+  return [path, ...campaign].join(" | ");
+}
+
 export function ContactForm() {
   const [plan, setPlan] = useState("");
+  const [interest, setInterest] = useState<EnquiryInterest>("coaching");
+  const [sport, setSport] = useState("");
+  const [source, setSource] = useState("contacto");
+  const [entry, setEntry] = useState("");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [summary, setSummary] = useState("");
   const [failed, setFailed] = useState(false);
   useEffect(() => {
-    const listener = (e: Event) => setPlan((e as CustomEvent<string>).detail);
-    window.addEventListener("icaro-plan", listener);
-    return () => window.removeEventListener("icaro-plan", listener);
+    setEntry(enquiryEntry());
+    const interestListener = (event: Event) => {
+      const selection = (event as CustomEvent<EnquirySelection>).detail;
+      if (!selection || !Object.hasOwn(interestLabels, selection.interest))
+        return;
+      setInterest(selection.interest);
+      setPlan(
+        typeof selection.plan === "string" ? selection.plan.slice(0, 100) : "",
+      );
+      setSource(
+        typeof selection.source === "string"
+          ? selection.source.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80) ||
+              "contacto"
+          : "contacto",
+      );
+      if (selection.sport && disciplines.includes(selection.sport))
+        setSport(selection.sport);
+      setStatus("");
+      setFailed(false);
+    };
+    const planListener = (event: Event) => {
+      const selection = (event as CustomEvent<string>).detail;
+      if (typeof selection !== "string") return;
+      const isTest = /test/i.test(selection);
+      setPlan(selection.slice(0, 100));
+      setInterest(isTest ? "tests" : "coaching");
+      setSource(isTest ? "tests" : "planes");
+    };
+    window.addEventListener("icaro-interest", interestListener);
+    window.addEventListener("icaro-plan", planListener);
+    return () => {
+      window.removeEventListener("icaro-interest", interestListener);
+      window.removeEventListener("icaro-plan", planListener);
+    };
   }, []);
   const configured = !!(
     site.contact.formEndpoint ||
@@ -49,7 +115,7 @@ export function ContactForm() {
       setBusy(false);
       return;
     }
-    const message = `Hola, soy ${data.get("name")}.\nContacto: ${data.get("contact")}\nDeporte: ${data.get("sport")}\nObjetivo: ${data.get("goal")}\n${plan ? `Plan: ${plan}\n` : ""}${data.get("message") || ""}`;
+    const message = `Hola, soy ${data.get("name")}.\nMe interesa: ${interestLabels[interest]}\nContacto: ${data.get("contact")}\nDeporte: ${data.get("sport")}\nObjetivo: ${data.get("goal")}\n${plan ? `Plan: ${plan}\n` : ""}${data.get("message") || ""}\nOrigen: ${data.get("source")}`;
     setSummary(message);
     try {
       if (site.contact.formEndpoint) {
@@ -76,6 +142,9 @@ export function ContactForm() {
             );
             form.reset();
             setPlan("");
+            setSport("");
+            setInterest("coaching");
+            setSource("contacto");
             setSummary("");
           }
         } finally {
@@ -140,22 +209,43 @@ export function ContactForm() {
           />
         </label>
       </div>
-      <div className="form-field">
-        <label htmlFor="sport">Deporte</label>
-        <select id="sport" name="sport" required defaultValue="">
-          <option value="" disabled>
-            Elige tu disciplina
-          </option>
-          {[
-            "Running",
-            "Ciclismo",
-            "Natación",
-            "Triatlón",
-            "Atleta híbrido",
-          ].map((s) => (
-            <option key={s}>{s}</option>
-          ))}
-        </select>
+      <div className="form-row">
+        <div className="form-field">
+          <label htmlFor="interest">Qué te interesa</label>
+          <select
+            id="interest"
+            name="interest"
+            required
+            value={interest}
+            onChange={(event) => {
+              setInterest(event.target.value as EnquiryInterest);
+              setPlan("");
+            }}
+          >
+            {Object.entries(interestLabels).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-field">
+          <label htmlFor="sport">Deporte</label>
+          <select
+            id="sport"
+            name="sport"
+            required
+            value={sport}
+            onChange={(event) => setSport(event.target.value)}
+          >
+            <option value="" disabled>
+              Elige tu disciplina
+            </option>
+            {disciplines.map((discipline) => (
+              <option key={discipline}>{discipline}</option>
+            ))}
+          </select>
+        </div>
       </div>
       <label>
         Tu objetivo
@@ -184,6 +274,11 @@ export function ContactForm() {
         </p>
       )}
       <input type="hidden" name="plan" value={plan} />
+      <input
+        type="hidden"
+        name="source"
+        value={[source, entry].filter(Boolean).join(" | ")}
+      />
       {site.legal.privacy ? (
         <label className="privacy-check">
           <input type="checkbox" required name="consent" />
@@ -200,7 +295,7 @@ export function ContactForm() {
         {busy
           ? "Enviando…"
           : configured
-            ? "Cuéntame tu objetivo"
+            ? "Enviar mi consulta"
             : "Preparar mi consulta"}
         <Arrow diagonal />
       </button>

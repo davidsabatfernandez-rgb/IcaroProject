@@ -7,7 +7,7 @@ export function Footer() {
         <a href="#inicio" title="Volver al inicio">
           <Wordmark />
         </a>
-        <span>Triathlon · Swimming · Cycling · Running</span>
+        <span>SCIENCE. INDIVIDUALIZATION. PERFORMANCE. COMMUNITY.</span>
         <div>
           {site.contact.instagram && (
             <a
@@ -63,7 +63,7 @@ export function Footer() {
             ) : null,
           )}
         </div>
-        <span>Entrenar con sentido.</span>
+        <span>TRAIN WITH PURPOSE.</span>
       </div>
     </footer>
   );
