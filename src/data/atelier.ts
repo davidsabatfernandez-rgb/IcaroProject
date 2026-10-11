@@ -6,7 +6,7 @@ export const atelierCopy = {
 };
 export const assessments = [
   {
-    title: "Tests de campo y zonas",
+    title: "Pruebas de campo y zonas",
     text: "Orientamos intensidades a partir de pruebas útiles para la disciplina, tus sesiones y tus sensaciones. Revisamos las referencias cuando cambia tu respuesta.",
   },
   {

@@ -5,14 +5,14 @@ import { Arrow } from "./ui";
 import type { EnquiryInterest, EnquirySelection } from "./enquiry-link";
 
 const interestLabels: Record<EnquiryInterest, string> = {
-  coaching: "Coaching individual",
-  collective: "ICARO Collective",
-  tests: "Tests y evaluaciones",
+  coaching: "Entrenamiento individual",
+  collective: "Comunidad ICARO",
+  tests: "Pruebas y evaluaciones",
 };
 const disciplines = [
   "Triatlón",
-  "Running",
-  "Trail",
+  "Carrera",
+  "Carrera por montaña",
   "Ciclismo",
   "Natación",
   "Atleta híbrido",
@@ -67,7 +67,7 @@ export function ContactForm() {
     const planListener = (event: Event) => {
       const selection = (event as CustomEvent<string>).detail;
       if (typeof selection !== "string") return;
-      const isTest = /test/i.test(selection);
+      const isTest = /test|prueba/i.test(selection);
       setPlan(selection.slice(0, 100));
       setInterest(isTest ? "tests" : "coaching");
       setSource(isTest ? "tests" : "planes");
@@ -98,7 +98,7 @@ export function ContactForm() {
       !/^\+?[\d\s().-]{6,25}$/.test(contact)
     ) {
       setStatus(
-        "Introduce un email válido o un teléfono para poder contactarte.",
+        "Introduce un correo electrónico válido o un teléfono para poder contactarte.",
       );
       setBusy(false);
       return;
@@ -158,7 +158,7 @@ export function ContactForm() {
       } else if (site.contact.email) {
         window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent("Mi objetivo · ICARO PROJECT")}&body=${encodeURIComponent(message)}`;
         setStatus(
-          "Se ha preparado un correo. Envíalo desde tu aplicación de email.",
+          "Se ha preparado un correo. Envíalo desde tu aplicación de correo.",
         );
       } else {
         setStatus(
@@ -183,7 +183,7 @@ export function ContactForm() {
     >
       <div hidden aria-hidden="true">
         <label>
-          Website
+          Sitio web
           <input name="_honey" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
@@ -199,7 +199,7 @@ export function ContactForm() {
           />
         </label>
         <label>
-          Email o teléfono
+          Correo o teléfono
           <input
             required
             name="contact"

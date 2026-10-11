@@ -3,12 +3,12 @@ export const navigation = [
   { label: "Método", href: "#metodo" },
   { label: "Tu preparación", href: "#como-funciona" },
   { label: "Disciplinas", href: "#disciplinas" },
-  { label: "Colectivo", href: "#comunidad" },
+  { label: "Comunidad", href: "#comunidad" },
   { label: "Planes", href: "#planes" },
 ];
 export const copy = {
   hero: {
-    eyebrow: "TRIATLÓN · RUNNING · ATLETA HÍBRIDO",
+    eyebrow: "TRIATLÓN · CARRERA · ATLETA HÍBRIDO",
     title: ["Tu reto.", "Nuestro camino."],
     description:
       "Entrenar es hacer espacio para algo que te importa. Te acompañamos con un sistema personalizado que trabaja la resistencia sin olvidarse de la fuerza, una planificación en TrainingPeaks y una comunidad con la que compartir el camino.",
@@ -28,10 +28,10 @@ export const sharedFeatures = [
   "Disponibilidad enviada cada viernes",
   "Programación entre sábado y domingo",
   "Explicación de la semana anterior y objetivos de la siguiente",
-  "Feedback semanal de tu entrenador",
+  "Revisión semanal de tu entrenador",
   "Sincronización con dispositivos compatibles",
   "Trabajo por fortalezas, limitaciones y ciclos",
-  "Tests de campo y zonas revisables",
+  "Pruebas de campo y zonas revisables",
   "Preparación de competición",
 ];
 export const plans = [
@@ -41,13 +41,13 @@ export const plans = [
     name: "Individual",
     label: "TU PLAN. TU AUTONOMÍA.",
     description:
-      "Quieres un plan bien explicado, feedback semanal y libertad para organizarte con autonomía.",
+      "Quieres un plan bien explicado, revisión semanal y libertad para organizarte con autonomía.",
     features: [
       "Análisis de sesiones importantes",
-      "Feedback semanal por audios de WhatsApp",
+      "Revisión semanal por audios de WhatsApp",
       "Preparación de competición",
     ],
-    contact: "Feedback semanal por WhatsApp.",
+    contact: "Revisión semanal por WhatsApp.",
     detail:
       "Entre sábado y domingo recibes audios con la explicación de la semana anterior y los objetivos de la siguiente, junto a tu nueva programación.",
     call: "Sin llamadas de seguimiento",
@@ -55,12 +55,12 @@ export const plans = [
   {
     id: "coaching",
     number: "02",
-    name: "Coaching",
+    name: "Seguimiento",
     label: "UN PUNTO DE CONTACTO DIARIO.",
     description:
       "Quieres resolver tus dudas cada día, ajustar el plan cuando hace falta y hablar con tu entrenador una vez al mes.",
     features: [
-      "Plan individual y feedback semanal",
+      "Plan individual y revisión semanal",
       "Consultas diarias al entrenador",
       "Seguimiento y análisis más frecuentes",
       "Ajustes durante la semana",
@@ -74,12 +74,12 @@ export const plans = [
   {
     id: "performance",
     number: "03",
-    name: "Performance",
+    name: "Rendimiento",
     label: "MÁS CERCA DE CADA DECISIÓN.",
     description:
       "Quieres un acompañamiento más cercano, disponibilidad para tus dudas y una llamada cada semana para revisar tu evolución.",
     features: [
-      "Plan individual y feedback semanal",
+      "Plan individual y revisión semanal",
       "Consultas diarias y contacto cercano",
       "Análisis profundo y adaptación continua",
       "Perfil longitudinal y comparación de ciclos",
@@ -94,7 +94,7 @@ export const plans = [
 export const faqs = [
   [
     "¿Puedo combinar resistencia y fuerza?",
-    "Sí. Puedes preparar triatlón o running incorporando fuerza, o trabajar con un enfoque de atleta híbrido. En la llamada inicial hablamos de tu experiencia, objetivo y material disponible. Coordinamos ambas capacidades en TrainingPeaks y ajustamos su distribución a tu disponibilidad y recuperación.",
+    "Sí. Puedes preparar triatlón o carrera incorporando fuerza, o trabajar con un enfoque de atleta híbrido. En la llamada inicial hablamos de tu experiencia, objetivo y material disponible. Coordinamos ambas capacidades en TrainingPeaks y ajustamos su distribución a tu disponibilidad y recuperación.",
   ],
   [
     "¿Puedo formar parte de Social ICARO sin contratar un plan?",
@@ -106,7 +106,7 @@ export const faqs = [
   ],
   [
     "¿La llamada inicial está incluida?",
-    "Sí. Individual, Coaching y Performance incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Coaching tiene una mensual y Performance una semanal.",
+    "Sí. Individual, Seguimiento y Rendimiento incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Seguimiento tiene una mensual y Rendimiento una semanal.",
   ],
   [
     "¿Los entrenamientos llegan a mi reloj?",
@@ -117,8 +117,8 @@ export const faqs = [
     "Sí. Tenemos la posibilidad de trabajar técnica en dos centros de Barcelona. Cuéntanos qué necesitas mejorar y te explicaremos las opciones, disponibilidad y condiciones antes de reservar.",
   ],
   [
-    "¿Puedo entrenar solamente running?",
-    "Sí. El plan de una disciplina puede dedicarse a running, ciclismo o natación. La planificación es individualizada en los tres casos.",
+    "¿Puedo centrar mi preparación en la carrera?",
+    "Sí. El plan de una disciplina puede dedicarse a carrera, ciclismo o natación. La planificación es individualizada en los tres casos.",
   ],
   [
     "¿También trabajáis ciclismo y natación?",
@@ -141,24 +141,24 @@ export const faqs = [
     "Cada viernes nos envías tu disponibilidad para la siguiente semana. Entre sábado y domingo recibes la programación en TrainingPeaks, una explicación de la semana anterior y los objetivos de la siguiente. Así el plan encaja con el tiempo que realmente tienes.",
   ],
   [
-    "¿Cómo funciona el feedback semanal?",
-    "Revisamos lo que has hecho, cómo has respondido y qué buscamos en la semana siguiente. Esa explicación llega entre sábado y domingo junto al nuevo plan. En Individual, el feedback semanal se entrega mediante audios de WhatsApp.",
+    "¿Cómo funciona la revisión semanal?",
+    "Revisamos lo que has hecho, cómo has respondido y qué buscamos en la semana siguiente. Esa explicación llega entre sábado y domingo junto al nuevo plan. En Individual, la revisión semanal se entrega mediante audios de WhatsApp.",
   ],
   [
     "¿Cómo contacto con el entrenador?",
-    "Los tres planes incluyen una llamada inicial. Después, Individual entrega feedback semanal por audios de WhatsApp y no incluye llamadas de seguimiento. Coaching permite consultas diarias y una llamada mensual. Performance ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
+    "Los tres planes incluyen una llamada inicial. Después, Individual entrega revisión semanal por audios de WhatsApp y no incluye llamadas de seguimiento. Seguimiento permite consultas diarias y una llamada mensual. Rendimiento ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
   ],
   [
-    "¿Los tests de lactato son obligatorios?",
-    "No. Son opcionales. Los utilizamos cuando aportan información útil para decidir tu entrenamiento. Puedes contratar un test por separado o acceder a las condiciones de tu plan. Performance incluye un test cada 6 meses.",
+    "¿Las pruebas de lactato son obligatorias?",
+    "No. Son opcionales. Las utilizamos cuando aportan información útil para decidir tu entrenamiento. Puedes contratar una prueba por separado o acceder a las condiciones de tu plan. Rendimiento incluye una prueba cada 6 meses.",
   ],
   [
-    "¿Puedo consultar un test sin contratar un plan?",
-    "Sí. Puedes consultar un test de lactato en pista aunque todavía no entrenes con ICARO. Te explicaremos cómo funciona y sus condiciones; el desplazamiento se presupuesta antes de reservar. Si entrenas con nosotros, también tienes condiciones específicas según tu plan.",
+    "¿Puedo reservar una prueba sin contratar un plan?",
+    "Sí. Puedes consultar una prueba de lactato en pista aunque todavía no entrenes con ICARO. Te explicaremos cómo funciona y sus condiciones; el desplazamiento se presupuesta antes de reservar. Si entrenas con nosotros, también tienes condiciones específicas según tu plan.",
   ],
   [
     "¿Qué diferencia hay entre los tres planes?",
-    "Todos incluyen llamada inicial, planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega feedback por audios de WhatsApp y no incluye llamadas de seguimiento. Coaching añade consultas diarias y una llamada mensual. Performance ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de los tests de lactato.",
+    "Todos incluyen llamada inicial, planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega la revisión por audios de WhatsApp y no incluye llamadas de seguimiento. Seguimiento añade consultas diarias y una llamada mensual. Rendimiento ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de las pruebas de lactato.",
   ],
   [
     "¿Hay permanencia?",

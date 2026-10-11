@@ -59,7 +59,7 @@ export function LactateLab() {
     <div className="lactate-lab">
       <div className="ll-masthead">
         <div>
-          <p className="ll-kicker">ICARO / PERFORMANCE LAB</p>
+          <p className="ll-kicker">ICARO / LABORATORIO DE RENDIMIENTO</p>
           <h3>Una curva. Más de una decisión.</h3>
         </div>
         <p className="ll-demo" id={`${id}-disclaimer`}>
@@ -272,13 +272,15 @@ export function LactateLab() {
             </div>
             <figcaption className="ll-chart-caption" id={`${id}-chart-caption`}>
               <span>{discipline.axisLabel}</span>
-              <span>LT1 / LT2: referencias estimadas de esta demo.</span>
+              <span>
+                LT1 / LT2: referencias estimadas de esta demostración.
+              </span>
             </figcaption>
           </figure>
 
           <div
             className="ll-zone-key"
-            aria-label="Franjas orientativas de intensidad de la demo"
+            aria-label="Franjas orientativas de intensidad de la demostración"
           >
             <span>
               <i />
@@ -303,7 +305,7 @@ export function LactateLab() {
           <div
             className="ll-sample-buttons"
             role="group"
-            aria-label="Seleccionar escalón del test ilustrativo"
+            aria-label="Seleccionar escalón de la prueba ilustrativa"
             aria-describedby={`${id}-sample-instructions`}
           >
             {assessment.samples.map((sample, index) => (
@@ -446,7 +448,7 @@ export function LactateLab() {
           >
             <table>
               <caption>
-                Valores inventados para explicar la interpretación de un test.{" "}
+                Valores inventados para explicar la interpretación de una prueba.{" "}
                 {discipline.label}. Lactato en mmol/L
                 {hasHeartRate
                   ? "; frecuencia cardiaca (FC) en lpm"
@@ -493,7 +495,8 @@ export function LactateLab() {
         </details>
         <details className="ll-method-notes">
           <summary>
-            Cómo interpretar esta demo <span aria-hidden="true">+</span>
+            Cómo interpretar esta demostraciónstración{" "}
+            <span aria-hidden="true">+</span>
           </summary>
           <div>
             <p>
@@ -518,8 +521,8 @@ export function LactateLab() {
             </p>
             <p>
               La natación se incluye para explicar diferencias entre
-              disciplinas. Esta demostración no implica que ICARO ofrezca tests
-              de lactato en piscina: la oferta confirmada es el test en pista.
+              disciplinas. Esta demostración no implica que ICARO ofrezca pruebas
+              de lactato en piscina: la oferta confirmada es la prueba en pista.
             </p>
           </div>
         </details>

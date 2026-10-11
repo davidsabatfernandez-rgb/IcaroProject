@@ -17,6 +17,15 @@ for (const [name, width, height] of [
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("body")).toBeVisible();
+    const bubble = page.getByRole("link", {
+      name: "Contactar por WhatsApp (abre en una pestaña nueva)",
+      exact: true,
+    });
+    await expect(bubble).toBeVisible();
+    const chatUrl = new URL((await bubble.getAttribute("href"))!);
+    expect(chatUrl.hostname).toBe("wa.me");
+    expect(chatUrl.pathname).toBe("/34619282582");
+    await expect(bubble).toHaveAttribute("target", "_blank");
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -102,7 +111,7 @@ test("plans show no prices and each enquiry carries interest to the form", async
     .locator("#planes")
     .getByRole("button", { name: "Triatlón", exact: true })
     .click();
-  for (const plan of ["Individual", "Coaching", "Performance"]) {
+  for (const plan of ["Individual", "Seguimiento", "Rendimiento"]) {
     await page
       .getByRole("link", { name: `Consultar este plan: ${plan}`, exact: true })
       .click();
@@ -211,9 +220,9 @@ test("lactate lab distinguishes synthetic observations, estimates and interpreta
     "No calculamos los umbrales aplicando una concentración universal",
   );
   await expect(lab.locator(".ll-method-notes")).toContainText(
-    "no implica que ICARO ofrezca tests de lactato en piscina",
+    "no implica que ICARO ofrezca pruebas de lactato en piscina",
   );
-  await sports.getByRole("button", { name: "Running", exact: true }).click();
+  await sports.getByRole("button", { name: "Carrera", exact: true }).click();
   await expect(lab.locator(".ll-chart-caption")).toContainText("min/km");
   expect(
     await page.evaluate(
@@ -236,10 +245,10 @@ test("weekly schedule and support channels match the three coaching plans", asyn
     has: page.getByRole("heading", { name: "Individual", exact: true }),
   });
   const coaching = page.locator(".plan").filter({
-    has: page.getByRole("heading", { name: "Coaching", exact: true }),
+    has: page.getByRole("heading", { name: "Seguimiento", exact: true }),
   });
   const performance = page.locator(".plan").filter({
-    has: page.getByRole("heading", { name: "Performance", exact: true }),
+    has: page.getByRole("heading", { name: "Rendimiento", exact: true }),
   });
   await expect(individual).toContainText("audios de WhatsApp");
   await expect(individual).toContainText("Sin llamadas de seguimiento");
@@ -349,7 +358,7 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
     "Condiciones para atletas del plan",
   );
   await expect(benefits.nth(1)).toContainText("promoción trimestral");
-  await expect(benefits.nth(2)).toContainText("1 test incluido cada 6 meses");
+  await expect(benefits.nth(2)).toContainText("1 prueba incluida cada 6 meses");
   await expect(benefits.nth(2)).toContainText("opción trimestral");
   await page
     .getByRole("button", { name: "Una disciplina", exact: true })
@@ -362,20 +371,23 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
     /€|\beuros?\b|\bprecios?\b/i,
   );
   await expect(page.locator(".lactate-rate-note")).toContainText(
-    "Tests opcionales",
+    "Pruebas opcionales",
   );
   await expect(page.locator(".lactate-travel")).toHaveText(
     "Desplazamiento presupuestado antes de reservar.",
   );
   await page
-    .getByRole("link", { name: "Consultar condiciones del test", exact: true })
+    .getByRole("link", {
+      name: "Consultar condiciones de la prueba",
+      exact: true,
+    })
     .click();
   await expect(page).toHaveURL(/#contacto$/);
   await expect(page.locator('input[name="plan"]')).toHaveValue(
-    "Test de lactato en pista",
+    "Prueba de lactato en pista",
   );
   await expect(page.locator(".chosen-plan")).toContainText(
-    "Test de lactato en pista",
+    "Prueba de lactato en pista",
   );
   await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
     "tests",
@@ -401,18 +413,21 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
           : {
               success: false,
               message:
-                "El envío por email aún no está disponible. Puedes enviarnos esta consulta por WhatsApp.",
+                "El envío por correo electrónico aún no está disponible. Puedes enviarnos esta consulta por WhatsApp.",
             },
       ),
     });
   });
   await page.goto("/");
   await page
-    .getByRole("link", { name: "Consultar este plan: Coaching", exact: true })
+    .getByRole("link", {
+      name: "Consultar este plan: Seguimiento",
+      exact: true,
+    })
     .click();
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
   await page
-    .getByLabel("Email o teléfono", { exact: true })
+    .getByLabel("Correo o teléfono", { exact: true })
     .fill("atleta@example.com");
   await page
     .getByLabel("Deporte", { exact: true })
@@ -429,7 +444,7 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
     .getByRole("button", { name: "Enviar mi consulta", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
-    "email aún no está disponible",
+    "correo electrónico aún no está disponible",
   );
   await expect(page.getByLabel("Nombre", { exact: true })).toHaveValue(
     "Atleta de prueba",
@@ -442,12 +457,12 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
   expect(url.hostname).toBe("wa.me");
   expect(url.pathname).toBe("/34619282582");
   expect(url.searchParams.get("text")).toContain("Preparar una media maratón");
-  expect(url.searchParams.get("text")).toContain("Plan: Coaching");
+  expect(url.searchParams.get("text")).toContain("Plan: Seguimiento");
   expect(payloads[0]).toMatchObject({
     contact: "atleta@example.com",
     sport: "Atleta híbrido",
     consent: "on",
-    plan: "Coaching",
+    plan: "Seguimiento",
     interest: "coaching",
   });
   expect(payloads[0].source).toMatch(/^planes \| /);
@@ -472,9 +487,9 @@ test("contact times out and releases the send button without losing the enquiry"
   await page.goto("/");
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta");
   await page
-    .getByLabel("Email o teléfono", { exact: true })
+    .getByLabel("Correo o teléfono", { exact: true })
     .fill("atleta@example.com");
-  await page.getByLabel("Deporte", { exact: true }).selectOption("Running");
+  await page.getByLabel("Deporte", { exact: true }).selectOption("Carrera");
   await page.getByLabel("Tu objetivo", { exact: true }).fill("Mi carrera");
   await page.getByRole("checkbox").check();
   await page
@@ -526,10 +541,10 @@ test("editorial identity, platform, Barcelona and authentic photography remain c
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "TRAIN WITH",
+    "ENTRENA CON",
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "PURPOSE.",
+    "PROPÓSITO.",
   );
   await page
     .getByRole("link", { name: "Descubre el método", exact: true })
@@ -581,7 +596,10 @@ test("discipline enquiries preserve sport and campaign context without unrelated
   const selector = disciplines.getByRole("group", {
     name: "Elige una disciplina",
   });
-  const trail = selector.getByRole("button", { name: "Trail", exact: true });
+  const trail = selector.getByRole("button", {
+    name: "Carrera por montaña",
+    exact: true,
+  });
   await trail.focus();
   await page.keyboard.press("Enter");
   await expect(trail).toBeFocused();
@@ -590,10 +608,13 @@ test("discipline enquiries preserve sport and campaign context without unrelated
     "desnivel, terreno",
   );
   await disciplines
-    .getByRole("link", { name: "Consulta tu objetivo en trail", exact: true })
+    .getByRole("link", {
+      name: "Consulta tu objetivo de carrera por montaña",
+      exact: true,
+    })
     .click();
   await expect(page.getByLabel("Deporte", { exact: true })).toHaveValue(
-    "Trail",
+    "Carrera por montaña",
   );
   await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
     "coaching",
@@ -628,7 +649,7 @@ test("collective has its own enquiry context and does not replace individual coa
   await page.goto("/");
   await page
     .getByRole("link", {
-      name: "Consultar este plan: Performance",
+      name: "Consultar este plan: Rendimiento",
       exact: true,
     })
     .click();
@@ -636,13 +657,13 @@ test("collective has its own enquiry context and does not replace individual coa
   await expect(collective).toContainText("presencialmente cada semana");
   await expect(collective).toContainText("ritmos y distancias según");
   await expect(collective).toContainText(
-    "coaching individual tiene su propio seguimiento",
+    "entrenamiento individual tiene su propio seguimiento",
   );
   await expect(collective.locator(".en-social-group")).toContainText(
     "GRUPO GRATUITO",
   );
   await collective
-    .getByRole("link", { name: "Conoce el colectivo", exact: true })
+    .getByRole("link", { name: "Conoce la comunidad", exact: true })
     .click();
   await expect(page).toHaveURL(/#contacto$/);
   await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(

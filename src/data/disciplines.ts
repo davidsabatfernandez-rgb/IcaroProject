@@ -42,8 +42,8 @@ export const disciplines: Discipline[] = [
   },
   {
     id: "running",
-    label: "Running",
-    formSport: "Running",
+    label: "Carrera",
+    formSport: "Carrera",
     statement: "El ritmo importa.\nEl proceso, también.",
     introduction:
       "Del objetivo en asfalto a la consistencia semanal. La preparación combina resistencia, trabajo específico y fuerza según tu experiencia y tu respuesta.",
@@ -54,7 +54,7 @@ export const disciplines: Discipline[] = [
       },
       {
         label: "Prioridad",
-        text: "Construir continuidad y dosificar el trabajo intenso sin convertir cada salida en un test.",
+        text: "Construir continuidad y dosificar el trabajo intenso sin convertir cada salida en una prueba.",
       },
       {
         label: "Aplicación",
@@ -65,15 +65,15 @@ export const disciplines: Discipline[] = [
     imageAlt:
       "Silueta de una persona junto al mar al atardecer; fotografía editorial",
     visual: "photo",
-    action: "Cuéntanos tu objetivo de running",
+    action: "Cuéntanos tu objetivo de carrera",
   },
   {
     id: "trail",
-    label: "Trail",
-    formSport: "Trail",
+    label: "Carrera por montaña",
+    formSport: "Carrera por montaña",
     statement: "El terreno cambia.\nEl objetivo se concreta.",
     introduction:
-      "Hablemos de tu objetivo en trail. La distancia por sí sola no describe sus exigencias: desnivel, terreno y tiempo de esfuerzo cambian el contexto de la preparación.",
+      "Hablemos de tu objetivo de carrera por montaña. La distancia por sí sola no describe sus exigencias: desnivel, terreno y tiempo de esfuerzo cambian el contexto de la preparación.",
     criteria: [
       {
         label: "Contexto",
@@ -89,7 +89,7 @@ export const disciplines: Discipline[] = [
       },
     ],
     visual: "terrain",
-    action: "Consulta tu objetivo en trail",
+    action: "Consulta tu objetivo de carrera por montaña",
   },
   {
     id: "cycling",

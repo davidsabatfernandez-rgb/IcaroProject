@@ -20,14 +20,14 @@ export function PhilosophySection() {
     >
       <div className="en-philosophy-intro">
         <SectionLabel number="02">
-          <span lang="en">THE PHILOSOPHY</span>
+          <span>NUESTRA FILOSOFÍA</span>
         </SectionLabel>
-        <h2 id="en-philosophy-title" lang="en">
-          MORE THAN
+        <h2 id="en-philosophy-title">
+          MÁS QUE
           <br />
-          A TRAINING
+          UN PLAN DE
           <br />
-          PLAN.
+          ENTRENAMIENTO.
         </h2>
         <p className="en-lead">
           Completar un calendario es una parte. Entender qué necesitas y cómo
@@ -39,10 +39,8 @@ export function PhilosophySection() {
           método tiene una lógica. Su aplicación tiene tu nombre.
         </p>
         <div className="en-philosophy-standard">
-          <span className="micro" lang="en">
-            THE STANDARD IS THE SAME.
-          </span>
-          <strong lang="en">THE APPROACH IS INDIVIDUAL.</strong>
+          <span className="micro">EL RIGOR ES EL MISMO.</span>
+          <strong>EL ENFOQUE ES INDIVIDUAL.</strong>
           <p>El mismo rigor. Una preparación propia.</p>
         </div>
       </div>
@@ -173,7 +171,7 @@ export function BeyondNumbersSection() {
       <div className="en-editorial-heading">
         <div>
           <SectionLabel number="04">
-            <span lang="en">BEYOND THE NUMBERS</span>
+            <span>MÁS ALLÁ DE LOS NÚMEROS</span>
           </SectionLabel>
           <h2 id="en-beyond-title">
             UN DATO.
@@ -233,7 +231,7 @@ export function CoachSection({ coach }: { coach?: CoachProfile }) {
     >
       <div className="en-coach-intro">
         <SectionLabel number="07">
-          <span lang="en">THE COACHING TEAM</span>
+          <span>EL EQUIPO DE ENTRENADORES</span>
         </SectionLabel>
         <h2 id="en-coach-title">
           {coachTeam.title.map((line) => (
@@ -315,24 +313,24 @@ export function CommunityAtelierSection() {
           fill
           sizes="(max-width: 900px) 100vw, 46vw"
         />
-        <span className="en-collective-photo-label micro" lang="en">
-          ICARO / ENDURANCE COLLECTIVE
+        <span className="en-collective-photo-label micro">
+          ICARO / COMUNIDAD DE RESISTENCIA
         </span>
         <small>Fotografía editorial de resistencia</small>
       </div>
       <div className="en-collective-copy">
         <SectionLabel number="08">
-          <span lang="en">ICARO COLLECTIVE</span>
+          <span>COMUNIDAD ICARO</span>
         </SectionLabel>
-        <h2 id="en-collective-title" lang="en">
+        <h2 id="en-collective-title">
           INDIVIDUAL
           <br />
-          BY DESIGN.
+          POR DISEÑO.
           <br />
           <span>
-            COLLECTIVE
+            COMUNIDAD
             <br />
-            BY NATURE.
+            POR NATURALEZA.
           </span>
         </h2>
         <p className="en-lead">
@@ -357,12 +355,12 @@ export function CommunityAtelierSection() {
           source="comunidad"
           className="button accent"
         >
-          Conoce el colectivo <Arrow diagonal />
+          Conoce la comunidad <Arrow diagonal />
         </EnquiryLink>
         <p className="en-collective-conditions">
           Consulta la organización y las condiciones de las sesiones
-          presenciales. El colectivo complementa tu experiencia deportiva; el
-          coaching individual tiene su propio seguimiento.
+          presenciales. La comunidad complementa tu experiencia deportiva; el
+          entrenamiento individual tiene su propio seguimiento.
         </p>
         <div className="en-social-group">
           <span className="micro">SOCIAL ICARO / GRUPO GRATUITO</span>

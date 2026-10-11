@@ -28,10 +28,10 @@ export function Landing() {
         aria-labelledby="hero-title"
       >
         <div className="atelier-hero-copy">
-          <p className="eyebrow">ICARO / ENDURANCE PERFORMANCE ATELIER</p>
-          <h1 id="hero-title" lang="en">
-            <span>TRAIN WITH</span>
-            <span>PURPOSE.</span>
+          <p className="eyebrow">ICARO / PREPARACIÓN DE RESISTENCIA</p>
+          <h1 id="hero-title">
+            <span>ENTRENA CON</span>
+            <span>PROPÓSITO.</span>
           </h1>
           <p className="atelier-hero-description">
             {atelierCopy.hero.description}
@@ -48,31 +48,31 @@ export function Landing() {
               Descubre el método <Arrow />
             </a>
           </div>
-          <div className="atelier-hero-signature" lang="en">
-            <span>SCIENCE.</span>
-            <span>INDIVIDUALIZATION.</span>
-            <span>PERFORMANCE.</span>
-            <span>COMMUNITY.</span>
+          <div className="atelier-hero-signature">
+            <span>CIENCIA.</span>
+            <span>INDIVIDUALIZACIÓN.</span>
+            <span>RENDIMIENTO.</span>
+            <span>COMUNIDAD.</span>
           </div>
         </div>
         <div className="atelier-hero-image">
           <Image
             src={site.images.hero}
-            alt="Corredores y sus sombras en una pista de atletismo, fotografía editorial"
+            alt="Triatletas saliendo del agua durante una competición, entre salpicaduras y público"
             fill
             loading="eager"
             fetchPriority="high"
-            sizes="(max-width: 760px) 100vw, 52vw"
+            sizes="(max-width: 760px) 100vw, (max-width: 1100px) 90vw, 75vw"
           />
           <div className="atelier-photo-caption">
-            <span>01 / ENDURANCE IN MOTION</span>
-            <span>SWIM · BIKE · RUN</span>
+            <span>01 / RESISTENCIA EN MOVIMIENTO</span>
+            <span>NATACIÓN · CICLISMO · CARRERA</span>
           </div>
         </div>
       </section>
       <div className="atelier-statement">
-        <p lang="en">THE STANDARD IS THE SAME.</p>
-        <p lang="en">THE APPROACH IS INDIVIDUAL.</p>
+        <p>EL RIGOR ES EL MISMO.</p>
+        <p>EL ENFOQUE ES INDIVIDUAL.</p>
         <span>El mismo rigor. Una aplicación distinta para cada atleta.</span>
       </div>
 
@@ -85,12 +85,12 @@ export function Landing() {
         <div className="section-heading">
           <div>
             <SectionLabel number="03">
-              THE METHOD / FISIOLOGÍA APLICADA
+              EL MÉTODO / FISIOLOGÍA APLICADA
             </SectionLabel>
-            <h2 id="method-title" lang="en">
-              DATA IS NOTHING
+            <h2 id="method-title">
+              LOS DATOS
               <br />
-              <em>WITHOUT INTERPRETATION.</em>
+              <em>NECESITAN CRITERIO.</em>
             </h2>
           </div>
           <p className="heading-copy">
@@ -111,12 +111,12 @@ export function Landing() {
         <div className="section-heading">
           <div>
             <SectionLabel number="05">
-              INSIDE ICARO / PLANIFICACIÓN
+              TU SEMANA EN ICARO / PLANIFICACIÓN
             </SectionLabel>
-            <h2 id="inside-title" lang="en">
-              YOUR TRAINING.
+            <h2 id="inside-title">
+              TU ENTRENAMIENTO.
               <br />
-              <em>NEVER GENERIC.</em>
+              <em>SIEMPRE A TU MEDIDA.</em>
             </h2>
           </div>
           <div className="heading-copy">
@@ -174,7 +174,7 @@ export function Landing() {
       >
         <div className="section-heading">
           <div>
-            <SectionLabel number="09">COACHING SERVICES</SectionLabel>
+            <SectionLabel number="09">PLANES DE ENTRENAMIENTO</SectionLabel>
             <h2 id="services-title">
               UN MISMO MÉTODO.
               <br />
@@ -211,7 +211,7 @@ export function Landing() {
       >
         <div className="section-heading">
           <div>
-            <SectionLabel number="10">TESTING & ASSESSMENT</SectionLabel>
+            <SectionLabel number="10">PRUEBAS Y EVALUACIÓN</SectionLabel>
             <h2 id="testing-title">
               MEDIR CON UN PROPÓSITO.
               <br />
@@ -219,8 +219,8 @@ export function Landing() {
             </h2>
           </div>
           <p className="heading-copy">
-            Elegimos pruebas cuando pueden orientar una decisión. Los tests de
-            campo forman parte del método; el test de lactato es opcional y
+            Elegimos pruebas cuando pueden orientar una decisión. Las pruebas de
+            campo forman parte del método; la prueba de lactato es opcional y
             tiene condiciones específicas según el plan.
           </p>
         </div>
@@ -261,7 +261,7 @@ export function Landing() {
       >
         <div>
           <SectionLabel number="11">
-            FAQ / INFORMACIÓN PARA DECIDIR
+            PREGUNTAS FRECUENTES / INFORMACIÓN PARA DECIDIR
           </SectionLabel>
           <h2 id="faq-title">
             ANTES DE
@@ -293,7 +293,7 @@ export function Landing() {
         <div className="contact-inner">
           <div className="contact-copy">
             <SectionLabel number="12">
-              CONTACT / TU PREPARACIÓN EMPIEZA AQUÍ
+              CONTACTO / TU PREPARACIÓN EMPIEZA AQUÍ
             </SectionLabel>
             <h2 id="contact-title">
               EMPIEZA TU
@@ -307,7 +307,9 @@ export function Landing() {
             <ol className="contact-expectations">
               <li>Una primera conversación para entender tu preparación.</li>
               <li>Opciones y condiciones claras antes de contratar.</li>
-              <li>Coaching, colectivo o evaluación: elige qué te interesa.</li>
+              <li>
+                Entrenamiento, comunidad o evaluación: elige qué te interesa.
+              </li>
             </ol>
             <a
               className="button light"
@@ -321,8 +323,8 @@ export function Landing() {
             <a className="contact-email" href={`mailto:${site.contact.email}`}>
               {site.contact.email}
             </a>
-            <span className="contact-signature" lang="en">
-              SCIENCE. INDIVIDUALIZATION. PERFORMANCE. COMMUNITY.
+            <span className="contact-signature">
+              CIENCIA. INDIVIDUALIZACIÓN. RENDIMIENTO. COMUNIDAD.
             </span>
           </div>
           <ContactForm />

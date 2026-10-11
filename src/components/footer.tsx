@@ -7,7 +7,7 @@ export function Footer() {
         <a href="#inicio" title="Volver al inicio">
           <Wordmark />
         </a>
-        <span>SCIENCE. INDIVIDUALIZATION. PERFORMANCE. COMMUNITY.</span>
+        <span>CIENCIA. INDIVIDUALIZACIÓN. RENDIMIENTO. COMUNIDAD.</span>
         <div>
           {site.contact.instagram && (
             <a
@@ -21,7 +21,7 @@ export function Footer() {
           )}
           {site.contact.email && (
             <a href={`mailto:${site.contact.email}`}>
-              Email
+              Correo
               <Arrow diagonal />
             </a>
           )}
@@ -34,7 +34,7 @@ export function Footer() {
         </div>
       </div>
       <p className="photo-credits">
-        Fotografía editorial:{" "}
+        Portada facilitada a ICARO. Fotografía editorial:{" "}
         {site.photographyCredits.map((credit, index) => (
           <span key={credit.name}>
             {index > 0 && " / "}
@@ -63,7 +63,7 @@ export function Footer() {
             ) : null,
           )}
         </div>
-        <span>TRAIN WITH PURPOSE.</span>
+        <span>ENTRENA CON PROPÓSITO.</span>
       </div>
     </footer>
   );

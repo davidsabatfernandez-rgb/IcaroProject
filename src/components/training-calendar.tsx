@@ -107,7 +107,7 @@ export function TrainingCalendar({ className = "" }: { className?: string }) {
     >
       <header className="tc-header">
         <div>
-          <p className="tc-eyebrow">INSIDE THE PLAN / TRIATLÓN</p>
+          <p className="tc-eyebrow">TU PLAN POR DENTRO / TRIATLÓN</p>
           <h3 id={titleId} className="tc-title">
             Cada sesión tiene un lugar.
           </h3>

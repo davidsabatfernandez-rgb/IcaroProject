@@ -26,9 +26,9 @@ export const journeyStages = [
   {
     number: "03",
     phase: "INICIO",
-    title: "Hacemos tests de campo.",
+    title: "Hacemos pruebas de campo.",
     text: "Elegimos pruebas útiles para tu rendimiento. Leemos los resultados junto a tus sesiones y sensaciones.",
-    detail: "Tests de campo. Lactato opcional.",
+    detail: "Pruebas de campo. Lactato opcional.",
   },
   {
     number: "04",

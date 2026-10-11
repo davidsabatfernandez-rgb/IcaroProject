@@ -148,12 +148,12 @@ export function DisciplinesSection() {
       <div className="disciplines-heading">
         <div>
           <SectionLabel number="06">
-            DISCIPLINES / EL PROPÓSITO CAMBIA. EL CRITERIO PERMANECE.
+            DISCIPLINAS / EL PROPÓSITO CAMBIA. EL CRITERIO PERMANECE.
           </SectionLabel>
-          <h2 id="disciplines-title" lang="en">
-            ONE METHOD.
+          <h2 id="disciplines-title">
+            UN MÉTODO.
             <br />
-            YOUR DISCIPLINE.
+            TU DISCIPLINA.
           </h2>
         </div>
         <p>

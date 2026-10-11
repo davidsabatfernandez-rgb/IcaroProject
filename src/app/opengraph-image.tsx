@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/config/site";
-export const alt = "ICARO PROJECT — Train with purpose.";
+export const alt = "ICARO PROJECT — Entrena con propósito.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function Image() {
@@ -36,12 +36,12 @@ export default function Image() {
           lineHeight: 1.02,
         }}
       >
-        <span>TRAIN WITH</span>
-        <span>PURPOSE.</span>
+        <span>ENTRENA CON</span>
+        <span>PROPÓSITO.</span>
         <span style={{ color: "#563115" }}>ICARO.</span>
       </div>
       <div style={{ display: "flex", fontSize: 18, letterSpacing: 3 }}>
-        TRIATLÓN · RUNNING · RESISTENCIA + FUERZA
+        TRIATLÓN · CARRERA · RESISTENCIA + FUERZA
       </div>
     </div>,
     size,

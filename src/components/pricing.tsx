@@ -28,7 +28,7 @@ export function Pricing() {
         </div>
         <p>
           {mode === "single"
-            ? "Running, trail, ciclismo o natación, con fuerza adaptada a tu objetivo."
+            ? "Carrera, carrera por montaña, ciclismo o natación, con fuerza adaptada a tu objetivo."
             : "Natación, ciclismo, carrera y fuerza. Planificadas en conjunto."}
         </p>
       </div>
@@ -81,10 +81,10 @@ export function Pricing() {
               <span className="call">{plan.call}</span>
             </div>
             <div className="plan-lactate">
-              <span className="micro">TU TEST DE LACTATO</span>
+              <span className="micro">TU PRUEBA DE LACTATO</span>
               {plan.id === "performance" ? (
                 <>
-                  <strong>1 test incluido cada 6 meses</strong>
+                  <strong>1 prueba incluida cada 6 meses</strong>
                   <p>También puedes consultar la opción trimestral.</p>
                 </>
               ) : (
@@ -93,7 +93,7 @@ export function Pricing() {
                   <p>
                     {plan.id === "coaching"
                       ? "Consulta la promoción trimestral."
-                      : "Pregúntanos cuándo puede ayudarte un test."}
+                      : "Pregúntanos cuándo puede ayudarte una prueba."}
                   </p>
                 </>
               )}
@@ -104,7 +104,7 @@ export function Pricing() {
       <p className="prices-note plans-note">
         ¿No sabes qué seguimiento elegir? Cuéntanos tu objetivo y tu
         disponibilidad: te explicaremos qué plan encaja contigo y sus
-        condiciones antes de empezar. Los tests de lactato son opcionales.
+        condiciones antes de empezar. Las pruebas de lactato son opcionales.
       </p>
     </>
   );

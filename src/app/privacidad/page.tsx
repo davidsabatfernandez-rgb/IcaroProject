@@ -27,23 +27,23 @@ export default function PrivacyPage() {
       </p>
       <h2 style={{ fontSize: 24 }}>Qué datos utilizamos y para qué</h2>
       <p>
-        El formulario recoge tu nombre, email o teléfono, deporte, objetivo,
-        interés en coaching, colectivo o evaluaciones, plan elegido y el mensaje
-        que decidas añadir. También incluye la sección desde la que contactas y,
-        si existen, parámetros limitados de campaña de la URL de entrada. Los
-        usamos para dar contexto a tu consulta, responder a tu solicitud y
-        explicarte las opciones de entrenamiento. No añadas información médica
-        ni otros datos sensibles. Enviar una consulta no te suscribe a
-        comunicaciones comerciales.
+        El formulario recoge tu nombre, correo o teléfono, deporte, objetivo,
+        interés en entrenamiento individual, colectivo o evaluaciones, plan
+        elegido y el mensaje que decidas añadir. También incluye la sección
+        desde la que contactas y, si existen, parámetros limitados de campaña de
+        la URL de entrada. Los usamos para dar contexto a tu consulta, responder
+        a tu solicitud y explicarte las opciones de entrenamiento. No añadas
+        información médica ni otros datos sensibles. Enviar una consulta no te
+        suscribe a comunicaciones comerciales.
       </p>
       <h2 style={{ fontSize: 24 }}>Cómo se envía</h2>
       <p>
         Al enviar, el servidor de la web recibe tu consulta y utiliza Resend
         para remitirla al correo de ICARO PROJECT. El correo se recibe en Gmail,
-        de Google. Si el email falla, puedes elegir enviar la consulta por
-        WhatsApp, de Meta. Estos proveedores pueden tratar información técnica
-        asociada al envío conforme a sus políticas y operar fuera del Espacio
-        Económico Europeo.
+        de Google. Si el envío por correo falla, puedes elegir enviar la
+        consulta por WhatsApp, de Meta. Estos proveedores pueden tratar
+        información técnica asociada al envío conforme a sus políticas y operar
+        fuera del Espacio Económico Europeo.
       </p>
       <p>
         <a

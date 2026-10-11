@@ -29,6 +29,7 @@ html {
 }
 body {
   margin: 0;
+  padding-bottom: max(84px, calc(68px + env(safe-area-inset-bottom, 0px)));
   background: var(--paper);
   color: var(--ink);
   font: 16px/1.7 var(--body);
@@ -365,7 +366,7 @@ p {
   justify-content: center;
 }
 .atelier-hero h1 {
-  font-size: clamp(78px, 8.2vw, 136px);
+  font-size: clamp(66px, 7.9vw, 126px);
   line-height: 0.88;
   margin: 32px 0;
   color: var(--accent);
@@ -402,7 +403,7 @@ p {
 }
 .atelier-hero-image img {
   object-fit: cover;
-  object-position: 54% center;
+  object-position: 44% center;
 }
 .atelier-photo-caption {
   position: absolute;
@@ -1118,7 +1119,7 @@ p {
     min-height: 600px;
   }
   .atelier-hero h1 {
-    font-size: clamp(75px, 8.5vw, 115px);
+    font-size: clamp(64px, 7.6vw, 94px);
   }
   .atelier-hero-image {
     min-height: 560px;
@@ -1153,7 +1154,7 @@ p {
     gap: 36px;
   }
   .atelier-hero h1 {
-    font-size: 78px;
+    font-size: 64px;
   }
   .atelier-hero-signature {
     font-size: 7px;
@@ -1279,7 +1280,7 @@ p {
     font-size: 9px;
   }
   .atelier-hero h1 {
-    font-size: clamp(71px, 14vw, 100px);
+    font-size: clamp(64px, 13.5vw, 94px);
     margin: 26px 0;
   }
   .atelier-hero-description {
@@ -1488,7 +1489,7 @@ p {
     padding-inline: 20px;
   }
   .atelier-hero h1 {
-    font-size: 71px;
+    font-size: clamp(60px, 18.75vw, 67px);
   }
   .hero-actions .button {
     padding: 13px 16px;

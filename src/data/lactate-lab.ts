@@ -40,7 +40,7 @@ function pace(seconds: number) {
 export const lactateDisciplines: readonly LabDiscipline[] = [
   {
     id: "running",
-    label: "Running",
+    label: "Carrera",
     intensityLabel: "Ritmo",
     axisLabel: "Ritmo de carrera · min/km · intensidad creciente →",
     formatIntensity: (speed) => `${pace(3600 / speed)} /km`,
@@ -114,7 +114,7 @@ export const lactateDisciplines: readonly LabDiscipline[] = [
       },
     },
     context:
-      "Los watts describen trabajo externo. Lactato, frecuencia cardiaca y sensaciones ayudan a interpretar su coste: igual potencia no siempre significa igual respuesta.",
+      "Los vatios describen trabajo externo. Lactato, frecuencia cardiaca y sensaciones ayudan a interpretar su coste: igual potencia no siempre significa igual respuesta.",
   },
   {
     id: "swimming",
@@ -153,7 +153,7 @@ export const lactateDisciplines: readonly LabDiscipline[] = [
       },
     },
     context:
-      "El ritmo en el agua exige contexto técnico: longitud de piscina, pausas y eficiencia de nado influyen en la lectura. Esta demo no registra frecuencia cardiaca.",
+      "El ritmo en el agua exige contexto técnico: longitud de piscina, pausas y eficiencia de nado influyen en la lectura. Esta demostración no registra frecuencia cardiaca.",
   },
 ];
 
@@ -175,8 +175,8 @@ export const lactateInterpretations = [
   {
     label: "Por encima de la referencia LT2",
     observation:
-      "La acumulación es mayor en los últimos escalones. Un test incremental aislado no demuestra cuánto tiempo puede sostenerse esta intensidad.",
+      "La acumulación es mayor en los últimos escalones. Una prueba incremental aislada no demuestra cuánto tiempo puede sostenerse esta intensidad.",
     decision:
-      "Los bloques exigentes necesitan una dosis y una recuperación coherentes. Contrastamos estas referencias con sesiones, tests de campo y respuesta del atleta.",
+      "Los bloques exigentes necesitan una dosis y una recuperación coherentes. Contrastamos estas referencias con sesiones, pruebas de campo y respuesta del atleta.",
   },
 ] as const;

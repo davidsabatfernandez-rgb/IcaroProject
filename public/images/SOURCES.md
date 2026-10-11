@@ -2,7 +2,7 @@
 
 Revisión: 7 de octubre de 2026. Se utilizan fotografías reales con **licencia gratuita para uso comercial**, según las licencias Unsplash y Pexels identificadas en las fuentes indicadas abajo. Estas licencias conservan el copyright del autor: no son una declaración de dominio público ni de CC0.
 
-Las imágenes son escenas ilustrativas de deporte. No representan atletas entrenados por ICARO PROJECT, centros de ICARO, testimonios, patrocinadores ni colaboradores. No se han generado o retocado con IA; los archivos coinciden, byte a byte, con sus respectivos mirrors fijados por commit.
+Las imágenes son escenas ilustrativas de deporte. No representan atletas entrenados por ICARO PROJECT, centros de ICARO, testimonios, patrocinadores ni colaboradores. Las fotografías de Unsplash y Pexels no se han generado o retocado con IA; sus archivos coinciden, byte a byte, con los mirrors fijados por commit. La nueva portada procede del archivo adjunto facilitado por el propietario y tiene un ajuste cromático realizado con la herramienta de edición de imagen.
 
 ## Alcance de la comprobación
 
@@ -11,7 +11,13 @@ Las imágenes son escenas ilustrativas de deporte. No representan atletas entren
 - Las páginas originales y las páginas de licencia de Unsplash/Pexels no pudieron consultarse directamente en esta revisión: el proxy del entorno respondió `CONNECT 403`. La evidencia comprobada de cada foto procede de los mirrors enlazados, no de una nueva validación de la página original. No se verificaron de nuevo los términos vigentes de esas páginas.
 - Una licencia de fotografía no acredita por sí sola cesiones de imagen de las personas ni autorizaciones sobre marcas o instalaciones. No constan esas cesiones en los mirrors. Los encuadres seleccionados reducen la identificación de personas; no debe afirmarse afiliación o respaldo de quienes aparecen.
 
-## running-track.jpg — portada
+## triathlon-start.jpg — portada actual
+
+- Imagen adjunta facilitada por el propietario, quien solicita su uso como portada. No se atribuye a un fotógrafo ni se declara una licencia libre desconocida.
+- Ajuste cromático suave con herramienta de edición de imagen: tonos cálidos y contraste para la paleta cobre y marfil. Derivado optimizado en JPEG, 1536 × 1024.
+- La escena de competición y las marcas visibles no se presentan como colaboradores o patrocinadores de ICARO.
+
+## running-track.jpg — portada anterior, archivo conservado
 
 - Autor: **Steven Lelham**.
 - Original: [atSaEOeE8Nk, corredores en pista](https://unsplash.com/photos/group-of-people-running-on-stadium-atSaEOeE8Nk).
@@ -57,4 +63,4 @@ Las imágenes son escenas ilustrativas de deporte. No representan atletas entren
 
 ## Fotografías sustituidas
 
-Se retiraron los primeros planos `triathlon-race.jpg` y `running-race.jpg`, de Quino Al: aunque tenían procedencia Unsplash documentada, mostraban atletas identificables y los clubes TRI GRANADA / TRIATLÓN JAÉN sin evidencia de relación con ICARO ni cesión de imagen. Las sustitutas conservan fotografía real y reducen esas asociaciones. Los créditos del sitio deben corresponder a los cuatro archivos activos de este documento.
+Se retiraron los primeros planos `triathlon-race.jpg` y `running-race.jpg`, de Quino Al: aunque tenían procedencia Unsplash documentada, mostraban atletas identificables y los clubes TRI GRANADA / TRIATLÓN JAÉN sin evidencia de relación con ICARO ni cesión de imagen. Las sustitutas conservan fotografía real y reducen esas asociaciones. Los créditos del sitio corresponden a las fotografías editoriales de terceros utilizadas. La nueva portada se identifica como archivo facilitado a ICARO.

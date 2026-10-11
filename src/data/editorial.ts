@@ -50,7 +50,7 @@ export const contextualComparisons = [
     label: "CARGA EXTERNA / RESPUESTA INTERNA",
     title: "La misma potencia. Otro coste.",
     description:
-      "Los watts describen el trabajo externo. El esfuerzo percibido y otras respuestas ayudan a entender cómo lo estás viviendo.",
+      "Los vatios describen el trabajo externo. El esfuerzo percibido y otras respuestas ayudan a entender cómo lo estás viviendo.",
     detail:
       "La frecuencia cardiaca, el lactato o las sensaciones pueden variar entre personas y entre días. El protocolo, el ambiente, la fatiga y el historial del atleta importan. Una cifra de potencia no determina por sí sola la intensidad fisiológica.",
   },
@@ -80,7 +80,7 @@ export const coachTeam = {
   title: ["ENTRENADORES.", "ATLETAS.", "TU EQUIPO."],
   lead: "Experiencia en el entrenamiento. Experiencia en la competición.",
   introduction:
-    "Nuestro equipo reúne entrenadores con experiencia, finishers de Ironman y triatletas que compiten actualmente a alto nivel. Criterio de entrenamiento y vivencia deportiva al servicio de tu preparación.",
+    "Nuestro equipo reúne entrenadores con experiencia, atletas que han completado pruebas de Ironman y triatletas que compiten actualmente a alto nivel. Criterio de entrenamiento y vivencia deportiva al servicio de tu preparación.",
   method:
     "Tu entrenador interpreta las sesiones con tus sensaciones y te explica qué buscamos. El seguimiento tiene un propósito: que entiendas tu preparación y que el siguiente paso responda a tu realidad.",
   contact: "Conoce al equipo",

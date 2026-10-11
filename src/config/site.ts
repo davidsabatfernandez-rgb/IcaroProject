@@ -10,7 +10,7 @@ export const site = {
     philosophy: "",
   },
   description:
-    "Preparación individualizada de triatlón y resistencia: fisiología aplicada, fuerza, planificación en TrainingPeaks, feedback semanal e ICARO Collective.",
+    "Preparación individualizada de triatlón y resistencia: fisiología aplicada, fuerza, planificación en TrainingPeaks, revisión semanal y Comunidad ICARO.",
   url: "https://www.icaroproject.es",
   trainingPeaksUrl: "https://www.trainingpeaks.com/",
   community: { name: "Social ICARO", instagramGroupUrl: "" },
@@ -23,7 +23,7 @@ export const site = {
   legal: { notice: "", privacy: "/privacidad", cookies: "" },
   privacy: { responsibleName: "" },
   images: {
-    hero: "/images/running-track.jpg",
+    hero: "/images/triathlon-start.jpg",
     running: "/images/running-coast.jpg",
     cycling: "/images/road-cycling.jpg",
     swimming: "/images/swimming-technique.webp",
@@ -31,7 +31,6 @@ export const site = {
     lactate: "",
   },
   photographyCredits: [
-    { name: "Steven Lelham", url: "https://unsplash.com/photos/atSaEOeE8Nk" },
     { name: "Fred Neethling", url: "https://unsplash.com/photos/T_KWo8LMyK4" },
     { name: "Marcus Ng", url: "https://unsplash.com/photos/ZbbhkQ0M2AM" },
     {

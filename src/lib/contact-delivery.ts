@@ -1,12 +1,14 @@
 const recipient = "contacticaroproject@gmail.com";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const interests: Record<string, string> = {
-  coaching: "Coaching individual",
-  collective: "ICARO Collective",
-  tests: "Tests y evaluaciones",
+  coaching: "Entrenamiento individual",
+  collective: "Comunidad ICARO",
+  tests: "Pruebas y evaluaciones",
 };
 const sports = new Set([
-  "Running",
+  "Carrera",
+  "Carrera por montaña",
+  "Running", // Compatibilidad con formularios abiertos antes de la traducción.
   "Trail",
   "Ciclismo",
   "Natación",
@@ -94,7 +96,7 @@ export async function handleContact(
   if (!options.apiKey) {
     return failure(
       503,
-      "El envío por email aún no está disponible. Puedes enviarnos esta consulta por WhatsApp.",
+      "El envío por correo electrónico aún no está disponible. Puedes enviarnos esta consulta por WhatsApp.",
     );
   }
   try {

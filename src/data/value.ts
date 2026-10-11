@@ -4,7 +4,7 @@ export const valueCopy = {
   intro:
     "Entre trabajo, familia y tres disciplinas, cada hora cuenta. Partimos de tu semana real para elegir las sesiones que necesitas y revisar contigo cómo respondes.",
   closeness:
-    "Entrenadores online, cerca del atleta. Para nosotros, trabajar como una familia empieza por escucharte, conocer tu contexto y acompañarte cada semana.",
+    "Entrenadores a distancia, cerca del atleta. Para nosotros, trabajar como una familia empieza por escucharte, conocer tu contexto y acompañarte cada semana.",
   action: "Cuéntanos cómo es tu semana",
 };
 
@@ -28,7 +28,7 @@ export const athleteNeeds = [
     concern:
       "Fatiga, sensaciones y dudas: no tienes por qué interpretarlas solo.",
     answer:
-      "Revisamos tus datos y te escuchamos. El feedback semanal da contexto a lo realizado y orienta la siguiente semana; el contacto se adapta al plan que elijas.",
+      "Revisamos tus datos y te escuchamos. La revisión semanal da contexto a lo realizado y orienta la siguiente semana; el contacto se adapta al plan que elijas.",
     outcome: "Tu entrenador conoce tu proceso.",
   },
 ] as const;

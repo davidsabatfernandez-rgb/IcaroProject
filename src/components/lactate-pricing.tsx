@@ -8,8 +8,8 @@ export function LactatePricing() {
     <div className="lactate-tariffs">
       <div className="lactate-standalone">
         <div>
-          <span className="micro">TAMBIÉN PUEDES CONTRATAR SOLO EL TEST</span>
-          <h3>Test de lactato en pista.</h3>
+          <span className="micro">TAMBIÉN PUEDES CONTRATAR SOLO LA PRUEBA</span>
+          <h3>Prueba de lactato en pista.</h3>
           <p>
             Para conocer tu respuesta y orientar las intensidades, también si
             todavía no entrenas con ICARO.
@@ -23,9 +23,9 @@ export function LactatePricing() {
             className="button accent"
             interest="tests"
             source="lactato"
-            plan="Test de lactato en pista"
+            plan="Prueba de lactato en pista"
           >
-            Consultar condiciones del test
+            Consultar condiciones de la prueba
             <Arrow diagonal />
           </EnquiryLink>
         </div>
@@ -41,26 +41,26 @@ export function LactatePricing() {
             </dd>
           </div>
           <div>
-            <dt>Coaching</dt>
+            <dt>Seguimiento</dt>
             <dd>
               <strong>Promoción trimestral.</strong>
               <p>Consulta las condiciones junto a tu seguimiento.</p>
             </dd>
           </div>
           <div>
-            <dt>Performance</dt>
+            <dt>Rendimiento</dt>
             <dd>
               <strong>
-                1 test incluido <span>cada 6 meses</span>
+                1 prueba incluida <span>cada 6 meses</span>
               </strong>
               <p>También puedes consultar la opción trimestral.</p>
             </dd>
           </div>
         </dl>
         <p className="lactate-rate-note">
-          Tests opcionales. Para los tests en pista, el desplazamiento se
-          presupuesta antes de reservar. Performance combina seguimiento cercano
-          con la ventaja de un test semestral incluido.
+          Pruebas opcionales. Para las pruebas en pista, el desplazamiento se
+          presupuesta antes de reservar. Rendimiento combina seguimiento cercano
+          con la ventaja de una prueba semestral incluida.
         </p>
       </div>
     </div>

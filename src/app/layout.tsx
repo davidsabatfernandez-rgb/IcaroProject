@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/config/site";
+import { WhatsAppBubble } from "@/components/whatsapp-bubble";
 const displayFont = localFont({
   src: [
     {
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "ICARO PROJECT. Train with purpose.",
+        alt: "ICARO PROJECT. Entrena con propósito.",
       },
     ],
   },
@@ -72,6 +73,7 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         {children}
+        <WhatsAppBubble />
       </body>
     </html>
   );

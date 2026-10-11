@@ -6,10 +6,10 @@ const endpoint = `${origin}/api/contact`;
 const validEnquiry = {
   name: "Atleta de prueba",
   contact: "atleta@example.com",
-  sport: "Atleta híbrido",
+  sport: "Carrera",
   goal: "Preparar una media maratón",
   message: "Tengo tres tardes disponibles.",
-  plan: "Coaching",
+  plan: "Seguimiento",
   interest: "coaching",
   source: "planes | /#inicio | utm_source=instagram",
   consent: "on",
@@ -78,7 +78,7 @@ test("contact API sends a fixed recipient and preserves the athlete's enquiry", 
     "source",
   ] as const)
     expect(payload.text).toContain(validEnquiry[field]);
-  expect(payload.text).toContain("Interés: Coaching individual");
+  expect(payload.text).toContain("Interés: Entrenamiento individual");
   expect(payload).not.toHaveProperty("html");
 });
 
@@ -132,18 +132,23 @@ test("contact API rejects invalid fields and honeypot submissions before contact
 
 test("contact API preserves collective and testing interests and accepts trail enquiries", async () => {
   for (const [interest, label] of [
-    ["collective", "ICARO Collective"],
-    ["tests", "Tests y evaluaciones"],
+    ["collective", "Comunidad ICARO"],
+    ["tests", "Pruebas y evaluaciones"],
   ]) {
     const mail = provider({ id: `${interest}-message-id` });
     const response = await handleContact(
-      enquiry({ interest, sport: "Trail", plan: "", source: "disciplinas" }),
+      enquiry({
+        interest,
+        sport: "Carrera por montaña",
+        plan: "",
+        source: "disciplinas",
+      }),
       { apiKey: "test-api-key", send: mail.send },
     );
     expect(response.status).toBe(200);
     const payload = JSON.parse(String(mail.requests[0].init?.body));
     expect(payload.text).toContain(`Interés: ${label}`);
-    expect(payload.text).toContain("Deporte: Trail");
+    expect(payload.text).toContain("Deporte: Carrera por montaña");
     expect(payload.text).toContain("Origen: disciplinas");
     expect(payload.text).not.toContain("Plan:");
   }
@@ -157,7 +162,7 @@ test("contact API remains compatible with enquiries without interest or origin",
   );
   expect(response.status).toBe(200);
   const payload = JSON.parse(String(mail.requests[0].init?.body));
-  expect(payload.text).toContain("Interés: Coaching individual");
+  expect(payload.text).toContain("Interés: Entrenamiento individual");
   expect(payload.text).not.toContain("Origen:");
 });
 

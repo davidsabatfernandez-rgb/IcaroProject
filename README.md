@@ -22,7 +22,7 @@ Si la caché de npm no es escribible: `npm ci --cache /tmp/icaro-npm-cache`.
 
 ## Rediseño Endurance Performance Atelier
 
-El trabajo está en la rama independiente `redesign/endurance-atelier`. **No se debe fusionar con la rama de producción ni promover un despliegue sin autorización del propietario.** La rama de producción existente es `icaro-web`.
+El propietario autorizó la publicación del rediseño y se integró en la rama de producción `icaro-web`. Los cambios se envían a esa rama para el despliegue de Vercel; un push correcto no confirma por sí solo que Vercel haya finalizado.
 
 La landing combina doce secciones: portada, filosofía, laboratorio ilustrativo, interpretación, planificación, disciplinas, equipo, colectivo, servicios, evaluaciones, FAQ y contacto. La composición se concentra en `src/sections/landing.tsx`; las decisiones y los pendientes están en `docs/ENDURANCE_ATELIER.md`.
 
@@ -109,6 +109,12 @@ En este entorno Playwright usa `/usr/bin/chromium`. En otro sistema instala el n
 
 Canonical y sitemap usan `https://www.icaroproject.es`. Esto no modifica DNS. En Vercel deben estar ambos dominios, con `icaroproject.es` redirigiendo a `www.icaroproject.es`. Los registros se toman del panel del proyecto, no de una URL con `https://` o una ruta. Mantener una única estrategia de DNS y no cambiar MX/TXT de correo sin revisar sus servicios.
 
-No hay acceso autenticado a Vercel, IONOS ni Gmail desde este entorno. El dominio público y la recepción real no se certifican con pruebas locales. Esta rama es de revisión; configurar un Preview separado si se quiere compartir sin publicar en producción.
+No hay acceso autenticado a Vercel, IONOS ni Gmail desde este entorno. El dominio público y la recepción real no se certifican con pruebas locales. Para revisiones independientes, configurar un Preview separado antes de promover al dominio principal.
 
 Las tareas de nube utilizan este checkout aislado; no crear worktrees salvo petición expresa.
+
+## Actualización en español
+
+La interfaz, las opciones del formulario y las respuestas de contacto utilizan español. Los planes visibles son Individual, Seguimiento y Rendimiento; conservan las mismas prestaciones y los identificadores internos. La API admite Carrera y Carrera por montaña, además de los valores antiguos para consultas abiertas antes de la actualización.
+
+La portada usa `public/images/triathlon-start.jpg`, a partir de la imagen facilitada por el propietario, con ajuste cromático y optimización JPEG. Su origen se documenta en `public/images/SOURCES.md`. `WhatsAppBubble` se renderiza en el layout para estar disponible en todas las páginas, incluidas privacidad y la página de error 404 en español. Abre WhatsApp directamente y no envía mensajes automáticamente.
