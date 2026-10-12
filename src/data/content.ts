@@ -5,6 +5,8 @@ export const navigation = [
   { label: "Disciplinas", href: "#disciplinas" },
   { label: "Comunidad", href: "#comunidad" },
   { label: "Planes", href: "#planes" },
+  { label: "Tienda", href: "/tienda" },
+  { label: "Artículos", href: "/articulos" },
 ];
 export const copy = {
   hero: {
@@ -40,8 +42,9 @@ export const plans = [
     number: "01",
     name: "Individual",
     label: "TU PLAN. TU AUTONOMÍA.",
+    value: "Un plan claro para entrenar con criterio.",
     description:
-      "Quieres un plan bien explicado, revisión semanal y libertad para organizarte con autonomía.",
+      "Una preparación individualizada, explicada y revisada cada semana. Para quien prefiere organizarse con autonomía y recibir una orientación clara.",
     features: [
       "Análisis de sesiones importantes",
       "Revisión semanal por audios de WhatsApp",
@@ -51,14 +54,25 @@ export const plans = [
     detail:
       "Entre sábado y domingo recibes audios con la explicación de la semana anterior y los objetivos de la siguiente, junto a tu nueva programación.",
     call: "Sin llamadas de seguimiento",
+    comparison: {
+      communication: "Revisión semanal por audios de WhatsApp",
+      calls: "Inicial incluida; sin llamadas de seguimiento",
+      lactate: "Prueba opcional con condiciones para atletas del plan",
+    },
+    lactate: {
+      headline: "Condiciones para atletas del plan",
+      detail:
+        "La prueba es opcional: te explicamos cuándo puede aportar información a tu preparación.",
+    },
   },
   {
     id: "coaching",
     number: "02",
     name: "Seguimiento",
-    label: "UN PUNTO DE CONTACTO DIARIO.",
+    label: "PLANIFICACIÓN Y CONTACTO REGULAR.",
+    value: "Tu entrenamiento, en constante evolución.",
     description:
-      "Quieres resolver tus dudas cada día, ajustar el plan cuando hace falta y hablar con tu entrenador una vez al mes.",
+      "Un entrenador que interpreta tu respuesta y adapta el proceso contigo. Para quien quiere resolver dudas durante la semana y mantener una conversación regular.",
     features: [
       "Plan individual y revisión semanal",
       "Consultas diarias al entrenador",
@@ -70,14 +84,25 @@ export const plans = [
     detail:
       "Comparte tus dudas, sensaciones y cambios de disponibilidad durante la semana. Estamos cerca para revisar contigo lo que necesitas.",
     call: "Llamada mensual",
+    comparison: {
+      communication: "Consultas diarias y ajustes durante la semana",
+      calls: "Inicial incluida y una llamada mensual",
+      lactate: "Prueba opcional con promoción trimestral",
+    },
+    lactate: {
+      headline: "Promoción trimestral para tu prueba",
+      detail:
+        "Consulta las condiciones de la prueba opcional de lactato para atletas de Seguimiento.",
+    },
   },
   {
     id: "performance",
     number: "03",
     name: "Rendimiento",
-    label: "MÁS CERCA DE CADA DECISIÓN.",
+    label: "ANÁLISIS Y CONTACTO MÁS DIRECTOS.",
+    value: "Una colaboración más profunda con tu rendimiento.",
     description:
-      "Quieres un acompañamiento más cercano, disponibilidad para tus dudas y una llamada cada semana para revisar tu evolución.",
+      "Más proximidad para revisar decisiones, comparar ciclos y preparar la competición. Para quien busca un análisis en profundidad y una llamada cada semana.",
     features: [
       "Plan individual y revisión semanal",
       "Consultas diarias y contacto cercano",
@@ -89,6 +114,16 @@ export const plans = [
     detail:
       "En la llamada semanal revisamos cómo fue la semana anterior y qué buscamos en la siguiente. Durante la semana estamos disponibles para resolver tus dudas.",
     call: "Llamada semanal",
+    comparison: {
+      communication: "Consultas diarias y análisis en profundidad",
+      calls: "Inicial incluida y una llamada semanal",
+      lactate: "Una prueba incluida cada 6 meses; opción trimestral",
+    },
+    lactate: {
+      headline: "1 prueba incluida cada 6 meses",
+      detail:
+        "También puedes consultar la opción trimestral. Las pruebas se realizan cuando aportan información útil.",
+    },
   },
 ] as const;
 export const faqs = [

@@ -29,12 +29,18 @@ export default function PrivacyPage() {
       <p>
         El formulario recoge tu nombre, correo o teléfono, deporte, objetivo,
         interés en entrenamiento individual, colectivo o evaluaciones, plan
-        elegido y el mensaje que decidas añadir. También incluye la sección
-        desde la que contactas y, si existen, parámetros limitados de campaña de
-        la URL de entrada. Los usamos para dar contexto a tu consulta, responder
-        a tu solicitud y explicarte las opciones de entrenamiento. No añadas
-        información médica ni otros datos sensibles. Enviar una consulta no te
-        suscribe a comunicaciones comerciales.
+        elegido y el mensaje que decidas añadir. En la valoración de
+        entrenamiento puedes indicar fecha aproximada, experiencia, horas
+        disponibles, dificultad actual, seguimiento deseado y presupuesto
+        orientativo. También incluye la sección desde la que contactas y, si
+        existen, parámetros limitados de campaña de la URL de entrada. Los
+        usamos para dar contexto a tu consulta, responder a tu solicitud y
+        explicarte las opciones de entrenamiento. No añadas información médica
+        ni otros datos sensibles. Enviar una consulta no te suscribe a
+        comunicaciones comerciales. El equipo revisa cada solicitud. Un
+        indicador de encaje inicial basado en la disponibilidad y el seguimiento
+        solicitado sirve para organizar la revisión; no acepta ni rechaza una
+        contratación y no sustituye una decisión humana.
       </p>
       <h2 style={{ fontSize: 24 }}>Cómo se envía</h2>
       <p>
@@ -84,6 +90,30 @@ export default function PrivacyPage() {
           Agencia Española de Protección de Datos
         </a>
         .
+      </p>
+      <h2 id="medicion" style={{ fontSize: 24 }}>
+        Carrito y preferencias de medición
+      </h2>
+      <p>
+        La tienda de demostración conserva en tu navegador los diseños, tallas y
+        cantidades que añades al carrito. Puedes eliminarlos desde la tienda. No
+        recoge tarjetas reales, datos de entrega ni crea pedidos.
+      </p>
+      <p>
+        Si se activa la medición del sitio, puedes aceptar o rechazar por
+        separado la analítica y la publicidad, y cambiar tu elección desde el
+        pie de página. Las herramientas de Google solo se cargan para las
+        categorías que aceptes. Los eventos describen acciones como abrir una
+        consulta, elegir un plan o enviar una solicitud aceptada por el
+        proveedor de correo. No incluyen tu nombre, contacto, objetivo, mensaje
+        ni datos bancarios. Un clic en WhatsApp no se registra como una
+        contratación.
+      </p>
+      <p>
+        Con tu elección válida, la medición puede conservar identificadores
+        limitados de campaña y, para publicidad, el identificador del clic. Las
+        preferencias se guardan en este navegador. Si rechazas la medición,
+        puedes seguir usando el formulario y todos los servicios del sitio.
       </p>
     </main>
   );

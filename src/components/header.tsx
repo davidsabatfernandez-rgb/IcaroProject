@@ -1,15 +1,20 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { navigation } from "@/data/content";
 import { Wordmark, Arrow } from "./ui";
 import { EnquiryLink } from "./enquiry-link";
 export function Header() {
   const [open, setOpen] = useState(false);
+  const isHome = usePathname() === "/";
+  const destination = (href: string) =>
+    href.startsWith("#") && !isHome ? `/${href}` : href;
   return (
     <header className="header">
       <a
         className="logo-link"
-        href="#inicio"
+        href={isHome ? "#inicio" : "/#inicio"}
         title="Volver al inicio"
         onClick={() => setOpen(false)}
       >
@@ -17,9 +22,9 @@ export function Header() {
       </a>
       <nav className="desktop-nav" aria-label="Principal">
         {navigation.map((n) => (
-          <a key={n.href} href={n.href}>
+          <Link key={n.href} href={destination(n.href)}>
             {n.label}
-          </a>
+          </Link>
         ))}
       </nav>
       <EnquiryLink className="header-cta" interest="coaching" source="header">
@@ -46,10 +51,14 @@ export function Header() {
           }}
         >
           {navigation.map((n) => (
-            <a key={n.href} href={n.href} onClick={() => setOpen(false)}>
+            <Link
+              key={n.href}
+              href={destination(n.href)}
+              onClick={() => setOpen(false)}
+            >
               {n.label}
               <Arrow diagonal />
-            </a>
+            </Link>
           ))}
           <EnquiryLink interest="coaching" source="header-mobile">
             Empieza tu preparación <Arrow diagonal />

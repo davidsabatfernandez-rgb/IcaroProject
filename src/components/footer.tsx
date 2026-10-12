@@ -1,14 +1,21 @@
 import { site, whatsappUrl } from "@/config/site";
 import { Wordmark, Arrow } from "./ui";
-export function Footer() {
+import { CommercialPreferencesButton } from "./commercial-analytics";
+export function Footer({ home = false }: { home?: boolean } = {}) {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <a href="#inicio" title="Volver al inicio">
+        <a href={home ? "#inicio" : "/#inicio"} title="Volver al inicio">
           <Wordmark />
         </a>
         <span>CIENCIA. INDIVIDUALIZACIÓN. RENDIMIENTO. COMUNIDAD.</span>
         <div>
+          <a href="/tienda">
+            Tienda <Arrow diagonal />
+          </a>
+          <a href="/articulos">
+            Artículos <Arrow diagonal />
+          </a>
           {site.contact.instagram && (
             <a
               href={site.contact.instagram}
@@ -62,6 +69,7 @@ export function Footer() {
               </a>
             ) : null,
           )}
+          <CommercialPreferencesButton />
         </div>
         <span>ENTRENA CON PROPÓSITO.</span>
       </div>

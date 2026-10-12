@@ -1,0 +1,265 @@
+.atelier-hero.atelier-hero-conversion .atelier-hero-copy {
+  min-width: 0;
+}
+.atelier-hero.atelier-hero-conversion h1 {
+  font-size: clamp(58px, 5.7vw, 91px);
+  line-height: 0.95;
+  max-width: 100%;
+  margin-block: 26px;
+}
+.atelier-hero-conversion .hero-audience {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.65;
+  max-width: 460px;
+}
+.atelier-hero-conversion .hero-audience strong {
+  font-weight: 600;
+}
+.atelier-hero-conversion .atelier-hero-signature {
+  margin-top: 30px;
+}
+.method-why {
+  border-bottom: 1px solid var(--line);
+}
+.method-differences {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 38px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-differences li {
+  min-width: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.method-differences .micro {
+  color: var(--bronze);
+}
+.method-differences h3 {
+  margin-top: 14px;
+  max-width: 320px;
+}
+.method-differences p {
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.method-overview {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.method-cycle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 34px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-cycle li {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+}
+.method-cycle summary {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 16px;
+  grid-template-rows: auto auto;
+  align-items: baseline;
+  gap: 7px 9px;
+  cursor: pointer;
+  padding: 20px 0;
+  list-style: none;
+}
+.method-cycle summary::-webkit-details-marker {
+  display: none;
+}
+.method-step-number {
+  color: var(--bronze);
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.method-step-name {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.method-step-prompt {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.method-step-toggle {
+  grid-column: 3;
+  grid-row: 1;
+  color: var(--bronze);
+  font-size: 23px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+.method-cycle details[open] .method-step-toggle {
+  transform: rotate(45deg);
+}
+.method-cycle details > p {
+  padding: 0 8px 20px 43px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.method-cycle-return {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-top: 24px;
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.method-cycle-return > span {
+  color: var(--bronze);
+  font-size: 24px;
+  line-height: 1;
+}
+.method-cycle-return p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.method-overview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 38px;
+  margin-top: 28px;
+}
+.method-laboratory-link {
+  color: var(--muted);
+}
+.atelier-scientific-detail {
+  max-width: 1600px;
+  margin: auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+.atelier-scientific-detail > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px max(5.5vw, 24px);
+  list-style: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+.atelier-scientific-detail > summary::-webkit-details-marker {
+  display: none;
+}
+.atelier-scientific-detail > summary > span {
+  font-size: 25px;
+  font-weight: 400;
+  color: var(--bronze);
+  transition: transform 180ms ease;
+}
+.atelier-scientific-detail[open] > summary > span {
+  transform: rotate(45deg);
+}
+.atelier-scientific-detail .en-philosophy {
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .atelier-hero.atelier-hero-conversion h1 {
+    font-size: clamp(49px, 5.7vw, 63px);
+  }
+}
+@media (max-width: 840px) {
+  .method-differences {
+    gap: 24px;
+  }
+  .method-cycle {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 28px;
+  }
+}
+@media (max-width: 760px) {
+  .atelier-hero.atelier-hero-conversion h1 {
+    font-size: clamp(40px, 12vw, 82px);
+    margin-block: 24px;
+  }
+  .atelier-hero-conversion .hero-audience {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+  .atelier-hero-conversion .atelier-hero-signature {
+    margin-top: 22px;
+  }
+  .method-differences {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .method-differences h3 {
+    margin-top: 10px;
+    font-size: 22px;
+    max-width: none;
+  }
+  .method-differences p {
+    margin-top: 10px;
+  }
+  .method-cycle summary {
+    grid-template-columns: 22px minmax(0, 1fr) 12px;
+    gap: 7px;
+  }
+  .method-step-name {
+    font-size: 17px;
+  }
+  .method-step-number {
+    font-size: 20px;
+  }
+  .method-step-prompt {
+    font-size: 11px;
+  }
+  .method-step-toggle {
+    font-size: 18px;
+  }
+  .method-cycle details > p {
+    padding-left: 0;
+    font-size: 12px;
+  }
+  .method-overview-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .atelier-scientific-detail > summary {
+    padding: 24px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .method-cycle {
+    gap: 12px 16px;
+  }
+  .method-cycle summary {
+    grid-template-columns: 20px minmax(0, 1fr) 10px;
+    gap: 6px;
+  }
+  .method-step-name {
+    font-size: 15px;
+  }
+  .method-step-prompt {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-step-toggle,
+  .atelier-scientific-detail > summary > span {
+    transition: none;
+  }
+}

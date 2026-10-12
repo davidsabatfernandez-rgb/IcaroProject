@@ -1,6 +1,6 @@
 # ICARO · Endurance Performance Atelier
 
-Rediseño implementado en `redesign/endurance-atelier`, a partir de la versión de producción `7870e35`. Esta rama es de revisión; no se ha fusionado ni publicado en producción.
+Documento del rediseño implementado originalmente en `redesign/endurance-atelier`, a partir de `7870e35`. El propietario autorizó su publicación y se integró en `icaro-web`. La evolución comercial posterior se documenta en `CONVERSION_AUDIT.md`, `CONVERSION_IMPLEMENTATION.md` y `MEASUREMENT.md`.
 
 ## Auditoría y dirección
 
@@ -61,7 +61,7 @@ El calendario adapta una semana de 420 minutos a otra de 260 minutos, conservand
 5. **Datos de contratación y privacidad.** Completar la identidad real del responsable en `site.privacy.responsibleName` y los datos legales que correspondan. No se ha camuflado una identidad inexistente.
 6. **Comprobación de correo y dominio en el entorno publicado.** Las pruebas locales simulan Resend. La aceptación del proveedor y la recepción en Gmail son comprobaciones distintas. `RESEND_API_KEY` indicada por el propietario para Production no se transfiere automáticamente a Preview. No hay acceso autenticado a Vercel, IONOS o Gmail desde este checkout.
 
-No publicar esta rama en producción hasta contar con autorización. Un Preview independiente permite revisar el diseño sin promoverlo al dominio principal.
+El propietario ya autorizó la publicación en la rama de producción. Un Preview independiente puede utilizarse para revisiones futuras; comprobar el estado del despliegue en Vercel sigue siendo distinto de verificar un push.
 
 ## Comprobaciones
 

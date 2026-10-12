@@ -24,7 +24,7 @@ Si la caché de npm no es escribible: `npm ci --cache /tmp/icaro-npm-cache`.
 
 El propietario autorizó la publicación del rediseño y se integró en la rama de producción `icaro-web`. Los cambios se envían a esa rama para el despliegue de Vercel; un push correcto no confirma por sí solo que Vercel haya finalizado.
 
-La landing combina doce secciones: portada, filosofía, laboratorio ilustrativo, interpretación, planificación, disciplinas, equipo, colectivo, servicios, evaluaciones, FAQ y contacto. La composición se concentra en `src/sections/landing.tsx`; las decisiones y los pendientes están en `docs/ENDURANCE_ATELIER.md`.
+La landing integra portada, método, planificación, planes, comunidad, equipo, disciplinas, laboratorio, evaluaciones, colección, guías, preguntas y contacto. La composición se concentra en `src/sections/landing.tsx`. La evolución comercial se documenta en `docs/CONVERSION_AUDIT.md` y las decisiones del rediseño anterior en `docs/ENDURANCE_ATELIER.md`.
 
 | Contenido                                                         | Archivo                                                                 |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -45,7 +45,9 @@ Los módulos anteriores de `product`, `journey`, `technical-method`, `community`
 
 ## Identidad y datos reales
 
-El logo oficial del ave mencionado en el documento no estaba adjunto ni entre los archivos del repositorio. La interfaz conserva temporalmente el wordmark existente. Para incorporar el original sin reconstruirlo, guarda el recurso autorizado en `public/` y configura `site.logo.src`, `width`, `height` y `alt`; `Wordmark` mantiene su relación de aspecto. El favicon actual permanece hasta disponer del isotipo original. No se ha generado otro símbolo.
+La evolución comercial, la landing `/entrenador-triatlon-online`, el formulario en dos pasos, la tienda y las 50 guías están documentados en [CONVERSION_IMPLEMENTATION.md](docs/CONVERSION_IMPLEMENTATION.md). Para activar medición consentida y preparar la campaña de 210 €, consulta [MEASUREMENT.md](docs/MEASUREMENT.md). Las rutas nuevas conservan WhatsApp y el contexto de la consulta.
+
+La tienda utiliza una adaptación transparente del logo ICARO TEAM adjuntado por el propietario. La imagen de colección representa diseños conceptuales generados desde esa referencia; no muestra prendas fabricadas. La cabecera conserva el wordmark del rediseño anterior. Para incorporar un archivo original, configura `site.logo.src`, `width`, `height` y `alt`.
 
 El propietario confirmó que el equipo reúne entrenadores con experiencia, finishers de Ironman y triatletas de alto nivel en activo. El texto refleja esa descripción. `site.coach` permite añadir nombre, fotografía autorizada, formación acreditada, experiencia y filosofía de una persona real; no contiene nombres ni titulaciones inventados. La ficha personal se muestra cuando se incorporan nombre y fotografía.
 
@@ -66,8 +68,8 @@ Todos incluyen llamada inicial. El viernes el atleta envía disponibilidad. Entr
 | Plan        | Seguimiento                                                          | Lactato                                          |
 | ----------- | -------------------------------------------------------------------- | ------------------------------------------------ |
 | Individual  | Feedback semanal por audios de WhatsApp; sin llamadas de seguimiento | Condiciones para atletas del plan                |
-| Coaching    | Feedback semanal, consultas diarias y llamada mensual                | Promoción trimestral bajo consulta               |
-| Performance | Llamada semanal y consultas diarias                                  | Un test incluido cada 6 meses; opción trimestral |
+| Seguimiento | Revisión semanal, consultas diarias y llamada mensual                | Promoción trimestral bajo consulta               |
+| Rendimiento | Llamada semanal y consultas diarias                                  | Un test incluido cada 6 meses; opción trimestral |
 
 No se muestran importes. Los valores anteriores en la configuración pública no deben tratarse como secretos. El test en pista se puede consultar por separado, con desplazamiento presupuestado antes de reservar. Las evaluaciones de técnica en dos centros de Barcelona se presentan con condiciones bajo consulta. La durabilidad describe un criterio de análisis de sesiones, sin anunciar otra medición de laboratorio incluida.
 

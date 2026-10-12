@@ -9,7 +9,7 @@ export default function Home() {
       <main id="contenido">
         <Landing />
       </main>
-      <Footer />
+      <Footer home />
       <Reveal />
     </>
   );

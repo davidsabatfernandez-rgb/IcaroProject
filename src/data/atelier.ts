@@ -1,7 +1,7 @@
 export const atelierCopy = {
   hero: {
     description:
-      "Entrenamiento individualizado de triatlón y resistencia. Fisiología aplicada, planificación con criterio y decisiones adaptadas a cada atleta.",
+      "Entrenamiento individualizado de triatlón, carrera y ciclismo. Analizamos tu perfil, planificamos resistencia y fuerza, y revisamos cada semana cómo respondes.",
   },
 };
 export const assessments = [

@@ -1,3 +1,11 @@
+import {
+  leadProfileOptions,
+  leadQualification,
+  profileLines,
+  type LeadProfile,
+  type LeadProfileOption,
+} from "../data/lead-qualification";
+
 const recipient = "contacticaroproject@gmail.com";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const interests: Record<string, string> = {
@@ -72,6 +80,17 @@ export async function handleContact(
   const plan = field("plan", 100, false);
   const interest = field("interest", 30, false);
   const source = field("source", 500, false);
+  const goalDate = field("goalDate", 100, false);
+  const optionalProfile: Record<string, string | null> = {};
+  for (const key of Object.keys(leadProfileOptions) as LeadProfileOption[]) {
+    const value = field(key, 30, false);
+    optionalProfile[key] =
+      value !== null &&
+      (value === "" ||
+        leadProfileOptions[key].some((option) => option.value === value))
+        ? value
+        : null;
+  }
   if (
     !name ||
     !contact ||
@@ -84,6 +103,8 @@ export async function handleContact(
     (interest !== "" && !Object.hasOwn(interests, interest)) ||
     source === null ||
     /[\r\n\u0000-\u001f\u007f]/.test(source) ||
+    goalDate === null ||
+    Object.values(optionalProfile).some((value) => value === null) ||
     (!emailPattern.test(contact) && !/^\+?[\d\s().-]{6,25}$/.test(contact)) ||
     (data.consent !== "on" && data.consent !== true) ||
     (data._honey !== undefined && data._honey !== "")
@@ -93,6 +114,13 @@ export async function handleContact(
       "Revisa los campos y confirma que has leído la política de privacidad.",
     );
   }
+  const profile = { goalDate, ...optionalProfile } as LeadProfile;
+  const qualification = leadQualification({
+    interest: interest || "coaching",
+    goal,
+    profile,
+    plan,
+  });
   if (!options.apiKey) {
     return failure(
       503,
@@ -113,7 +141,7 @@ export async function handleContact(
           to: [recipient],
           subject: "Nueva consulta · ICARO PROJECT",
           ...(emailPattern.test(contact) ? { reply_to: contact } : {}),
-          text: `Interés: ${interests[interest || "coaching"]}\nNombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${plan ? `Plan: ${plan}\n` : ""}${source ? `Origen: ${source}\n` : ""}\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad.`,
+          text: `Estado: Nueva solicitud, pendiente de valorar.\nPrevaloración: ${qualification === "potential_fit" ? "Encaje potencial con seguimiento frecuente; requiere valoración humana." : "Pendiente de valoración humana."}\nInterés: ${interests[interest || "coaching"]}\nNombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${plan ? `Plan: ${plan}\n` : ""}${source ? `Origen: ${source}\n` : ""}${profileLines(profile).join("\n")}\n\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad. Esta solicitud no confirma una contratación.`,
         }),
         signal: AbortSignal.timeout(10000),
         cache: "no-store",
@@ -137,7 +165,7 @@ export async function handleContact(
         "No hemos recibido confirmación del envío. Puedes contactar por WhatsApp.",
       );
     }
-    return Response.json({ success: true });
+    return Response.json({ success: true, leadStatus: "new", qualification });
   } catch {
     return failure(
       504,

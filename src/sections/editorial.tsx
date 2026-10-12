@@ -19,7 +19,7 @@ export function PhilosophySection() {
       aria-labelledby="en-philosophy-title"
     >
       <div className="en-philosophy-intro">
-        <SectionLabel number="02">
+        <SectionLabel number="10.1">
           <span>NUESTRA FILOSOFÍA</span>
         </SectionLabel>
         <h2 id="en-philosophy-title">
@@ -170,7 +170,7 @@ export function BeyondNumbersSection() {
     >
       <div className="en-editorial-heading">
         <div>
-          <SectionLabel number="04">
+          <SectionLabel number="10">
             <span>MÁS ALLÁ DE LOS NÚMEROS</span>
           </SectionLabel>
           <h2 id="en-beyond-title">
@@ -319,7 +319,7 @@ export function CommunityAtelierSection() {
         <small>Fotografía editorial de resistencia</small>
       </div>
       <div className="en-collective-copy">
-        <SectionLabel number="08">
+        <SectionLabel number="06">
           <span>COMUNIDAD ICARO</span>
         </SectionLabel>
         <h2 id="en-collective-title">

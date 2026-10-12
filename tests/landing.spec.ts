@@ -87,7 +87,7 @@ test("plans show no prices and each enquiry carries interest to the form", async
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator("main")).not.toContainText(
+  await expect(page.locator("#planes")).not.toContainText(
     /€|\beuros?\b|\bprecios?\b/i,
   );
   await expect(page.locator("#faq")).not.toContainText(
@@ -130,7 +130,7 @@ test("plans show no prices and each enquiry carries interest to the form", async
     await page.getByRole("button", { name: "Cambiar", exact: true }).click();
     await expect(page.locator(".chosen-plan")).toHaveCount(0);
   }
-  await expect(page.locator("main")).not.toContainText(
+  await expect(page.locator("#planes")).not.toContainText(
     /€|\beuros?\b|\bprecios?\b/i,
   );
 });
@@ -252,9 +252,12 @@ test("weekly schedule and support channels match the three coaching plans", asyn
   });
   await expect(individual).toContainText("audios de WhatsApp");
   await expect(individual).toContainText("Sin llamadas de seguimiento");
-  for (const plan of [individual, coaching, performance]) {
-    await expect(plan).toContainText("Llamada inicial");
-  }
+  await expect(page.locator(".pricing-included")).toContainText(
+    "Llamada inicial",
+  );
+  await expect(page.locator(".pricing-included")).toContainText(
+    "LOS TRES PLANES",
+  );
   await expect(coaching).toContainText("Consultas diarias");
   await expect(coaching).toContainText("Llamada mensual");
   await expect(performance).toContainText("Contacto diario");
@@ -357,7 +360,7 @@ test("optional lactate conditions are clear and a track enquiry is prefilled", a
   await expect(benefits.nth(0)).toContainText(
     "Condiciones para atletas del plan",
   );
-  await expect(benefits.nth(1)).toContainText("promoción trimestral");
+  await expect(benefits.nth(1)).toContainText(/promoción trimestral/i);
   await expect(benefits.nth(2)).toContainText("1 prueba incluida cada 6 meses");
   await expect(benefits.nth(2)).toContainText("opción trimestral");
   await page
@@ -425,10 +428,6 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
       exact: true,
     })
     .click();
-  await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
-  await page
-    .getByLabel("Correo o teléfono", { exact: true })
-    .fill("atleta@example.com");
   await page
     .getByLabel("Deporte", { exact: true })
     .selectOption("Atleta híbrido");
@@ -436,12 +435,19 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
     .getByLabel("Tu objetivo", { exact: true })
     .fill("Preparar una media maratón");
   await page
-    .getByRole("button", { name: "Enviar mi consulta", exact: true })
+    .getByRole("button", { name: "Continuar al contacto", exact: true })
+    .click();
+  await page.getByLabel("Nombre", { exact: true }).fill("Atleta de prueba");
+  await page
+    .getByLabel("Correo o teléfono", { exact: true })
+    .fill("atleta@example.com");
+  await page
+    .getByRole("button", { name: "Solicitar valoración", exact: true })
     .click();
   expect(payloads).toHaveLength(0);
   await page.getByRole("checkbox").check();
   await page
-    .getByRole("button", { name: "Enviar mi consulta", exact: true })
+    .getByRole("button", { name: "Solicitar valoración", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
     "correo electrónico aún no está disponible",
@@ -468,7 +474,7 @@ test("contact handles mail failures and offers the same enquiry in WhatsApp", as
   expect(payloads[0].source).toMatch(/^planes \| /);
   accepted = true;
   await page
-    .getByRole("button", { name: "Enviar mi consulta", exact: true })
+    .getByRole("button", { name: "Solicitar valoración", exact: true })
     .click();
   await expect(page.locator(".form-status")).toContainText(
     "Tu consulta se ha enviado",
@@ -485,22 +491,25 @@ test("contact times out and releases the send button without losing the enquiry"
   await page.clock.install();
   await page.route("**/api/contact", (route) => new Promise<void>(() => {}));
   await page.goto("/");
+  await page.getByLabel("Deporte", { exact: true }).selectOption("Carrera");
+  await page.getByLabel("Tu objetivo", { exact: true }).fill("Mi carrera");
+  await page
+    .getByRole("button", { name: "Continuar al contacto", exact: true })
+    .click();
   await page.getByLabel("Nombre", { exact: true }).fill("Atleta");
   await page
     .getByLabel("Correo o teléfono", { exact: true })
     .fill("atleta@example.com");
-  await page.getByLabel("Deporte", { exact: true }).selectOption("Carrera");
-  await page.getByLabel("Tu objetivo", { exact: true }).fill("Mi carrera");
   await page.getByRole("checkbox").check();
   await page
-    .getByRole("button", { name: "Enviar mi consulta", exact: true })
+    .getByRole("button", { name: "Solicitar valoración", exact: true })
     .click();
   await expect(
     page.getByRole("button", { name: "Enviando…", exact: true }),
   ).toBeDisabled();
   await page.clock.fastForward(16000);
   await expect(
-    page.getByRole("button", { name: "Enviar mi consulta", exact: true }),
+    page.getByRole("button", { name: "Solicitar valoración", exact: true }),
   ).toBeEnabled();
   await expect(page.locator(".form-status")).toContainText(
     "No se ha podido confirmar",
@@ -541,13 +550,13 @@ test("editorial identity, platform, Barcelona and authentic photography remain c
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "ENTRENA CON",
+    "TU OBJETIVO.",
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "PROPÓSITO.",
+    "EL ENTRENAMIENTOADECUADO.",
   );
   await page
-    .getByRole("link", { name: "Descubre el método", exact: true })
+    .getByRole("link", { name: "Descubrir el método", exact: true })
     .click();
   await expect(page).toHaveURL(/#metodo$/);
   const platform = page

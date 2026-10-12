@@ -147,7 +147,7 @@ export function DisciplinesSection() {
     >
       <div className="disciplines-heading">
         <div>
-          <SectionLabel number="06">
+          <SectionLabel number="08">
             DISCIPLINAS / EL PROPÓSITO CAMBIA. EL CRITERIO PERMANECE.
           </SectionLabel>
           <h2 id="disciplines-title">

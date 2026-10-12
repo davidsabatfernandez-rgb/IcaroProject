@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/config/site";
 import { WhatsAppBubble } from "@/components/whatsapp-bubble";
+import { CommercialAnalytics } from "@/components/commercial-analytics";
 const displayFont = localFont({
   src: [
     {
@@ -67,13 +68,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html
+      lang="es"
+      data-scroll-behavior="smooth"
+      className={`${displayFont.variable} ${bodyFont.variable}`}
+    >
       <body>
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
         {children}
         <WhatsAppBubble />
+        <CommercialAnalytics />
       </body>
     </html>
   );

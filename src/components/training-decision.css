@@ -1,0 +1,67 @@
+.training-decision {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+.training-decision-observations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  padding: 25px 0;
+  margin: 0 0 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.training-decision-observations dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.training-decision-observations dd {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+.training-decision-observations .training-decision-context {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+.training-decision-stages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.training-decision-stages li {
+  min-width: 0;
+}
+.training-decision-stages .micro {
+  color: var(--bronze);
+}
+.training-decision-stages h3 {
+  margin-top: 10px;
+}
+.training-decision-stages p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.training-decision-outcome {
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+  margin-top: 38px;
+}
+.training-decision-outcome p {
+  margin-top: 12px;
+  max-width: 780px;
+  font-size: 15px;
+}
+@media (max-width: 760px) {
+  .training-decision-stages {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}

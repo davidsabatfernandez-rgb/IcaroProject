@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentProps } from "react";
+import { usePathname } from "next/navigation";
 
 export type EnquiryInterest = "coaching" | "collective" | "tests";
 
@@ -23,13 +24,26 @@ export function EnquiryLink({
   children,
   ...props
 }: EnquiryLinkProps) {
+  const pathname = usePathname();
+  const crossesToHome =
+    pathname !== "/" && (href === "#contacto" || href === "/#contacto");
+  const params = new URLSearchParams({ consulta: interest, origen: source });
+  if (sport) params.set("deporte", sport);
+  if (plan) params.set("plan", plan);
+  const destination = crossesToHome ? `/?${params.toString()}#contacto` : href;
   return (
     <a
       {...props}
-      href={href}
+      href={destination}
+      data-track="cta_click"
+      data-track-source={source}
+      data-track-plan={plan}
+      data-track-interest={interest}
+      data-track-sport={sport}
       onClick={(event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
           return;
+        if (crossesToHome) return;
         window.dispatchEvent(
           new CustomEvent<EnquirySelection>("icaro-interest", {
             detail: { interest, source, sport, plan },

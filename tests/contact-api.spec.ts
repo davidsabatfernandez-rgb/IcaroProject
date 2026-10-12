@@ -114,6 +114,14 @@ test("contact API rejects invalid fields and honeypot submissions before contact
     { source: "s".repeat(501) },
     { source: null },
     { source: "planes\nHeader: unexpected" },
+    { goalDate: "d".repeat(101) },
+    { goalDate: null },
+    { experience: "expert" },
+    { weeklyHours: "unlimited" },
+    { difficulty: "unknown" },
+    { support: "vip" },
+    { budget: "free" },
+    { weeklyHours: null },
     { consent: false },
     { consent: "off" },
     { _honey: "https://spam.example.com" },
@@ -128,6 +136,74 @@ test("contact API rejects invalid fields and honeypot submissions before contact
     expect(await response.json()).toMatchObject({ success: false });
   }
   expect(mail.requests).toHaveLength(0);
+});
+
+test("qualification is a human-review hint only after the provider accepts a complete enquiry", async () => {
+  const mail = provider({ id: "qualified-message-id" });
+  const response = await handleContact(
+    enquiry({
+      goalDate: "Primavera de 2027",
+      experience: "competition",
+      weeklyHours: "6-8",
+      difficulty: "progress",
+      support: "followup",
+      budget: "options",
+    }),
+    { apiKey: "test-api-key", send: mail.send },
+  );
+  expect(await response.json()).toMatchObject({
+    success: true,
+    leadStatus: "new",
+    qualification: "potential_fit",
+  });
+  const text = JSON.parse(String(mail.requests[0].init?.body)).text;
+  for (const value of [
+    "Primavera de 2027",
+    "experiencia en competición",
+    "De 6 a 8 horas",
+    "Seguimiento frecuente",
+    "Prefiero conocer opciones",
+    "Nueva solicitud, pendiente de valorar",
+    "requiere valoración humana",
+    "no confirma una contratación",
+  ])
+    expect(text).toContain(value);
+});
+
+test("qualification never excludes enquiries with little time, undecided support or community interest", async () => {
+  for (const values of [
+    { weeklyHours: "under-3", support: "followup" },
+    { weeklyHours: "6-8", support: "unsure" },
+    { weeklyHours: "6-8", support: "individual" },
+    { weeklyHours: "6-8", support: "performance", interest: "collective" },
+    { weeklyHours: "", support: "performance" },
+  ]) {
+    const mail = provider({ id: "review-message-id" });
+    const response = await handleContact(enquiry(values), {
+      apiKey: "test-api-key",
+      send: mail.send,
+    });
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({
+      success: true,
+      qualification: "pending_review",
+    });
+    expect(JSON.parse(String(mail.requests[0].init?.body)).text).toContain(
+      "Pendiente de valoración humana",
+    );
+  }
+});
+
+test("a potential fit is not emitted when the provider rejects the enquiry", async () => {
+  const mail = provider({ message: "Provider unavailable" }, 500);
+  const response = await handleContact(
+    enquiry({ weeklyHours: "6-8", support: "performance" }),
+    { apiKey: "test-api-key", send: mail.send },
+  );
+  expect(response.status).toBe(502);
+  const body = await response.json();
+  expect(body.success).toBe(false);
+  expect(body).not.toHaveProperty("qualification");
 });
 
 test("contact API preserves collective and testing interests and accepts trail enquiries", async () => {

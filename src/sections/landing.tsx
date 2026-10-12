@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { site, whatsappUrl } from "@/config/site";
-import { faqs, sharedFeatures } from "@/data/content";
+import { faqs } from "@/data/content";
 import { journeyStages } from "@/data/journey";
 import { Arrow, SectionLabel } from "@/components/ui";
 import { EnquiryLink } from "@/components/enquiry-link";
@@ -18,23 +18,35 @@ import {
   CoachSection,
 } from "./editorial";
 import { atelierCopy, assessments } from "@/data/atelier";
+import { ExploreSection } from "./explore";
+import { MethodOverviewSection, WhyIcaroSection } from "./method-overview";
+import { TrainingDecision } from "@/components/training-decision";
+import { trainingDecisionCase } from "@/data/training-decision";
 
 export function Landing() {
   return (
     <div className="atelier">
       <section
-        className="atelier-hero"
+        className="atelier-hero atelier-hero-conversion"
         id="inicio"
         aria-labelledby="hero-title"
       >
         <div className="atelier-hero-copy">
-          <p className="eyebrow">ICARO / PREPARACIÓN DE RESISTENCIA</p>
+          <p className="eyebrow">
+            ENTRENAMIENTO DE TRIATLÓN · CARRERA · CICLISMO
+          </p>
           <h1 id="hero-title">
-            <span>ENTRENA CON</span>
-            <span>PROPÓSITO.</span>
+            <span>TU OBJETIVO.</span>
+            <span>EL ENTRENAMIENTO</span>
+            <span>ADECUADO.</span>
           </h1>
           <p className="atelier-hero-description">
             {atelierCopy.hero.description}
+          </p>
+          <p className="hero-audience">
+            <strong>Desde iniciación hasta atletas con experiencia.</strong>{" "}
+            Empezamos por conocerte en una llamada inicial, incluida en todos
+            los planes.
           </p>
           <div className="hero-actions">
             <EnquiryLink
@@ -42,10 +54,10 @@ export function Landing() {
               interest="coaching"
               source="hero"
             >
-              Empieza tu preparación <Arrow diagonal />
+              Solicitar valoración inicial <Arrow diagonal />
             </EnquiryLink>
             <a className="text-link" href="#metodo">
-              Descubre el método <Arrow />
+              Descubrir el método <Arrow />
             </a>
           </div>
           <div className="atelier-hero-signature">
@@ -70,38 +82,8 @@ export function Landing() {
           </div>
         </div>
       </section>
-      <div className="atelier-statement">
-        <p>EL RIGOR ES EL MISMO.</p>
-        <p>EL ENFOQUE ES INDIVIDUAL.</p>
-        <span>El mismo rigor. Una aplicación distinta para cada atleta.</span>
-      </div>
-
-      <PhilosophySection />
-      <section
-        className="section atelier-method"
-        id="metodo"
-        aria-labelledby="method-title"
-      >
-        <div className="section-heading">
-          <div>
-            <SectionLabel number="03">
-              EL MÉTODO / FISIOLOGÍA APLICADA
-            </SectionLabel>
-            <h2 id="method-title">
-              LOS DATOS
-              <br />
-              <em>NECESITAN CRITERIO.</em>
-            </h2>
-          </div>
-          <p className="heading-copy">
-            Los datos describen una respuesta. El entrenador interpreta qué
-            significa, qué limita tu preparación y qué decisión puede ayudarte a
-            avanzar. Explora un ejemplo de evaluación.
-          </p>
-        </div>
-        <LactateLab />
-      </section>
-      <BeyondNumbersSection />
+      <WhyIcaroSection />
+      <MethodOverviewSection />
 
       <section
         className="section atelier-inside"
@@ -110,7 +92,7 @@ export function Landing() {
       >
         <div className="section-heading">
           <div>
-            <SectionLabel number="05">
+            <SectionLabel number="04">
               TU SEMANA EN ICARO / PLANIFICACIÓN
             </SectionLabel>
             <h2 id="inside-title">
@@ -163,9 +145,7 @@ export function Landing() {
           </ol>
         </details>
       </section>
-      <DisciplinesSection />
-      <CoachSection coach={site.coach} />
-      <CommunityAtelierSection />
+      <TrainingDecision trainingCase={trainingDecisionCase} />
 
       <section
         className="section atelier-services plans-section"
@@ -174,7 +154,7 @@ export function Landing() {
       >
         <div className="section-heading">
           <div>
-            <SectionLabel number="09">PLANES DE ENTRENAMIENTO</SectionLabel>
+            <SectionLabel number="05">PLANES DE ENTRENAMIENTO</SectionLabel>
             <h2 id="services-title">
               UN MISMO MÉTODO.
               <br />
@@ -188,21 +168,45 @@ export function Landing() {
           </p>
         </div>
         <Pricing />
-        <div className="shared-features">
-          <div>
-            <span className="micro">EL ESTÁNDAR ES EL MISMO</span>
-            <h3>Incluido en todos.</h3>
-          </div>
-          <ul>
-            {sharedFeatures.map((feature) => (
-              <li key={feature}>
-                <Arrow diagonal />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
+
+      <CommunityAtelierSection />
+      <CoachSection coach={site.coach} />
+      <DisciplinesSection />
+
+      <section
+        className="section atelier-method"
+        id="laboratorio"
+        aria-labelledby="method-title"
+      >
+        <div className="section-heading">
+          <div>
+            <SectionLabel number="09">
+              EL LABORATORIO / FISIOLOGÍA APLICADA
+            </SectionLabel>
+            <h2 id="method-title">
+              LOS DATOS
+              <br />
+              <em>NECESITAN CRITERIO.</em>
+            </h2>
+          </div>
+          <p className="heading-copy">
+            Los datos describen una respuesta. El entrenador interpreta qué
+            significa, qué limita tu preparación y qué decisión puede ayudarte a
+            avanzar. Explora un ejemplo ilustrativo de evaluación; no representa
+            resultados de un atleta.
+          </p>
+        </div>
+        <LactateLab />
+      </section>
+      <BeyondNumbersSection />
+
+      <details className="atelier-scientific-detail">
+        <summary>
+          El criterio detrás de cada sesión <span aria-hidden="true">+</span>
+        </summary>
+        <PhilosophySection />
+      </details>
 
       <section
         className="section atelier-testing"
@@ -211,7 +215,7 @@ export function Landing() {
       >
         <div className="section-heading">
           <div>
-            <SectionLabel number="10">PRUEBAS Y EVALUACIÓN</SectionLabel>
+            <SectionLabel number="11">PRUEBAS Y EVALUACIÓN</SectionLabel>
             <h2 id="testing-title">
               MEDIR CON UN PROPÓSITO.
               <br />
@@ -254,13 +258,15 @@ export function Landing() {
         </div>
       </section>
 
+      <ExploreSection />
+
       <section
         className="section faq-section"
         id="faq"
         aria-labelledby="faq-title"
       >
         <div>
-          <SectionLabel number="11">
+          <SectionLabel number="12">
             PREGUNTAS FRECUENTES / INFORMACIÓN PARA DECIDIR
           </SectionLabel>
           <h2 id="faq-title">
@@ -292,13 +298,13 @@ export function Landing() {
       >
         <div className="contact-inner">
           <div className="contact-copy">
-            <SectionLabel number="12">
-              CONTACTO / TU PREPARACIÓN EMPIEZA AQUÍ
+            <SectionLabel number="13">
+              VALORACIÓN INICIAL / TU PREPARACIÓN EMPIEZA AQUÍ
             </SectionLabel>
             <h2 id="contact-title">
-              EMPIEZA TU
+              HABLEMOS DE TU
               <br />
-              <em>PREPARACIÓN.</em>
+              <em>PRÓXIMO OBJETIVO.</em>
             </h2>
             <p>
               Cuéntanos tu objetivo. Hablamos de tu contexto, de lo que

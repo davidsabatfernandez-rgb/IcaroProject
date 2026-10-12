@@ -64,3 +64,15 @@ Las imágenes son escenas ilustrativas de deporte. No representan atletas entren
 ## Fotografías sustituidas
 
 Se retiraron los primeros planos `triathlon-race.jpg` y `running-race.jpg`, de Quino Al: aunque tenían procedencia Unsplash documentada, mostraban atletas identificables y los clubes TRI GRANADA / TRIATLÓN JAÉN sin evidencia de relación con ICARO ni cesión de imagen. Las sustitutas conservan fotografía real y reducen esas asociaciones. Los créditos del sitio corresponden a las fotografías editoriales de terceros utilizadas. La nueva portada se identifica como archivo facilitado a ICARO.
+
+## icaro-team-logo.png — marca para la colección
+
+- Referencia ICARO TEAM facilitada por el propietario en el encargo de merchandising del 11 de octubre de 2026.
+- Adaptación mediante herramienta de imagen, con fondo transparente, para integrar la marca en las ilustraciones conceptuales. No se declara que sea el archivo vectorial original ni se atribuye una licencia libre desconocida.
+- PNG optimizado de 1536 × 1024. El wordmark de la cabecera permanece sin cambios.
+
+## shop/collection.jpg — colección conceptual
+
+- Visualización generada desde la referencia de la marca por petición del propietario de inventar una colección ICARO.
+- Seis propuestas de prendas y accesorios en carbón, cobre, marfil y arena. No es fotografía de productos fabricados ni acredita materiales o características técnicas.
+- JPEG optimizado de 1536 × 1024. El sitio identifica la colección y cada diseño como conceptuales; la compra es una demostración sin cobro.

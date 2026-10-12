@@ -1,0 +1,115 @@
+.contact-form.cq-form {
+  min-width: 0;
+}
+.cq-progress {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+.cq-progress li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.cq-progress li[aria-current="step"] {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.cq-progress li span {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.cq-step-heading {
+  margin: 0 0 10px;
+  font-size: 23px;
+}
+.cq-introduction {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.cq-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 17px;
+}
+.cq-fields[hidden] {
+  display: none;
+}
+.cq-fields legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.cq-select-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+.cq-select-row .form-field {
+  min-width: 0;
+}
+.cq-form select {
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+.cq-budget-note {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.cq-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+.cq-back {
+  justify-self: start;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.cq-profile-summary {
+  margin: 0 0 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.cq-form .privacy-check {
+  margin-top: 4px;
+}
+.cq-form .form-status {
+  margin: 16px 0 0;
+}
+@media (max-width: 540px) {
+  .cq-select-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 17px;
+  }
+  .cq-progress {
+    margin-bottom: 20px;
+  }
+}
