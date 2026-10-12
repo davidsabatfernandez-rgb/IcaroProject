@@ -1,3 +1,5 @@
+import type { LeadCategory } from "./enquiries";
+
 export const leadProfileOptions = {
   experience: [
     { value: "starting", label: "Estoy empezando o retomando" },
@@ -23,10 +25,10 @@ export const leadProfileOptions = {
   ],
   support: [
     { value: "individual", label: "Plan y revisión semanal" },
-    { value: "followup", label: "Seguimiento frecuente" },
+    { value: "followup", label: "Seguimiento con llamada semanal" },
     {
       value: "performance",
-      label: "Más análisis y contacto con el entrenador",
+      label: "Rendimiento y comunicación prioritaria",
     },
     { value: "unsure", label: "Quiero que me orientéis" },
   ],
@@ -80,6 +82,37 @@ export function supportForPlan(plan: string) {
   if (/seguimiento|coaching/i.test(plan)) return "followup";
   if (/individual/i.test(plan)) return "individual";
   return "";
+}
+
+export function planForSupport(support: string) {
+  return (
+    (
+      {
+        individual: "Individual",
+        followup: "Seguimiento",
+        performance: "Rendimiento",
+      } as Record<string, string>
+    )[support] || ""
+  );
+}
+
+export function leadCategory(
+  interest: string,
+  plan: string,
+  support: string,
+): LeadCategory {
+  if (
+    interest === "social_run" ||
+    interest === "social_ride" ||
+    interest === "collective" ||
+    interest === "tests"
+  )
+    return interest;
+  const preference = support || supportForPlan(plan);
+  if (preference === "individual") return "individual";
+  if (preference === "followup") return "seguimiento";
+  if (preference === "performance") return "rendimiento";
+  return "coaching";
 }
 
 /** A routing hint for human review, never a rejection or a confirmed sale. */

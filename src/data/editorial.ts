@@ -110,7 +110,7 @@ export const coachFollowUp = [
 export const collectiveDetails = [
   {
     label: "PRESENCIAL",
-    text: "Entrenamientos compartidos cada semana.",
+    text: "Entrenamientos compartidos semanales, cuando estén programados.",
   },
   {
     label: "ORGANIZACIÓN",

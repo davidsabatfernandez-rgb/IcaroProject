@@ -251,25 +251,45 @@ test("weekly schedule and support channels match the three coaching plans", asyn
     has: page.getByRole("heading", { name: "Rendimiento", exact: true }),
   });
   await expect(individual).toContainText("audios de WhatsApp");
-  await expect(individual).toContainText("Sin llamadas de seguimiento");
+  await expect(individual).toContainText(/sin llamadas de seguimiento/i);
+  await expect(individual.locator(".plan-contact")).toContainText(
+    "19:00 a 20:00",
+  );
   await expect(page.locator(".pricing-included")).toContainText(
     "Llamada inicial",
   );
   await expect(page.locator(".pricing-included")).toContainText(
     "LOS TRES PLANES",
   );
-  await expect(coaching).toContainText("Consultas diarias");
-  await expect(coaching).toContainText("Llamada mensual");
-  await expect(performance).toContainText("Contacto diario");
+  await expect(coaching.locator(".plan-contact")).toContainText(
+    "Consultas escritas de 19:00 a 20:00",
+  );
+  await expect(coaching).toContainText("Llamada semanal, coordinada contigo");
+  await expect(coaching).toContainText("SEGUIMIENTO PERSONALIZADO");
+  await expect(performance.locator(".plan-contact")).toContainText(
+    "Comunicación diaria y respuesta prioritaria según disponibilidad",
+  );
   await expect(performance).toContainText("Llamada semanal");
-  await page
-    .locator("summary")
-    .filter({ hasText: "¿Cada cuánto recibo mi planificación?" })
-    .click();
-  await expect(page.locator("details[open]")).toContainText(
+  await expect(page.locator("#planes")).not.toContainText(/llamada mensual/i);
+  await coaching.locator(".plan-details > summary").click();
+  await expect(coaching.locator(".plan-details-content")).toContainText(
+    "aparte de esa franja de consultas",
+  );
+  await performance.locator(".plan-details > summary").click();
+  await expect(performance.locator(".plan-details-content")).toContainText(
+    "no queda limitada a la franja de 19:00 a 20:00",
+  );
+  await expect(performance.locator(".plan-details-content")).toContainText(
+    "sin atención las 24 horas ni respuesta inmediata garantizada",
+  );
+  const weeklyFaq = page.locator("#faq details").filter({
+    hasText: "¿Cada cuánto recibo mi planificación?",
+  });
+  await weeklyFaq.locator("summary").click();
+  await expect(weeklyFaq).toContainText(
     "Cada viernes nos envías tu disponibilidad",
   );
-  await expect(page.locator("details[open]")).toContainText(
+  await expect(weeklyFaq).toContainText(
     "Entre sábado y domingo recibes la programación",
   );
 });
@@ -550,15 +570,37 @@ test("editorial identity, platform, Barcelona and authentic photography remain c
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "TU OBJETIVO.",
+    "ENTRENA CON CRITERIO.",
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "EL ENTRENAMIENTOADECUADO.",
+    "COMPARTE EL CAMINO.",
   );
-  await page
-    .getByRole("link", { name: "Descubrir el método", exact: true })
-    .click();
-  await expect(page).toHaveURL(/#metodo$/);
+  const hero = page.locator("#inicio");
+  const planAction = hero.getByRole("link", {
+    name: "Descubre tu plan",
+    exact: true,
+  });
+  const socialAction = hero.getByRole("link", {
+    name: "Únete a los Socials",
+    exact: true,
+  });
+  await expect(planAction).toHaveAttribute("href", "#planes");
+  await expect(socialAction).toHaveAttribute("href", "/social");
+  await planAction.click();
+  await expect(page).toHaveURL(/#planes$/);
+  await expect(page.locator(".header .wordmark-name")).toHaveText("ICARO.");
+  await expect(page.locator(".header .wordmark small")).toHaveText("PROJECT");
+  const method = page.locator("#metodo");
+  await expect(method.locator(".method-cycle > li")).toHaveCount(6);
+  const interpret = method
+    .locator("details")
+    .filter({ hasText: "Interpretar" });
+  await interpret.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(interpret).toHaveAttribute("open", "");
+  await expect(interpret).toContainText(
+    "sin decidir a partir de una cifra aislada",
+  );
   const platform = page
     .locator("#como-funciona")
     .getByRole("link", { name: "Planificación en TrainingPeaks" });
@@ -652,7 +694,7 @@ test("discipline enquiries preserve sport and campaign context without unrelated
   );
 });
 
-test("collective has its own enquiry context and does not replace individual coaching", async ({
+test("Social Club has clear independent routes before plans without changing a coaching enquiry", async ({
   page,
 }) => {
   await page.goto("/");
@@ -662,25 +704,38 @@ test("collective has its own enquiry context and does not replace individual coa
       exact: true,
     })
     .click();
-  const collective = page.locator("#comunidad");
-  await expect(collective).toContainText("presencialmente cada semana");
-  await expect(collective).toContainText("ritmos y distancias según");
-  await expect(collective).toContainText(
-    "entrenamiento individual tiene su propio seguimiento",
+  const social = page.locator("#comunidad");
+  await expect(
+    social.getByRole("heading", { name: "ICARO SOCIAL CLUB", exact: true }),
+  ).toBeVisible();
+  await expect(social).toContainText(
+    "TU PLAN ES INDIVIDUAL. EL CAMINO NO TIENE POR QUÉ SERLO.",
   );
-  await expect(collective.locator(".en-social-group")).toContainText(
-    "GRUPO GRATUITO",
-  );
-  await collective
-    .getByRole("link", { name: "Conoce la comunidad", exact: true })
-    .click();
-  await expect(page).toHaveURL(/#contacto$/);
+  await expect(social).toContainText("ritmos, grupos y distancias adaptados");
+  await expect(social).toContainText("semanales cuando estén programados");
+  await expect(
+    social.getByRole("link", { name: "DESCUBRIR SOCIAL RUNS", exact: true }),
+  ).toHaveAttribute("href", "/social#runs");
+  await expect(
+    social.getByRole("link", { name: "DESCUBRIR SOCIAL RIDES", exact: true }),
+  ).toHaveAttribute("href", "/social#rides");
+  await expect(
+    social.getByRole("link", { name: "Ver próximas quedadas", exact: true }),
+  ).toHaveAttribute("href", "/social#agenda");
+  expect(
+    await page.evaluate(() => {
+      const community = document.getElementById("comunidad")!;
+      const plans = document.getElementById("planes")!;
+      return Boolean(
+        community.compareDocumentPosition(plans) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      );
+    }),
+  ).toBe(true);
+  // Browsing community information does not silently recategorise an existing coaching enquiry.
   await expect(page.getByLabel("Qué te interesa", { exact: true })).toHaveValue(
-    "collective",
+    "coaching",
   );
-  await expect(page.locator('input[name="source"]')).toHaveValue(
-    /^comunidad \| /,
-  );
-  await expect(page.locator('input[name="plan"]')).toHaveValue("");
-  await expect(page.locator(".chosen-plan")).toHaveCount(0);
+  await expect(page.locator('input[name="plan"]')).toHaveValue("Rendimiento");
+  await expect(page.locator('input[name="source"]')).toHaveValue(/^planes \| /);
 });

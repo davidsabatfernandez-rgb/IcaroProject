@@ -1,10 +1,10 @@
 :root {
-  --ink: #262320;
-  --paper: #f5f2ec;
-  --accent: #563115;
-  --bronze: #8c5a35;
-  --muted: #685f56;
-  --line: #d8cfc3;
+  --ink: #202020;
+  --paper: #fff;
+  --accent: #171717;
+  --bronze: #515151;
+  --muted: #626262;
+  --line: #d8d8d8;
   --display: var(--font-display), sans-serif;
   --body: var(--font-body), sans-serif;
   --white: #fff;
@@ -35,7 +35,7 @@ body {
   font: 16px/1.7 var(--body);
 }
 ::selection {
-  background: #dec7ae;
+  background: #d8d8d8;
   color: var(--ink);
 }
 a {
@@ -200,7 +200,7 @@ p {
 }
 .button.outline:hover {
   border-color: var(--accent);
-  background: #eae1d6;
+  background: #ededed;
 }
 .button.light {
   background: var(--paper);
@@ -246,6 +246,7 @@ p {
   display: inline-flex;
 }
 .wordmark {
+  color: #262320;
   display: flex;
   flex-direction: column;
   width: max-content;
@@ -267,7 +268,7 @@ p {
   );
 }
 .brand-dot {
-  color: var(--bronze);
+  color: #8c5a35;
 }
 .wordmark small {
   font-size: 8px;
@@ -886,23 +887,23 @@ p {
 }
 .contact-copy .section-label,
 .contact-copy .section-label > span {
-  color: #d7bea7;
+  color: #d6d6d6;
 }
 .contact-copy h2 {
   font-size: clamp(58px, 6vw, 89px);
 }
 .contact-copy h2 em {
-  color: #d7bea7;
+  color: #d6d6d6;
 }
 .contact-copy > p {
   font-size: 15px;
-  color: #d1c5b7;
+  color: #cdcdcd;
   max-width: 420px;
   margin-top: 26px;
 }
 .contact-expectations {
   font-size: 12px;
-  color: #d1c5b7;
+  color: #cdcdcd;
   padding: 0;
   margin: 30px 0;
   list-style: none;
@@ -915,7 +916,7 @@ p {
 .contact-expectations li:before {
   content: "0" counter(contact) " / ";
   font-variant-numeric: tabular-nums;
-  color: #d7bea7;
+  color: #d6d6d6;
   margin-right: 14px;
 }
 .contact-email {
@@ -929,7 +930,7 @@ p {
   font-size: 8px;
   letter-spacing: 0.12em;
   max-width: 360px;
-  color: #d1c5b7;
+  color: #cdcdcd;
   margin-top: 46px;
 }
 .contact-form {
@@ -963,7 +964,7 @@ p {
   width: 100%;
   min-width: 0;
   border: 0;
-  border-bottom: 1px solid #a39280;
+  border-bottom: 1px solid #a0a0a0;
   border-radius: 0;
   padding: 11px 0;
   background: transparent;
@@ -1042,7 +1043,7 @@ p {
   background: var(--ink);
   color: var(--paper);
   padding: 38px max(5.5vw, 24px);
-  border-top: 1px solid #51483f;
+  border-top: 1px solid #4d4d4d;
 }
 .footer-top {
   display: flex;
@@ -1053,24 +1054,31 @@ p {
 .footer-top > span {
   font-size: 10px;
   letter-spacing: 0.1em;
-  color: #d1c5b7;
+  color: #cdcdcd;
 }
 .footer-top > div {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 14px 20px;
   font-size: 11px;
 }
 .footer-top > div a {
   display: inline-flex;
+  white-space: nowrap;
+  min-height: 36px;
   gap: 8px;
   align-items: center;
+}
+.footer .wordmark {
+  color: #f5f2ec;
 }
 .footer .brand-dot {
   color: #d7bea7;
 }
 .photo-credits {
   font-size: 9px;
-  color: #d1c5b7;
+  color: #cdcdcd;
   line-height: 1.7;
   margin-top: 30px;
 }
@@ -1082,11 +1090,11 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 25px;
-  border-top: 1px solid #51483f;
+  border-top: 1px solid #4d4d4d;
   padding-top: 25px;
   margin-top: 20px;
   font-size: 9px;
-  color: #d1c5b7;
+  color: #cdcdcd;
 }
 .footer-bottom > div {
   display: flex;
@@ -1539,7 +1547,7 @@ p {
   right: 24px;
   font-size: 9px;
   letter-spacing: 0.13em;
-  background: #f6f2e7e8;
+  background: #ffffffe8;
   padding: 10px 12px;
   width: fit-content;
 }
@@ -1558,7 +1566,7 @@ p {
   line-height: 0.98;
 }
 .explore-collection-copy h2 em {
-  color: #d9b889;
+  color: #d5d5d5;
 }
 .explore-collection-copy > p:not(.eyebrow) {
   margin: 22px 0 28px;

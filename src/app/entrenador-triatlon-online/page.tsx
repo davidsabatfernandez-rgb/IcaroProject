@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/contact";
 import { EnquiryLink } from "@/components/enquiry-link";
 import { Arrow, Wordmark } from "@/components/ui";
 import { site } from "@/config/site";
-import { plans } from "@/data/content";
+import { plans, planFaqs } from "@/data/plans";
 import "./triatlon-landing.css";
 
 const canonical = `${site.url}/entrenador-triatlon-online`;
@@ -68,6 +68,7 @@ const method = [
 ];
 
 const faqs = [
+  ...planFaqs,
   {
     question:
       "¿Necesito tener experiencia en triatlón para contratar un entrenador?",
@@ -77,7 +78,7 @@ const faqs = [
   {
     question: "¿Qué diferencia hay entre Seguimiento y Rendimiento?",
     answer:
-      "Ambos incluyen planificación individual, revisión semanal y consultas diarias. Seguimiento añade una llamada mensual. Rendimiento ofrece una llamada semanal, análisis de mayor profundidad y contacto más cercano; también incluye una prueba de lactato cada 6 meses. Te explicamos las condiciones de cada opción antes de empezar.",
+      "Ambos incluyen planificación individual, revisión semanal y una llamada semanal coordinada contigo. Seguimiento atiende las consultas escritas de 19:00 a 20:00, hora de Barcelona; la llamada se agenda aparte. Rendimiento ofrece comunicación diaria prioritaria según disponibilidad, sin limitarse a esa franja, análisis de mayor profundidad y una prueba de lactato cada 6 meses. Te explicamos las condiciones antes de empezar.",
   },
   {
     question: "¿Cada cuánto recibo el plan y qué sucede si cambia mi semana?",
@@ -335,7 +336,7 @@ export default function TriathlonCoachingPage() {
             <p>
               Las dos opciones incluyen llamada inicial, planificación en
               TrainingPeaks y revisión semanal. La diferencia está en la
-              frecuencia de las conversaciones y la profundidad del
+              prioridad de la comunicación y la profundidad del análisis y
               acompañamiento.
             </p>
           </div>
@@ -347,15 +348,11 @@ export default function TriathlonCoachingPage() {
               >
                 <p className="ads-plan-tag">
                   {plan.id === "coaching"
-                    ? "PLAN DESTACADO"
+                    ? "SEGUIMIENTO PERSONALIZADO"
                     : "ACOMPAÑAMIENTO MÁS CERCANO"}
                 </p>
                 <h3>{plan.name}</h3>
-                <p className="ads-plan-position">
-                  {plan.id === "coaching"
-                    ? "Tu entrenamiento, en constante evolución."
-                    : "Una colaboración más profunda con tu rendimiento."}
-                </p>
+                <p className="ads-plan-position">{plan.value}</p>
                 <p className="ads-plan-description">{plan.description}</p>
                 <dl>
                   <div>
@@ -371,7 +368,12 @@ export default function TriathlonCoachingPage() {
                   </div>
                   <div>
                     <dt>Conversación por llamada</dt>
-                    <dd>{plan.call}.</dd>
+                    <dd>
+                      {plan.call}.{" "}
+                      {plan.id === "coaching"
+                        ? "Se agenda de mutuo acuerdo, aparte de la franja de consultas escritas."
+                        : "Acordamos contigo el horario de la llamada."}
+                    </dd>
                   </div>
                   <div>
                     <dt>Análisis y ajustes</dt>

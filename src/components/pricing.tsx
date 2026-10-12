@@ -1,11 +1,13 @@
 "use client";
 import { useId, useState } from "react";
-import { plans } from "@/data/content";
+import Link from "next/link";
+import { plans, planComparison } from "@/data/plans";
 import { Arrow } from "./ui";
 import { EnquiryLink } from "./enquiry-link";
+import { PlanFaq } from "./plan-faq";
 import "./pricing-conversion.css";
 
-export function Pricing() {
+export function Pricing({ source = "planes" }: { source?: string }) {
   const [mode, setMode] = useState<"single" | "triathlon">("triathlon");
   const [singleSport, setSingleSport] = useState("Carrera");
   const disciplineId = useId();
@@ -75,7 +77,9 @@ export function Pricing() {
             <div className="plan-eyebrow">
               <span className="plan-index">{plan.number} /</span>
               {plan.id === "coaching" && (
-                <span className="recommendation">PLAN DESTACADO</span>
+                <span className="recommendation">
+                  SEGUIMIENTO PERSONALIZADO
+                </span>
               )}
             </div>
             <div className="plan-top">
@@ -96,7 +100,7 @@ export function Pricing() {
             <EnquiryLink
               className={`button ${plan.id === "coaching" ? "accent" : "outline"}`}
               interest="coaching"
-              source="planes"
+              source={source}
               plan={plan.name}
               sport={mode === "triathlon" ? "Triatlón" : singleSport}
               aria-label={`Consultar este plan: ${plan.name}`}
@@ -137,7 +141,7 @@ export function Pricing() {
         <div
           className="plan-comparison-scroll"
           role="region"
-          aria-label="Comparación de comunicación, llamadas y pruebas entre planes"
+          aria-label="Comparación de planificación, comunicación, análisis y pruebas entre planes"
           tabIndex={0}
         >
           <table>
@@ -146,25 +150,48 @@ export function Pricing() {
             </caption>
             <thead>
               <tr>
-                <th scope="col">Plan</th>
-                <th scope="col">Comunicación y análisis</th>
-                <th scope="col">Llamadas</th>
-                <th scope="col">Prueba de lactato</th>
+                <th scope="col">Características</th>
+                {plans.map((plan) => (
+                  <th
+                    scope="col"
+                    key={plan.id}
+                    className={
+                      plan.id === "coaching" ? "comparison-featured" : undefined
+                    }
+                  >
+                    {plan.name}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {plans.map((plan) => (
-                <tr key={plan.id}>
-                  <th scope="row">{plan.name}</th>
-                  <td>{plan.comparison.communication}</td>
-                  <td>{plan.comparison.calls}</td>
-                  <td>{plan.comparison.lactate}</td>
+              {planComparison.map((row) => (
+                <tr key={row.feature}>
+                  <th scope="row">{row.feature}</th>
+                  {row.values.map((value, index) => (
+                    <td
+                      key={plans[index].id}
+                      className={
+                        plans[index].id === "coaching"
+                          ? "comparison-featured"
+                          : undefined
+                      }
+                    >
+                      {value}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <p className="plan-comparison-hint">En móvil, desliza para comparar.</p>
+        <p className="plan-comparison-conditions">
+          Llamada inicial incluida en los tres planes. El horario de consultas
+          es el de Barcelona; la llamada semanal se agenda de mutuo acuerdo.
+          Rendimiento prioriza el contacto según disponibilidad, sin atención
+          las 24 horas ni respuesta instantánea garantizada.
+        </p>
       </div>
       <p className="prices-note plans-note">
         ¿No sabes qué nivel de seguimiento elegir? En la valoración inicial
@@ -172,6 +199,12 @@ export function Pricing() {
         encaja y sus condiciones antes de empezar. Las pruebas de lactato son
         opcionales y no necesitas realizarlas para contratar un plan.
       </p>
+      {source !== "pagina-planes" && (
+        <Link className="text-link plan-page-link" href="/planes">
+          Ver planes y condiciones de comunicación <Arrow diagonal />
+        </Link>
+      )}
+      <PlanFaq />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 # ICARO PROJECT
 
-Preparación individualizada de resistencia. Next.js 16, React 19 y TypeScript, con fuentes locales y fotografías editoriales documentadas. Sin dependencias de gráficos, analítica ni cookies añadidas.
+Preparación individualizada de resistencia. Next.js 16, React 19 y TypeScript, con fuentes locales y fotografías editoriales documentadas. Sin librería de gráficos añadida. La medición consentida permanece desactivada hasta configurar identificadores reales.
 
 ## Ejecutar
 
@@ -24,26 +24,28 @@ Si la caché de npm no es escribible: `npm ci --cache /tmp/icaro-npm-cache`.
 
 El propietario autorizó la publicación del rediseño y se integró en la rama de producción `icaro-web`. Los cambios se envían a esa rama para el despliegue de Vercel; un push correcto no confirma por sí solo que Vercel haya finalizado.
 
-La landing integra portada, método, planificación, planes, comunidad, equipo, disciplinas, laboratorio, evaluaciones, colección, guías, preguntas y contacto. La composición se concentra en `src/sections/landing.tsx`. La evolución comercial se documenta en `docs/CONVERSION_AUDIT.md` y las decisiones del rediseño anterior en `docs/ENDURANCE_ATELIER.md`.
+La landing integra portada, individualización, Social Club, método, planificación, planes, equipo, disciplinas, laboratorio, evaluaciones, colección, guías, preguntas y contacto. Las rutas `/social` y `/planes` amplían comunidad y condiciones de acompañamiento. La composición se concentra en `src/sections/landing.tsx`. La evolución comercial se documenta en `docs/CONVERSION_AUDIT.md` y las decisiones del rediseño anterior en `docs/ENDURANCE_ATELIER.md`.
 
-| Contenido                                                         | Archivo                                                                 |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Paleta, tipografía y estilos comunes                              | `src/app/globals.css`                                                   |
-| Configuración pública, contactos, fotografías, logo y perfil real | `src/config/site.ts`                                                    |
-| Portada y evaluaciones                                            | `src/data/atelier.ts`                                                   |
-| Filosofía, interpretación, equipo y colectivo                     | `src/data/editorial.ts`, `src/sections/editorial.tsx/css`               |
-| Disciplinas                                                       | `src/data/disciplines.ts`, `src/sections/disciplines.tsx/css`           |
-| Gráfica y evaluaciones sintéticas                                 | `src/data/lactate-lab.ts`, `src/components/lactate-lab.tsx/css`         |
-| Ejemplos de semanas y calendario                                  | `src/data/training-week.ts`, `src/components/training-calendar.tsx/css` |
-| Planes, prestaciones y FAQ                                        | `src/data/content.ts`, `src/components/pricing.tsx`                     |
-| Ciclo de entrega y recorrido inicial                              | `src/data/value.ts`, `src/data/journey.ts`                              |
-| Condiciones del test en pista                                     | `src/components/lactate-pricing.tsx`                                    |
-| Formulario y contexto de la consulta                              | `src/components/contact.tsx`, `src/components/enquiry-link.tsx`         |
-| Validación y envío real                                           | `src/lib/contact-delivery.ts`, `src/app/api/contact/route.ts`           |
+| Contenido                                                         | Archivo                                                                          |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Paleta, tipografía y estilos comunes                              | `src/app/globals.css`                                                            |
+| Configuración pública, contactos, fotografías, logo y perfil real | `src/config/site.ts`                                                             |
+| Portada y evaluaciones                                            | `src/data/atelier.ts`                                                            |
+| Filosofía, interpretación, equipo y colectivo                     | `src/data/editorial.ts`, `src/sections/editorial.tsx/css`                        |
+| Disciplinas                                                       | `src/data/disciplines.ts`, `src/sections/disciplines.tsx/css`                    |
+| Gráfica y evaluaciones sintéticas                                 | `src/data/lactate-lab.ts`, `src/components/lactate-lab.tsx/css`                  |
+| Ejemplos de semanas y calendario                                  | `src/data/training-week.ts`, `src/components/training-calendar.tsx/css`          |
+| Planes, prestaciones y FAQ                                        | `src/data/plans.ts`, `src/components/pricing.tsx`, `src/components/plan-faq.tsx` |
+| Ciclo de entrega y recorrido inicial                              | `src/data/value.ts`, `src/data/journey.ts`                                       |
+| Condiciones del test en pista                                     | `src/components/lactate-pricing.tsx`                                             |
+| Formulario y contexto de la consulta                              | `src/components/contact.tsx`, `src/components/enquiry-link.tsx`                  |
+| Validación y envío real                                           | `src/lib/contact-delivery.ts`, `src/app/api/contact/route.ts`                    |
 
 Los módulos anteriores de `product`, `journey`, `technical-method`, `community` y sus CSS permanecen como código de referencia; la nueva landing no importa esas secciones antiguas. `journeyStages` conserva los pasos reales en un desplegable, y `WeeklySchedule` conserva la entrega semanal.
 
 ## Identidad y datos reales
+
+La actualización de rendimiento, Social Club y condiciones comerciales está documentada en [PERFORMANCE_COMMUNITY.md](docs/PERFORMANCE_COMMUNITY.md). La agenda y los enlaces verificados se editan en `src/data/social.ts`, siguiendo [SOCIAL.md](docs/SOCIAL.md).
 
 La evolución comercial, la landing `/entrenador-triatlon-online`, el formulario en dos pasos, la tienda y las 50 guías están documentados en [CONVERSION_IMPLEMENTATION.md](docs/CONVERSION_IMPLEMENTATION.md). Para activar medición consentida y preparar la campaña de 210 €, consulta [MEASUREMENT.md](docs/MEASUREMENT.md). Las rutas nuevas conservan WhatsApp y el contexto de la consulta.
 
@@ -51,7 +53,7 @@ La tienda utiliza una adaptación transparente del logo ICARO TEAM adjuntado por
 
 El propietario confirmó que el equipo reúne entrenadores con experiencia, finishers de Ironman y triatletas de alto nivel en activo. El texto refleja esa descripción. `site.coach` permite añadir nombre, fotografía autorizada, formación acreditada, experiencia y filosofía de una persona real; no contiene nombres ni titulaciones inventados. La ficha personal se muestra cuando se incorporan nombre y fotografía.
 
-`site.community.instagramGroupUrl` está vacío porque falta el enlace real del grupo gratuito Social ICARO. Sin él no se presenta un acceso ficticio. ICARO Collective anuncia los entrenamientos presenciales semanales confirmados por el propietario; los ritmos, distancias y condiciones dependen de cada sesión. No se inventan horarios, puntos de encuentro ni cupos.
+`socialLinks.instagram` y `socialLinks.strava`, en `src/data/social.ts`, están vacíos hasta verificar los destinos oficiales. Sin ellos no se presentan accesos ficticios. ICARO Social Club presenta entrenamientos presenciales semanales cuando estén programados; los ritmos, distancias y condiciones dependen de cada sesión. No se inventan horarios, puntos de encuentro ni cupos.
 
 ## Rigor de los ejemplos
 
@@ -65,17 +67,17 @@ TrainingPeaks es la plataforma de trabajo confirmada. El enlace usa `site.traini
 
 Todos incluyen llamada inicial. El viernes el atleta envía disponibilidad. Entre sábado y domingo recibe programación, revisión de la semana anterior y objetivos de la siguiente.
 
-| Plan        | Seguimiento                                                          | Lactato                                          |
-| ----------- | -------------------------------------------------------------------- | ------------------------------------------------ |
-| Individual  | Feedback semanal por audios de WhatsApp; sin llamadas de seguimiento | Condiciones para atletas del plan                |
-| Seguimiento | Revisión semanal, consultas diarias y llamada mensual                | Promoción trimestral bajo consulta               |
-| Rendimiento | Llamada semanal y consultas diarias                                  | Un test incluido cada 6 meses; opción trimestral |
+| Plan        | Seguimiento                                                               | Lactato                                          |
+| ----------- | ------------------------------------------------------------------------- | ------------------------------------------------ |
+| Individual  | Audios semanales de WhatsApp; dudas de 19–20; sin llamadas de seguimiento | Condiciones para atletas del plan                |
+| Seguimiento | Revisión y llamada semanal acordada; consultas escritas de 19–20          | Promoción trimestral bajo consulta               |
+| Rendimiento | Llamada semanal; comunicación diaria prioritaria según disponibilidad     | Un test incluido cada 6 meses; opción trimestral |
 
 No se muestran importes. Los valores anteriores en la configuración pública no deben tratarse como secretos. El test en pista se puede consultar por separado, con desplazamiento presupuestado antes de reservar. Las evaluaciones de técnica en dos centros de Barcelona se presentan con condiciones bajo consulta. La durabilidad describe un criterio de análisis de sesiones, sin anunciar otra medición de laboratorio incluida.
 
 ## Formulario y WhatsApp
 
-El formulario conserva interés (`coaching`, `collective`, `tests`), disciplina, plan y origen del CTA. El origen puede incluir la ruta de entrada y parámetros de campaña permitidos, con longitud acotada; no incluye el referrer externo ni cualquier parámetro arbitrario. El contexto viaja en la consulta, sin almacenamiento persistente añadido.
+El formulario conserva interés (`coaching`, `social_run`, `social_ride`, `collective`, `tests`), disciplina, plan y origen del CTA. El origen puede incluir la ruta de entrada y parámetros de campaña permitidos, con longitud acotada; no incluye el referrer externo ni cualquier parámetro arbitrario. El contexto viaja en la consulta, sin almacenamiento persistente añadido. Coaching tiene dos pasos y recoge disciplina, objetivo, experiencia, disponibilidad, acompañamiento y contacto; comunidad utiliza un paso. La categoría comercial figura en el asunto del email y las consultas de Socials quedan excluidas de la conversión principal de Ads.
 
 La interfaz envía JSON a `/api/contact`. El servidor valida campos, longitud, consentimiento, interés y honeypot; limita el cuerpo a 8 KB y rechaza peticiones desde otro origen. El destinatario fijo es `contacticaroproject@gmail.com`. Resend se llama exclusivamente en el servidor, con tiempo máximo de 10 segundos. La interfaz deja de esperar a los 15 segundos, mantiene los campos ante errores y ofrece el mismo contenido por WhatsApp. Solo indica éxito tras aceptación correcta del proveedor; esto no confirma recepción en Gmail.
 
@@ -102,6 +104,8 @@ npm run typecheck
 npm run build
 npm run test:e2e
 ```
+
+No hay script `lint` ni configuración de ESLint en este repositorio. La compilación, TypeScript, las pruebas y la comprobación de formato son verificaciones distintas; no se presenta el formato como lint.
 
 Las pruebas verifican cinco tamaños de pantalla, navegación, overflow, selección de disciplinas, laboratorio, adaptación del calendario, condiciones de planes/tests, contexto de consultas, validación, errores, timeout y éxito del formulario. Las respuestas del proveedor se simulan para evitar envíos reales en pruebas. La recepción en Gmail requiere una comprobación con la configuración del entorno desplegado.
 

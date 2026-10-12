@@ -38,7 +38,7 @@ export const coachingStrengthArticles: TrainingArticle[] = [
       {
         heading: "Elige una comunicación que vayas a utilizar",
         paragraphs: [
-          "Todos los planes de ICARO incluyen una llamada inicial. Individual ofrece la revisión semanal mediante audios de WhatsApp, sin llamadas periódicas de seguimiento. Seguimiento incorpora consultas diarias y llamada mensual; Rendimiento, consultas diarias y llamada semanal.",
+          "Todos los planes de ICARO incluyen una llamada inicial. Individual utiliza audios semanales de WhatsApp, sin llamadas periódicas. Individual y Seguimiento atienden dudas de 19:00 a 20:00, hora de Barcelona. Seguimiento añade una llamada semanal coordinada aparte de esa franja. Rendimiento incluye llamada semanal y comunicación diaria prioritaria según disponibilidad, sin límite a ese horario ni atención las 24 horas.",
           "No es necesario escoger la opción con más llamadas para empezar. Piensa en cómo te resulta más fácil preguntar y explicar tus sensaciones. Un buen servicio debería darte autonomía para entender el entrenamiento, además de acompañarte en las decisiones que todavía no sabes tomar.",
         ],
       },
@@ -103,7 +103,7 @@ export const coachingStrengthArticles: TrainingArticle[] = [
       {
         heading: "Acuerda un seguimiento que puedas sostener",
         paragraphs: [
-          "La llamada inicial está incluida en los tres planes de ICARO. El seguimiento posterior cambia: Individual utiliza audios semanales de WhatsApp; Seguimiento añade consultas diarias y llamada mensual; Rendimiento incorpora consultas diarias y llamada semanal.",
+          "La llamada inicial está incluida en los tres planes de ICARO. Individual utiliza audios semanales de WhatsApp; comparte con Seguimiento la franja de consultas de 19:00 a 20:00, hora de Barcelona. Seguimiento añade una llamada semanal coordinada aparte de las consultas. Rendimiento mantiene llamada semanal y comunicación diaria prioritaria según disponibilidad, sin limitarse a esa franja ni prometer respuestas instantáneas.",
           "La disponibilidad se comparte el viernes y el fin de semana se explica la revisión anterior y la programación siguiente. TrainingPeaks permite consultar las sesiones, pero la sincronización con un reloj depende del dispositivo y del formato. Comprueba esas compatibilidades y el canal para resolver dudas antes de decidir.",
         ],
       },
@@ -221,7 +221,7 @@ export const coachingStrengthArticles: TrainingArticle[] = [
         heading: "La comunicación debe estar definida",
         paragraphs: [
           "Las llamadas, los mensajes y los audios pueden ayudar a resolver dudas, pero conviene conocer el formato incluido. Tener un canal de consulta no significa respuesta inmediata a cualquier hora. Pide que te expliquen cómo se utiliza y qué expectativas son razonables.",
-          "En ICARO todos los planes incluyen llamada inicial. Individual incluye revisión semanal por audios de WhatsApp sin llamadas periódicas. Seguimiento incluye consultas diarias y llamada mensual; Rendimiento, consultas diarias y llamada semanal. Estas diferencias permiten valorar el acompañamiento sin asumir que un plan ofrece lo mismo que otro.",
+          "En ICARO todos los planes incluyen llamada inicial. Individual entrega audios semanales sin llamadas periódicas y atiende consultas de 19:00 a 20:00, igual que Seguimiento. Seguimiento añade una llamada semanal coordinada; Rendimiento mantiene esa llamada y ofrece comunicación diaria prioritaria según disponibilidad, sin limitarse a esa franja, sin atención las 24 horas. Valora estas condiciones según el contacto que necesitas.",
         ],
       },
       {
@@ -298,7 +298,7 @@ export const coachingStrengthArticles: TrainingArticle[] = [
       {
         heading: "Un acuerdo claro sobre el acompañamiento",
         paragraphs: [
-          "Pregunta qué canales, llamadas y consultas están incluidos, y cómo se gestionan las dudas. Individual ofrece audios semanales de WhatsApp sin llamadas periódicas; Seguimiento añade consultas diarias y llamada mensual; Rendimiento incluye consultas diarias y llamada semanal.",
+          "Pregunta qué canales, llamadas y consultas están incluidos. En ICARO, Individual entrega audios semanales sin llamadas periódicas. Individual y Seguimiento atienden consultas de 19:00 a 20:00, hora de Barcelona. Seguimiento incluye una llamada semanal coordinada aparte de esa franja. Rendimiento añade comunicación diaria prioritaria según disponibilidad, sin limitarse a ese horario, y mantiene la llamada semanal sin prometer respuestas instantáneas.",
           "TrainingPeaks organiza la programación, pero no sustituye esa comunicación. Tampoco sustituye una valoración sanitaria si existe un problema que requiere atención clínica. Un servicio definido con claridad te permite saber a quién acudir, entender sus límites y elegir el grado de acompañamiento que necesitas en esta etapa.",
         ],
       },

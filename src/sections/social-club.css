@@ -1,0 +1,114 @@
+.social-club {
+  background: #f2f2f2;
+}
+.social-club-heading {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 7vw;
+  align-items: end;
+  margin-bottom: 46px;
+}
+.social-club-heading h2 {
+  max-width: 640px;
+  font-size: clamp(50px, 6.8vw, 94px);
+}
+.social-club-statement {
+  max-width: 580px;
+  font-family: var(--display);
+  font-size: clamp(25px, 3vw, 37px);
+  line-height: 1.13;
+}
+.social-club-heading p + p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 20px;
+}
+.social-club-activities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.social-club-photo {
+  position: relative;
+  aspect-ratio: 1.45;
+  overflow: hidden;
+  background: var(--ink);
+}
+.social-club-photo img {
+  object-fit: cover;
+}
+.social-club-photo-label {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+.social-club-copy {
+  padding: 27px 0 0;
+}
+.social-club-copy h3 {
+  font-family: var(--display);
+  font-size: clamp(31px, 3.2vw, 44px);
+  line-height: 1.03;
+  letter-spacing: -0.015em;
+  max-width: 610px;
+}
+.social-club-copy p {
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 510px;
+}
+.social-club-copy .text-link {
+  font-size: 12px;
+  font-weight: 600;
+  min-height: 44px;
+}
+.social-club-bottom {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #cccccc;
+  margin-top: 44px;
+  padding-top: 23px;
+}
+.social-club-bottom p {
+  max-width: 700px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.social-club-bottom .text-link {
+  font-size: 13px;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+@media (max-width: 900px) {
+  .social-club-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .social-club-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+@media (max-width: 700px) {
+  .social-club-activities {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .social-club-heading {
+    margin-bottom: 30px;
+  }
+  .social-club-photo-label {
+    left: 16px;
+    bottom: 16px;
+  }
+}

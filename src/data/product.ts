@@ -32,8 +32,9 @@ export const trainingFlow = [
     icon: "review",
     label: "CUÉNTANOS CÓMO HA IDO",
     title: "Tu entrenador te acompaña.",
-    text: "Te damos feedback semanal a partir de tus datos y sensaciones. Individual lo recibe en audios de WhatsApp; Coaching y Performance añaden consultas diarias.",
-    detail: "Coaching: llamada mensual. Performance: llamada semanal.",
+    text: "Te damos feedback semanal a partir de tus datos y sensaciones. Individual lo recibe en audios de WhatsApp. Individual y Seguimiento atienden dudas de 19:00 a 20:00; Rendimiento ofrece comunicación diaria prioritaria según disponibilidad, sin quedar limitado a esa franja.",
+    detail:
+      "Seguimiento y Rendimiento: una llamada semanal coordinada contigo. Llamada inicial incluida en los tres planes.",
   },
 ] as const;
 

@@ -8,18 +8,19 @@ import {
   leadProfileOptions,
   profileLines,
   supportForPlan,
+  planForSupport,
   type LeadProfile,
   type LeadProfileOption,
 } from "@/data/lead-qualification";
 import { Arrow } from "./ui";
-import type { EnquiryInterest, EnquirySelection } from "./enquiry-link";
+import type { EnquirySelection } from "./enquiry-link";
+import {
+  enquiryInterestLabels as interestLabels,
+  socialEnquiryDefaults,
+  type EnquiryInterest,
+} from "@/data/enquiries";
 import "./contact-qualification.css";
 
-const interestLabels: Record<EnquiryInterest, string> = {
-  coaching: "Entrenamiento individual",
-  collective: "Comunidad ICARO",
-  tests: "Pruebas y evaluaciones",
-};
 const disciplines = [
   "Triatlón",
   "Carrera",
@@ -49,20 +50,24 @@ function safeSource(value: string) {
 
 export function ContactForm({
   initialSource = "contacto",
+  initialInterest = "coaching",
   initialSport = "",
   initialPlan = "",
 }: {
   initialSource?: string;
+  initialInterest?: EnquiryInterest;
   initialSport?: string;
   initialPlan?: string;
 } = {}) {
   const id = useId();
   const [plan, setPlan] = useState(initialPlan.slice(0, 100));
-  const [interest, setInterest] = useState<EnquiryInterest>("coaching");
+  const [interest, setInterest] = useState<EnquiryInterest>(initialInterest);
   const [sport, setSport] = useState(
-    disciplines.includes(initialSport) ? initialSport : "",
+    disciplines.includes(initialSport)
+      ? initialSport
+      : socialEnquiryDefaults(initialInterest).sport,
   );
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState(socialEnquiryDefaults(initialInterest).goal);
   const [profile, setProfile] = useState<LeadProfile>({
     ...emptyLeadProfile,
     support: supportForPlan(initialPlan),
@@ -72,6 +77,7 @@ export function ContactForm({
   const [step, setStep] = useState<1 | 2>(1);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
+  const [ready, setReady] = useState(false);
   const [summary, setSummary] = useState("");
   const [failed, setFailed] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -89,21 +95,6 @@ export function ContactForm({
 
   useEffect(() => {
     setEntry(enquiryEntry());
-    const params = new URLSearchParams(window.location.search);
-    const requestedInterest = params.get("consulta");
-    if (requestedInterest && Object.hasOwn(interestLabels, requestedInterest)) {
-      setInterest(requestedInterest as EnquiryInterest);
-      setSource(safeSource(params.get("origen") || initialSource));
-      const requestedSport = params.get("deporte");
-      if (requestedSport && disciplines.includes(requestedSport))
-        setSport(requestedSport);
-      const requestedPlan = (params.get("plan") || "").slice(0, 100);
-      setPlan(requestedPlan);
-      setProfile((current) => ({
-        ...current,
-        support: supportForPlan(requestedPlan),
-      }));
-    }
     const select = (selection: EnquirySelection) => {
       if (
         !selection ||
@@ -111,26 +102,53 @@ export function ContactForm({
         sending.current
       )
         return;
+      const community = ["social_run", "social_ride", "collective"].includes(
+        selection.interest,
+      );
       const nextPlan =
-        typeof selection.plan === "string" ? selection.plan.slice(0, 100) : "";
+        !community && typeof selection.plan === "string"
+          ? selection.plan.slice(0, 100)
+          : "";
+      const defaults = socialEnquiryDefaults(selection.interest);
       setInterest(selection.interest);
       setPlan(nextPlan);
       setSource(
         safeSource(
-          typeof selection.source === "string" ? selection.source : "contacto",
+          typeof selection.source === "string"
+            ? selection.source
+            : initialSource,
         ),
       );
       if (selection.sport && disciplines.includes(selection.sport))
         setSport(selection.sport);
-      if (nextPlan)
-        setProfile((current) => ({
-          ...current,
-          support: supportForPlan(nextPlan),
-        }));
+      else if (defaults.sport) setSport(defaults.sport);
+      setGoal(
+        (current) =>
+          defaults.goal ||
+          (/^Consultar las próximas (quedadas|salidas) de Social (Runs|Rides)$/.test(
+            current,
+          )
+            ? ""
+            : current),
+      );
+      setProfile((current) => ({
+        ...current,
+        support:
+          selection.interest === "coaching" ? supportForPlan(nextPlan) : "",
+      }));
       setStep(1);
       setStatus("");
       setFailed(false);
     };
+    const params = new URLSearchParams(window.location.search);
+    const requestedInterest = params.get("consulta");
+    if (requestedInterest && Object.hasOwn(interestLabels, requestedInterest))
+      select({
+        interest: requestedInterest as EnquiryInterest,
+        source: params.get("origen") || initialSource,
+        sport: params.get("deporte") || undefined,
+        plan: params.get("plan") || undefined,
+      });
     const interestListener = (event: Event) =>
       select((event as CustomEvent<EnquirySelection>).detail);
     const planListener = (event: Event) => {
@@ -145,6 +163,7 @@ export function ContactForm({
     };
     window.addEventListener("icaro-interest", interestListener);
     window.addEventListener("icaro-plan", planListener);
+    setReady(true);
     return () => {
       window.removeEventListener("icaro-interest", interestListener);
       window.removeEventListener("icaro-plan", planListener);
@@ -171,10 +190,14 @@ export function ContactForm({
   function clearEnquiry(form: HTMLFormElement) {
     form.reset();
     setPlan("");
-    setSport("");
-    setGoal("");
+    setSport(
+      disciplines.includes(initialSport)
+        ? initialSport
+        : socialEnquiryDefaults(initialInterest).sport,
+    );
+    setGoal(socialEnquiryDefaults(initialInterest).goal);
     setProfile({ ...emptyLeadProfile });
-    setInterest("coaching");
+    setInterest(initialInterest);
     setSource(safeSource(initialSource));
     setSummary("");
     setStep(1);
@@ -273,7 +296,9 @@ export function ContactForm({
                 qualification: "potential_fit",
               });
             setStatus(
-              "Tu consulta se ha enviado. Revisaremos tu preparación y las opciones de seguimiento contigo. La solicitud está pendiente de valoración.",
+              isCoaching
+                ? "Tu consulta se ha enviado. Revisaremos tu preparación y las opciones de seguimiento contigo. La solicitud está pendiente de valoración."
+                : "Tu consulta se ha enviado. Te explicaremos las opciones y condiciones disponibles. La participación se confirma con la organización de cada quedada o sesión.",
             );
             clearEnquiry(form);
           }
@@ -316,12 +341,11 @@ export function ContactForm({
           id={`${id}-${field}`}
           name={field}
           value={profile[field]}
-          onChange={(event) =>
-            setProfile((current) => ({
-              ...current,
-              [field]: event.target.value,
-            }))
-          }
+          onChange={(event) => {
+            const value = event.target.value;
+            setProfile((current) => ({ ...current, [field]: value }));
+            if (field === "support") setPlan(planForSupport(value));
+          }}
         >
           <option value="">Elige una opción</option>
           {leadProfileOptions[field].map((option) => (
@@ -375,11 +399,24 @@ export function ContactForm({
         <select
           id={`${id}-interest`}
           name="interest"
-          disabled={busy}
+          disabled={busy || !ready}
           value={interest}
           onChange={(event) => {
-            setInterest(event.target.value as EnquiryInterest);
+            const nextInterest = event.target.value as EnquiryInterest;
+            const defaults = socialEnquiryDefaults(nextInterest);
+            setInterest(nextInterest);
             setPlan("");
+            setProfile((current) => ({ ...current, support: "" }));
+            if (defaults.sport) setSport(defaults.sport);
+            setGoal(
+              (current) =>
+                defaults.goal ||
+                (/^Consultar las próximas (quedadas|salidas) de Social (Runs|Rides)$/.test(
+                  current,
+                )
+                  ? ""
+                  : current),
+            );
             setStep(1);
             setFailed(false);
             setStatus("");
@@ -397,7 +434,7 @@ export function ContactForm({
           Te interesa: {plan}
           <button
             type="button"
-            disabled={busy}
+            disabled={busy || !ready}
             onClick={() => {
               setPlan("");
               setProfile((current) => ({ ...current, support: "" }));
@@ -410,7 +447,7 @@ export function ContactForm({
       <fieldset
         className="cq-fields"
         hidden={isCoaching && step === 2}
-        disabled={(isCoaching && step === 2) || busy}
+        disabled={(isCoaching && step === 2) || busy || !ready}
       >
         <legend>Tu preparación deportiva</legend>
         <div className="form-field">
@@ -444,36 +481,10 @@ export function ContactForm({
         {isCoaching && (
           <>
             <div className="cq-select-row">
-              <label>
-                Fecha aproximada <span>(opcional)</span>
-                <input
-                  name="goalDate"
-                  maxLength={100}
-                  placeholder="Mes o prueba, si ya lo tienes definido"
-                  value={profile.goalDate}
-                  onChange={(event) =>
-                    setProfile((current) => ({
-                      ...current,
-                      goalDate: event.target.value,
-                    }))
-                  }
-                />
-              </label>
               {profileSelect("experience", "Experiencia previa")}
-            </div>
-            <div className="cq-select-row">
               {profileSelect("weeklyHours", "Horas semanales disponibles")}
-              {profileSelect("difficulty", "Principal dificultad")}
             </div>
-            <div className="cq-select-row">
-              {profileSelect("support", "Seguimiento deseado")}
-              {profileSelect("budget", "Presupuesto mensual orientativo")}
-            </div>
-            <p className="cq-budget-note">
-              El presupuesto expresa tu preferencia. No es una tarifa de ICARO
-              ni un compromiso de contratación. También puedes pedir que te
-              expliquemos las opciones.
-            </p>
+            {profileSelect("support", "Seguimiento deseado")}
           </>
         )}
       </fieldset>
@@ -485,7 +496,7 @@ export function ContactForm({
       <fieldset
         className="cq-fields"
         hidden={!atContact}
-        disabled={!atContact || busy}
+        disabled={!atContact || busy || !ready}
       >
         <legend>Tu contacto y consentimiento</legend>
         <div className="form-row">
@@ -543,13 +554,17 @@ export function ContactForm({
           <button
             className="cq-back"
             type="button"
-            disabled={busy}
+            disabled={busy || !ready}
             onClick={() => changeStep(1)}
           >
             Volver a tu preparación
           </button>
         )}
-        <button className="button accent" type="submit" disabled={busy}>
+        <button
+          className="button accent"
+          type="submit"
+          disabled={busy || !ready}
+        >
           {busy
             ? "Enviando…"
             : !atContact

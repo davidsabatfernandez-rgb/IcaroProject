@@ -161,7 +161,7 @@ test("qualification is a human-review hint only after the provider accepts a com
     "Primavera de 2027",
     "experiencia en competición",
     "De 6 a 8 horas",
-    "Seguimiento frecuente",
+    "Seguimiento con llamada semanal",
     "Prefiero conocer opciones",
     "Nueva solicitud, pendiente de valorar",
     "requiere valoración humana",
@@ -341,4 +341,48 @@ test("contact API uses the public request host behind the Next.js proxy", async 
   });
   expect(response.status).toBe(200);
   expect(mail.requests).toHaveLength(1);
+});
+
+test("email categories distinguish all plans and socials without leaking stale coaching choices", async () => {
+  for (const [interest, plan, support, category, label] of [
+    [
+      "coaching",
+      "Individual",
+      "individual",
+      "individual",
+      "Entrenamiento Individual",
+    ],
+    [
+      "coaching",
+      "Seguimiento",
+      "followup",
+      "seguimiento",
+      "Entrenamiento Seguimiento",
+    ],
+    [
+      "coaching",
+      "Rendimiento",
+      "performance",
+      "rendimiento",
+      "Entrenamiento Rendimiento",
+    ],
+    ["social_run", "Rendimiento", "performance", "social_run", "Social Runs"],
+    ["social_ride", "Seguimiento", "followup", "social_ride", "Social Rides"],
+  ]) {
+    const mail = provider({ id: "category-message-id" });
+    const response = await handleContact(
+      enquiry({ interest, plan, support, weeklyHours: "6-8" }),
+      { apiKey: "test-api-key", send: mail.send },
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ success: true, category });
+    const payload = JSON.parse(String(mail.requests[0].init?.body));
+    expect(payload.subject).toContain(label);
+    expect(payload.text).toContain(`Categoría: ${label}`);
+    if (interest.startsWith("social_")) {
+      expect(payload.text).not.toContain("Plan:");
+      expect(payload.text).not.toContain("Horas semanales disponibles");
+      expect(payload.text).not.toContain("Seguimiento deseado");
+    }
+  }
 });

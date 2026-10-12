@@ -28,19 +28,19 @@ export default function PrivacyPage() {
       <h2 style={{ fontSize: 24 }}>Qué datos utilizamos y para qué</h2>
       <p>
         El formulario recoge tu nombre, correo o teléfono, deporte, objetivo,
-        interés en entrenamiento individual, colectivo o evaluaciones, plan
-        elegido y el mensaje que decidas añadir. En la valoración de
-        entrenamiento puedes indicar fecha aproximada, experiencia, horas
-        disponibles, dificultad actual, seguimiento deseado y presupuesto
-        orientativo. También incluye la sección desde la que contactas y, si
-        existen, parámetros limitados de campaña de la URL de entrada. Los
-        usamos para dar contexto a tu consulta, responder a tu solicitud y
-        explicarte las opciones de entrenamiento. No añadas información médica
-        ni otros datos sensibles. Enviar una consulta no te suscribe a
-        comunicaciones comerciales. El equipo revisa cada solicitud. Un
-        indicador de encaje inicial basado en la disponibilidad y el seguimiento
-        solicitado sirve para organizar la revisión; no acepta ni rechaza una
-        contratación y no sustituye una decisión humana.
+        interés en entrenamiento individual, Social Runs, Social Rides,
+        comunidad o evaluaciones, plan elegido y el mensaje que decidas añadir.
+        En la valoración de entrenamiento puedes indicar experiencia, horas
+        disponibles y seguimiento deseado. También incluye la sección desde la
+        que contactas y, si existen, parámetros limitados de campaña de la URL
+        de entrada. Los usamos para dar contexto a tu consulta, responder a tu
+        solicitud y explicarte las opciones de entrenamiento o las condiciones
+        de participación en la comunidad. No añadas información médica ni otros
+        datos sensibles. Enviar una consulta no te suscribe a comunicaciones
+        comerciales. El equipo revisa cada solicitud. Un indicador de encaje
+        inicial basado en la disponibilidad y el seguimiento solicitado sirve
+        para organizar la revisión; no acepta ni rechaza una contratación y no
+        sustituye una decisión humana.
       </p>
       <h2 style={{ fontSize: 24 }}>Cómo se envía</h2>
       <p>

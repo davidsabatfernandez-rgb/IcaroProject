@@ -358,22 +358,22 @@
 }
 .en-coach .section-label,
 .en-coach .section-label > span {
-  color: #d3b99d;
+  color: #d3d3d3;
 }
 .en-coach-intro > .en-lead {
   margin: 32px 0 22px;
 }
 .en-coach-intro > p:not(.en-lead) {
   font-size: 15px;
-  color: #d1c7bb;
+  color: #cdcdcd;
   max-width: 440px;
 }
 .en-coach-intro > .text-link {
   margin-top: 28px;
-  color: #e2c8aa;
+  color: #e2e2e2;
 }
 .en-coach a:focus-visible {
-  outline-color: #e2c8aa;
+  outline-color: #e2e2e2;
 }
 .en-coach-profile {
   border-bottom: 1px solid #ffffff30;
@@ -395,7 +395,7 @@
 .en-coach-profile p,
 .en-coach-profile li {
   font-size: 14px;
-  color: #d1c7bb;
+  color: #cdcdcd;
 }
 .en-coach-profile ul {
   margin: 20px 0;
@@ -406,7 +406,7 @@
   padding-top: 22px;
 }
 .en-follow-up-heading > span {
-  color: #d3b99d;
+  color: #d3d3d3;
 }
 .en-follow-up-heading > p {
   font-size: 19px;
@@ -427,11 +427,11 @@
 }
 .en-coach-step {
   font-size: 13px;
-  color: #d3b99d;
+  color: #d3d3d3;
   font-variant-numeric: tabular-nums;
 }
 .en-coach-timeline .micro {
-  color: #d3b99d;
+  color: #d3d3d3;
   font-size: 9px;
 }
 .en-coach-timeline h3 {
@@ -440,11 +440,11 @@
   margin: 12px 0;
 }
 .en-coach-timeline p {
-  color: #d1c7bb;
+  color: #cdcdcd;
   font-size: 13px;
 }
 .en-coach-plans {
-  color: #e2c8aa;
+  color: #e2e2e2;
   font-size: 12px;
   margin-left: 52px;
   margin-top: 8px;

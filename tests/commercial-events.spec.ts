@@ -286,6 +286,7 @@ test("Ads conversions require advertising opt-in, configured label and actual pr
     api.saveCommercialConsent({ analytics: false, advertising: true }, config);
     const noAcceptance = api.trackCommercialEvent("form_success", {
       source: "contacto",
+      interest: "coaching",
     });
     const click = api.trackCommercialEvent("whatsapp_click", {
       source: "whatsapp",
@@ -299,12 +300,29 @@ test("Ads conversions require advertising opt-in, configured label and actual pr
       qualification: "potential_fit",
     });
     const before = JSON.stringify(window.dataLayer);
+    const socialResults = [
+      "social_run",
+      "social_ride",
+      "collective",
+      "tests",
+    ].map((interest) =>
+      api.trackCommercialEvent("form_success", {
+        interest,
+        source: "social-form",
+        providerAccepted: true,
+      }),
+    );
+    const socialQueue = JSON.stringify(window.dataLayer);
     const accepted = api.trackCommercialEvent("form_success", {
       source: "contacto",
+      interest: "coaching",
+      plan: "Seguimiento",
       providerAccepted: true,
     });
     return {
       noAcceptance,
+      socialResults,
+      socialQueue,
       click,
       customer,
       qualified,
@@ -319,6 +337,8 @@ test("Ads conversions require advertising opt-in, configured label and actual pr
   expect(result.customer).toBe(false);
   expect(result.qualified).toBe(false);
   expect(result.before).not.toContain('"conversion"');
+  expect(result.socialResults).toEqual([false, false, false, false]);
+  expect(result.socialQueue).not.toContain('"conversion"');
   expect(result.accepted).toBe(true);
   expect(result.queue).toContain(`AW-123456789/test_lead_label`);
   expect(result.queue.match(/"conversion"/g)).toHaveLength(1);

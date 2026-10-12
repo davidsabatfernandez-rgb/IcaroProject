@@ -10,6 +10,17 @@ export function Footer({ home = false }: { home?: boolean } = {}) {
         </a>
         <span>CIENCIA. INDIVIDUALIZACIÓN. RENDIMIENTO. COMUNIDAD.</span>
         <div>
+          <a
+            href="/social"
+            data-track="cta_click"
+            data-track-source="footer-social"
+            data-track-interest="collective"
+          >
+            Social Club <Arrow diagonal />
+          </a>
+          <a href="/planes">
+            Planes <Arrow diagonal />
+          </a>
           <a href="/tienda">
             Tienda <Arrow diagonal />
           </a>

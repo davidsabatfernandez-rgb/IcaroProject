@@ -1,18 +1,16 @@
 import {
   leadProfileOptions,
+  leadCategory,
   leadQualification,
   profileLines,
   type LeadProfile,
   type LeadProfileOption,
 } from "../data/lead-qualification";
+import { enquiryInterestLabels, leadCategoryLabels } from "../data/enquiries";
 
 const recipient = "contacticaroproject@gmail.com";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const interests: Record<string, string> = {
-  coaching: "Entrenamiento individual",
-  collective: "Comunidad ICARO",
-  tests: "Pruebas y evaluaciones",
-};
+const interests: Record<string, string> = enquiryInterestLabels;
 const sports = new Set([
   "Carrera",
   "Carrera por montaña",
@@ -115,11 +113,33 @@ export async function handleContact(
     );
   }
   const profile = { goalDate, ...optionalProfile } as LeadProfile;
+  const enquiryPlan =
+    interest === "social_run" ||
+    interest === "social_ride" ||
+    interest === "collective"
+      ? ""
+      : plan;
+  const activeProfile =
+    !interest || interest === "coaching"
+      ? profile
+      : {
+          goalDate: "",
+          experience: "",
+          weeklyHours: "",
+          difficulty: "",
+          support: "",
+          budget: "",
+        };
+  const category = leadCategory(
+    interest || "coaching",
+    enquiryPlan,
+    activeProfile.support,
+  );
   const qualification = leadQualification({
     interest: interest || "coaching",
     goal,
-    profile,
-    plan,
+    profile: activeProfile,
+    plan: enquiryPlan,
   });
   if (!options.apiKey) {
     return failure(
@@ -139,9 +159,9 @@ export async function handleContact(
         body: JSON.stringify({
           from: options.fromEmail || "ICARO PROJECT <onboarding@resend.dev>",
           to: [recipient],
-          subject: "Nueva consulta · ICARO PROJECT",
+          subject: `Nueva consulta · ${leadCategoryLabels[category]} · ICARO PROJECT`,
           ...(emailPattern.test(contact) ? { reply_to: contact } : {}),
-          text: `Estado: Nueva solicitud, pendiente de valorar.\nPrevaloración: ${qualification === "potential_fit" ? "Encaje potencial con seguimiento frecuente; requiere valoración humana." : "Pendiente de valoración humana."}\nInterés: ${interests[interest || "coaching"]}\nNombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${plan ? `Plan: ${plan}\n` : ""}${source ? `Origen: ${source}\n` : ""}${profileLines(profile).join("\n")}\n\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad. Esta solicitud no confirma una contratación.`,
+          text: `Estado: Nueva solicitud, pendiente de valorar.\nPrevaloración: ${qualification === "potential_fit" ? "Encaje potencial con seguimiento frecuente; requiere valoración humana." : "Pendiente de valoración humana."}\nCategoría: ${leadCategoryLabels[category]}\nInterés: ${interests[interest || "coaching"]}\nNombre: ${name}\nContacto: ${contact}\nDeporte: ${sport}\nObjetivo: ${goal}\n${enquiryPlan ? `Plan: ${enquiryPlan}\n` : ""}${source ? `Origen: ${source}\n` : ""}${profileLines(activeProfile).join("\n")}\n\n${message}\n\nEl atleta confirmó que ha leído la política de privacidad. Esta solicitud no confirma una contratación.`,
         }),
         signal: AbortSignal.timeout(10000),
         cache: "no-store",
@@ -165,7 +185,12 @@ export async function handleContact(
         "No hemos recibido confirmación del envío. Puedes contactar por WhatsApp.",
       );
     }
-    return Response.json({ success: true, leadStatus: "new", qualification });
+    return Response.json({
+      success: true,
+      leadStatus: "new",
+      qualification,
+      category,
+    });
   } catch {
     return failure(
       504,

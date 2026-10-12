@@ -1,7 +1,7 @@
 export const atelierCopy = {
   hero: {
     description:
-      "Entrenamiento individualizado de triatlón, carrera y ciclismo. Analizamos tu perfil, planificamos resistencia y fuerza, y revisamos cada semana cómo respondes.",
+      "Entrenamiento individualizado basado en fisiología aplicada, análisis y seguimiento real. Una comunidad de atletas con Social Runs, Social Rides y entrenamientos compartidos para diferentes niveles.",
   },
 };
 export const assessments = [

@@ -3,7 +3,7 @@ export const navigation = [
   { label: "Método", href: "#metodo" },
   { label: "Tu preparación", href: "#como-funciona" },
   { label: "Disciplinas", href: "#disciplinas" },
-  { label: "Comunidad", href: "#comunidad" },
+  { label: "Social Club", href: "/social" },
   { label: "Planes", href: "#planes" },
   { label: "Tienda", href: "/tienda" },
   { label: "Artículos", href: "/articulos" },
@@ -36,104 +36,15 @@ export const sharedFeatures = [
   "Pruebas de campo y zonas revisables",
   "Preparación de competición",
 ];
-export const plans = [
-  {
-    id: "individual",
-    number: "01",
-    name: "Individual",
-    label: "TU PLAN. TU AUTONOMÍA.",
-    value: "Un plan claro para entrenar con criterio.",
-    description:
-      "Una preparación individualizada, explicada y revisada cada semana. Para quien prefiere organizarse con autonomía y recibir una orientación clara.",
-    features: [
-      "Análisis de sesiones importantes",
-      "Revisión semanal por audios de WhatsApp",
-      "Preparación de competición",
-    ],
-    contact: "Revisión semanal por WhatsApp.",
-    detail:
-      "Entre sábado y domingo recibes audios con la explicación de la semana anterior y los objetivos de la siguiente, junto a tu nueva programación.",
-    call: "Sin llamadas de seguimiento",
-    comparison: {
-      communication: "Revisión semanal por audios de WhatsApp",
-      calls: "Inicial incluida; sin llamadas de seguimiento",
-      lactate: "Prueba opcional con condiciones para atletas del plan",
-    },
-    lactate: {
-      headline: "Condiciones para atletas del plan",
-      detail:
-        "La prueba es opcional: te explicamos cuándo puede aportar información a tu preparación.",
-    },
-  },
-  {
-    id: "coaching",
-    number: "02",
-    name: "Seguimiento",
-    label: "PLANIFICACIÓN Y CONTACTO REGULAR.",
-    value: "Tu entrenamiento, en constante evolución.",
-    description:
-      "Un entrenador que interpreta tu respuesta y adapta el proceso contigo. Para quien quiere resolver dudas durante la semana y mantener una conversación regular.",
-    features: [
-      "Plan individual y revisión semanal",
-      "Consultas diarias al entrenador",
-      "Seguimiento y análisis más frecuentes",
-      "Ajustes durante la semana",
-      "Control de fatiga y respuesta",
-    ],
-    contact: "Consultas diarias con tu entrenador.",
-    detail:
-      "Comparte tus dudas, sensaciones y cambios de disponibilidad durante la semana. Estamos cerca para revisar contigo lo que necesitas.",
-    call: "Llamada mensual",
-    comparison: {
-      communication: "Consultas diarias y ajustes durante la semana",
-      calls: "Inicial incluida y una llamada mensual",
-      lactate: "Prueba opcional con promoción trimestral",
-    },
-    lactate: {
-      headline: "Promoción trimestral para tu prueba",
-      detail:
-        "Consulta las condiciones de la prueba opcional de lactato para atletas de Seguimiento.",
-    },
-  },
-  {
-    id: "performance",
-    number: "03",
-    name: "Rendimiento",
-    label: "ANÁLISIS Y CONTACTO MÁS DIRECTOS.",
-    value: "Una colaboración más profunda con tu rendimiento.",
-    description:
-      "Más proximidad para revisar decisiones, comparar ciclos y preparar la competición. Para quien busca un análisis en profundidad y una llamada cada semana.",
-    features: [
-      "Plan individual y revisión semanal",
-      "Consultas diarias y contacto cercano",
-      "Análisis profundo y adaptación continua",
-      "Perfil longitudinal y comparación de ciclos",
-      "Preparación detallada de competición",
-    ],
-    contact: "Contacto diario para todas tus dudas.",
-    detail:
-      "En la llamada semanal revisamos cómo fue la semana anterior y qué buscamos en la siguiente. Durante la semana estamos disponibles para resolver tus dudas.",
-    call: "Llamada semanal",
-    comparison: {
-      communication: "Consultas diarias y análisis en profundidad",
-      calls: "Inicial incluida y una llamada semanal",
-      lactate: "Una prueba incluida cada 6 meses; opción trimestral",
-    },
-    lactate: {
-      headline: "1 prueba incluida cada 6 meses",
-      detail:
-        "También puedes consultar la opción trimestral. Las pruebas se realizan cuando aportan información útil.",
-    },
-  },
-] as const;
+export { plans } from "./plans";
 export const faqs = [
   [
     "¿Puedo combinar resistencia y fuerza?",
     "Sí. Puedes preparar triatlón o carrera incorporando fuerza, o trabajar con un enfoque de atleta híbrido. En la llamada inicial hablamos de tu experiencia, objetivo y material disponible. Coordinamos ambas capacidades en TrainingPeaks y ajustamos su distribución a tu disponibilidad y recuperación.",
   ],
   [
-    "¿Puedo formar parte de Social ICARO sin contratar un plan?",
-    "Sí. Social ICARO es nuestro grupo gratuito en Instagram para compartir el camino con la comunidad. Los planes personalizados y las sesiones presenciales tienen sus propias condiciones, que te explicamos antes de contratar.",
+    "¿Puedo participar en ICARO Social Club sin contratar un plan?",
+    "Sí. Puedes consultar las Social Runs y Social Rides sin contratar coaching. Organizamos grupos, ritmos y recorridos según los participantes. En la página Social Club publicamos las quedadas cuando están confirmadas, con sus condiciones de participación; los planes individuales son un servicio independiente.",
   ],
   [
     "¿Necesito entender los datos para empezar?",
@@ -141,7 +52,7 @@ export const faqs = [
   ],
   [
     "¿La llamada inicial está incluida?",
-    "Sí. Individual, Seguimiento y Rendimiento incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Seguimiento tiene una mensual y Rendimiento una semanal.",
+    "Sí. Individual, Seguimiento y Rendimiento incluyen una llamada inicial para conocerte, resolver dudas y acordar objetivos concretos. Después, las llamadas de seguimiento dependen del plan: Individual no las incluye, Seguimiento y Rendimiento incluyen una llamada semanal, coordinada entre atleta y entrenador. En Seguimiento, la llamada se agenda aparte de la franja de consultas escritas.",
   ],
   [
     "¿Los entrenamientos llegan a mi reloj?",
@@ -181,7 +92,7 @@ export const faqs = [
   ],
   [
     "¿Cómo contacto con el entrenador?",
-    "Los tres planes incluyen una llamada inicial. Después, Individual entrega revisión semanal por audios de WhatsApp y no incluye llamadas de seguimiento. Seguimiento permite consultas diarias y una llamada mensual. Rendimiento ofrece contacto diario para tus dudas y una llamada semanal, con un acompañamiento más cercano.",
+    "Los tres planes incluyen una llamada inicial. Después, Individual entrega revisión semanal por audios de WhatsApp y no incluye llamadas de seguimiento. Individual y Seguimiento atienden las consultas de 19:00 a 20:00, hora de Barcelona. Seguimiento incluye una llamada semanal coordinada contigo. Rendimiento añade comunicación diaria prioritaria según la disponibilidad del entrenador, sin limitarse a esa franja, y una llamada semanal; no ofrece atención las 24 horas ni respuestas instantáneas.",
   ],
   [
     "¿Las pruebas de lactato son obligatorias?",
@@ -193,7 +104,7 @@ export const faqs = [
   ],
   [
     "¿Qué diferencia hay entre los tres planes?",
-    "Todos incluyen llamada inicial, planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega la revisión por audios de WhatsApp y no incluye llamadas de seguimiento. Seguimiento añade consultas diarias y una llamada mensual. Rendimiento ofrece contacto diario más cercano, análisis en profundidad y una llamada semanal. También cambian las condiciones de las pruebas de lactato.",
+    "Todos incluyen llamada inicial, planificación individualizada, revisión semanal y explicación de los objetivos. Individual entrega la revisión por audios de WhatsApp y no incluye llamadas de seguimiento. Individual y Seguimiento atienden dudas de 19:00 a 20:00, hora de Barcelona. Seguimiento añade una llamada semanal coordinada. Rendimiento ofrece comunicación diaria prioritaria según disponibilidad, sin limitarse a esa franja, análisis en mayor profundidad y una llamada semanal. También cambian las condiciones de las pruebas de lactato.",
   ],
   [
     "¿Hay permanencia?",

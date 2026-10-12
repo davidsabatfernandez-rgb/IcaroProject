@@ -34,13 +34,15 @@ test("sports profile and contact survive back navigation and an email error", as
   await form
     .getByLabel("Tu objetivo", { exact: true })
     .fill("Preparar mi primer medio Ironman");
-  await form.locator('input[name="goalDate"]').fill("Primavera de 2027");
+  await expect(form.locator('input[name="goalDate"]')).toHaveCount(0);
   await form.locator('select[name="experience"]').selectOption("competition");
   await form.locator('select[name="weeklyHours"]').selectOption("6-8");
-  await form.locator('select[name="difficulty"]').selectOption("progress");
-  await form.locator('select[name="budget"]').selectOption("options");
+  await expect(form.locator('select[name="difficulty"]')).toHaveCount(0);
+  await expect(form.locator('select[name="budget"]')).toHaveCount(0);
   await expect(form.locator('select[name="support"]')).toHaveValue("followup");
-  await expect(form).toContainText("El presupuesto expresa tu preferencia");
+  await expect(
+    form.locator('select[name="support"] option[value="followup"]'),
+  ).toHaveText("Seguimiento con llamada semanal");
   await form
     .getByRole("button", { name: "Continuar al contacto", exact: true })
     .click();
@@ -59,8 +61,8 @@ test("sports profile and contact survive back navigation and an email error", as
     .getByRole("button", { name: "Volver a tu preparación", exact: true })
     .click();
   await expect(form.locator('select[name="weeklyHours"]')).toHaveValue("6-8");
-  await expect(form.locator('input[name="goalDate"]')).toHaveValue(
-    "Primavera de 2027",
+  await expect(form.locator('select[name="experience"]')).toHaveValue(
+    "competition",
   );
   await expect(form.getByLabel("Tu objetivo", { exact: true })).toHaveValue(
     "Preparar mi primer medio Ironman",
@@ -82,12 +84,12 @@ test("sports profile and contact survive back navigation and an email error", as
     name: "Atleta de prueba",
     sport: "Triatlón",
     plan: "Seguimiento",
-    goalDate: "Primavera de 2027",
+    goalDate: "",
     experience: "competition",
     weeklyHours: "6-8",
-    difficulty: "progress",
+    difficulty: "",
     support: "followup",
-    budget: "options",
+    budget: "",
     consent: "on",
   });
   expect(enquiries[0].source).toMatch(
@@ -99,8 +101,9 @@ test("sports profile and contact survive back navigation and an email error", as
   const fallbackUrl = new URL((await fallback.getAttribute("href"))!);
   expect(fallbackUrl.searchParams.get("text")).toContain("De 6 a 8 horas");
   expect(fallbackUrl.searchParams.get("text")).toContain(
-    "Prefiero conocer opciones",
+    "Seguimiento con llamada semanal",
   );
+  expect(fallbackUrl.searchParams.get("text")).not.toContain("Presupuesto");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -195,4 +198,51 @@ test("advertising query context preselects the preparation without submitting a 
     form.getByRole("button", { name: "Continuar al contacto", exact: true }),
   ).toBeVisible();
   expect(submitted).toEqual([]);
+});
+
+test("changing plan preference and enquiry family clears stale coaching context", async ({
+  page,
+}) => {
+  let payload: Record<string, unknown> = {};
+  await page.route("**/api/contact", async (route) => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ success: true, qualification: "pending_review" }),
+    });
+  });
+  await page.goto(
+    "/?consulta=coaching&plan=Seguimiento&deporte=Triatl%C3%B3n#contacto",
+  );
+  const form = page.locator(".cq-form");
+  await form.locator('select[name="support"]').selectOption("performance");
+  await expect(form.locator('input[name="plan"]')).toHaveValue("Rendimiento");
+  await form.locator('select[name="interest"]').selectOption("social_ride");
+  await expect(form.locator('input[name="plan"]')).toBeEmpty();
+  await expect(form.locator('select[name="sport"]')).toHaveValue("Ciclismo");
+  await expect(form.locator('input[name="goal"]')).toHaveValue(
+    "Consultar las próximas salidas de Social Rides",
+  );
+  await expect(form.locator('select[name="support"]')).toHaveCount(0);
+  await form.locator('select[name="interest"]').selectOption("coaching");
+  await expect(form.locator('select[name="support"]')).toHaveValue("");
+  await form.locator('select[name="interest"]').selectOption("social_run");
+  await form.getByLabel("Nombre", { exact: true }).fill("Atleta");
+  await form
+    .getByLabel("Correo o teléfono", { exact: true })
+    .fill("atleta@example.com");
+  await form.getByRole("checkbox").check();
+  await form
+    .getByRole("button", { name: "Enviar mi consulta", exact: true })
+    .click();
+  await expect(form.getByRole("status")).toContainText(
+    "Tu consulta se ha enviado",
+  );
+  expect(payload).toMatchObject({
+    interest: "social_run",
+    sport: "Carrera",
+    plan: "",
+    support: "",
+  });
 });

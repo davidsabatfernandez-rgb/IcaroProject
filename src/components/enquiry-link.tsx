@@ -1,9 +1,10 @@
 "use client";
 
-import type { ComponentProps } from "react";
+import { useEffect, useState, type ComponentProps } from "react";
 import { usePathname } from "next/navigation";
+import type { EnquiryInterest } from "@/data/enquiries";
 
-export type EnquiryInterest = "coaching" | "collective" | "tests";
+export type { EnquiryInterest } from "@/data/enquiries";
 
 export type EnquirySelection = {
   interest: EnquiryInterest;
@@ -25,11 +26,27 @@ export function EnquiryLink({
   ...props
 }: EnquiryLinkProps) {
   const pathname = usePathname();
+  const [campaign, setCampaign] = useState<readonly [string, string][]>([]);
+  useEffect(() => {
+    const current = new URLSearchParams(window.location.search);
+    const allowed: [string, string][] = [];
+    for (const key of ["ref", "utm_source", "utm_medium", "utm_campaign"]) {
+      const value = current.get(key);
+      if (
+        value &&
+        /^[A-Za-z][A-Za-z0-9_-]{0,39}$/.test(value) &&
+        !/\d{6}/.test(value)
+      )
+        allowed.push([key, value]);
+    }
+    setCampaign(allowed);
+  }, [pathname]);
   const crossesToHome =
     pathname !== "/" && (href === "#contacto" || href === "/#contacto");
   const params = new URLSearchParams({ consulta: interest, origen: source });
   if (sport) params.set("deporte", sport);
   if (plan) params.set("plan", plan);
+  for (const [key, value] of campaign) params.set(key, value);
   const destination = crossesToHome ? `/?${params.toString()}#contacto` : href;
   return (
     <a

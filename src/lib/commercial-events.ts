@@ -56,6 +56,21 @@ const knownEvents = new Set<CommercialEventName>([
 ]);
 const sources = new Set([
   "hero",
+  "hero-plans",
+  "hero-social",
+  "social-runs",
+  "social-rides",
+  "social-form",
+  "social-events",
+  "social",
+  "footer-social",
+  "pagina-planes",
+  "pagina-planes-hero",
+  "pagina-planes-final",
+  "home-social-runs",
+  "home-social-rides",
+  "social-agenda-runs",
+  "social-agenda-rides",
   "header",
   "header-mobile",
   "planes",
@@ -187,11 +202,17 @@ export function sanitizeCommercialDetails(
   const normalizedSource = normalize(details.source);
   const source = /^articulo-[a-z0-9-]{1,80}$/.test(normalizedSource)
     ? "articulo"
-    : normalizedSource;
+    : /^social-event-[a-z0-9-]{1,80}$/.test(normalizedSource)
+      ? "social-events"
+      : normalizedSource;
   if (sources.has(source)) output.source = source;
   const plan = normalize(details.plan);
   if (Object.hasOwn(planAliases, plan)) output.plan = planAliases[plan];
-  if (["coaching", "collective", "tests"].includes(normalize(details.interest)))
+  if (
+    ["coaching", "social_run", "social_ride", "collective", "tests"].includes(
+      normalize(details.interest),
+    )
+  )
     output.interest = normalize(details.interest);
   const sport = normalize(details.sport);
   if (Object.hasOwn(sportAliases, sport)) output.sport = sportAliases[sport];
@@ -291,6 +312,8 @@ function safePageLocation(): string {
     "/",
     "/entrenador-triatlon-online",
     "/articulos",
+    "/planes",
+    "/social",
     "/privacidad",
   ].includes(path)
     ? path
@@ -491,6 +514,7 @@ export function trackCommercialEvent(
   }
   if (
     name === "form_success" &&
+    payload.interest === "coaching" &&
     activeConsent.advertising &&
     activeConfiguration.adsId &&
     activeConfiguration.adsLeadLabel

@@ -10,7 +10,7 @@ export const site = {
     philosophy: "",
   },
   description:
-    "Preparación individualizada de triatlón y resistencia: fisiología aplicada, fuerza, planificación en TrainingPeaks, revisión semanal y Comunidad ICARO.",
+    "Preparación individualizada de triatlón y resistencia: fisiología aplicada, fuerza, planificación en TrainingPeaks, revisión semanal y comunidad con Social Runs y Social Rides.",
   url: "https://www.icaroproject.es",
   trainingPeaksUrl: "https://www.trainingpeaks.com/",
   community: { name: "Social ICARO", instagramGroupUrl: "" },

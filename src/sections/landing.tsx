@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { SocialClubSection } from "./social-club";
 import { site, whatsappUrl } from "@/config/site";
 import { faqs } from "@/data/content";
 import { journeyStages } from "@/data/journey";
@@ -14,7 +16,6 @@ import { DisciplinesSection } from "./disciplines";
 import {
   PhilosophySection,
   BeyondNumbersSection,
-  CommunityAtelierSection,
   CoachSection,
 } from "./editorial";
 import { atelierCopy, assessments } from "@/data/atelier";
@@ -32,33 +33,33 @@ export function Landing() {
         aria-labelledby="hero-title"
       >
         <div className="atelier-hero-copy">
-          <p className="eyebrow">
-            ENTRENAMIENTO DE TRIATLÓN · CARRERA · CICLISMO
-          </p>
+          <p className="eyebrow">ICARO PERFORMANCE / ICARO COMMUNITY</p>
           <h1 id="hero-title">
-            <span>TU OBJETIVO.</span>
-            <span>EL ENTRENAMIENTO</span>
-            <span>ADECUADO.</span>
+            <span>ENTRENA CON CRITERIO.</span>
+            <span>COMPARTE EL CAMINO.</span>
           </h1>
           <p className="atelier-hero-description">
             {atelierCopy.hero.description}
           </p>
-          <p className="hero-audience">
-            <strong>Desde iniciación hasta atletas con experiencia.</strong>{" "}
-            Empezamos por conocerte en una llamada inicial, incluida en todos
-            los planes.
-          </p>
           <div className="hero-actions">
-            <EnquiryLink
+            <a
               className="button accent"
-              interest="coaching"
-              source="hero"
+              href="#planes"
+              data-track="cta_click"
+              data-track-source="hero-plans"
+              data-track-interest="coaching"
             >
-              Solicitar valoración inicial <Arrow diagonal />
-            </EnquiryLink>
-            <a className="text-link" href="#metodo">
-              Descubrir el método <Arrow />
+              Descubre tu plan <Arrow diagonal />
             </a>
+            <Link
+              className="button outline"
+              href="/social"
+              data-track="cta_click"
+              data-track-source="hero-social"
+              data-track-interest="collective"
+            >
+              Únete a los Socials <Arrow diagonal />
+            </Link>
           </div>
           <div className="atelier-hero-signature">
             <span>CIENCIA.</span>
@@ -83,6 +84,7 @@ export function Landing() {
         </div>
       </section>
       <WhyIcaroSection />
+      <SocialClubSection />
       <MethodOverviewSection />
 
       <section
@@ -170,7 +172,6 @@ export function Landing() {
         <Pricing />
       </section>
 
-      <CommunityAtelierSection />
       <CoachSection coach={site.coach} />
       <DisciplinesSection />
 

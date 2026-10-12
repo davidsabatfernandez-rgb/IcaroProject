@@ -339,8 +339,9 @@ export function CommunityAtelierSection() {
         <p>
           En ICARO cada preparación tiene su propio camino, pero el deporte
           también se construye compartiendo experiencias. Entrenamos
-          presencialmente cada semana, organizando ritmos y distancias según los
-          participantes y las características de cada sesión.
+          presencialmente cuando hay sesiones programadas, organizando ritmos y
+          distancias según los participantes y las características de cada
+          sesión.
         </p>
         <dl className="en-collective-facts">
           {collectiveDetails.map((detail) => (

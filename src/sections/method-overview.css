@@ -2,20 +2,17 @@
   min-width: 0;
 }
 .atelier-hero.atelier-hero-conversion h1 {
-  font-size: clamp(58px, 5.7vw, 91px);
+  font-size: clamp(55px, 5.4vw, 85px);
   line-height: 0.95;
   max-width: 100%;
   margin-block: 26px;
 }
-.atelier-hero-conversion .hero-audience {
-  margin-top: 12px;
-  color: var(--ink);
-  font-size: 12px;
-  line-height: 1.65;
-  max-width: 460px;
+.atelier-hero-conversion .hero-actions {
+  gap: 12px;
 }
-.atelier-hero-conversion .hero-audience strong {
-  font-weight: 600;
+.atelier-hero-conversion .hero-actions .button {
+  font-size: 12px;
+  min-height: 50px;
 }
 .atelier-hero-conversion .atelier-hero-signature {
   margin-top: 30px;
@@ -191,12 +188,26 @@
 }
 @media (max-width: 760px) {
   .atelier-hero.atelier-hero-conversion h1 {
-    font-size: clamp(40px, 12vw, 82px);
+    font-size: clamp(39px, 10.5vw, 75px);
     margin-block: 24px;
   }
-  .atelier-hero-conversion .hero-audience {
-    margin-top: 10px;
+  .atelier-hero-conversion .hero-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .atelier-hero-conversion .hero-actions .button {
+    padding: 12px 10px;
+    gap: 8px;
+    min-width: 0;
     font-size: 11px;
+    line-height: 1.4;
+  }
+  .atelier-hero-conversion .hero-actions .button svg {
+    flex-shrink: 0;
+    width: 17px;
   }
   .atelier-hero-conversion .atelier-hero-signature {
     margin-top: 22px;

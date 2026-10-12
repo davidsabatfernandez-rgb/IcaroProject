@@ -59,9 +59,11 @@ export function WeeklySchedule() {
         ))}
       </div>
       <p className="schedule-feedback">
-        Individual: audios de WhatsApp, sin llamadas de seguimiento.
-        Seguimiento: consultas diarias y llamada mensual. Rendimiento: consultas
-        diarias y llamada semanal.
+        Individual: audios semanales de WhatsApp. Individual y Seguimiento:
+        consultas de 19:00 a 20:00. Seguimiento y Rendimiento: llamada semanal
+        coordinada contigo. Rendimiento: comunicación diaria prioritaria según
+        disponibilidad, sin limitarse a esa franja. Llamada inicial incluida en
+        los tres planes.
       </p>
     </div>
   );
